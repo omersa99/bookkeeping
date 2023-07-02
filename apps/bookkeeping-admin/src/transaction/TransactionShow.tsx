@@ -8,7 +8,6 @@ import {
   DateField,
 } from "react-admin";
 import { ACCOUNT_TITLE_FIELD } from "../account/AccountTitle";
-import { JOURNAL_TITLE_FIELD } from "../journal/JournalTitle";
 
 export const TransactionShow = (props: ShowProps): React.ReactElement => {
   return (
@@ -20,9 +19,6 @@ export const TransactionShow = (props: ShowProps): React.ReactElement => {
         <TextField label="amount" source="amount" />
         <DateField source="createdAt" label="Created At" />
         <TextField label="ID" source="id" />
-        <ReferenceField label="Journal" source="journal.id" reference="Journal">
-          <TextField source={JOURNAL_TITLE_FIELD} />
-        </ReferenceField>
         <TextField label="Transaction type" source="transactionType" />
         <DateField source="updatedAt" label="Updated At" />
       </SimpleShowLayout>

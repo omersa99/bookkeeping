@@ -10,7 +10,7 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
-import { Prisma, Ledger, Journal, Entity } from "@prisma/client";
+import { Prisma, Ledger, Entity } from "@prisma/client";
 
 export class LedgerServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -45,17 +45,6 @@ export class LedgerServiceBase {
     args: Prisma.SelectSubset<T, Prisma.LedgerDeleteArgs>
   ): Promise<Ledger> {
     return this.prisma.ledger.delete(args);
-  }
-
-  async findJournals(
-    parentId: string,
-    args: Prisma.JournalFindManyArgs
-  ): Promise<Journal[]> {
-    return this.prisma.ledger
-      .findUniqueOrThrow({
-        where: { id: parentId },
-      })
-      .journals(args);
   }
 
   async getEntity(parentId: string): Promise<Entity | null> {

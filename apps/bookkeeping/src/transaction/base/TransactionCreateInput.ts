@@ -14,7 +14,6 @@ import { ApiProperty } from "@nestjs/swagger";
 import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
 import { ValidateNested, IsOptional, IsString, IsEnum } from "class-validator";
 import { Type } from "class-transformer";
-import { JournalWhereUniqueInput } from "../../journal/base/JournalWhereUniqueInput";
 import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
 
 @InputType()
@@ -41,15 +40,6 @@ class TransactionCreateInput {
     nullable: true,
   })
   amount?: string | null;
-
-  @ApiProperty({
-    required: true,
-    type: () => JournalWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => JournalWhereUniqueInput)
-  @Field(() => JournalWhereUniqueInput)
-  journal!: JournalWhereUniqueInput;
 
   @ApiProperty({
     required: false,
