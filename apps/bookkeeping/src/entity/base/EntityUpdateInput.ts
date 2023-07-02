@@ -17,8 +17,9 @@ import {
   ValidateNested,
   IsString,
 } from "class-validator";
-import { CustomerUpdateManyWithoutEntitiesInput } from "./CustomerUpdateManyWithoutEntitiesInput";
+import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
 import { Type } from "class-transformer";
+import { CustomerUpdateManyWithoutEntitiesInput } from "./CustomerUpdateManyWithoutEntitiesInput";
 import { IsJSONValue } from "@app/custom-validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
@@ -38,6 +39,18 @@ class EntityUpdateInput {
     nullable: true,
   })
   accrualMethod?: boolean | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => ChartOfAccountWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => ChartOfAccountWhereUniqueInput)
+  @IsOptional()
+  @Field(() => ChartOfAccountWhereUniqueInput, {
+    nullable: true,
+  })
+  chartOfAccounts?: ChartOfAccountWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,

@@ -14,10 +14,11 @@ import { ApiProperty } from "@nestjs/swagger";
 import {
   IsBoolean,
   IsOptional,
-  IsDate,
   ValidateNested,
+  IsDate,
   IsString,
 } from "class-validator";
+import { ChartOfAccount } from "../../chartOfAccount/base/ChartOfAccount";
 import { Type } from "class-transformer";
 import { Customer } from "../../customer/base/Customer";
 import { IsJSONValue } from "@app/custom-validators";
@@ -39,6 +40,15 @@ class Entity {
     nullable: true,
   })
   accrualMethod!: boolean | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => ChartOfAccount,
+  })
+  @ValidateNested()
+  @Type(() => ChartOfAccount)
+  @IsOptional()
+  chartOfAccounts?: ChartOfAccount | null;
 
   @ApiProperty({
     required: true,

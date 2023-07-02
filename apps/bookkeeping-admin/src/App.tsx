@@ -37,6 +37,10 @@ import { CustomerList } from "./customer/CustomerList";
 import { CustomerCreate } from "./customer/CustomerCreate";
 import { CustomerEdit } from "./customer/CustomerEdit";
 import { CustomerShow } from "./customer/CustomerShow";
+import { ChartOfAccountList } from "./chartOfAccount/ChartOfAccountList";
+import { ChartOfAccountCreate } from "./chartOfAccount/ChartOfAccountCreate";
+import { ChartOfAccountEdit } from "./chartOfAccount/ChartOfAccountEdit";
+import { ChartOfAccountShow } from "./chartOfAccount/ChartOfAccountShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -118,6 +122,13 @@ const App = (): React.ReactElement => {
           edit={CustomerEdit}
           create={CustomerCreate}
           show={CustomerShow}
+        />
+        <Resource
+          name="ChartOfAccount"
+          list={ChartOfAccountList}
+          edit={ChartOfAccountEdit}
+          create={ChartOfAccountCreate}
+          show={ChartOfAccountShow}
         />
       </Admin>
     </div>

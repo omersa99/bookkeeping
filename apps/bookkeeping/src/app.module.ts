@@ -9,6 +9,7 @@ import { ItemModule } from "./item/item.module";
 import { TransactionModule } from "./transaction/transaction.module";
 import { AccountModule } from "./account/account.module";
 import { CustomerModule } from "./customer/customer.module";
+import { ChartOfAccountModule } from "./chartOfAccount/chartOfAccount.module";
 import { HealthModule } from "./health/health.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { SecretsManagerModule } from "./providers/secrets/secretsManager.module";
@@ -33,6 +34,7 @@ import { AuthModule } from "./auth/auth.module";
     TransactionModule,
     AccountModule,
     CustomerModule,
+    ChartOfAccountModule,
     HealthModule,
     PrismaModule,
     SecretsManagerModule,

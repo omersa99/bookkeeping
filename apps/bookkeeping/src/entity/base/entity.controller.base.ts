@@ -60,9 +60,24 @@ export class EntityControllerBase {
   })
   async create(@common.Body() data: EntityCreateInput): Promise<Entity> {
     return await this.service.create({
-      data: data,
+      data: {
+        ...data,
+
+        chartOfAccounts: data.chartOfAccounts
+          ? {
+              connect: data.chartOfAccounts,
+            }
+          : undefined,
+      },
       select: {
         accrualMethod: true,
+
+        chartOfAccounts: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
         id: true,
         info: true,
@@ -90,6 +105,13 @@ export class EntityControllerBase {
       ...args,
       select: {
         accrualMethod: true,
+
+        chartOfAccounts: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
         id: true,
         info: true,
@@ -118,6 +140,13 @@ export class EntityControllerBase {
       where: params,
       select: {
         accrualMethod: true,
+
+        chartOfAccounts: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
         id: true,
         info: true,
@@ -152,9 +181,24 @@ export class EntityControllerBase {
     try {
       return await this.service.update({
         where: params,
-        data: data,
+        data: {
+          ...data,
+
+          chartOfAccounts: data.chartOfAccounts
+            ? {
+                connect: data.chartOfAccounts,
+              }
+            : undefined,
+        },
         select: {
           accrualMethod: true,
+
+          chartOfAccounts: {
+            select: {
+              id: true,
+            },
+          },
+
           createdAt: true,
           id: true,
           info: true,
@@ -191,6 +235,13 @@ export class EntityControllerBase {
         where: params,
         select: {
           accrualMethod: true,
+
+          chartOfAccounts: {
+            select: {
+              id: true,
+            },
+          },
+
           createdAt: true,
           id: true,
           info: true,
@@ -328,6 +379,7 @@ export class EntityControllerBase {
     const results = await this.service.findItems(params.id, {
       ...query,
       select: {
+        Amount: true,
         createdAt: true,
 
         entity: {
@@ -337,7 +389,9 @@ export class EntityControllerBase {
         },
 
         id: true,
+        isProductOrService: true,
         itemRole: true,
+        itemType: true,
         name: true,
         updatedAt: true,
       },

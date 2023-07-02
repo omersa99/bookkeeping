@@ -12,7 +12,10 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { EnumAccountBalanceType } from "./EnumAccountBalanceType";
-import { IsEnum, IsOptional, IsString } from "class-validator";
+import { IsEnum, IsOptional, ValidateNested, IsString } from "class-validator";
+import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
+import { Type } from "class-transformer";
+import { TransactionUpdateManyWithoutAccountsInput } from "./TransactionUpdateManyWithoutAccountsInput";
 
 @InputType()
 class AccountUpdateInput {
@@ -26,6 +29,18 @@ class AccountUpdateInput {
     nullable: true,
   })
   balanceType?: "Debit" | "Credit" | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => ChartOfAccountWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => ChartOfAccountWhereUniqueInput)
+  @IsOptional()
+  @Field(() => ChartOfAccountWhereUniqueInput, {
+    nullable: true,
+  })
+  chartOfAccount?: ChartOfAccountWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,
@@ -59,6 +74,18 @@ class AccountUpdateInput {
     nullable: true,
   })
   role?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => TransactionUpdateManyWithoutAccountsInput,
+  })
+  @ValidateNested()
+  @Type(() => TransactionUpdateManyWithoutAccountsInput)
+  @IsOptional()
+  @Field(() => TransactionUpdateManyWithoutAccountsInput, {
+    nullable: true,
+  })
+  transactions?: TransactionUpdateManyWithoutAccountsInput;
 }
 
 export { AccountUpdateInput as AccountUpdateInput };

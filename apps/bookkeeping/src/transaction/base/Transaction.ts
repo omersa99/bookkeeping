@@ -11,12 +11,40 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsString, ValidateNested, IsOptional } from "class-validator";
+import { Account } from "../../account/base/Account";
+import {
+  ValidateNested,
+  IsOptional,
+  IsString,
+  IsDate,
+  IsEnum,
+} from "class-validator";
 import { Type } from "class-transformer";
 import { Journal } from "../../journal/base/Journal";
+import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
 
 @ObjectType()
 class Transaction {
+  @ApiProperty({
+    required: false,
+    type: () => Account,
+  })
+  @ValidateNested()
+  @Type(() => Account)
+  @IsOptional()
+  account?: Account | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  amount!: string | null;
+
   @ApiProperty({
     required: true,
   })
@@ -34,13 +62,23 @@ class Transaction {
   id!: string;
 
   @ApiProperty({
-    required: false,
+    required: true,
     type: () => Journal,
   })
   @ValidateNested()
   @Type(() => Journal)
+  journal?: Journal;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumTransactionTransactionType,
+  })
+  @IsEnum(EnumTransactionTransactionType)
   @IsOptional()
-  journal?: Journal | null;
+  @Field(() => EnumTransactionTransactionType, {
+    nullable: true,
+  })
+  transactionType?: "Credit" | "Debit" | null;
 
   @ApiProperty({
     required: true,

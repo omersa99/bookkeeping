@@ -12,8 +12,16 @@ https://docs.amplication.com/how-to/custom-code
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { EnumAccountBalanceType } from "./EnumAccountBalanceType";
-import { IsEnum, IsOptional, IsString, IsDate } from "class-validator";
+import {
+  IsEnum,
+  IsOptional,
+  ValidateNested,
+  IsString,
+  IsDate,
+} from "class-validator";
+import { ChartOfAccount } from "../../chartOfAccount/base/ChartOfAccount";
 import { Type } from "class-transformer";
+import { Transaction } from "../../transaction/base/Transaction";
 
 @ObjectType()
 class Account {
@@ -27,6 +35,15 @@ class Account {
     nullable: true,
   })
   balanceType?: "Debit" | "Credit" | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => ChartOfAccount,
+  })
+  @ValidateNested()
+  @Type(() => ChartOfAccount)
+  @IsOptional()
+  chartOfAccount?: ChartOfAccount | null;
 
   @ApiProperty({
     required: false,
@@ -76,6 +93,15 @@ class Account {
     nullable: true,
   })
   role!: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Transaction],
+  })
+  @ValidateNested()
+  @Type(() => Transaction)
+  @IsOptional()
+  transactions?: Array<Transaction>;
 
   @ApiProperty({
     required: true,

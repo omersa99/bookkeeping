@@ -11,13 +11,39 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { StringFilter } from "../../util/StringFilter";
+import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
+import { ValidateNested, IsOptional, IsEnum } from "class-validator";
 import { Type } from "class-transformer";
-import { IsOptional, ValidateNested } from "class-validator";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { StringFilter } from "../../util/StringFilter";
 import { JournalWhereUniqueInput } from "../../journal/base/JournalWhereUniqueInput";
+import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
 
 @InputType()
 class TransactionWhereInput {
+  @ApiProperty({
+    required: false,
+    type: () => AccountWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => AccountWhereUniqueInput)
+  @IsOptional()
+  @Field(() => AccountWhereUniqueInput, {
+    nullable: true,
+  })
+  account?: AccountWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  amount?: StringNullableFilter;
+
   @ApiProperty({
     required: false,
     type: StringFilter,
@@ -40,6 +66,17 @@ class TransactionWhereInput {
     nullable: true,
   })
   journal?: JournalWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumTransactionTransactionType,
+  })
+  @IsEnum(EnumTransactionTransactionType)
+  @IsOptional()
+  @Field(() => EnumTransactionTransactionType, {
+    nullable: true,
+  })
+  transactionType?: "Credit" | "Debit";
 }
 
 export { TransactionWhereInput as TransactionWhereInput };

@@ -53,13 +53,24 @@ export class TransactionControllerBase {
       data: {
         ...data,
 
-        journal: data.journal
+        account: data.account
           ? {
-              connect: data.journal,
+              connect: data.account,
             }
           : undefined,
+
+        journal: {
+          connect: data.journal,
+        },
       },
       select: {
+        account: {
+          select: {
+            id: true,
+          },
+        },
+
+        amount: true,
         createdAt: true,
         id: true,
 
@@ -69,6 +80,7 @@ export class TransactionControllerBase {
           },
         },
 
+        transactionType: true,
         updatedAt: true,
       },
     });
@@ -91,6 +103,13 @@ export class TransactionControllerBase {
     return this.service.findMany({
       ...args,
       select: {
+        account: {
+          select: {
+            id: true,
+          },
+        },
+
+        amount: true,
         createdAt: true,
         id: true,
 
@@ -100,6 +119,7 @@ export class TransactionControllerBase {
           },
         },
 
+        transactionType: true,
         updatedAt: true,
       },
     });
@@ -123,6 +143,13 @@ export class TransactionControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
+        account: {
+          select: {
+            id: true,
+          },
+        },
+
+        amount: true,
         createdAt: true,
         id: true,
 
@@ -132,6 +159,7 @@ export class TransactionControllerBase {
           },
         },
 
+        transactionType: true,
         updatedAt: true,
       },
     });
@@ -165,13 +193,24 @@ export class TransactionControllerBase {
         data: {
           ...data,
 
-          journal: data.journal
+          account: data.account
             ? {
-                connect: data.journal,
+                connect: data.account,
               }
             : undefined,
+
+          journal: {
+            connect: data.journal,
+          },
         },
         select: {
+          account: {
+            select: {
+              id: true,
+            },
+          },
+
+          amount: true,
           createdAt: true,
           id: true,
 
@@ -181,6 +220,7 @@ export class TransactionControllerBase {
             },
           },
 
+          transactionType: true,
           updatedAt: true,
         },
       });
@@ -212,6 +252,13 @@ export class TransactionControllerBase {
       return await this.service.delete({
         where: params,
         select: {
+          account: {
+            select: {
+              id: true,
+            },
+          },
+
+          amount: true,
           createdAt: true,
           id: true,
 
@@ -221,6 +268,7 @@ export class TransactionControllerBase {
             },
           },
 
+          transactionType: true,
           updatedAt: true,
         },
       });

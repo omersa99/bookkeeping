@@ -14,6 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
+import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
 import { CustomerListRelationFilter } from "../../customer/base/CustomerListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { JsonFilter } from "../../util/JsonFilter";
@@ -34,6 +35,18 @@ class EntityWhereInput {
     nullable: true,
   })
   accrualMethod?: BooleanNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => ChartOfAccountWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => ChartOfAccountWhereUniqueInput)
+  @IsOptional()
+  @Field(() => ChartOfAccountWhereUniqueInput, {
+    nullable: true,
+  })
+  chartOfAccounts?: ChartOfAccountWhereUniqueInput;
 
   @ApiProperty({
     required: false,

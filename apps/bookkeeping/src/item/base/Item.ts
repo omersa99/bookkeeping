@@ -12,18 +12,31 @@ https://docs.amplication.com/how-to/custom-code
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import {
+  IsString,
+  IsOptional,
   IsDate,
   ValidateNested,
-  IsOptional,
-  IsString,
+  IsBoolean,
   IsEnum,
 } from "class-validator";
 import { Type } from "class-transformer";
 import { Entity } from "../../entity/base/Entity";
 import { EnumItemItemRole } from "./EnumItemItemRole";
+import { EnumItemItemType } from "./EnumItemItemType";
 
 @ObjectType()
 class Item {
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  Amount!: string | null;
+
   @ApiProperty({
     required: true,
   })
@@ -51,6 +64,17 @@ class Item {
 
   @ApiProperty({
     required: false,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @IsOptional()
+  @Field(() => Boolean, {
+    nullable: true,
+  })
+  isProductOrService!: boolean | null;
+
+  @ApiProperty({
+    required: false,
     enum: EnumItemItemRole,
   })
   @IsEnum(EnumItemItemRole)
@@ -59,6 +83,17 @@ class Item {
     nullable: true,
   })
   itemRole?: "Expense" | "Inventory" | "Service" | "Product" | null;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumItemItemType,
+  })
+  @IsEnum(EnumItemItemType)
+  @IsOptional()
+  @Field(() => EnumItemItemType, {
+    nullable: true,
+  })
+  itemType?: "Labor" | "Material" | "LumpSum" | "Equipment" | "Other" | null;
 
   @ApiProperty({
     required: false,

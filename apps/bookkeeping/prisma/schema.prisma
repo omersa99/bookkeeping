@@ -21,16 +21,18 @@ model User {
 }
 
 model Entity {
-  accrualMethod Boolean?
-  createdAt     DateTime   @default(now())
-  customers     Customer[]
-  id            String     @id @default(cuid())
-  info          Json?
-  items         Item[]
-  ledgers       Ledger[]
-  name          String?
-  updatedAt     DateTime   @updatedAt
-  users         User[]
+  accrualMethod     Boolean?
+  chartOfAccounts   ChartOfAccount? @relation(fields: [chartOfAccountsId], references: [id])
+  chartOfAccountsId String?         @unique
+  createdAt         DateTime        @default(now())
+  customers         Customer[]
+  id                String          @id @default(cuid())
+  info              Json?
+  items             Item[]
+  ledgers           Ledger[]
+  name              String?
+  updatedAt         DateTime        @updatedAt
+  users             User[]
 }
 
 model Ledger {
@@ -53,31 +55,41 @@ model Journal {
 }
 
 model Item {
-  createdAt DateTime @default(now())
-  entity    Entity?  @relation(fields: [entityId], references: [id])
-  entityId  String?
-  id        String   @id @default(cuid())
+  Amount             String?
+  createdAt          DateTime          @default(now())
+  entity             Entity?           @relation(fields: [entityId], references: [id])
+  entityId           String?
+  id                 String            @id @default(cuid())
+  isProductOrService Boolean?
   itemRole EnumItemItemRole? @determines whether the ItemModel should be treated as an expense, inventory, service or product.
-  name      String?
-  updatedAt DateTime @updatedAt
+  itemType           EnumItemItemType?
+  name               String?
+  updatedAt          DateTime          @updatedAt
 }
 
 model Transaction {
-  createdAt DateTime @default(now())
-  id        String   @id @default(cuid())
-  journal   Journal? @relation(fields: [journalId], references: [id])
-  journalId String?
-  updatedAt DateTime @updatedAt
+  account         Account?                        @relation(fields: [accountId], references: [id])
+  accountId       String?
+  amount          String?
+  createdAt       DateTime                        @default(now())
+  id              String                          @id @default(cuid())
+  journal         Journal                         @relation(fields: [journalId], references: [id])
+  journalId       String
+  transactionType EnumTransactionTransactionType?
+  updatedAt       DateTime                        @updatedAt
 }
 
 model Account {
-  balanceType EnumAccountBalanceType?
-  code        String?
-  createdAt   DateTime                @default(now())
-  id          String                  @id @default(cuid())
-  name        String?
-  role        String?
-  updatedAt   DateTime                @updatedAt
+  balanceType      EnumAccountBalanceType?
+  chartOfAccount   ChartOfAccount?         @relation(fields: [chartOfAccountId], references: [id])
+  chartOfAccountId String?
+  code             String?
+  createdAt        DateTime                @default(now())
+  id               String                  @id @default(cuid())
+  name             String?
+  role             String?
+  transactions     Transaction[]
+  updatedAt        DateTime                @updatedAt
 }
 
 model Customer {
@@ -90,11 +102,33 @@ model Customer {
   updatedAt    DateTime @updatedAt
 }
 
+model ChartOfAccount {
+  accountsSet Account[]
+  createdAt   DateTime  @default(now())
+  description String?
+  entity      Entity?
+  id          String    @id @default(cuid())
+  updatedAt   DateTime  @updatedAt
+}
+
 enum EnumItemItemRole {
   Expense
   Inventory
   Service
   Product
+}
+
+enum EnumItemItemType {
+  Labor
+  Material
+  LumpSum
+  Equipment
+  Other
+}
+
+enum EnumTransactionTransactionType {
+  Credit
+  Debit
 }
 
 enum EnumAccountBalanceType {

@@ -11,15 +11,28 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
-import { ValidateNested, IsOptional, IsEnum } from "class-validator";
-import { Type } from "class-transformer";
-import { StringFilter } from "../../util/StringFilter";
-import { EnumItemItemRole } from "./EnumItemItemRole";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { Type } from "class-transformer";
+import { IsOptional, ValidateNested, IsEnum } from "class-validator";
+import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
+import { StringFilter } from "../../util/StringFilter";
+import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
+import { EnumItemItemRole } from "./EnumItemItemRole";
+import { EnumItemItemType } from "./EnumItemItemType";
 
 @InputType()
 class ItemWhereInput {
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  Amount?: StringNullableFilter;
+
   @ApiProperty({
     required: false,
     type: () => EntityWhereUniqueInput,
@@ -45,6 +58,17 @@ class ItemWhereInput {
 
   @ApiProperty({
     required: false,
+    type: BooleanNullableFilter,
+  })
+  @Type(() => BooleanNullableFilter)
+  @IsOptional()
+  @Field(() => BooleanNullableFilter, {
+    nullable: true,
+  })
+  isProductOrService?: BooleanNullableFilter;
+
+  @ApiProperty({
+    required: false,
     enum: EnumItemItemRole,
   })
   @IsEnum(EnumItemItemRole)
@@ -53,6 +77,17 @@ class ItemWhereInput {
     nullable: true,
   })
   itemRole?: "Expense" | "Inventory" | "Service" | "Product";
+
+  @ApiProperty({
+    required: false,
+    enum: EnumItemItemType,
+  })
+  @IsEnum(EnumItemItemType)
+  @IsOptional()
+  @Field(() => EnumItemItemType, {
+    nullable: true,
+  })
+  itemType?: "Labor" | "Material" | "LumpSum" | "Equipment" | "Other";
 
   @ApiProperty({
     required: false,

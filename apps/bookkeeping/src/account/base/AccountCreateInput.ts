@@ -12,7 +12,10 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { EnumAccountBalanceType } from "./EnumAccountBalanceType";
-import { IsEnum, IsOptional, IsString } from "class-validator";
+import { IsEnum, IsOptional, ValidateNested, IsString } from "class-validator";
+import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
+import { Type } from "class-transformer";
+import { TransactionCreateNestedManyWithoutAccountsInput } from "./TransactionCreateNestedManyWithoutAccountsInput";
 
 @InputType()
 class AccountCreateInput {
@@ -26,6 +29,18 @@ class AccountCreateInput {
     nullable: true,
   })
   balanceType?: "Debit" | "Credit" | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => ChartOfAccountWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => ChartOfAccountWhereUniqueInput)
+  @IsOptional()
+  @Field(() => ChartOfAccountWhereUniqueInput, {
+    nullable: true,
+  })
+  chartOfAccount?: ChartOfAccountWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,
@@ -59,6 +74,18 @@ class AccountCreateInput {
     nullable: true,
   })
   role?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => TransactionCreateNestedManyWithoutAccountsInput,
+  })
+  @ValidateNested()
+  @Type(() => TransactionCreateNestedManyWithoutAccountsInput)
+  @IsOptional()
+  @Field(() => TransactionCreateNestedManyWithoutAccountsInput, {
+    nullable: true,
+  })
+  transactions?: TransactionCreateNestedManyWithoutAccountsInput;
 }
 
 export { AccountCreateInput as AccountCreateInput };

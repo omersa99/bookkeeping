@@ -5,11 +5,14 @@ import {
   SimpleForm,
   CreateProps,
   BooleanInput,
+  ReferenceInput,
+  SelectInput,
   ReferenceArrayInput,
   SelectArrayInput,
   TextInput,
 } from "react-admin";
 
+import { ChartOfAccountTitle } from "../chartOfAccount/ChartOfAccountTitle";
 import { CustomerTitle } from "../customer/CustomerTitle";
 import { ItemTitle } from "../item/ItemTitle";
 import { LedgerTitle } from "../ledger/LedgerTitle";
@@ -20,6 +23,13 @@ export const EntityCreate = (props: CreateProps): React.ReactElement => {
     <Create {...props}>
       <SimpleForm>
         <BooleanInput label="accrual_method" source="accrualMethod" />
+        <ReferenceInput
+          source="chartOfAccounts.id"
+          reference="ChartOfAccount"
+          label="Chart of Accounts"
+        >
+          <SelectInput optionText={ChartOfAccountTitle} />
+        </ReferenceInput>
         <ReferenceArrayInput
           source="customers"
           reference="Customer"

@@ -26,6 +26,7 @@ import { TransactionCountArgs } from "./TransactionCountArgs";
 import { TransactionFindManyArgs } from "./TransactionFindManyArgs";
 import { TransactionFindUniqueArgs } from "./TransactionFindUniqueArgs";
 import { Transaction } from "./Transaction";
+import { Account } from "../../account/base/Account";
 import { Journal } from "../../journal/base/Journal";
 import { TransactionService } from "../transaction.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
@@ -96,11 +97,15 @@ export class TransactionResolverBase {
       data: {
         ...args.data,
 
-        journal: args.data.journal
+        account: args.data.account
           ? {
-              connect: args.data.journal,
+              connect: args.data.account,
             }
           : undefined,
+
+        journal: {
+          connect: args.data.journal,
+        },
       },
     });
   }
@@ -121,11 +126,15 @@ export class TransactionResolverBase {
         data: {
           ...args.data,
 
-          journal: args.data.journal
+          account: args.data.account
             ? {
-                connect: args.data.journal,
+                connect: args.data.account,
               }
             : undefined,
+
+          journal: {
+            connect: args.data.journal,
+          },
         },
       });
     } catch (error) {
@@ -157,6 +166,27 @@ export class TransactionResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Account, {
+    nullable: true,
+    name: "account",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Account",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldAccount(
+    @graphql.Parent() parent: Transaction
+  ): Promise<Account | null> {
+    const result = await this.service.getAccount(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)

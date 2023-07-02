@@ -11,13 +11,31 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
+import {
+  IsString,
+  IsOptional,
+  ValidateNested,
+  IsBoolean,
+  IsEnum,
+} from "class-validator";
 import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
-import { ValidateNested, IsOptional, IsEnum, IsString } from "class-validator";
 import { Type } from "class-transformer";
 import { EnumItemItemRole } from "./EnumItemItemRole";
+import { EnumItemItemType } from "./EnumItemItemType";
 
 @InputType()
 class ItemUpdateInput {
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  Amount?: string | null;
+
   @ApiProperty({
     required: false,
     type: () => EntityWhereUniqueInput,
@@ -32,6 +50,17 @@ class ItemUpdateInput {
 
   @ApiProperty({
     required: false,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @IsOptional()
+  @Field(() => Boolean, {
+    nullable: true,
+  })
+  isProductOrService?: boolean | null;
+
+  @ApiProperty({
+    required: false,
     enum: EnumItemItemRole,
   })
   @IsEnum(EnumItemItemRole)
@@ -40,6 +69,17 @@ class ItemUpdateInput {
     nullable: true,
   })
   itemRole?: "Expense" | "Inventory" | "Service" | "Product" | null;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumItemItemType,
+  })
+  @IsEnum(EnumItemItemType)
+  @IsOptional()
+  @Field(() => EnumItemItemType, {
+    nullable: true,
+  })
+  itemType?: "Labor" | "Material" | "LumpSum" | "Equipment" | "Other" | null;
 
   @ApiProperty({
     required: false,

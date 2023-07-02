@@ -11,23 +11,56 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { JournalWhereUniqueInput } from "../../journal/base/JournalWhereUniqueInput";
-import { ValidateNested, IsOptional } from "class-validator";
+import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
+import { ValidateNested, IsOptional, IsString, IsEnum } from "class-validator";
 import { Type } from "class-transformer";
+import { JournalWhereUniqueInput } from "../../journal/base/JournalWhereUniqueInput";
+import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
 
 @InputType()
 class TransactionCreateInput {
   @ApiProperty({
     required: false,
+    type: () => AccountWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => AccountWhereUniqueInput)
+  @IsOptional()
+  @Field(() => AccountWhereUniqueInput, {
+    nullable: true,
+  })
+  account?: AccountWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  amount?: string | null;
+
+  @ApiProperty({
+    required: true,
     type: () => JournalWhereUniqueInput,
   })
   @ValidateNested()
   @Type(() => JournalWhereUniqueInput)
+  @Field(() => JournalWhereUniqueInput)
+  journal!: JournalWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumTransactionTransactionType,
+  })
+  @IsEnum(EnumTransactionTransactionType)
   @IsOptional()
-  @Field(() => JournalWhereUniqueInput, {
+  @Field(() => EnumTransactionTransactionType, {
     nullable: true,
   })
-  journal?: JournalWhereUniqueInput | null;
+  transactionType?: "Credit" | "Debit" | null;
 }
 
 export { TransactionCreateInput as TransactionCreateInput };

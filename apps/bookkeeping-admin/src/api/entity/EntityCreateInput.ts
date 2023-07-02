@@ -1,3 +1,4 @@
+import { ChartOfAccountWhereUniqueInput } from "../chartOfAccount/ChartOfAccountWhereUniqueInput";
 import { CustomerCreateNestedManyWithoutEntitiesInput } from "./CustomerCreateNestedManyWithoutEntitiesInput";
 import { InputJsonValue } from "../../types";
 import { ItemCreateNestedManyWithoutEntitiesInput } from "./ItemCreateNestedManyWithoutEntitiesInput";
@@ -6,6 +7,7 @@ import { UserCreateNestedManyWithoutEntitiesInput } from "./UserCreateNestedMany
 
 export type EntityCreateInput = {
   accrualMethod?: boolean | null;
+  chartOfAccounts?: ChartOfAccountWhereUniqueInput | null;
   customers?: CustomerCreateNestedManyWithoutEntitiesInput;
   info?: InputJsonValue;
   items?: ItemCreateNestedManyWithoutEntitiesInput;

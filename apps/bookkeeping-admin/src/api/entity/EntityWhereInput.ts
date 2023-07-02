@@ -1,4 +1,5 @@
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
+import { ChartOfAccountWhereUniqueInput } from "../chartOfAccount/ChartOfAccountWhereUniqueInput";
 import { CustomerListRelationFilter } from "../customer/CustomerListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { JsonFilter } from "../../util/JsonFilter";
@@ -9,6 +10,7 @@ import { UserListRelationFilter } from "../user/UserListRelationFilter";
 
 export type EntityWhereInput = {
   accrualMethod?: BooleanNullableFilter;
+  chartOfAccounts?: ChartOfAccountWhereUniqueInput;
   customers?: CustomerListRelationFilter;
   id?: StringFilter;
   info?: JsonFilter;

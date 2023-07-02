@@ -12,10 +12,12 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { EnumAccountBalanceType } from "./EnumAccountBalanceType";
-import { IsEnum, IsOptional } from "class-validator";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { IsEnum, IsOptional, ValidateNested } from "class-validator";
+import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
 import { Type } from "class-transformer";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
+import { TransactionListRelationFilter } from "../../transaction/base/TransactionListRelationFilter";
 
 @InputType()
 class AccountWhereInput {
@@ -29,6 +31,18 @@ class AccountWhereInput {
     nullable: true,
   })
   balanceType?: "Debit" | "Credit";
+
+  @ApiProperty({
+    required: false,
+    type: () => ChartOfAccountWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => ChartOfAccountWhereUniqueInput)
+  @IsOptional()
+  @Field(() => ChartOfAccountWhereUniqueInput, {
+    nullable: true,
+  })
+  chartOfAccount?: ChartOfAccountWhereUniqueInput;
 
   @ApiProperty({
     required: false,
@@ -73,6 +87,18 @@ class AccountWhereInput {
     nullable: true,
   })
   role?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => TransactionListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => TransactionListRelationFilter)
+  @IsOptional()
+  @Field(() => TransactionListRelationFilter, {
+    nullable: true,
+  })
+  transactions?: TransactionListRelationFilter;
 }
 
 export { AccountWhereInput as AccountWhereInput };

@@ -1,3 +1,4 @@
+import { ChartOfAccountWhereUniqueInput } from "../chartOfAccount/ChartOfAccountWhereUniqueInput";
 import { CustomerUpdateManyWithoutEntitiesInput } from "./CustomerUpdateManyWithoutEntitiesInput";
 import { InputJsonValue } from "../../types";
 import { ItemUpdateManyWithoutEntitiesInput } from "./ItemUpdateManyWithoutEntitiesInput";
@@ -6,6 +7,7 @@ import { UserUpdateManyWithoutEntitiesInput } from "./UserUpdateManyWithoutEntit
 
 export type EntityUpdateInput = {
   accrualMethod?: boolean | null;
+  chartOfAccounts?: ChartOfAccountWhereUniqueInput | null;
   customers?: CustomerUpdateManyWithoutEntitiesInput;
   info?: InputJsonValue;
   items?: ItemUpdateManyWithoutEntitiesInput;

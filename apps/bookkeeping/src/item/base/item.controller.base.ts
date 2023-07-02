@@ -58,6 +58,7 @@ export class ItemControllerBase {
           : undefined,
       },
       select: {
+        Amount: true,
         createdAt: true,
 
         entity: {
@@ -67,7 +68,9 @@ export class ItemControllerBase {
         },
 
         id: true,
+        isProductOrService: true,
         itemRole: true,
+        itemType: true,
         name: true,
         updatedAt: true,
       },
@@ -91,6 +94,7 @@ export class ItemControllerBase {
     return this.service.findMany({
       ...args,
       select: {
+        Amount: true,
         createdAt: true,
 
         entity: {
@@ -100,7 +104,9 @@ export class ItemControllerBase {
         },
 
         id: true,
+        isProductOrService: true,
         itemRole: true,
+        itemType: true,
         name: true,
         updatedAt: true,
       },
@@ -125,6 +131,7 @@ export class ItemControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
+        Amount: true,
         createdAt: true,
 
         entity: {
@@ -134,7 +141,9 @@ export class ItemControllerBase {
         },
 
         id: true,
+        isProductOrService: true,
         itemRole: true,
+        itemType: true,
         name: true,
         updatedAt: true,
       },
@@ -176,6 +185,7 @@ export class ItemControllerBase {
             : undefined,
         },
         select: {
+          Amount: true,
           createdAt: true,
 
           entity: {
@@ -185,7 +195,9 @@ export class ItemControllerBase {
           },
 
           id: true,
+          isProductOrService: true,
           itemRole: true,
+          itemType: true,
           name: true,
           updatedAt: true,
         },
@@ -218,6 +230,7 @@ export class ItemControllerBase {
       return await this.service.delete({
         where: params,
         select: {
+          Amount: true,
           createdAt: true,
 
           entity: {
@@ -227,7 +240,9 @@ export class ItemControllerBase {
           },
 
           id: true,
+          isProductOrService: true,
           itemRole: true,
+          itemType: true,
           name: true,
           updatedAt: true,
         },
