@@ -27,9 +27,6 @@ import { CustomerWhereUniqueInput } from "./CustomerWhereUniqueInput";
 import { CustomerFindManyArgs } from "./CustomerFindManyArgs";
 import { CustomerUpdateInput } from "./CustomerUpdateInput";
 import { Customer } from "./Customer";
-import { InvoiceFindManyArgs } from "../../invoice/base/InvoiceFindManyArgs";
-import { Invoice } from "../../invoice/base/Invoice";
-import { InvoiceWhereUniqueInput } from "../../invoice/base/InvoiceWhereUniqueInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -249,109 +246,5 @@ export class CustomerControllerBase {
       }
       throw error;
     }
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @common.Get("/:id/invoices")
-  @ApiNestedQuery(InvoiceFindManyArgs)
-  @nestAccessControl.UseRoles({
-    resource: "Invoice",
-    action: "read",
-    possession: "any",
-  })
-  async findManyInvoices(
-    @common.Req() request: Request,
-    @common.Param() params: CustomerWhereUniqueInput
-  ): Promise<Invoice[]> {
-    const query = plainToClass(InvoiceFindManyArgs, request.query);
-    const results = await this.service.findInvoices(params.id, {
-      ...query,
-      select: {
-        createdAt: true,
-
-        customer: {
-          select: {
-            id: true,
-          },
-        },
-
-        id: true,
-        info: true,
-        invoiceNumber: true,
-        updatedAt: true,
-      },
-    });
-    if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
-    }
-    return results;
-  }
-
-  @common.Post("/:id/invoices")
-  @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "update",
-    possession: "any",
-  })
-  async connectInvoices(
-    @common.Param() params: CustomerWhereUniqueInput,
-    @common.Body() body: InvoiceWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      invoices: {
-        connect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Patch("/:id/invoices")
-  @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "update",
-    possession: "any",
-  })
-  async updateInvoices(
-    @common.Param() params: CustomerWhereUniqueInput,
-    @common.Body() body: InvoiceWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      invoices: {
-        set: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Delete("/:id/invoices")
-  @nestAccessControl.UseRoles({
-    resource: "Customer",
-    action: "update",
-    possession: "any",
-  })
-  async disconnectInvoices(
-    @common.Param() params: CustomerWhereUniqueInput,
-    @common.Body() body: InvoiceWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      invoices: {
-        disconnect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
   }
 }

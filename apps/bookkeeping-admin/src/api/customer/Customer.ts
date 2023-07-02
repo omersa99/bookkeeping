@@ -1,6 +1,5 @@
 import { Entity } from "../entity/Entity";
 import { JsonValue } from "type-fest";
-import { Invoice } from "../invoice/Invoice";
 
 export type Customer = {
   createdAt: Date;
@@ -8,6 +7,5 @@ export type Customer = {
   entity?: Entity | null;
   id: string;
   info: JsonValue;
-  invoices?: Array<Invoice>;
   updatedAt: Date;
 };

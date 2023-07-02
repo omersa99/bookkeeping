@@ -17,7 +17,6 @@ import { IsOptional, ValidateNested } from "class-validator";
 import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
 import { JsonFilter } from "../../util/JsonFilter";
-import { InvoiceListRelationFilter } from "../../invoice/base/InvoiceListRelationFilter";
 
 @InputType()
 class CustomerWhereInput {
@@ -65,18 +64,6 @@ class CustomerWhereInput {
     nullable: true,
   })
   info?: JsonFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => InvoiceListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => InvoiceListRelationFilter)
-  @IsOptional()
-  @Field(() => InvoiceListRelationFilter, {
-    nullable: true,
-  })
-  invoices?: InvoiceListRelationFilter;
 }
 
 export { CustomerWhereInput as CustomerWhereInput };

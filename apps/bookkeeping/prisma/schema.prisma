@@ -93,14 +93,13 @@ model Account {
 }
 
 model Customer {
-  createdAt    DateTime  @default(now())
+  createdAt    DateTime @default(now())
   customerName String?
-  entity       Entity?   @relation(fields: [entityId], references: [id])
+  entity       Entity?  @relation(fields: [entityId], references: [id])
   entityId     String?
-  id           String    @id @default(cuid())
+  id           String   @id @default(cuid())
   info         Json?
-  invoices     Invoice[]
-  updatedAt    DateTime  @updatedAt
+  updatedAt    DateTime @updatedAt
 }
 
 model ChartOfAccount {
@@ -110,16 +109,6 @@ model ChartOfAccount {
   entity      Entity?
   id          String    @id @default(cuid())
   updatedAt   DateTime  @updatedAt
-}
-
-model Invoice {
-  createdAt     DateTime  @default(now())
-  customer      Customer? @relation(fields: [ID], references: [id])
-  ID            String?
-  id            String    @id @default(cuid())
-  info          Json?
-  invoiceNumber String?
-  updatedAt     DateTime  @updatedAt
 }
 
 enum EnumItemItemRole {

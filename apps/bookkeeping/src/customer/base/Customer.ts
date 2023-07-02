@@ -17,7 +17,6 @@ import { Entity } from "../../entity/base/Entity";
 import { IsJSONValue } from "@app/custom-validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
-import { Invoice } from "../../invoice/base/Invoice";
 
 @ObjectType()
 class Customer {
@@ -66,15 +65,6 @@ class Customer {
     nullable: true,
   })
   info!: JsonValue;
-
-  @ApiProperty({
-    required: false,
-    type: () => [Invoice],
-  })
-  @ValidateNested()
-  @Type(() => Invoice)
-  @IsOptional()
-  invoices?: Array<Invoice>;
 
   @ApiProperty({
     required: true,
