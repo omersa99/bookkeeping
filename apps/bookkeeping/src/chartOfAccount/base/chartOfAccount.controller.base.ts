@@ -49,6 +49,9 @@ export class ChartOfAccountControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
+  @swagger.ApiBody({
+    type: ChartOfAccountCreateInput,
+  })
   async create(
     @common.Body() data: ChartOfAccountCreateInput
   ): Promise<ChartOfAccount> {
@@ -160,6 +163,9 @@ export class ChartOfAccountControllerBase {
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
+  })
+  @swagger.ApiBody({
+    type: ChartOfAccountUpdateInput,
   })
   async update(
     @common.Param() params: ChartOfAccountWhereUniqueInput,

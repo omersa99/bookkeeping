@@ -58,6 +58,9 @@ export class EntityControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
+  @swagger.ApiBody({
+    type: EntityCreateInput,
+  })
   async create(@common.Body() data: EntityCreateInput): Promise<Entity> {
     return await this.service.create({
       data: {
@@ -173,6 +176,9 @@ export class EntityControllerBase {
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
+  })
+  @swagger.ApiBody({
+    type: EntityUpdateInput,
   })
   async update(
     @common.Param() params: EntityWhereUniqueInput,

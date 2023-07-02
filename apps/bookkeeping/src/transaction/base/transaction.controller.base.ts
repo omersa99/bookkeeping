@@ -46,6 +46,9 @@ export class TransactionControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
+  @swagger.ApiBody({
+    type: TransactionCreateInput,
+  })
   async create(
     @common.Body() data: TransactionCreateInput
   ): Promise<Transaction> {
@@ -182,6 +185,9 @@ export class TransactionControllerBase {
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
+  })
+  @swagger.ApiBody({
+    type: TransactionUpdateInput,
   })
   async update(
     @common.Param() params: TransactionWhereUniqueInput,

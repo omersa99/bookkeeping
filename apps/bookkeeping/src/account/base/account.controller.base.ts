@@ -49,6 +49,9 @@ export class AccountControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
+  @swagger.ApiBody({
+    type: AccountCreateInput,
+  })
   async create(@common.Body() data: AccountCreateInput): Promise<Account> {
     return await this.service.create({
       data: {
@@ -167,6 +170,9 @@ export class AccountControllerBase {
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
+  })
+  @swagger.ApiBody({
+    type: AccountUpdateInput,
   })
   async update(
     @common.Param() params: AccountWhereUniqueInput,

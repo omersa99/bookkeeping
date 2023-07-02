@@ -49,6 +49,9 @@ export class JournalControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
+  @swagger.ApiBody({
+    type: JournalCreateInput,
+  })
   async create(@common.Body() data: JournalCreateInput): Promise<Journal> {
     return await this.service.create({
       data: {
@@ -155,6 +158,9 @@ export class JournalControllerBase {
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
+  })
+  @swagger.ApiBody({
+    type: JournalUpdateInput,
   })
   async update(
     @common.Param() params: JournalWhereUniqueInput,

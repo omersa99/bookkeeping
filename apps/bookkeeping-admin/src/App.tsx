@@ -41,6 +41,10 @@ import { ChartOfAccountList } from "./chartOfAccount/ChartOfAccountList";
 import { ChartOfAccountCreate } from "./chartOfAccount/ChartOfAccountCreate";
 import { ChartOfAccountEdit } from "./chartOfAccount/ChartOfAccountEdit";
 import { ChartOfAccountShow } from "./chartOfAccount/ChartOfAccountShow";
+import { InvoiceList } from "./invoice/InvoiceList";
+import { InvoiceCreate } from "./invoice/InvoiceCreate";
+import { InvoiceEdit } from "./invoice/InvoiceEdit";
+import { InvoiceShow } from "./invoice/InvoiceShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -129,6 +133,13 @@ const App = (): React.ReactElement => {
           edit={ChartOfAccountEdit}
           create={ChartOfAccountCreate}
           show={ChartOfAccountShow}
+        />
+        <Resource
+          name="Invoice"
+          list={InvoiceList}
+          edit={InvoiceEdit}
+          create={InvoiceCreate}
+          show={InvoiceShow}
         />
       </Admin>
     </div>

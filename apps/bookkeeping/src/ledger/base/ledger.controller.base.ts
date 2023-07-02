@@ -49,6 +49,9 @@ export class LedgerControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
+  @swagger.ApiBody({
+    type: LedgerCreateInput,
+  })
   async create(@common.Body() data: LedgerCreateInput): Promise<Ledger> {
     return await this.service.create({
       data: {
@@ -158,6 +161,9 @@ export class LedgerControllerBase {
   })
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
+  })
+  @swagger.ApiBody({
+    type: LedgerUpdateInput,
   })
   async update(
     @common.Param() params: LedgerWhereUniqueInput,

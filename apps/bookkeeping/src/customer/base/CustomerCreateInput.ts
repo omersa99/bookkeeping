@@ -17,6 +17,7 @@ import { Type } from "class-transformer";
 import { IsJSONValue } from "@app/custom-validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
+import { InvoiceCreateNestedManyWithoutCustomersInput } from "./InvoiceCreateNestedManyWithoutCustomersInput";
 
 @InputType()
 class CustomerCreateInput {
@@ -52,6 +53,18 @@ class CustomerCreateInput {
     nullable: true,
   })
   info?: InputJsonValue;
+
+  @ApiProperty({
+    required: false,
+    type: () => InvoiceCreateNestedManyWithoutCustomersInput,
+  })
+  @ValidateNested()
+  @Type(() => InvoiceCreateNestedManyWithoutCustomersInput)
+  @IsOptional()
+  @Field(() => InvoiceCreateNestedManyWithoutCustomersInput, {
+    nullable: true,
+  })
+  invoices?: InvoiceCreateNestedManyWithoutCustomersInput;
 }
 
 export { CustomerCreateInput as CustomerCreateInput };
