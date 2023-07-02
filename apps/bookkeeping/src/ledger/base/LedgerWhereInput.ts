@@ -15,6 +15,7 @@ import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput
 import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
 import { StringFilter } from "../../util/StringFilter";
+import { JournalListRelationFilter } from "../../journal/base/JournalListRelationFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 
 @InputType()
@@ -41,6 +42,18 @@ class LedgerWhereInput {
     nullable: true,
   })
   id?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => JournalListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => JournalListRelationFilter)
+  @IsOptional()
+  @Field(() => JournalListRelationFilter, {
+    nullable: true,
+  })
+  journals?: JournalListRelationFilter;
 
   @ApiProperty({
     required: false,

@@ -14,6 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
 import { ValidateNested, IsOptional, IsString } from "class-validator";
 import { Type } from "class-transformer";
+import { JournalCreateNestedManyWithoutLedgersInput } from "./JournalCreateNestedManyWithoutLedgersInput";
 
 @InputType()
 class LedgerCreateInput {
@@ -28,6 +29,18 @@ class LedgerCreateInput {
     nullable: true,
   })
   entity?: EntityWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => JournalCreateNestedManyWithoutLedgersInput,
+  })
+  @ValidateNested()
+  @Type(() => JournalCreateNestedManyWithoutLedgersInput)
+  @IsOptional()
+  @Field(() => JournalCreateNestedManyWithoutLedgersInput, {
+    nullable: true,
+  })
+  journals?: JournalCreateNestedManyWithoutLedgersInput;
 
   @ApiProperty({
     required: false,

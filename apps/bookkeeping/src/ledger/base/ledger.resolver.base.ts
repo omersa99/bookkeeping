@@ -26,6 +26,8 @@ import { LedgerCountArgs } from "./LedgerCountArgs";
 import { LedgerFindManyArgs } from "./LedgerFindManyArgs";
 import { LedgerFindUniqueArgs } from "./LedgerFindUniqueArgs";
 import { Ledger } from "./Ledger";
+import { JournalFindManyArgs } from "../../journal/base/JournalFindManyArgs";
+import { Journal } from "../../journal/base/Journal";
 import { Entity } from "../../entity/base/Entity";
 import { LedgerService } from "../ledger.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
@@ -153,6 +155,26 @@ export class LedgerResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [Journal], { name: "journals" })
+  @nestAccessControl.UseRoles({
+    resource: "Journal",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldJournals(
+    @graphql.Parent() parent: Ledger,
+    @graphql.Args() args: JournalFindManyArgs
+  ): Promise<Journal[]> {
+    const results = await this.service.findJournals(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)

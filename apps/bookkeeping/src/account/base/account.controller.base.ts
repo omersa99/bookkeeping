@@ -286,6 +286,13 @@ export class AccountControllerBase {
         amount: true,
         createdAt: true,
         id: true,
+
+        journal: {
+          select: {
+            id: true,
+          },
+        },
+
         transactionType: true,
         updatedAt: true,
       },

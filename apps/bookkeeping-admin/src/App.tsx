@@ -17,6 +17,10 @@ import { LedgerList } from "./ledger/LedgerList";
 import { LedgerCreate } from "./ledger/LedgerCreate";
 import { LedgerEdit } from "./ledger/LedgerEdit";
 import { LedgerShow } from "./ledger/LedgerShow";
+import { JournalList } from "./journal/JournalList";
+import { JournalCreate } from "./journal/JournalCreate";
+import { JournalEdit } from "./journal/JournalEdit";
+import { JournalShow } from "./journal/JournalShow";
 import { ItemList } from "./item/ItemList";
 import { ItemCreate } from "./item/ItemCreate";
 import { ItemEdit } from "./item/ItemEdit";
@@ -83,6 +87,13 @@ const App = (): React.ReactElement => {
           edit={LedgerEdit}
           create={LedgerCreate}
           show={LedgerShow}
+        />
+        <Resource
+          name="Journal"
+          list={JournalList}
+          edit={JournalEdit}
+          create={JournalCreate}
+          show={JournalShow}
         />
         <Resource
           name="Item"
