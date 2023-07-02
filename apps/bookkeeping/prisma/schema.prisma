@@ -1,0 +1,137 @@
+datasource postgres {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  createdAt DateTime @default(now())
+  entity    Entity?  @relation(fields: [entityId], references: [id])
+  entityId  String?
+  firstName String?
+  id        String   @id @default(cuid())
+  lastName  String?
+  password  String
+  roles     Json
+  updatedAt DateTime @updatedAt
+  username  String   @unique
+}
+
+model Entity {
+  accrualMethod     Boolean?
+  chartOfAccounts   ChartOfAccount? @relation(fields: [chartOfAccountsId], references: [id])
+  chartOfAccountsId String?         @unique
+  createdAt         DateTime        @default(now())
+  customers         Customer[]
+  id                String          @id @default(cuid())
+  info              Json?
+  items             Item[]
+  ledgers           Ledger[]
+  name              String?
+  updatedAt         DateTime        @updatedAt
+  users             User[]
+}
+
+model Ledger {
+  createdAt DateTime  @default(now())
+  entity    Entity?   @relation(fields: [entityId], references: [id])
+  entityId  String?
+  id        String    @id @default(cuid())
+  journals  Journal[]
+  name      String?
+  updatedAt DateTime  @updatedAt
+}
+
+model Journal {
+  createdAt    DateTime      @default(now())
+  id           String        @id @default(cuid())
+  ledger       Ledger?       @relation(fields: [ledgerId], references: [id])
+  ledgerId     String?
+  transactions Transaction[]
+  updatedAt    DateTime      @updatedAt
+}
+
+model Item {
+  Amount             String?
+  createdAt          DateTime          @default(now())
+  entity             Entity?           @relation(fields: [entityId], references: [id])
+  entityId           String?
+  id                 String            @id @default(cuid())
+  isProductOrService Boolean?
+  itemRole EnumItemItemRole? @determines whether the ItemModel should be treated as an expense, inventory, service or product.
+  itemType           EnumItemItemType?
+  name               String?
+  updatedAt          DateTime          @updatedAt
+}
+
+model Transaction {
+  account         Account?                        @relation(fields: [accountId], references: [id])
+  accountId       String?
+  amount          String?
+  createdAt       DateTime                        @default(now())
+  id              String                          @id @default(cuid())
+  journal         Journal                         @relation(fields: [journalId], references: [id])
+  journalId       String
+  transactionType EnumTransactionTransactionType?
+  updatedAt       DateTime                        @updatedAt
+}
+
+model Account {
+  balanceType      EnumAccountBalanceType?
+  chartOfAccount   ChartOfAccount?         @relation(fields: [chartOfAccountId], references: [id])
+  chartOfAccountId String?
+  code             String?
+  createdAt        DateTime                @default(now())
+  id               String                  @id @default(cuid())
+  name             String?
+  role             String?
+  transactions     Transaction[]
+  updatedAt        DateTime                @updatedAt
+}
+
+model Customer {
+  createdAt    DateTime @default(now())
+  customerName String?
+  entity       Entity?  @relation(fields: [entityId], references: [id])
+  entityId     String?
+  id           String   @id @default(cuid())
+  info         Json?
+  updatedAt    DateTime @updatedAt
+}
+
+model ChartOfAccount {
+  accountsSet Account[]
+  createdAt   DateTime  @default(now())
+  description String?
+  entity      Entity?
+  id          String    @id @default(cuid())
+  updatedAt   DateTime  @updatedAt
+}
+
+enum EnumItemItemRole {
+  Expense
+  Inventory
+  Service
+  Product
+}
+
+enum EnumItemItemType {
+  Labor
+  Material
+  LumpSum
+  Equipment
+  Other
+}
+
+enum EnumTransactionTransactionType {
+  Credit
+  Debit
+}
+
+enum EnumAccountBalanceType {
+  Debit
+  Credit
+}
