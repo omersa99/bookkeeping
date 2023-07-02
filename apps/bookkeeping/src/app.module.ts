@@ -4,7 +4,6 @@ import { MorganInterceptor, MorganModule } from "nest-morgan";
 import { UserModule } from "./user/user.module";
 import { EntityModule } from "./entity/entity.module";
 import { LedgerModule } from "./ledger/ledger.module";
-import { JournalModule } from "./journal/journal.module";
 import { ItemModule } from "./item/item.module";
 import { TransactionModule } from "./transaction/transaction.module";
 import { AccountModule } from "./account/account.module";
@@ -29,7 +28,6 @@ import { AuthModule } from "./auth/auth.module";
     UserModule,
     EntityModule,
     LedgerModule,
-    JournalModule,
     ItemModule,
     TransactionModule,
     AccountModule,

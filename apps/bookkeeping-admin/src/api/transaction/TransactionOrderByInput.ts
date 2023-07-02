@@ -5,7 +5,6 @@ export type TransactionOrderByInput = {
   amount?: SortOrder;
   createdAt?: SortOrder;
   id?: SortOrder;
-  journalId?: SortOrder;
   transactionType?: SortOrder;
   updatedAt?: SortOrder;
 };

@@ -20,7 +20,6 @@ import {
   IsEnum,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { Journal } from "../../journal/base/Journal";
 import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
 
 @ObjectType()
@@ -60,14 +59,6 @@ class Transaction {
   @IsString()
   @Field(() => String)
   id!: string;
-
-  @ApiProperty({
-    required: true,
-    type: () => Journal,
-  })
-  @ValidateNested()
-  @Type(() => Journal)
-  journal?: Journal;
 
   @ApiProperty({
     required: false,

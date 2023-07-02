@@ -16,7 +16,6 @@ import { ValidateNested, IsOptional, IsEnum } from "class-validator";
 import { Type } from "class-transformer";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
-import { JournalWhereUniqueInput } from "../../journal/base/JournalWhereUniqueInput";
 import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
 
 @InputType()
@@ -54,18 +53,6 @@ class TransactionWhereInput {
     nullable: true,
   })
   id?: StringFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => JournalWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => JournalWhereUniqueInput)
-  @IsOptional()
-  @Field(() => JournalWhereUniqueInput, {
-    nullable: true,
-  })
-  journal?: JournalWhereUniqueInput;
 
   @ApiProperty({
     required: false,

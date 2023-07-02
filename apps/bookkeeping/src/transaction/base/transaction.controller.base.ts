@@ -61,10 +61,6 @@ export class TransactionControllerBase {
               connect: data.account,
             }
           : undefined,
-
-        journal: {
-          connect: data.journal,
-        },
       },
       select: {
         account: {
@@ -76,13 +72,6 @@ export class TransactionControllerBase {
         amount: true,
         createdAt: true,
         id: true,
-
-        journal: {
-          select: {
-            id: true,
-          },
-        },
-
         transactionType: true,
         updatedAt: true,
       },
@@ -115,13 +104,6 @@ export class TransactionControllerBase {
         amount: true,
         createdAt: true,
         id: true,
-
-        journal: {
-          select: {
-            id: true,
-          },
-        },
-
         transactionType: true,
         updatedAt: true,
       },
@@ -155,13 +137,6 @@ export class TransactionControllerBase {
         amount: true,
         createdAt: true,
         id: true,
-
-        journal: {
-          select: {
-            id: true,
-          },
-        },
-
         transactionType: true,
         updatedAt: true,
       },
@@ -204,10 +179,6 @@ export class TransactionControllerBase {
                 connect: data.account,
               }
             : undefined,
-
-          journal: {
-            connect: data.journal,
-          },
         },
         select: {
           account: {
@@ -219,13 +190,6 @@ export class TransactionControllerBase {
           amount: true,
           createdAt: true,
           id: true,
-
-          journal: {
-            select: {
-              id: true,
-            },
-          },
-
           transactionType: true,
           updatedAt: true,
         },
@@ -267,13 +231,6 @@ export class TransactionControllerBase {
           amount: true,
           createdAt: true,
           id: true,
-
-          journal: {
-            select: {
-              id: true,
-            },
-          },
-
           transactionType: true,
           updatedAt: true,
         },
