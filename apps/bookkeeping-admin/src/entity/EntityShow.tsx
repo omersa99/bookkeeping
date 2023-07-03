@@ -25,7 +25,7 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
         <TextField label="info" source="info" />
         <TextField label="name" source="name" />
         <DateField source="updatedAt" label="Updated At" />
-        <ReferenceField label="Users" source="user.id" reference="User">
+        <ReferenceField label="User" source="user.id" reference="User">
           <TextField source={USER_TITLE_FIELD} />
         </ReferenceField>
         <ReferenceManyField
