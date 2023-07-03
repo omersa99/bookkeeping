@@ -1,14 +1,6 @@
 import * as React from "react";
-import {
-  List,
-  Datagrid,
-  ListProps,
-  TextField,
-  ReferenceField,
-  DateField,
-} from "react-admin";
+import { List, Datagrid, ListProps, TextField, DateField } from "react-admin";
 import Pagination from "../Components/Pagination";
-import { CHARTOFACCOUNT_TITLE_FIELD } from "../chartOfAccount/ChartOfAccountTitle";
 
 export const AccountList = (props: ListProps): React.ReactElement => {
   return (
@@ -21,13 +13,6 @@ export const AccountList = (props: ListProps): React.ReactElement => {
     >
       <Datagrid rowClick="show">
         <TextField label="balance_type" source="balanceType" />
-        <ReferenceField
-          label="Chart of Accounts"
-          source="chartofaccount.id"
-          reference="ChartOfAccount"
-        >
-          <TextField source={CHARTOFACCOUNT_TITLE_FIELD} />
-        </ReferenceField>
         <TextField label="code" source="code" />
         <DateField source="createdAt" label="Created At" />
         <TextField label="ID" source="id" />

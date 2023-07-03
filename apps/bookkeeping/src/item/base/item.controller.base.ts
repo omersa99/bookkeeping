@@ -61,8 +61,11 @@ export class ItemControllerBase {
           : undefined,
       },
       select: {
+        additionalInfo: true,
         Amount: true,
+        cogsAccount: true,
         createdAt: true,
+        earningsAccount: true,
 
         entity: {
           select: {
@@ -70,7 +73,10 @@ export class ItemControllerBase {
           },
         },
 
+        expenseAccount: true,
         id: true,
+        inventoryAccount: true,
+        isInventory: true,
         isProductOrService: true,
         itemRole: true,
         itemType: true,
@@ -97,8 +103,11 @@ export class ItemControllerBase {
     return this.service.findMany({
       ...args,
       select: {
+        additionalInfo: true,
         Amount: true,
+        cogsAccount: true,
         createdAt: true,
+        earningsAccount: true,
 
         entity: {
           select: {
@@ -106,7 +115,10 @@ export class ItemControllerBase {
           },
         },
 
+        expenseAccount: true,
         id: true,
+        inventoryAccount: true,
+        isInventory: true,
         isProductOrService: true,
         itemRole: true,
         itemType: true,
@@ -134,8 +146,11 @@ export class ItemControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
+        additionalInfo: true,
         Amount: true,
+        cogsAccount: true,
         createdAt: true,
+        earningsAccount: true,
 
         entity: {
           select: {
@@ -143,7 +158,10 @@ export class ItemControllerBase {
           },
         },
 
+        expenseAccount: true,
         id: true,
+        inventoryAccount: true,
+        isInventory: true,
         isProductOrService: true,
         itemRole: true,
         itemType: true,
@@ -191,8 +209,11 @@ export class ItemControllerBase {
             : undefined,
         },
         select: {
+          additionalInfo: true,
           Amount: true,
+          cogsAccount: true,
           createdAt: true,
+          earningsAccount: true,
 
           entity: {
             select: {
@@ -200,7 +221,10 @@ export class ItemControllerBase {
             },
           },
 
+          expenseAccount: true,
           id: true,
+          inventoryAccount: true,
+          isInventory: true,
           isProductOrService: true,
           itemRole: true,
           itemType: true,
@@ -236,8 +260,11 @@ export class ItemControllerBase {
       return await this.service.delete({
         where: params,
         select: {
+          additionalInfo: true,
           Amount: true,
+          cogsAccount: true,
           createdAt: true,
+          earningsAccount: true,
 
           entity: {
             select: {
@@ -245,7 +272,10 @@ export class ItemControllerBase {
             },
           },
 
+          expenseAccount: true,
           id: true,
+          inventoryAccount: true,
+          isInventory: true,
           isProductOrService: true,
           itemRole: true,
           itemType: true,

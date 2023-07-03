@@ -5,27 +5,19 @@ import {
   SimpleShowLayout,
   ShowProps,
   TextField,
-  ReferenceField,
   DateField,
   ReferenceManyField,
   Datagrid,
+  ReferenceField,
 } from "react-admin";
 
 import { ACCOUNT_TITLE_FIELD } from "./AccountTitle";
-import { CHARTOFACCOUNT_TITLE_FIELD } from "../chartOfAccount/ChartOfAccountTitle";
 
 export const AccountShow = (props: ShowProps): React.ReactElement => {
   return (
     <Show {...props}>
       <SimpleShowLayout>
         <TextField label="balance_type" source="balanceType" />
-        <ReferenceField
-          label="Chart of Accounts"
-          source="chartofaccount.id"
-          reference="ChartOfAccount"
-        >
-          <TextField source={CHARTOFACCOUNT_TITLE_FIELD} />
-        </ReferenceField>
         <TextField label="code" source="code" />
         <DateField source="createdAt" label="Created At" />
         <TextField label="ID" source="id" />

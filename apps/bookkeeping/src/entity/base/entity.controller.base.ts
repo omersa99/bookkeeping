@@ -33,9 +33,6 @@ import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqu
 import { ItemFindManyArgs } from "../../item/base/ItemFindManyArgs";
 import { Item } from "../../item/base/Item";
 import { ItemWhereUniqueInput } from "../../item/base/ItemWhereUniqueInput";
-import { LedgerFindManyArgs } from "../../ledger/base/LedgerFindManyArgs";
-import { Ledger } from "../../ledger/base/Ledger";
-import { LedgerWhereUniqueInput } from "../../ledger/base/LedgerWhereUniqueInput";
 import { UserFindManyArgs } from "../../user/base/UserFindManyArgs";
 import { User } from "../../user/base/User";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
@@ -63,24 +60,9 @@ export class EntityControllerBase {
   })
   async create(@common.Body() data: EntityCreateInput): Promise<Entity> {
     return await this.service.create({
-      data: {
-        ...data,
-
-        chartOfAccounts: data.chartOfAccounts
-          ? {
-              connect: data.chartOfAccounts,
-            }
-          : undefined,
-      },
+      data: data,
       select: {
         accrualMethod: true,
-
-        chartOfAccounts: {
-          select: {
-            id: true,
-          },
-        },
-
         createdAt: true,
         id: true,
         info: true,
@@ -108,13 +90,6 @@ export class EntityControllerBase {
       ...args,
       select: {
         accrualMethod: true,
-
-        chartOfAccounts: {
-          select: {
-            id: true,
-          },
-        },
-
         createdAt: true,
         id: true,
         info: true,
@@ -143,13 +118,6 @@ export class EntityControllerBase {
       where: params,
       select: {
         accrualMethod: true,
-
-        chartOfAccounts: {
-          select: {
-            id: true,
-          },
-        },
-
         createdAt: true,
         id: true,
         info: true,
@@ -187,24 +155,9 @@ export class EntityControllerBase {
     try {
       return await this.service.update({
         where: params,
-        data: {
-          ...data,
-
-          chartOfAccounts: data.chartOfAccounts
-            ? {
-                connect: data.chartOfAccounts,
-              }
-            : undefined,
-        },
+        data: data,
         select: {
           accrualMethod: true,
-
-          chartOfAccounts: {
-            select: {
-              id: true,
-            },
-          },
-
           createdAt: true,
           id: true,
           info: true,
@@ -241,13 +194,6 @@ export class EntityControllerBase {
         where: params,
         select: {
           accrualMethod: true,
-
-          chartOfAccounts: {
-            select: {
-              id: true,
-            },
-          },
-
           createdAt: true,
           id: true,
           info: true,
@@ -385,8 +331,11 @@ export class EntityControllerBase {
     const results = await this.service.findItems(params.id, {
       ...query,
       select: {
+        additionalInfo: true,
         Amount: true,
+        cogsAccount: true,
         createdAt: true,
+        earningsAccount: true,
 
         entity: {
           select: {
@@ -394,7 +343,10 @@ export class EntityControllerBase {
           },
         },
 
+        expenseAccount: true,
         id: true,
+        inventoryAccount: true,
+        isInventory: true,
         isProductOrService: true,
         itemRole: true,
         itemType: true,
@@ -466,109 +418,6 @@ export class EntityControllerBase {
   ): Promise<void> {
     const data = {
       items: {
-        disconnect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @common.Get("/:id/ledgers")
-  @ApiNestedQuery(LedgerFindManyArgs)
-  @nestAccessControl.UseRoles({
-    resource: "Ledger",
-    action: "read",
-    possession: "any",
-  })
-  async findManyLedgers(
-    @common.Req() request: Request,
-    @common.Param() params: EntityWhereUniqueInput
-  ): Promise<Ledger[]> {
-    const query = plainToClass(LedgerFindManyArgs, request.query);
-    const results = await this.service.findLedgers(params.id, {
-      ...query,
-      select: {
-        createdAt: true,
-
-        entity: {
-          select: {
-            id: true,
-          },
-        },
-
-        id: true,
-        name: true,
-        updatedAt: true,
-      },
-    });
-    if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
-    }
-    return results;
-  }
-
-  @common.Post("/:id/ledgers")
-  @nestAccessControl.UseRoles({
-    resource: "Entity",
-    action: "update",
-    possession: "any",
-  })
-  async connectLedgers(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: LedgerWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      ledgers: {
-        connect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Patch("/:id/ledgers")
-  @nestAccessControl.UseRoles({
-    resource: "Entity",
-    action: "update",
-    possession: "any",
-  })
-  async updateLedgers(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: LedgerWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      ledgers: {
-        set: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Delete("/:id/ledgers")
-  @nestAccessControl.UseRoles({
-    resource: "Entity",
-    action: "update",
-    possession: "any",
-  })
-  async disconnectLedgers(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: LedgerWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      ledgers: {
         disconnect: body,
       },
     };

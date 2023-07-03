@@ -13,10 +13,6 @@ import { EntityList } from "./entity/EntityList";
 import { EntityCreate } from "./entity/EntityCreate";
 import { EntityEdit } from "./entity/EntityEdit";
 import { EntityShow } from "./entity/EntityShow";
-import { LedgerList } from "./ledger/LedgerList";
-import { LedgerCreate } from "./ledger/LedgerCreate";
-import { LedgerEdit } from "./ledger/LedgerEdit";
-import { LedgerShow } from "./ledger/LedgerShow";
 import { ItemList } from "./item/ItemList";
 import { ItemCreate } from "./item/ItemCreate";
 import { ItemEdit } from "./item/ItemEdit";
@@ -33,10 +29,6 @@ import { CustomerList } from "./customer/CustomerList";
 import { CustomerCreate } from "./customer/CustomerCreate";
 import { CustomerEdit } from "./customer/CustomerEdit";
 import { CustomerShow } from "./customer/CustomerShow";
-import { ChartOfAccountList } from "./chartOfAccount/ChartOfAccountList";
-import { ChartOfAccountCreate } from "./chartOfAccount/ChartOfAccountCreate";
-import { ChartOfAccountEdit } from "./chartOfAccount/ChartOfAccountEdit";
-import { ChartOfAccountShow } from "./chartOfAccount/ChartOfAccountShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -78,13 +70,6 @@ const App = (): React.ReactElement => {
           show={EntityShow}
         />
         <Resource
-          name="Ledger"
-          list={LedgerList}
-          edit={LedgerEdit}
-          create={LedgerCreate}
-          show={LedgerShow}
-        />
-        <Resource
           name="Item"
           list={ItemList}
           edit={ItemEdit}
@@ -111,13 +96,6 @@ const App = (): React.ReactElement => {
           edit={CustomerEdit}
           create={CustomerCreate}
           show={CustomerShow}
-        />
-        <Resource
-          name="ChartOfAccount"
-          list={ChartOfAccountList}
-          edit={ChartOfAccountEdit}
-          create={ChartOfAccountCreate}
-          show={ChartOfAccountShow}
         />
       </Admin>
     </div>

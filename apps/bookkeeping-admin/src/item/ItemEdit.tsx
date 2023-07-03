@@ -16,10 +16,16 @@ export const ItemEdit = (props: EditProps): React.ReactElement => {
   return (
     <Edit {...props}>
       <SimpleForm>
+        <TextInput label="additional_info" source="additionalInfo" />
         <TextInput label="amount" source="Amount" />
+        <TextInput label="cogs_account" source="cogsAccount" />
+        <TextInput label="earnings_account" source="earningsAccount" />
         <ReferenceInput source="entity.id" reference="Entity" label="entity">
           <SelectInput optionText={EntityTitle} />
         </ReferenceInput>
+        <TextInput label="expense_account" source="expenseAccount" />
+        <TextInput label="inventory_account" source="inventoryAccount" />
+        <BooleanInput label="is_inventory" source="isInventory" />
         <BooleanInput
           label="is_product_or_service"
           source="isProductOrService"

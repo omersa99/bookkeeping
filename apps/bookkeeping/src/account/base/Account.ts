@@ -15,11 +15,10 @@ import { EnumAccountBalanceType } from "./EnumAccountBalanceType";
 import {
   IsEnum,
   IsOptional,
-  ValidateNested,
   IsString,
   IsDate,
+  ValidateNested,
 } from "class-validator";
-import { ChartOfAccount } from "../../chartOfAccount/base/ChartOfAccount";
 import { Type } from "class-transformer";
 import { Transaction } from "../../transaction/base/Transaction";
 
@@ -35,15 +34,6 @@ class Account {
     nullable: true,
   })
   balanceType?: "Debit" | "Credit" | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => ChartOfAccount,
-  })
-  @ValidateNested()
-  @Type(() => ChartOfAccount)
-  @IsOptional()
-  chartOfAccount?: ChartOfAccount | null;
 
   @ApiProperty({
     required: false,

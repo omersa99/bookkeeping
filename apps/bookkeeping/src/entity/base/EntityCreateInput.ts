@@ -17,14 +17,12 @@ import {
   ValidateNested,
   IsString,
 } from "class-validator";
-import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
-import { Type } from "class-transformer";
 import { CustomerCreateNestedManyWithoutEntitiesInput } from "./CustomerCreateNestedManyWithoutEntitiesInput";
+import { Type } from "class-transformer";
 import { IsJSONValue } from "@app/custom-validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
 import { ItemCreateNestedManyWithoutEntitiesInput } from "./ItemCreateNestedManyWithoutEntitiesInput";
-import { LedgerCreateNestedManyWithoutEntitiesInput } from "./LedgerCreateNestedManyWithoutEntitiesInput";
 import { UserCreateNestedManyWithoutEntitiesInput } from "./UserCreateNestedManyWithoutEntitiesInput";
 
 @InputType()
@@ -39,18 +37,6 @@ class EntityCreateInput {
     nullable: true,
   })
   accrualMethod?: boolean | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => ChartOfAccountWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => ChartOfAccountWhereUniqueInput)
-  @IsOptional()
-  @Field(() => ChartOfAccountWhereUniqueInput, {
-    nullable: true,
-  })
-  chartOfAccounts?: ChartOfAccountWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,
@@ -85,18 +71,6 @@ class EntityCreateInput {
     nullable: true,
   })
   items?: ItemCreateNestedManyWithoutEntitiesInput;
-
-  @ApiProperty({
-    required: false,
-    type: () => LedgerCreateNestedManyWithoutEntitiesInput,
-  })
-  @ValidateNested()
-  @Type(() => LedgerCreateNestedManyWithoutEntitiesInput)
-  @IsOptional()
-  @Field(() => LedgerCreateNestedManyWithoutEntitiesInput, {
-    nullable: true,
-  })
-  ledgers?: LedgerCreateNestedManyWithoutEntitiesInput;
 
   @ApiProperty({
     required: false,

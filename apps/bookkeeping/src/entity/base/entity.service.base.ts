@@ -10,15 +10,7 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
-import {
-  Prisma,
-  Entity,
-  Customer,
-  Item,
-  Ledger,
-  User,
-  ChartOfAccount,
-} from "@prisma/client";
+import { Prisma, Entity, Customer, Item, User } from "@prisma/client";
 
 export class EntityServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -77,17 +69,6 @@ export class EntityServiceBase {
       .items(args);
   }
 
-  async findLedgers(
-    parentId: string,
-    args: Prisma.LedgerFindManyArgs
-  ): Promise<Ledger[]> {
-    return this.prisma.entity
-      .findUniqueOrThrow({
-        where: { id: parentId },
-      })
-      .ledgers(args);
-  }
-
   async findUsers(
     parentId: string,
     args: Prisma.UserFindManyArgs
@@ -97,13 +78,5 @@ export class EntityServiceBase {
         where: { id: parentId },
       })
       .users(args);
-  }
-
-  async getChartOfAccounts(parentId: string): Promise<ChartOfAccount | null> {
-    return this.prisma.entity
-      .findUnique({
-        where: { id: parentId },
-      })
-      .chartOfAccounts();
   }
 }

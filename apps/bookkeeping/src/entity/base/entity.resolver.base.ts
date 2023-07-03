@@ -30,11 +30,8 @@ import { CustomerFindManyArgs } from "../../customer/base/CustomerFindManyArgs";
 import { Customer } from "../../customer/base/Customer";
 import { ItemFindManyArgs } from "../../item/base/ItemFindManyArgs";
 import { Item } from "../../item/base/Item";
-import { LedgerFindManyArgs } from "../../ledger/base/LedgerFindManyArgs";
-import { Ledger } from "../../ledger/base/Ledger";
 import { UserFindManyArgs } from "../../user/base/UserFindManyArgs";
 import { User } from "../../user/base/User";
-import { ChartOfAccount } from "../../chartOfAccount/base/ChartOfAccount";
 import { EntityService } from "../entity.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Entity)
@@ -97,15 +94,7 @@ export class EntityResolverBase {
   async createEntity(@graphql.Args() args: CreateEntityArgs): Promise<Entity> {
     return await this.service.create({
       ...args,
-      data: {
-        ...args.data,
-
-        chartOfAccounts: args.data.chartOfAccounts
-          ? {
-              connect: args.data.chartOfAccounts,
-            }
-          : undefined,
-      },
+      data: args.data,
     });
   }
 
@@ -122,15 +111,7 @@ export class EntityResolverBase {
     try {
       return await this.service.update({
         ...args,
-        data: {
-          ...args.data,
-
-          chartOfAccounts: args.data.chartOfAccounts
-            ? {
-                connect: args.data.chartOfAccounts,
-              }
-            : undefined,
-        },
+        data: args.data,
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -204,26 +185,6 @@ export class EntityResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [Ledger], { name: "ledgers" })
-  @nestAccessControl.UseRoles({
-    resource: "Ledger",
-    action: "read",
-    possession: "any",
-  })
-  async resolveFieldLedgers(
-    @graphql.Parent() parent: Entity,
-    @graphql.Args() args: LedgerFindManyArgs
-  ): Promise<Ledger[]> {
-    const results = await this.service.findLedgers(parent.id, args);
-
-    if (!results) {
-      return [];
-    }
-
-    return results;
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => [User], { name: "users" })
   @nestAccessControl.UseRoles({
     resource: "User",
@@ -241,26 +202,5 @@ export class EntityResolverBase {
     }
 
     return results;
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => ChartOfAccount, {
-    nullable: true,
-    name: "chartOfAccounts",
-  })
-  @nestAccessControl.UseRoles({
-    resource: "ChartOfAccount",
-    action: "read",
-    possession: "any",
-  })
-  async resolveFieldChartOfAccounts(
-    @graphql.Parent() parent: Entity
-  ): Promise<ChartOfAccount | null> {
-    const result = await this.service.getChartOfAccounts(parent.id);
-
-    if (!result) {
-      return null;
-    }
-    return result;
   }
 }

@@ -23,12 +23,18 @@ export const ItemList = (props: ListProps): React.ReactElement => {
       pagination={<Pagination />}
     >
       <Datagrid rowClick="show">
+        <TextField label="additional_info" source="additionalInfo" />
         <TextField label="amount" source="Amount" />
+        <TextField label="cogs_account" source="cogsAccount" />
         <DateField source="createdAt" label="Created At" />
+        <TextField label="earnings_account" source="earningsAccount" />
         <ReferenceField label="entity" source="entity.id" reference="Entity">
           <TextField source={ENTITY_TITLE_FIELD} />
         </ReferenceField>
+        <TextField label="expense_account" source="expenseAccount" />
         <TextField label="ID" source="id" />
+        <TextField label="inventory_account" source="inventoryAccount" />
+        <BooleanField label="is_inventory" source="isInventory" />
         <BooleanField
           label="is_product_or_service"
           source="isProductOrService"
