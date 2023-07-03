@@ -11,9 +11,10 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
+import { ValidateNested, IsOptional, IsEnum } from "class-validator";
 import { Type } from "class-transformer";
-import { IsOptional, ValidateNested, IsEnum } from "class-validator";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
 import { EnumItemItemRole } from "./EnumItemItemRole";
@@ -21,6 +22,18 @@ import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 
 @InputType()
 class ItemWhereInput {
+  @ApiProperty({
+    required: false,
+    type: () => AccountWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => AccountWhereUniqueInput)
+  @IsOptional()
+  @Field(() => AccountWhereUniqueInput, {
+    nullable: true,
+  })
+  account?: AccountWhereUniqueInput;
+
   @ApiProperty({
     required: false,
     type: StringNullableFilter,
@@ -76,6 +89,17 @@ class ItemWhereInput {
     nullable: true,
   })
   itemRole?: "Expense" | "Inventory" | "Service" | "Product";
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  itemType?: StringNullableFilter;
 
   @ApiProperty({
     required: false,

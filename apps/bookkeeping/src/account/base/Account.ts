@@ -11,29 +11,31 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { EnumAccountBalanceType } from "./EnumAccountBalanceType";
 import {
-  IsEnum,
+  IsBoolean,
   IsOptional,
   IsString,
   IsDate,
+  IsEnum,
   ValidateNested,
 } from "class-validator";
 import { Type } from "class-transformer";
+import { EnumAccountDefaultAccountType } from "./EnumAccountDefaultAccountType";
+import { Item } from "../../item/base/Item";
 import { Transaction } from "../../transaction/base/Transaction";
 
 @ObjectType()
 class Account {
   @ApiProperty({
     required: false,
-    enum: EnumAccountBalanceType,
+    type: Boolean,
   })
-  @IsEnum(EnumAccountBalanceType)
+  @IsBoolean()
   @IsOptional()
-  @Field(() => EnumAccountBalanceType, {
+  @Field(() => Boolean, {
     nullable: true,
   })
-  balanceType?: "Debit" | "Credit" | null;
+  active!: boolean | null;
 
   @ApiProperty({
     required: false,
@@ -55,12 +57,32 @@ class Account {
   createdAt!: Date;
 
   @ApiProperty({
+    required: false,
+    enum: EnumAccountDefaultAccountType,
+  })
+  @IsEnum(EnumAccountDefaultAccountType)
+  @IsOptional()
+  @Field(() => EnumAccountDefaultAccountType, {
+    nullable: true,
+  })
+  DefaultAccountType?: "Debit" | "Credit" | null;
+
+  @ApiProperty({
     required: true,
     type: String,
   })
   @IsString()
   @Field(() => String)
   id!: string;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Item],
+  })
+  @ValidateNested()
+  @Type(() => Item)
+  @IsOptional()
+  items?: Array<Item>;
 
   @ApiProperty({
     required: false,

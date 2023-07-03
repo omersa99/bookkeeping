@@ -1,8 +1,11 @@
+import { ItemCreateNestedManyWithoutAccountsInput } from "./ItemCreateNestedManyWithoutAccountsInput";
 import { TransactionCreateNestedManyWithoutAccountsInput } from "./TransactionCreateNestedManyWithoutAccountsInput";
 
 export type AccountCreateInput = {
-  balanceType?: "Debit" | "Credit" | null;
+  active?: boolean | null;
   code?: string | null;
+  DefaultAccountType?: "Debit" | "Credit" | null;
+  items?: ItemCreateNestedManyWithoutAccountsInput;
   name?: string | null;
   role?: string | null;
   transactions?: TransactionCreateNestedManyWithoutAccountsInput;

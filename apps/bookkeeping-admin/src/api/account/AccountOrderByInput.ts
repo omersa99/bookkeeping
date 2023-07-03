@@ -1,9 +1,10 @@
 import { SortOrder } from "../../util/SortOrder";
 
 export type AccountOrderByInput = {
-  balanceType?: SortOrder;
+  active?: SortOrder;
   code?: SortOrder;
   createdAt?: SortOrder;
+  DefaultAccountType?: SortOrder;
   id?: SortOrder;
   name?: SortOrder;
   role?: SortOrder;

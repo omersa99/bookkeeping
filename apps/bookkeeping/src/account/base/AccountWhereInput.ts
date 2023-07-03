@@ -11,25 +11,27 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { EnumAccountBalanceType } from "./EnumAccountBalanceType";
-import { IsEnum, IsOptional, ValidateNested } from "class-validator";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 import { Type } from "class-transformer";
+import { IsOptional, IsEnum, ValidateNested } from "class-validator";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { EnumAccountDefaultAccountType } from "./EnumAccountDefaultAccountType";
 import { StringFilter } from "../../util/StringFilter";
+import { ItemListRelationFilter } from "../../item/base/ItemListRelationFilter";
 import { TransactionListRelationFilter } from "../../transaction/base/TransactionListRelationFilter";
 
 @InputType()
 class AccountWhereInput {
   @ApiProperty({
     required: false,
-    enum: EnumAccountBalanceType,
+    type: BooleanNullableFilter,
   })
-  @IsEnum(EnumAccountBalanceType)
+  @Type(() => BooleanNullableFilter)
   @IsOptional()
-  @Field(() => EnumAccountBalanceType, {
+  @Field(() => BooleanNullableFilter, {
     nullable: true,
   })
-  balanceType?: "Debit" | "Credit";
+  active?: BooleanNullableFilter;
 
   @ApiProperty({
     required: false,
@@ -44,6 +46,17 @@ class AccountWhereInput {
 
   @ApiProperty({
     required: false,
+    enum: EnumAccountDefaultAccountType,
+  })
+  @IsEnum(EnumAccountDefaultAccountType)
+  @IsOptional()
+  @Field(() => EnumAccountDefaultAccountType, {
+    nullable: true,
+  })
+  DefaultAccountType?: "Debit" | "Credit";
+
+  @ApiProperty({
+    required: false,
     type: StringFilter,
   })
   @Type(() => StringFilter)
@@ -52,6 +65,18 @@ class AccountWhereInput {
     nullable: true,
   })
   id?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => ItemListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => ItemListRelationFilter)
+  @IsOptional()
+  @Field(() => ItemListRelationFilter, {
+    nullable: true,
+  })
+  items?: ItemListRelationFilter;
 
   @ApiProperty({
     required: false,

@@ -11,11 +11,12 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
+import { Account } from "../../account/base/Account";
 import {
-  IsString,
-  IsOptional,
-  IsDate,
   ValidateNested,
+  IsOptional,
+  IsString,
+  IsDate,
   IsEnum,
   IsNumber,
 } from "class-validator";
@@ -25,6 +26,15 @@ import { EnumItemItemRole } from "./EnumItemItemRole";
 
 @ObjectType()
 class Item {
+  @ApiProperty({
+    required: false,
+    type: () => Account,
+  })
+  @ValidateNested()
+  @Type(() => Account)
+  @IsOptional()
+  account?: Account | null;
+
   @ApiProperty({
     required: false,
     type: String,
@@ -82,6 +92,17 @@ class Item {
     nullable: true,
   })
   itemRole?: "Expense" | "Inventory" | "Service" | "Product" | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  itemType!: string | null;
 
   @ApiProperty({
     required: false,
