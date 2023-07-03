@@ -1,10 +1,13 @@
+import { Item } from "../item/Item";
 import { Transaction } from "../transaction/Transaction";
 
 export type Account = {
-  balanceType?: "Debit" | "Credit" | null;
+  active: boolean | null;
   code: string | null;
   createdAt: Date;
+  DefaultAccountType?: "Debit" | "Credit" | null;
   id: string;
+  items?: Array<Item>;
   name: string | null;
   role: string | null;
   transactions?: Array<Transaction>;

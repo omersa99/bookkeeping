@@ -19,6 +19,7 @@ import { AccountService } from "../account.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
+  active: "true",
   code: "exampleCode",
   createdAt: new Date(),
   id: "exampleId",
@@ -27,6 +28,7 @@ const CREATE_INPUT = {
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
+  active: "true",
   code: "exampleCode",
   createdAt: new Date(),
   id: "exampleId",
@@ -36,6 +38,7 @@ const CREATE_RESULT = {
 };
 const FIND_MANY_RESULT = [
   {
+    active: "true",
     code: "exampleCode",
     createdAt: new Date(),
     id: "exampleId",
@@ -45,6 +48,7 @@ const FIND_MANY_RESULT = [
   },
 ];
 const FIND_ONE_RESULT = {
+  active: "true",
   code: "exampleCode",
   createdAt: new Date(),
   id: "exampleId",

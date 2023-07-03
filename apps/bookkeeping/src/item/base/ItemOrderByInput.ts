@@ -28,6 +28,17 @@ class ItemOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  accountId?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @IsOptional()
+  @IsEnum(SortOrder)
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   additionalInfo?: SortOrder;
 
   @ApiProperty({
@@ -84,6 +95,17 @@ class ItemOrderByInput {
     nullable: true,
   })
   itemRole?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @IsOptional()
+  @IsEnum(SortOrder)
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  itemType?: SortOrder;
 
   @ApiProperty({
     required: false,

@@ -11,23 +11,30 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { EnumAccountBalanceType } from "./EnumAccountBalanceType";
-import { IsEnum, IsOptional, IsString, ValidateNested } from "class-validator";
-import { TransactionCreateNestedManyWithoutAccountsInput } from "./TransactionCreateNestedManyWithoutAccountsInput";
+import {
+  IsBoolean,
+  IsOptional,
+  IsString,
+  IsEnum,
+  ValidateNested,
+} from "class-validator";
+import { EnumAccountDefaultAccountType } from "./EnumAccountDefaultAccountType";
+import { ItemCreateNestedManyWithoutAccountsInput } from "./ItemCreateNestedManyWithoutAccountsInput";
 import { Type } from "class-transformer";
+import { TransactionCreateNestedManyWithoutAccountsInput } from "./TransactionCreateNestedManyWithoutAccountsInput";
 
 @InputType()
 class AccountCreateInput {
   @ApiProperty({
     required: false,
-    enum: EnumAccountBalanceType,
+    type: Boolean,
   })
-  @IsEnum(EnumAccountBalanceType)
+  @IsBoolean()
   @IsOptional()
-  @Field(() => EnumAccountBalanceType, {
+  @Field(() => Boolean, {
     nullable: true,
   })
-  balanceType?: "Debit" | "Credit" | null;
+  active?: boolean | null;
 
   @ApiProperty({
     required: false,
@@ -39,6 +46,29 @@ class AccountCreateInput {
     nullable: true,
   })
   code?: string | null;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumAccountDefaultAccountType,
+  })
+  @IsEnum(EnumAccountDefaultAccountType)
+  @IsOptional()
+  @Field(() => EnumAccountDefaultAccountType, {
+    nullable: true,
+  })
+  DefaultAccountType?: "Debit" | "Credit" | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => ItemCreateNestedManyWithoutAccountsInput,
+  })
+  @ValidateNested()
+  @Type(() => ItemCreateNestedManyWithoutAccountsInput)
+  @IsOptional()
+  @Field(() => ItemCreateNestedManyWithoutAccountsInput, {
+    nullable: true,
+  })
+  items?: ItemCreateNestedManyWithoutAccountsInput;
 
   @ApiProperty({
     required: false,

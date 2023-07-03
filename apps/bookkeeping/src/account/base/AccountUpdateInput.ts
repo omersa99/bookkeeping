@@ -11,23 +11,30 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { EnumAccountBalanceType } from "./EnumAccountBalanceType";
-import { IsEnum, IsOptional, IsString, ValidateNested } from "class-validator";
-import { TransactionUpdateManyWithoutAccountsInput } from "./TransactionUpdateManyWithoutAccountsInput";
+import {
+  IsBoolean,
+  IsOptional,
+  IsString,
+  IsEnum,
+  ValidateNested,
+} from "class-validator";
+import { EnumAccountDefaultAccountType } from "./EnumAccountDefaultAccountType";
+import { ItemUpdateManyWithoutAccountsInput } from "./ItemUpdateManyWithoutAccountsInput";
 import { Type } from "class-transformer";
+import { TransactionUpdateManyWithoutAccountsInput } from "./TransactionUpdateManyWithoutAccountsInput";
 
 @InputType()
 class AccountUpdateInput {
   @ApiProperty({
     required: false,
-    enum: EnumAccountBalanceType,
+    type: Boolean,
   })
-  @IsEnum(EnumAccountBalanceType)
+  @IsBoolean()
   @IsOptional()
-  @Field(() => EnumAccountBalanceType, {
+  @Field(() => Boolean, {
     nullable: true,
   })
-  balanceType?: "Debit" | "Credit" | null;
+  active?: boolean | null;
 
   @ApiProperty({
     required: false,
@@ -39,6 +46,29 @@ class AccountUpdateInput {
     nullable: true,
   })
   code?: string | null;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumAccountDefaultAccountType,
+  })
+  @IsEnum(EnumAccountDefaultAccountType)
+  @IsOptional()
+  @Field(() => EnumAccountDefaultAccountType, {
+    nullable: true,
+  })
+  DefaultAccountType?: "Debit" | "Credit" | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => ItemUpdateManyWithoutAccountsInput,
+  })
+  @ValidateNested()
+  @Type(() => ItemUpdateManyWithoutAccountsInput)
+  @IsOptional()
+  @Field(() => ItemUpdateManyWithoutAccountsInput, {
+    nullable: true,
+  })
+  items?: ItemUpdateManyWithoutAccountsInput;
 
   @ApiProperty({
     required: false,

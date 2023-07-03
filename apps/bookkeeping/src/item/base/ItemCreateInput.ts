@@ -11,19 +11,32 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
+import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
 import {
-  IsString,
-  IsOptional,
   ValidateNested,
+  IsOptional,
+  IsString,
   IsEnum,
   IsNumber,
 } from "class-validator";
-import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
 import { Type } from "class-transformer";
+import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
 import { EnumItemItemRole } from "./EnumItemItemRole";
 
 @InputType()
 class ItemCreateInput {
+  @ApiProperty({
+    required: false,
+    type: () => AccountWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => AccountWhereUniqueInput)
+  @IsOptional()
+  @Field(() => AccountWhereUniqueInput, {
+    nullable: true,
+  })
+  account?: AccountWhereUniqueInput | null;
+
   @ApiProperty({
     required: false,
     type: String,
@@ -68,6 +81,17 @@ class ItemCreateInput {
     nullable: true,
   })
   itemRole?: "Expense" | "Inventory" | "Service" | "Product" | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  itemType?: string | null;
 
   @ApiProperty({
     required: false,

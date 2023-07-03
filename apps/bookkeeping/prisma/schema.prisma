@@ -33,6 +33,8 @@ model Entity {
 }
 
 model Item {
+  account        Account? @relation(fields: [accountId], references: [id])
+  accountId      String?
   additionalInfo String?
   Amount         String?
   createdAt      DateTime @default(now())
@@ -40,6 +42,7 @@ model Item {
   entityId       String?
   id             String   @id @default(cuid())
   itemRole EnumItemItemRole? @determines whether the ItemModel should be treated as an expense, inventory, service or product.
+  itemType       String?
   name           String?
   price          Float?
   updatedAt      DateTime @updatedAt
@@ -56,14 +59,16 @@ model Transaction {
 }
 
 model Account {
-  balanceType  EnumAccountBalanceType?
-  code         String?
-  createdAt    DateTime                @default(now())
-  id           String                  @id @default(cuid())
-  name         String?
-  role         String?
-  transactions Transaction[]
-  updatedAt    DateTime                @updatedAt
+  active             Boolean?
+  code               String?
+  createdAt          DateTime                       @default(now())
+  DefaultAccountType EnumAccountDefaultAccountType?
+  id                 String                         @id @default(cuid())
+  items              Item[]
+  name               String?
+  role               String?
+  transactions       Transaction[]
+  updatedAt          DateTime                       @updatedAt
 }
 
 model Client {
@@ -124,7 +129,7 @@ enum EnumTransactionTransactionType {
   Debit
 }
 
-enum EnumAccountBalanceType {
+enum EnumAccountDefaultAccountType {
   Debit
   Credit
 }

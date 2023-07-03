@@ -4,21 +4,25 @@ import {
   Create,
   SimpleForm,
   CreateProps,
-  SelectInput,
+  BooleanInput,
   TextInput,
+  SelectInput,
   ReferenceArrayInput,
   SelectArrayInput,
 } from "react-admin";
 
+import { ItemTitle } from "../item/ItemTitle";
 import { TransactionTitle } from "../transaction/TransactionTitle";
 
 export const AccountCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
+        <BooleanInput label="active" source="active" />
+        <TextInput label="code" source="code" />
         <SelectInput
-          source="balanceType"
-          label="balance_type"
+          source="DefaultAccountType"
+          label="default Account type"
           choices={[
             { label: "debit", value: "Debit" },
             { label: "credit", value: "Credit" },
@@ -27,7 +31,14 @@ export const AccountCreate = (props: CreateProps): React.ReactElement => {
           allowEmpty
           optionValue="value"
         />
-        <TextInput label="code" source="code" />
+        <ReferenceArrayInput
+          source="items"
+          reference="Item"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={ItemTitle} />
+        </ReferenceArrayInput>
         <TextInput label="name" source="name" />
         <TextInput label="role" source="role" />
         <ReferenceArrayInput

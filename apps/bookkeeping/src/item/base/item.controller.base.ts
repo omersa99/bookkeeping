@@ -54,6 +54,12 @@ export class ItemControllerBase {
       data: {
         ...data,
 
+        account: data.account
+          ? {
+              connect: data.account,
+            }
+          : undefined,
+
         entity: data.entity
           ? {
               connect: data.entity,
@@ -61,6 +67,12 @@ export class ItemControllerBase {
           : undefined,
       },
       select: {
+        account: {
+          select: {
+            id: true,
+          },
+        },
+
         additionalInfo: true,
         Amount: true,
         createdAt: true,
@@ -73,6 +85,7 @@ export class ItemControllerBase {
 
         id: true,
         itemRole: true,
+        itemType: true,
         name: true,
         price: true,
         updatedAt: true,
@@ -97,6 +110,12 @@ export class ItemControllerBase {
     return this.service.findMany({
       ...args,
       select: {
+        account: {
+          select: {
+            id: true,
+          },
+        },
+
         additionalInfo: true,
         Amount: true,
         createdAt: true,
@@ -109,6 +128,7 @@ export class ItemControllerBase {
 
         id: true,
         itemRole: true,
+        itemType: true,
         name: true,
         price: true,
         updatedAt: true,
@@ -134,6 +154,12 @@ export class ItemControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
+        account: {
+          select: {
+            id: true,
+          },
+        },
+
         additionalInfo: true,
         Amount: true,
         createdAt: true,
@@ -146,6 +172,7 @@ export class ItemControllerBase {
 
         id: true,
         itemRole: true,
+        itemType: true,
         name: true,
         price: true,
         updatedAt: true,
@@ -184,6 +211,12 @@ export class ItemControllerBase {
         data: {
           ...data,
 
+          account: data.account
+            ? {
+                connect: data.account,
+              }
+            : undefined,
+
           entity: data.entity
             ? {
                 connect: data.entity,
@@ -191,6 +224,12 @@ export class ItemControllerBase {
             : undefined,
         },
         select: {
+          account: {
+            select: {
+              id: true,
+            },
+          },
+
           additionalInfo: true,
           Amount: true,
           createdAt: true,
@@ -203,6 +242,7 @@ export class ItemControllerBase {
 
           id: true,
           itemRole: true,
+          itemType: true,
           name: true,
           price: true,
           updatedAt: true,
@@ -236,6 +276,12 @@ export class ItemControllerBase {
       return await this.service.delete({
         where: params,
         select: {
+          account: {
+            select: {
+              id: true,
+            },
+          },
+
           additionalInfo: true,
           Amount: true,
           createdAt: true,
@@ -248,6 +294,7 @@ export class ItemControllerBase {
 
           id: true,
           itemRole: true,
+          itemType: true,
           name: true,
           price: true,
           updatedAt: true,

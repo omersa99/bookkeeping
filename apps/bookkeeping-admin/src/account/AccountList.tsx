@@ -1,5 +1,12 @@
 import * as React from "react";
-import { List, Datagrid, ListProps, TextField, DateField } from "react-admin";
+import {
+  List,
+  Datagrid,
+  ListProps,
+  BooleanField,
+  TextField,
+  DateField,
+} from "react-admin";
 import Pagination from "../Components/Pagination";
 
 export const AccountList = (props: ListProps): React.ReactElement => {
@@ -12,9 +19,10 @@ export const AccountList = (props: ListProps): React.ReactElement => {
       pagination={<Pagination />}
     >
       <Datagrid rowClick="show">
-        <TextField label="balance_type" source="balanceType" />
+        <BooleanField label="active" source="active" />
         <TextField label="code" source="code" />
         <DateField source="createdAt" label="Created At" />
+        <TextField label="default Account type" source="DefaultAccountType" />
         <TextField label="ID" source="id" />
         <TextField label="name" source="name" />
         <TextField label="role" source="role" />

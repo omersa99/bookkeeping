@@ -26,6 +26,7 @@ import { ItemCountArgs } from "./ItemCountArgs";
 import { ItemFindManyArgs } from "./ItemFindManyArgs";
 import { ItemFindUniqueArgs } from "./ItemFindUniqueArgs";
 import { Item } from "./Item";
+import { Account } from "../../account/base/Account";
 import { Entity } from "../../entity/base/Entity";
 import { ItemService } from "../item.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
@@ -90,6 +91,12 @@ export class ItemResolverBase {
       data: {
         ...args.data,
 
+        account: args.data.account
+          ? {
+              connect: args.data.account,
+            }
+          : undefined,
+
         entity: args.data.entity
           ? {
               connect: args.data.entity,
@@ -112,6 +119,12 @@ export class ItemResolverBase {
         ...args,
         data: {
           ...args.data,
+
+          account: args.data.account
+            ? {
+                connect: args.data.account,
+              }
+            : undefined,
 
           entity: args.data.entity
             ? {
@@ -147,6 +160,27 @@ export class ItemResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Account, {
+    nullable: true,
+    name: "account",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Account",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldAccount(
+    @graphql.Parent() parent: Item
+  ): Promise<Account | null> {
+    const result = await this.service.getAccount(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
