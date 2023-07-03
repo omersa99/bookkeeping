@@ -36,19 +36,19 @@ model Item {
   additionalInfo   String?
   Amount           String?
   cogsAccount      String?
-  createdAt        DateTime   @default(now())
+  createdAt        DateTime          @default(now())
   document         Document[]
   earningsAccount  String?
-  entity           Entity?    @relation(fields: [entityId], references: [id])
+  entity           Entity?           @relation(fields: [entityId], references: [id])
   entityId         String?
   expenseAccount   String?
-  id               String     @id @default(cuid())
+  id               String            @id @default(cuid())
   inventoryAccount String?
-  itemRole EnumItemItemRole? @determines whether the ItemModel should be treated as an expense, inventory, service or product.
+  itemRole         EnumItemItemRole?
   itemType         String?
   name             String?
   price            Float?
-  updatedAt        DateTime   @updatedAt
+  updatedAt        DateTime          @updatedAt
 }
 
 model Transaction {
