@@ -11,27 +11,33 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
-import { ValidateNested, IsOptional, IsEnum, IsDate } from "class-validator";
-import { Type } from "class-transformer";
+import {
+  IsString,
+  IsOptional,
+  ValidateNested,
+  IsEnum,
+  IsDate,
+} from "class-validator";
 import { ClientWhereUniqueInput } from "../../client/base/ClientWhereUniqueInput";
+import { Type } from "class-transformer";
 import { Client } from "../../client/base/Client";
 import { EnumDocumentDocType } from "./EnumDocumentDocType";
+import { ItemUpdateManyWithoutDocumentsInput } from "./ItemUpdateManyWithoutDocumentsInput";
+import { EnumDocumentStatus } from "./EnumDocumentStatus";
 import { SupplierWhereUniqueInput } from "../../supplier/base/SupplierWhereUniqueInput";
 
 @InputType()
 class DocumentUpdateInput {
   @ApiProperty({
     required: false,
-    type: () => AccountWhereUniqueInput,
+    type: String,
   })
-  @ValidateNested()
-  @Type(() => AccountWhereUniqueInput)
+  @IsString()
   @IsOptional()
-  @Field(() => AccountWhereUniqueInput, {
+  @Field(() => String, {
     nullable: true,
   })
-  cashAccount?: AccountWhereUniqueInput | null;
+  cashAccount?: string | null;
 
   @ApiProperty({
     required: false,
@@ -69,6 +75,40 @@ class DocumentUpdateInput {
 
   @ApiProperty({
     required: false,
+    type: () => ItemUpdateManyWithoutDocumentsInput,
+  })
+  @ValidateNested()
+  @Type(() => ItemUpdateManyWithoutDocumentsInput)
+  @IsOptional()
+  @Field(() => ItemUpdateManyWithoutDocumentsInput, {
+    nullable: true,
+  })
+  items?: ItemUpdateManyWithoutDocumentsInput;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  prepaidAccount?: string | null;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumDocumentStatus,
+  })
+  @IsEnum(EnumDocumentStatus)
+  @IsOptional()
+  @Field(() => EnumDocumentStatus, {
+    nullable: true,
+  })
+  status?: "Draft" | "Approved" | "Paid" | "Canceled" | null;
+
+  @ApiProperty({
+    required: false,
     type: () => SupplierWhereUniqueInput,
   })
   @ValidateNested()
@@ -78,6 +118,17 @@ class DocumentUpdateInput {
     nullable: true,
   })
   supplier?: SupplierWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  unearnedAccount?: string | null;
 }
 
 export { DocumentUpdateInput as DocumentUpdateInput };

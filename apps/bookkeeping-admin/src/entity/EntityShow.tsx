@@ -13,7 +13,6 @@ import {
 } from "react-admin";
 
 import { ENTITY_TITLE_FIELD } from "./EntityTitle";
-import { ACCOUNT_TITLE_FIELD } from "../account/AccountTitle";
 import { USER_TITLE_FIELD } from "../user/UserTitle";
 
 export const EntityShow = (props: ShowProps): React.ReactElement => {
@@ -51,16 +50,11 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
         </ReferenceManyField>
         <ReferenceManyField reference="Item" target="entityId" label="Items">
           <Datagrid rowClick="show">
-            <ReferenceField
-              label="account"
-              source="account.id"
-              reference="Account"
-            >
-              <TextField source={ACCOUNT_TITLE_FIELD} />
-            </ReferenceField>
             <TextField label="additional_info" source="additionalInfo" />
             <TextField label="amount" source="Amount" />
+            <TextField label="cogs account" source="cogsAccount" />
             <DateField source="createdAt" label="Created At" />
+            <TextField label="earnings account" source="earningsAccount" />
             <ReferenceField
               label="entity"
               source="entity.id"
@@ -68,9 +62,11 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
             >
               <TextField source={ENTITY_TITLE_FIELD} />
             </ReferenceField>
+            <TextField label="expense_account" source="expenseAccount" />
             <TextField label="ID" source="id" />
+            <TextField label="inventory account" source="inventoryAccount" />
             <TextField label="item_role" source="itemRole" />
-            <TextField label="item_type" source="itemType" />
+            <TextField label="item type" source="itemType" />
             <TextField label="name" source="name" />
             <TextField label="price" source="price" />
             <DateField source="updatedAt" label="Updated At" />

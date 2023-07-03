@@ -19,29 +19,41 @@ import { DocumentService } from "../document.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
+  cashAccount: "exampleCashAccount",
   createdAt: new Date(),
   dueDate: new Date(),
   id: "exampleId",
+  prepaidAccount: "examplePrepaidAccount",
+  unearnedAccount: "exampleUnearnedAccount",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
+  cashAccount: "exampleCashAccount",
   createdAt: new Date(),
   dueDate: new Date(),
   id: "exampleId",
+  prepaidAccount: "examplePrepaidAccount",
+  unearnedAccount: "exampleUnearnedAccount",
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
   {
+    cashAccount: "exampleCashAccount",
     createdAt: new Date(),
     dueDate: new Date(),
     id: "exampleId",
+    prepaidAccount: "examplePrepaidAccount",
+    unearnedAccount: "exampleUnearnedAccount",
     updatedAt: new Date(),
   },
 ];
 const FIND_ONE_RESULT = {
+  cashAccount: "exampleCashAccount",
   createdAt: new Date(),
   dueDate: new Date(),
   id: "exampleId",
+  prepaidAccount: "examplePrepaidAccount",
+  unearnedAccount: "exampleUnearnedAccount",
   updatedAt: new Date(),
 };
 

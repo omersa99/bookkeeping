@@ -1,5 +1,5 @@
 import { ItemWhereUniqueInput } from "../item/ItemWhereUniqueInput";
 
-export type ItemCreateNestedManyWithoutAccountsInput = {
+export type ItemCreateNestedManyWithoutDocumentsInput = {
   connect?: Array<ItemWhereUniqueInput>;
 };

@@ -374,15 +374,11 @@ export class EntityControllerBase {
     const results = await this.service.findItems(params.id, {
       ...query,
       select: {
-        account: {
-          select: {
-            id: true,
-          },
-        },
-
         additionalInfo: true,
         Amount: true,
+        cogsAccount: true,
         createdAt: true,
+        earningsAccount: true,
 
         entity: {
           select: {
@@ -390,7 +386,9 @@ export class EntityControllerBase {
           },
         },
 
+        expenseAccount: true,
         id: true,
+        inventoryAccount: true,
         itemRole: true,
         itemType: true,
         name: true,

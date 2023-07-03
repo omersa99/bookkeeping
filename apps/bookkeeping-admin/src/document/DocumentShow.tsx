@@ -3,11 +3,10 @@ import {
   Show,
   SimpleShowLayout,
   ShowProps,
-  ReferenceField,
   TextField,
+  ReferenceField,
   DateField,
 } from "react-admin";
-import { ACCOUNT_TITLE_FIELD } from "../account/AccountTitle";
 import { CLIENT_TITLE_FIELD } from "../client/ClientTitle";
 import { SUPPLIER_TITLE_FIELD } from "../supplier/SupplierTitle";
 
@@ -15,13 +14,7 @@ export const DocumentShow = (props: ShowProps): React.ReactElement => {
   return (
     <Show {...props}>
       <SimpleShowLayout>
-        <ReferenceField
-          label="cash account"
-          source="account.id"
-          reference="Account"
-        >
-          <TextField source={ACCOUNT_TITLE_FIELD} />
-        </ReferenceField>
+        <TextField label="cash account" source="cashAccount" />
         <ReferenceField label="Client" source="client.id" reference="Client">
           <TextField source={CLIENT_TITLE_FIELD} />
         </ReferenceField>
@@ -29,6 +22,8 @@ export const DocumentShow = (props: ShowProps): React.ReactElement => {
         <TextField label="doc_type" source="docType" />
         <TextField label="dueDate" source="dueDate" />
         <TextField label="ID" source="id" />
+        <TextField label="prepaid account" source="prepaidAccount" />
+        <TextField label="status" source="status" />
         <ReferenceField
           label="Supplier"
           source="supplier.id"
@@ -36,6 +31,7 @@ export const DocumentShow = (props: ShowProps): React.ReactElement => {
         >
           <TextField source={SUPPLIER_TITLE_FIELD} />
         </ReferenceField>
+        <TextField label="unearned account" source="unearnedAccount" />
         <DateField source="updatedAt" label="Updated At" />
       </SimpleShowLayout>
     </Show>

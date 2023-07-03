@@ -16,9 +16,7 @@ import { Type } from "class-transformer";
 import { IsOptional, IsEnum, ValidateNested } from "class-validator";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { EnumAccountDefaultAccountType } from "./EnumAccountDefaultAccountType";
-import { DocumentWhereUniqueInput } from "../../document/base/DocumentWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
-import { ItemListRelationFilter } from "../../item/base/ItemListRelationFilter";
 import { TransactionListRelationFilter } from "../../transaction/base/TransactionListRelationFilter";
 
 @InputType()
@@ -58,18 +56,6 @@ class AccountWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => DocumentWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => DocumentWhereUniqueInput)
-  @IsOptional()
-  @Field(() => DocumentWhereUniqueInput, {
-    nullable: true,
-  })
-  documents?: DocumentWhereUniqueInput;
-
-  @ApiProperty({
-    required: false,
     type: StringFilter,
   })
   @Type(() => StringFilter)
@@ -78,18 +64,6 @@ class AccountWhereInput {
     nullable: true,
   })
   id?: StringFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => ItemListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => ItemListRelationFilter)
-  @IsOptional()
-  @Field(() => ItemListRelationFilter, {
-    nullable: true,
-  })
-  items?: ItemListRelationFilter;
 
   @ApiProperty({
     required: false,

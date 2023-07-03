@@ -217,11 +217,7 @@ export class SupplierControllerBase {
     const results = await this.service.findDocuments(params.id, {
       ...query,
       select: {
-        cashAccount: {
-          select: {
-            id: true,
-          },
-        },
+        cashAccount: true,
 
         Client: {
           select: {
@@ -233,6 +229,8 @@ export class SupplierControllerBase {
         docType: true,
         dueDate: true,
         id: true,
+        prepaidAccount: true,
+        status: true,
 
         supplier: {
           select: {
@@ -240,6 +238,7 @@ export class SupplierControllerBase {
           },
         },
 
+        unearnedAccount: true,
         updatedAt: true,
       },
     });

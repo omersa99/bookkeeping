@@ -33,19 +33,22 @@ model Entity {
 }
 
 model Item {
-  account        Account? @relation(fields: [accountId], references: [id])
-  accountId      String?
-  additionalInfo String?
-  Amount         String?
-  createdAt      DateTime @default(now())
-  entity         Entity?  @relation(fields: [entityId], references: [id])
-  entityId       String?
-  id             String   @id @default(cuid())
+  additionalInfo   String?
+  Amount           String?
+  cogsAccount      String?
+  createdAt        DateTime   @default(now())
+  document         Document[]
+  earningsAccount  String?
+  entity           Entity?    @relation(fields: [entityId], references: [id])
+  entityId         String?
+  expenseAccount   String?
+  id               String     @id @default(cuid())
+  inventoryAccount String?
   itemRole EnumItemItemRole? @determines whether the ItemModel should be treated as an expense, inventory, service or product.
-  itemType       String?
-  name           String?
-  price          Float?
-  updatedAt      DateTime @updatedAt
+  itemType         String?
+  name             String?
+  price            Float?
+  updatedAt        DateTime   @updatedAt
 }
 
 model Transaction {
@@ -63,9 +66,7 @@ model Account {
   code               String?
   createdAt          DateTime                       @default(now())
   DefaultAccountType EnumAccountDefaultAccountType?
-  documents          Document?
   id                 String                         @id @default(cuid())
-  items              Item[]
   name               String?
   role               String?
   transactions       Transaction[]
@@ -98,17 +99,20 @@ model Meta {
 }
 
 model Document {
-  cashAccount Account?             @relation(fields: [ID], references: [id])
-  ID          String?              @unique
-  Client      Client?              @relation(fields: [ClientId], references: [id])
-  ClientId    String?
-  createdAt   DateTime             @default(now())
-  docType     EnumDocumentDocType?
-  dueDate     DateTime?
-  id          String               @id @default(cuid())
-  supplier    Supplier?            @relation(fields: [supplierId], references: [id])
-  supplierId  String?
-  updatedAt   DateTime             @updatedAt
+  cashAccount     String?
+  Client          Client?              @relation(fields: [ClientId], references: [id])
+  ClientId        String?
+  createdAt       DateTime             @default(now())
+  docType         EnumDocumentDocType?
+  dueDate         DateTime?
+  id              String               @id @default(cuid())
+  items           Item[]
+  prepaidAccount  String?
+  status          EnumDocumentStatus?
+  supplier        Supplier?            @relation(fields: [supplierId], references: [id])
+  supplierId      String?
+  unearnedAccount String?
+  updatedAt       DateTime             @updatedAt
 }
 
 model Supplier {
@@ -147,4 +151,11 @@ enum EnumDocumentDocType {
   Invoice
   Receipt
   Bill
+}
+
+enum EnumDocumentStatus {
+  Draft
+  Approved
+  Paid
+  Canceled
 }
