@@ -14,7 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
-import { CustomerListRelationFilter } from "../../customer/base/CustomerListRelationFilter";
+import { ClientListRelationFilter } from "../../client/base/ClientListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { JsonFilter } from "../../util/JsonFilter";
 import { ItemListRelationFilter } from "../../item/base/ItemListRelationFilter";
@@ -36,15 +36,15 @@ class EntityWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => CustomerListRelationFilter,
+    type: () => ClientListRelationFilter,
   })
   @ValidateNested()
-  @Type(() => CustomerListRelationFilter)
+  @Type(() => ClientListRelationFilter)
   @IsOptional()
-  @Field(() => CustomerListRelationFilter, {
+  @Field(() => ClientListRelationFilter, {
     nullable: true,
   })
-  customers?: CustomerListRelationFilter;
+  customers?: ClientListRelationFilter;
 
   @ApiProperty({
     required: false,

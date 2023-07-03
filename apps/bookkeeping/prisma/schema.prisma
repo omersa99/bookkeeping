@@ -22,33 +22,27 @@ model User {
 
 model Entity {
   accrualMethod Boolean?
-  createdAt     DateTime   @default(now())
-  customers     Customer[]
-  id            String     @id @default(cuid())
+  createdAt     DateTime @default(now())
+  customers     Client[]
+  id            String   @id @default(cuid())
   info          Json?
   items         Item[]
   name          String?
-  updatedAt     DateTime   @updatedAt
+  updatedAt     DateTime @updatedAt
   users         User[]
 }
 
 model Item {
-  additionalInfo     String?
-  Amount             String?
-  cogsAccount        String?
-  createdAt          DateTime          @default(now())
-  earningsAccount    String?
-  entity             Entity?           @relation(fields: [entityId], references: [id])
-  entityId           String?
-  expenseAccount     String?
-  id                 String            @id @default(cuid())
-  inventoryAccount   String?
-  isInventory        Boolean?
-  isProductOrService Boolean?
+  additionalInfo String?
+  Amount         String?
+  createdAt      DateTime @default(now())
+  entity         Entity?  @relation(fields: [entityId], references: [id])
+  entityId       String?
+  id             String   @id @default(cuid())
   itemRole EnumItemItemRole? @determines whether the ItemModel should be treated as an expense, inventory, service or product.
-  itemType           EnumItemItemType?
-  name               String?
-  updatedAt          DateTime          @updatedAt
+  name           String?
+  price          Float?
+  updatedAt      DateTime @updatedAt
 }
 
 model Transaction {
@@ -72,14 +66,50 @@ model Account {
   updatedAt    DateTime                @updatedAt
 }
 
-model Customer {
-  createdAt    DateTime @default(now())
+model Client {
+  createdAt    DateTime   @default(now())
   customerName String?
-  entity       Entity?  @relation(fields: [entityId], references: [id])
+  documents    Document[]
+  entity       Entity?    @relation(fields: [entityId], references: [id])
   entityId     String?
-  id           String   @id @default(cuid())
+  id           String     @id @default(cuid())
   info         Json?
-  updatedAt    DateTime @updatedAt
+  updatedAt    DateTime   @updatedAt
+}
+
+model Meta {
+  active       Boolean?
+  bankAccount  String?
+  category     String?
+  createdAt    DateTime             @default(now())
+  email        String?
+  id           String               @id @default(cuid())
+  name         String?
+  paymentTerms String?
+  paymentType  EnumMetaPaymentType?
+  taxId        String?
+  updatedAt    DateTime             @updatedAt
+}
+
+model Document {
+  Client            Client?               @relation(fields: [ClientId], references: [id])
+  ClientId          String?
+  createdAt         DateTime              @default(now())
+  docType           EnumDocumentDocType?
+  dueDate           DateTime?
+  id                String                @id @default(cuid())
+  linkedDocumentIds String?
+  linkType          EnumDocumentLinkType?
+  updatedAt         DateTime              @updatedAt
+  vatType           EnumDocumentVatType?
+}
+
+model Supplier {
+  active    String?
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  name      String?
+  updatedAt DateTime @updatedAt
 }
 
 enum EnumItemItemRole {
@@ -87,14 +117,6 @@ enum EnumItemItemRole {
   Inventory
   Service
   Product
-}
-
-enum EnumItemItemType {
-  Labor
-  Material
-  LumpSum
-  Equipment
-  Other
 }
 
 enum EnumTransactionTransactionType {
@@ -105,4 +127,30 @@ enum EnumTransactionTransactionType {
 enum EnumAccountBalanceType {
   Debit
   Credit
+}
+
+enum EnumMetaPaymentType {
+  WithoutType
+  Cash
+  CreditCard
+}
+
+enum EnumDocumentDocType {
+  PriceOffer
+  Order
+  DeliveryCertificate
+  Invoice
+  CreditInvoice
+  Receipt
+}
+
+enum EnumDocumentLinkType {
+  Related
+  Cancelling
+}
+
+enum EnumDocumentVatType {
+  Default
+  Exempt
+  Mixed
 }

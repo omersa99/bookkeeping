@@ -6,7 +6,10 @@ import { EntityModule } from "./entity/entity.module";
 import { ItemModule } from "./item/item.module";
 import { TransactionModule } from "./transaction/transaction.module";
 import { AccountModule } from "./account/account.module";
-import { CustomerModule } from "./customer/customer.module";
+import { ClientModule } from "./client/client.module";
+import { MetaModule } from "./meta/meta.module";
+import { DocumentModule } from "./document/document.module";
+import { SupplierModule } from "./supplier/supplier.module";
 import { HealthModule } from "./health/health.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { SecretsManagerModule } from "./providers/secrets/secretsManager.module";
@@ -28,7 +31,10 @@ import { AuthModule } from "./auth/auth.module";
     ItemModule,
     TransactionModule,
     AccountModule,
-    CustomerModule,
+    ClientModule,
+    MetaModule,
+    DocumentModule,
+    SupplierModule,
     HealthModule,
     PrismaModule,
     SecretsManagerModule,

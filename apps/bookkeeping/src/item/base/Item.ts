@@ -16,13 +16,12 @@ import {
   IsOptional,
   IsDate,
   ValidateNested,
-  IsBoolean,
   IsEnum,
+  IsNumber,
 } from "class-validator";
 import { Type } from "class-transformer";
 import { Entity } from "../../entity/base/Entity";
 import { EnumItemItemRole } from "./EnumItemItemRole";
-import { EnumItemItemType } from "./EnumItemItemType";
 
 @ObjectType()
 class Item {
@@ -49,34 +48,12 @@ class Item {
   Amount!: string | null;
 
   @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  cogsAccount!: string | null;
-
-  @ApiProperty({
     required: true,
   })
   @IsDate()
   @Type(() => Date)
   @Field(() => Date)
   createdAt!: Date;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  earningsAccount!: string | null;
 
   @ApiProperty({
     required: false,
@@ -88,56 +65,12 @@ class Item {
   entity?: Entity | null;
 
   @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  expenseAccount!: string | null;
-
-  @ApiProperty({
     required: true,
     type: String,
   })
   @IsString()
   @Field(() => String)
   id!: string;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  inventoryAccount!: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: Boolean,
-  })
-  @IsBoolean()
-  @IsOptional()
-  @Field(() => Boolean, {
-    nullable: true,
-  })
-  isInventory!: boolean | null;
-
-  @ApiProperty({
-    required: false,
-    type: Boolean,
-  })
-  @IsBoolean()
-  @IsOptional()
-  @Field(() => Boolean, {
-    nullable: true,
-  })
-  isProductOrService!: boolean | null;
 
   @ApiProperty({
     required: false,
@@ -152,17 +85,6 @@ class Item {
 
   @ApiProperty({
     required: false,
-    enum: EnumItemItemType,
-  })
-  @IsEnum(EnumItemItemType)
-  @IsOptional()
-  @Field(() => EnumItemItemType, {
-    nullable: true,
-  })
-  itemType?: "Labor" | "Material" | "LumpSum" | "Equipment" | "Other" | null;
-
-  @ApiProperty({
-    required: false,
     type: String,
   })
   @IsString()
@@ -171,6 +93,17 @@ class Item {
     nullable: true,
   })
   name!: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsNumber()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  price!: number | null;
 
   @ApiProperty({
     required: true,

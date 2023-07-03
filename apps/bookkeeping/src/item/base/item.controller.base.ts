@@ -63,9 +63,7 @@ export class ItemControllerBase {
       select: {
         additionalInfo: true,
         Amount: true,
-        cogsAccount: true,
         createdAt: true,
-        earningsAccount: true,
 
         entity: {
           select: {
@@ -73,14 +71,10 @@ export class ItemControllerBase {
           },
         },
 
-        expenseAccount: true,
         id: true,
-        inventoryAccount: true,
-        isInventory: true,
-        isProductOrService: true,
         itemRole: true,
-        itemType: true,
         name: true,
+        price: true,
         updatedAt: true,
       },
     });
@@ -105,9 +99,7 @@ export class ItemControllerBase {
       select: {
         additionalInfo: true,
         Amount: true,
-        cogsAccount: true,
         createdAt: true,
-        earningsAccount: true,
 
         entity: {
           select: {
@@ -115,14 +107,10 @@ export class ItemControllerBase {
           },
         },
 
-        expenseAccount: true,
         id: true,
-        inventoryAccount: true,
-        isInventory: true,
-        isProductOrService: true,
         itemRole: true,
-        itemType: true,
         name: true,
+        price: true,
         updatedAt: true,
       },
     });
@@ -148,9 +136,7 @@ export class ItemControllerBase {
       select: {
         additionalInfo: true,
         Amount: true,
-        cogsAccount: true,
         createdAt: true,
-        earningsAccount: true,
 
         entity: {
           select: {
@@ -158,14 +144,10 @@ export class ItemControllerBase {
           },
         },
 
-        expenseAccount: true,
         id: true,
-        inventoryAccount: true,
-        isInventory: true,
-        isProductOrService: true,
         itemRole: true,
-        itemType: true,
         name: true,
+        price: true,
         updatedAt: true,
       },
     });
@@ -211,9 +193,7 @@ export class ItemControllerBase {
         select: {
           additionalInfo: true,
           Amount: true,
-          cogsAccount: true,
           createdAt: true,
-          earningsAccount: true,
 
           entity: {
             select: {
@@ -221,14 +201,10 @@ export class ItemControllerBase {
             },
           },
 
-          expenseAccount: true,
           id: true,
-          inventoryAccount: true,
-          isInventory: true,
-          isProductOrService: true,
           itemRole: true,
-          itemType: true,
           name: true,
+          price: true,
           updatedAt: true,
         },
       });
@@ -262,9 +238,7 @@ export class ItemControllerBase {
         select: {
           additionalInfo: true,
           Amount: true,
-          cogsAccount: true,
           createdAt: true,
-          earningsAccount: true,
 
           entity: {
             select: {
@@ -272,14 +246,10 @@ export class ItemControllerBase {
             },
           },
 
-          expenseAccount: true,
           id: true,
-          inventoryAccount: true,
-          isInventory: true,
-          isProductOrService: true,
           itemRole: true,
-          itemType: true,
           name: true,
+          price: true,
           updatedAt: true,
         },
       });

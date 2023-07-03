@@ -1,5 +1,5 @@
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
-import { CustomerListRelationFilter } from "../customer/CustomerListRelationFilter";
+import { ClientListRelationFilter } from "../client/ClientListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { JsonFilter } from "../../util/JsonFilter";
 import { ItemListRelationFilter } from "../item/ItemListRelationFilter";
@@ -8,7 +8,7 @@ import { UserListRelationFilter } from "../user/UserListRelationFilter";
 
 export type EntityWhereInput = {
   accrualMethod?: BooleanNullableFilter;
-  customers?: CustomerListRelationFilter;
+  customers?: ClientListRelationFilter;
   id?: StringFilter;
   info?: JsonFilter;
   items?: ItemListRelationFilter;

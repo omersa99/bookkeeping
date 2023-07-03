@@ -1,4 +1,4 @@
-import { Customer } from "../customer/Customer";
+import { Client } from "../client/Client";
 import { JsonValue } from "type-fest";
 import { Item } from "../item/Item";
 import { User } from "../user/User";
@@ -6,7 +6,7 @@ import { User } from "../user/User";
 export type Entity = {
   accrualMethod: boolean | null;
   createdAt: Date;
-  customers?: Array<Customer>;
+  customers?: Array<Client>;
   id: string;
   info: JsonValue;
   items?: Array<Item>;

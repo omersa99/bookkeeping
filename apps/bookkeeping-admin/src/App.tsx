@@ -25,10 +25,22 @@ import { AccountList } from "./account/AccountList";
 import { AccountCreate } from "./account/AccountCreate";
 import { AccountEdit } from "./account/AccountEdit";
 import { AccountShow } from "./account/AccountShow";
-import { CustomerList } from "./customer/CustomerList";
-import { CustomerCreate } from "./customer/CustomerCreate";
-import { CustomerEdit } from "./customer/CustomerEdit";
-import { CustomerShow } from "./customer/CustomerShow";
+import { ClientList } from "./client/ClientList";
+import { ClientCreate } from "./client/ClientCreate";
+import { ClientEdit } from "./client/ClientEdit";
+import { ClientShow } from "./client/ClientShow";
+import { MetaList } from "./meta/MetaList";
+import { MetaCreate } from "./meta/MetaCreate";
+import { MetaEdit } from "./meta/MetaEdit";
+import { MetaShow } from "./meta/MetaShow";
+import { DocumentList } from "./document/DocumentList";
+import { DocumentCreate } from "./document/DocumentCreate";
+import { DocumentEdit } from "./document/DocumentEdit";
+import { DocumentShow } from "./document/DocumentShow";
+import { SupplierList } from "./supplier/SupplierList";
+import { SupplierCreate } from "./supplier/SupplierCreate";
+import { SupplierEdit } from "./supplier/SupplierEdit";
+import { SupplierShow } from "./supplier/SupplierShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -91,11 +103,32 @@ const App = (): React.ReactElement => {
           show={AccountShow}
         />
         <Resource
-          name="Customer"
-          list={CustomerList}
-          edit={CustomerEdit}
-          create={CustomerCreate}
-          show={CustomerShow}
+          name="Client"
+          list={ClientList}
+          edit={ClientEdit}
+          create={ClientCreate}
+          show={ClientShow}
+        />
+        <Resource
+          name="Meta"
+          list={MetaList}
+          edit={MetaEdit}
+          create={MetaCreate}
+          show={MetaShow}
+        />
+        <Resource
+          name="Document"
+          list={DocumentList}
+          edit={DocumentEdit}
+          create={DocumentCreate}
+          show={DocumentShow}
+        />
+        <Resource
+          name="Supplier"
+          list={SupplierList}
+          edit={SupplierEdit}
+          create={SupplierCreate}
+          show={SupplierShow}
         />
       </Admin>
     </div>

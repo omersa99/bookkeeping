@@ -17,7 +17,7 @@ import {
   ValidateNested,
   IsString,
 } from "class-validator";
-import { CustomerUpdateManyWithoutEntitiesInput } from "./CustomerUpdateManyWithoutEntitiesInput";
+import { ClientUpdateManyWithoutEntitiesInput } from "./ClientUpdateManyWithoutEntitiesInput";
 import { Type } from "class-transformer";
 import { IsJSONValue } from "@app/custom-validators";
 import { GraphQLJSON } from "graphql-type-json";
@@ -40,15 +40,15 @@ class EntityUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: () => CustomerUpdateManyWithoutEntitiesInput,
+    type: () => ClientUpdateManyWithoutEntitiesInput,
   })
   @ValidateNested()
-  @Type(() => CustomerUpdateManyWithoutEntitiesInput)
+  @Type(() => ClientUpdateManyWithoutEntitiesInput)
   @IsOptional()
-  @Field(() => CustomerUpdateManyWithoutEntitiesInput, {
+  @Field(() => ClientUpdateManyWithoutEntitiesInput, {
     nullable: true,
   })
-  customers?: CustomerUpdateManyWithoutEntitiesInput;
+  customers?: ClientUpdateManyWithoutEntitiesInput;
 
   @ApiProperty({
     required: false,

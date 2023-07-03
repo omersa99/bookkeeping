@@ -16,9 +16,8 @@ import { Type } from "class-transformer";
 import { IsOptional, ValidateNested, IsEnum } from "class-validator";
 import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
-import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 import { EnumItemItemRole } from "./EnumItemItemRole";
-import { EnumItemItemType } from "./EnumItemItemType";
+import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 
 @InputType()
 class ItemWhereInput {
@@ -46,28 +45,6 @@ class ItemWhereInput {
 
   @ApiProperty({
     required: false,
-    type: StringNullableFilter,
-  })
-  @Type(() => StringNullableFilter)
-  @IsOptional()
-  @Field(() => StringNullableFilter, {
-    nullable: true,
-  })
-  cogsAccount?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: StringNullableFilter,
-  })
-  @Type(() => StringNullableFilter)
-  @IsOptional()
-  @Field(() => StringNullableFilter, {
-    nullable: true,
-  })
-  earningsAccount?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
     type: () => EntityWhereUniqueInput,
   })
   @ValidateNested()
@@ -77,17 +54,6 @@ class ItemWhereInput {
     nullable: true,
   })
   entity?: EntityWhereUniqueInput;
-
-  @ApiProperty({
-    required: false,
-    type: StringNullableFilter,
-  })
-  @Type(() => StringNullableFilter)
-  @IsOptional()
-  @Field(() => StringNullableFilter, {
-    nullable: true,
-  })
-  expenseAccount?: StringNullableFilter;
 
   @ApiProperty({
     required: false,
@@ -102,39 +68,6 @@ class ItemWhereInput {
 
   @ApiProperty({
     required: false,
-    type: StringNullableFilter,
-  })
-  @Type(() => StringNullableFilter)
-  @IsOptional()
-  @Field(() => StringNullableFilter, {
-    nullable: true,
-  })
-  inventoryAccount?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: BooleanNullableFilter,
-  })
-  @Type(() => BooleanNullableFilter)
-  @IsOptional()
-  @Field(() => BooleanNullableFilter, {
-    nullable: true,
-  })
-  isInventory?: BooleanNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: BooleanNullableFilter,
-  })
-  @Type(() => BooleanNullableFilter)
-  @IsOptional()
-  @Field(() => BooleanNullableFilter, {
-    nullable: true,
-  })
-  isProductOrService?: BooleanNullableFilter;
-
-  @ApiProperty({
-    required: false,
     enum: EnumItemItemRole,
   })
   @IsEnum(EnumItemItemRole)
@@ -146,17 +79,6 @@ class ItemWhereInput {
 
   @ApiProperty({
     required: false,
-    enum: EnumItemItemType,
-  })
-  @IsEnum(EnumItemItemType)
-  @IsOptional()
-  @Field(() => EnumItemItemType, {
-    nullable: true,
-  })
-  itemType?: "Labor" | "Material" | "LumpSum" | "Equipment" | "Other";
-
-  @ApiProperty({
-    required: false,
     type: StringNullableFilter,
   })
   @Type(() => StringNullableFilter)
@@ -165,6 +87,17 @@ class ItemWhereInput {
     nullable: true,
   })
   name?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: FloatNullableFilter,
+  })
+  @Type(() => FloatNullableFilter)
+  @IsOptional()
+  @Field(() => FloatNullableFilter, {
+    nullable: true,
+  })
+  price?: FloatNullableFilter;
 }
 
 export { ItemWhereInput as ItemWhereInput };

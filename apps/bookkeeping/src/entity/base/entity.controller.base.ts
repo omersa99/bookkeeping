@@ -27,9 +27,9 @@ import { EntityWhereUniqueInput } from "./EntityWhereUniqueInput";
 import { EntityFindManyArgs } from "./EntityFindManyArgs";
 import { EntityUpdateInput } from "./EntityUpdateInput";
 import { Entity } from "./Entity";
-import { CustomerFindManyArgs } from "../../customer/base/CustomerFindManyArgs";
-import { Customer } from "../../customer/base/Customer";
-import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
+import { ClientFindManyArgs } from "../../client/base/ClientFindManyArgs";
+import { Client } from "../../client/base/Client";
+import { ClientWhereUniqueInput } from "../../client/base/ClientWhereUniqueInput";
 import { ItemFindManyArgs } from "../../item/base/ItemFindManyArgs";
 import { Item } from "../../item/base/Item";
 import { ItemWhereUniqueInput } from "../../item/base/ItemWhereUniqueInput";
@@ -213,17 +213,17 @@ export class EntityControllerBase {
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get("/:id/customers")
-  @ApiNestedQuery(CustomerFindManyArgs)
+  @ApiNestedQuery(ClientFindManyArgs)
   @nestAccessControl.UseRoles({
-    resource: "Customer",
+    resource: "Client",
     action: "read",
     possession: "any",
   })
   async findManyCustomers(
     @common.Req() request: Request,
     @common.Param() params: EntityWhereUniqueInput
-  ): Promise<Customer[]> {
-    const query = plainToClass(CustomerFindManyArgs, request.query);
+  ): Promise<Client[]> {
+    const query = plainToClass(ClientFindManyArgs, request.query);
     const results = await this.service.findCustomers(params.id, {
       ...query,
       select: {
@@ -257,7 +257,7 @@ export class EntityControllerBase {
   })
   async connectCustomers(
     @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: CustomerWhereUniqueInput[]
+    @common.Body() body: ClientWhereUniqueInput[]
   ): Promise<void> {
     const data = {
       customers: {
@@ -279,7 +279,7 @@ export class EntityControllerBase {
   })
   async updateCustomers(
     @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: CustomerWhereUniqueInput[]
+    @common.Body() body: ClientWhereUniqueInput[]
   ): Promise<void> {
     const data = {
       customers: {
@@ -301,7 +301,7 @@ export class EntityControllerBase {
   })
   async disconnectCustomers(
     @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: CustomerWhereUniqueInput[]
+    @common.Body() body: ClientWhereUniqueInput[]
   ): Promise<void> {
     const data = {
       customers: {
@@ -333,9 +333,7 @@ export class EntityControllerBase {
       select: {
         additionalInfo: true,
         Amount: true,
-        cogsAccount: true,
         createdAt: true,
-        earningsAccount: true,
 
         entity: {
           select: {
@@ -343,14 +341,10 @@ export class EntityControllerBase {
           },
         },
 
-        expenseAccount: true,
         id: true,
-        inventoryAccount: true,
-        isInventory: true,
-        isProductOrService: true,
         itemRole: true,
-        itemType: true,
         name: true,
+        price: true,
         updatedAt: true,
       },
     });

@@ -26,8 +26,8 @@ import { EntityCountArgs } from "./EntityCountArgs";
 import { EntityFindManyArgs } from "./EntityFindManyArgs";
 import { EntityFindUniqueArgs } from "./EntityFindUniqueArgs";
 import { Entity } from "./Entity";
-import { CustomerFindManyArgs } from "../../customer/base/CustomerFindManyArgs";
-import { Customer } from "../../customer/base/Customer";
+import { ClientFindManyArgs } from "../../client/base/ClientFindManyArgs";
+import { Client } from "../../client/base/Client";
 import { ItemFindManyArgs } from "../../item/base/ItemFindManyArgs";
 import { Item } from "../../item/base/Item";
 import { UserFindManyArgs } from "../../user/base/UserFindManyArgs";
@@ -145,16 +145,16 @@ export class EntityResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [Customer], { name: "customers" })
+  @graphql.ResolveField(() => [Client], { name: "customers" })
   @nestAccessControl.UseRoles({
-    resource: "Customer",
+    resource: "Client",
     action: "read",
     possession: "any",
   })
   async resolveFieldCustomers(
     @graphql.Parent() parent: Entity,
-    @graphql.Args() args: CustomerFindManyArgs
-  ): Promise<Customer[]> {
+    @graphql.Args() args: ClientFindManyArgs
+  ): Promise<Client[]> {
     const results = await this.service.findCustomers(parent.id, args);
 
     if (!results) {

@@ -19,7 +19,7 @@ import {
   IsString,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { Customer } from "../../customer/base/Customer";
+import { Client } from "../../client/base/Client";
 import { IsJSONValue } from "@app/custom-validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
@@ -49,12 +49,12 @@ class Entity {
 
   @ApiProperty({
     required: false,
-    type: () => [Customer],
+    type: () => [Client],
   })
   @ValidateNested()
-  @Type(() => Customer)
+  @Type(() => Client)
   @IsOptional()
-  customers?: Array<Customer>;
+  customers?: Array<Client>;
 
   @ApiProperty({
     required: true,

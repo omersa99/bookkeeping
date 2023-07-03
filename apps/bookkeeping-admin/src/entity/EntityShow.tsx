@@ -25,9 +25,9 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
         <TextField label="name" source="name" />
         <DateField source="updatedAt" label="Updated At" />
         <ReferenceManyField
-          reference="Customer"
+          reference="Client"
           target="entityId"
-          label="customers"
+          label="clients"
         >
           <Datagrid rowClick="show">
             <DateField source="createdAt" label="Created At" />
@@ -48,9 +48,7 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
           <Datagrid rowClick="show">
             <TextField label="additional_info" source="additionalInfo" />
             <TextField label="amount" source="Amount" />
-            <TextField label="cogs_account" source="cogsAccount" />
             <DateField source="createdAt" label="Created At" />
-            <TextField label="earnings_account" source="earningsAccount" />
             <ReferenceField
               label="entity"
               source="entity.id"
@@ -58,17 +56,10 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
             >
               <TextField source={ENTITY_TITLE_FIELD} />
             </ReferenceField>
-            <TextField label="expense_account" source="expenseAccount" />
             <TextField label="ID" source="id" />
-            <TextField label="inventory_account" source="inventoryAccount" />
-            <BooleanField label="is_inventory" source="isInventory" />
-            <BooleanField
-              label="is_product_or_service"
-              source="isProductOrService"
-            />
             <TextField label="item_role" source="itemRole" />
-            <TextField label="item_type" source="itemType" />
             <TextField label="name" source="name" />
+            <TextField label="price" source="price" />
             <DateField source="updatedAt" label="Updated At" />
           </Datagrid>
         </ReferenceManyField>

@@ -17,7 +17,7 @@ import {
   ValidateNested,
   IsString,
 } from "class-validator";
-import { CustomerCreateNestedManyWithoutEntitiesInput } from "./CustomerCreateNestedManyWithoutEntitiesInput";
+import { ClientCreateNestedManyWithoutEntitiesInput } from "./ClientCreateNestedManyWithoutEntitiesInput";
 import { Type } from "class-transformer";
 import { IsJSONValue } from "@app/custom-validators";
 import { GraphQLJSON } from "graphql-type-json";
@@ -40,15 +40,15 @@ class EntityCreateInput {
 
   @ApiProperty({
     required: false,
-    type: () => CustomerCreateNestedManyWithoutEntitiesInput,
+    type: () => ClientCreateNestedManyWithoutEntitiesInput,
   })
   @ValidateNested()
-  @Type(() => CustomerCreateNestedManyWithoutEntitiesInput)
+  @Type(() => ClientCreateNestedManyWithoutEntitiesInput)
   @IsOptional()
-  @Field(() => CustomerCreateNestedManyWithoutEntitiesInput, {
+  @Field(() => ClientCreateNestedManyWithoutEntitiesInput, {
     nullable: true,
   })
-  customers?: CustomerCreateNestedManyWithoutEntitiesInput;
+  customers?: ClientCreateNestedManyWithoutEntitiesInput;
 
   @ApiProperty({
     required: false,
