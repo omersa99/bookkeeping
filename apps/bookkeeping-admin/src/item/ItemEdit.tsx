@@ -4,6 +4,7 @@ import {
   Edit,
   SimpleForm,
   EditProps,
+  BooleanInput,
   TextInput,
   ReferenceArrayInput,
   SelectArrayInput,
@@ -19,6 +20,7 @@ export const ItemEdit = (props: EditProps): React.ReactElement => {
   return (
     <Edit {...props}>
       <SimpleForm>
+        <BooleanInput label="active" source="active" />
         <TextInput label="additional_info" source="additionalInfo" />
         <TextInput label="amount" source="Amount" />
         <TextInput label="cogs account" source="cogsAccount" />

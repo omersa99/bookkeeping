@@ -2,6 +2,7 @@ import { DocumentCreateNestedManyWithoutItemsInput } from "./DocumentCreateNeste
 import { EntityWhereUniqueInput } from "../entity/EntityWhereUniqueInput";
 
 export type ItemCreateInput = {
+  active?: boolean | null;
   additionalInfo?: string | null;
   Amount?: string | null;
   cogsAccount?: string | null;

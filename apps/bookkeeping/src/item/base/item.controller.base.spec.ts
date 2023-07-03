@@ -19,6 +19,7 @@ import { ItemService } from "../item.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
+  active: "true",
   additionalInfo: "exampleAdditionalInfo",
   Amount: "exampleAmount",
   cogsAccount: "exampleCogsAccount",
@@ -33,6 +34,7 @@ const CREATE_INPUT = {
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
+  active: "true",
   additionalInfo: "exampleAdditionalInfo",
   Amount: "exampleAmount",
   cogsAccount: "exampleCogsAccount",
@@ -48,6 +50,7 @@ const CREATE_RESULT = {
 };
 const FIND_MANY_RESULT = [
   {
+    active: "true",
     additionalInfo: "exampleAdditionalInfo",
     Amount: "exampleAmount",
     cogsAccount: "exampleCogsAccount",
@@ -63,6 +66,7 @@ const FIND_MANY_RESULT = [
   },
 ];
 const FIND_ONE_RESULT = {
+  active: "true",
   additionalInfo: "exampleAdditionalInfo",
   Amount: "exampleAmount",
   cogsAccount: "exampleCogsAccount",

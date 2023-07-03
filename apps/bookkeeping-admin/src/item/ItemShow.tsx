@@ -1,18 +1,22 @@
 import * as React from "react";
+
 import {
   Show,
   SimpleShowLayout,
   ShowProps,
+  BooleanField,
   TextField,
   DateField,
   ReferenceField,
 } from "react-admin";
+
 import { ENTITY_TITLE_FIELD } from "../entity/EntityTitle";
 
 export const ItemShow = (props: ShowProps): React.ReactElement => {
   return (
     <Show {...props}>
       <SimpleShowLayout>
+        <BooleanField label="active" source="active" />
         <TextField label="additional_info" source="additionalInfo" />
         <TextField label="amount" source="Amount" />
         <TextField label="cogs account" source="cogsAccount" />

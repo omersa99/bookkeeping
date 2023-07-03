@@ -2,6 +2,7 @@ import { DocumentUpdateManyWithoutItemsInput } from "./DocumentUpdateManyWithout
 import { EntityWhereUniqueInput } from "../entity/EntityWhereUniqueInput";
 
 export type ItemUpdateInput = {
+  active?: boolean | null;
   additionalInfo?: string | null;
   Amount?: string | null;
   cogsAccount?: string | null;

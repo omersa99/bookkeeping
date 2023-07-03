@@ -12,8 +12,9 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import {
-  IsString,
+  IsBoolean,
   IsOptional,
+  IsString,
   ValidateNested,
   IsEnum,
   IsNumber,
@@ -25,6 +26,17 @@ import { EnumItemItemRole } from "./EnumItemItemRole";
 
 @InputType()
 class ItemCreateInput {
+  @ApiProperty({
+    required: false,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @IsOptional()
+  @Field(() => Boolean, {
+    nullable: true,
+  })
+  active?: boolean | null;
+
   @ApiProperty({
     required: false,
     type: String,
