@@ -1,21 +1,15 @@
+import { AccountWhereUniqueInput } from "../account/AccountWhereUniqueInput";
 import { ClientWhereUniqueInput } from "../client/ClientWhereUniqueInput";
 import { Client } from "../client/Client";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { SupplierWhereUniqueInput } from "../supplier/SupplierWhereUniqueInput";
 
 export type DocumentWhereInput = {
+  cashAccount?: AccountWhereUniqueInput;
   Client?: ClientWhereUniqueInput;
-  docType?:
-    | "PriceOffer"
-    | "Order"
-    | "DeliveryCertificate"
-    | "Invoice"
-    | "CreditInvoice"
-    | "Receipt";
+  docType?: "Invoice" | "Receipt" | "Bill";
   dueDate?: DateTimeNullableFilter;
   id?: StringFilter;
-  linkedDocumentIds?: StringNullableFilter;
-  linkType?: "Related" | "Cancelling";
-  vatType?: "Default" | "Exempt" | "Mixed";
+  supplier?: SupplierWhereUniqueInput;
 };

@@ -8,7 +8,9 @@ import {
   DateField,
 } from "react-admin";
 import Pagination from "../Components/Pagination";
+import { ACCOUNT_TITLE_FIELD } from "../account/AccountTitle";
 import { CLIENT_TITLE_FIELD } from "../client/ClientTitle";
+import { SUPPLIER_TITLE_FIELD } from "../supplier/SupplierTitle";
 
 export const DocumentList = (props: ListProps): React.ReactElement => {
   return (
@@ -20,6 +22,13 @@ export const DocumentList = (props: ListProps): React.ReactElement => {
       pagination={<Pagination />}
     >
       <Datagrid rowClick="show">
+        <ReferenceField
+          label="cash account"
+          source="account.id"
+          reference="Account"
+        >
+          <TextField source={ACCOUNT_TITLE_FIELD} />
+        </ReferenceField>
         <ReferenceField label="Client" source="client.id" reference="Client">
           <TextField source={CLIENT_TITLE_FIELD} />
         </ReferenceField>
@@ -27,10 +36,14 @@ export const DocumentList = (props: ListProps): React.ReactElement => {
         <TextField label="doc_type" source="docType" />
         <TextField label="dueDate" source="dueDate" />
         <TextField label="ID" source="id" />
-        <TextField label="linkedDocumentIds" source="linkedDocumentIds" />
-        <TextField label="linkType" source="linkType" />
+        <ReferenceField
+          label="Supplier"
+          source="supplier.id"
+          reference="Supplier"
+        >
+          <TextField source={SUPPLIER_TITLE_FIELD} />
+        </ReferenceField>
         <DateField source="updatedAt" label="Updated At" />
-        <TextField label="vatType" source="vatType" />
       </Datagrid>
     </List>
   );

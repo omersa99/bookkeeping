@@ -27,6 +27,8 @@ import { DocumentFindManyArgs } from "./DocumentFindManyArgs";
 import { DocumentFindUniqueArgs } from "./DocumentFindUniqueArgs";
 import { Document } from "./Document";
 import { Client } from "../../client/base/Client";
+import { Account } from "../../account/base/Account";
+import { Supplier } from "../../supplier/base/Supplier";
 import { DocumentService } from "../document.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Document)
@@ -96,9 +98,21 @@ export class DocumentResolverBase {
       data: {
         ...args.data,
 
+        cashAccount: args.data.cashAccount
+          ? {
+              connect: args.data.cashAccount,
+            }
+          : undefined,
+
         Client: args.data.Client
           ? {
               connect: args.data.Client,
+            }
+          : undefined,
+
+        supplier: args.data.supplier
+          ? {
+              connect: args.data.supplier,
             }
           : undefined,
       },
@@ -121,9 +135,21 @@ export class DocumentResolverBase {
         data: {
           ...args.data,
 
+          cashAccount: args.data.cashAccount
+            ? {
+                connect: args.data.cashAccount,
+              }
+            : undefined,
+
           Client: args.data.Client
             ? {
                 connect: args.data.Client,
+              }
+            : undefined,
+
+          supplier: args.data.supplier
+            ? {
+                connect: args.data.supplier,
               }
             : undefined,
         },
@@ -160,6 +186,27 @@ export class DocumentResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Account, {
+    nullable: true,
+    name: "cashAccount",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Account",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldCashAccount(
+    @graphql.Parent() parent: Document
+  ): Promise<Account | null> {
+    const result = await this.service.getCashAccount(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Client, {
     nullable: true,
     name: "client",
@@ -173,6 +220,27 @@ export class DocumentResolverBase {
     @graphql.Parent() parent: Document
   ): Promise<Client | null> {
     const result = await this.service.getClient(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Supplier, {
+    nullable: true,
+    name: "supplier",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Supplier",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldSupplier(
+    @graphql.Parent() parent: Document
+  ): Promise<Supplier | null> {
+    const result = await this.service.getSupplier(parent.id);
 
     if (!result) {
       return null;

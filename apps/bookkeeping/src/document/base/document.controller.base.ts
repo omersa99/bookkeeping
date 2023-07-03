@@ -55,13 +55,31 @@ export class DocumentControllerBase {
       data: {
         ...data,
 
+        cashAccount: data.cashAccount
+          ? {
+              connect: data.cashAccount,
+            }
+          : undefined,
+
         Client: data.Client
           ? {
               connect: data.Client,
             }
           : undefined,
+
+        supplier: data.supplier
+          ? {
+              connect: data.supplier,
+            }
+          : undefined,
       },
       select: {
+        cashAccount: {
+          select: {
+            id: true,
+          },
+        },
+
         Client: {
           select: {
             id: true,
@@ -72,10 +90,14 @@ export class DocumentControllerBase {
         docType: true,
         dueDate: true,
         id: true,
-        linkedDocumentIds: true,
-        linkType: true,
+
+        supplier: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
-        vatType: true,
       },
     });
   }
@@ -97,6 +119,12 @@ export class DocumentControllerBase {
     return this.service.findMany({
       ...args,
       select: {
+        cashAccount: {
+          select: {
+            id: true,
+          },
+        },
+
         Client: {
           select: {
             id: true,
@@ -107,10 +135,14 @@ export class DocumentControllerBase {
         docType: true,
         dueDate: true,
         id: true,
-        linkedDocumentIds: true,
-        linkType: true,
+
+        supplier: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
-        vatType: true,
       },
     });
   }
@@ -133,6 +165,12 @@ export class DocumentControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
+        cashAccount: {
+          select: {
+            id: true,
+          },
+        },
+
         Client: {
           select: {
             id: true,
@@ -143,10 +181,14 @@ export class DocumentControllerBase {
         docType: true,
         dueDate: true,
         id: true,
-        linkedDocumentIds: true,
-        linkType: true,
+
+        supplier: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
-        vatType: true,
       },
     });
     if (result === null) {
@@ -182,13 +224,31 @@ export class DocumentControllerBase {
         data: {
           ...data,
 
+          cashAccount: data.cashAccount
+            ? {
+                connect: data.cashAccount,
+              }
+            : undefined,
+
           Client: data.Client
             ? {
                 connect: data.Client,
               }
             : undefined,
+
+          supplier: data.supplier
+            ? {
+                connect: data.supplier,
+              }
+            : undefined,
         },
         select: {
+          cashAccount: {
+            select: {
+              id: true,
+            },
+          },
+
           Client: {
             select: {
               id: true,
@@ -199,10 +259,14 @@ export class DocumentControllerBase {
           docType: true,
           dueDate: true,
           id: true,
-          linkedDocumentIds: true,
-          linkType: true,
+
+          supplier: {
+            select: {
+              id: true,
+            },
+          },
+
           updatedAt: true,
-          vatType: true,
         },
       });
     } catch (error) {
@@ -233,6 +297,12 @@ export class DocumentControllerBase {
       return await this.service.delete({
         where: params,
         select: {
+          cashAccount: {
+            select: {
+              id: true,
+            },
+          },
+
           Client: {
             select: {
               id: true,
@@ -243,10 +313,14 @@ export class DocumentControllerBase {
           docType: true,
           dueDate: true,
           id: true,
-          linkedDocumentIds: true,
-          linkType: true,
+
+          supplier: {
+            select: {
+              id: true,
+            },
+          },
+
           updatedAt: true,
-          vatType: true,
         },
       });
     } catch (error) {

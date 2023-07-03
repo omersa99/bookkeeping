@@ -267,6 +267,12 @@ export class ClientControllerBase {
     const results = await this.service.findDocuments(params.id, {
       ...query,
       select: {
+        cashAccount: {
+          select: {
+            id: true,
+          },
+        },
+
         Client: {
           select: {
             id: true,
@@ -277,10 +283,14 @@ export class ClientControllerBase {
         docType: true,
         dueDate: true,
         id: true,
-        linkedDocumentIds: true,
-        linkType: true,
+
+        supplier: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
-        vatType: true,
       },
     });
     if (results === null) {

@@ -1,7 +1,7 @@
 import { ClientUpdateManyWithoutEntitiesInput } from "./ClientUpdateManyWithoutEntitiesInput";
 import { InputJsonValue } from "../../types";
 import { ItemUpdateManyWithoutEntitiesInput } from "./ItemUpdateManyWithoutEntitiesInput";
-import { UserUpdateManyWithoutEntitiesInput } from "./UserUpdateManyWithoutEntitiesInput";
+import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type EntityUpdateInput = {
   accrualMethod?: boolean | null;
@@ -9,5 +9,5 @@ export type EntityUpdateInput = {
   info?: InputJsonValue;
   items?: ItemUpdateManyWithoutEntitiesInput;
   name?: string | null;
-  users?: UserUpdateManyWithoutEntitiesInput;
+  users?: UserWhereUniqueInput | null;
 };

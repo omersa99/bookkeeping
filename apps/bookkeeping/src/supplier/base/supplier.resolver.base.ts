@@ -26,6 +26,8 @@ import { SupplierCountArgs } from "./SupplierCountArgs";
 import { SupplierFindManyArgs } from "./SupplierFindManyArgs";
 import { SupplierFindUniqueArgs } from "./SupplierFindUniqueArgs";
 import { Supplier } from "./Supplier";
+import { DocumentFindManyArgs } from "../../document/base/DocumentFindManyArgs";
+import { Document } from "../../document/base/Document";
 import { SupplierService } from "../supplier.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Supplier)
@@ -140,5 +142,25 @@ export class SupplierResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [Document], { name: "documents" })
+  @nestAccessControl.UseRoles({
+    resource: "Document",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldDocuments(
+    @graphql.Parent() parent: Supplier,
+    @graphql.Args() args: DocumentFindManyArgs
+  ): Promise<Document[]> {
+    const results = await this.service.findDocuments(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
   }
 }

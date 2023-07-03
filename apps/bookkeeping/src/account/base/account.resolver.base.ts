@@ -30,6 +30,7 @@ import { ItemFindManyArgs } from "../../item/base/ItemFindManyArgs";
 import { Item } from "../../item/base/Item";
 import { TransactionFindManyArgs } from "../../transaction/base/TransactionFindManyArgs";
 import { Transaction } from "../../transaction/base/Transaction";
+import { Document } from "../../document/base/Document";
 import { AccountService } from "../account.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Account)
@@ -96,7 +97,15 @@ export class AccountResolverBase {
   ): Promise<Account> {
     return await this.service.create({
       ...args,
-      data: args.data,
+      data: {
+        ...args.data,
+
+        documents: args.data.documents
+          ? {
+              connect: args.data.documents,
+            }
+          : undefined,
+      },
     });
   }
 
@@ -113,7 +122,15 @@ export class AccountResolverBase {
     try {
       return await this.service.update({
         ...args,
-        data: args.data,
+        data: {
+          ...args.data,
+
+          documents: args.data.documents
+            ? {
+                connect: args.data.documents,
+              }
+            : undefined,
+        },
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -184,5 +201,26 @@ export class AccountResolverBase {
     }
 
     return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Document, {
+    nullable: true,
+    name: "documents",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Document",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldDocuments(
+    @graphql.Parent() parent: Account
+  ): Promise<Document | null> {
+    const result = await this.service.getDocuments(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
   }
 }

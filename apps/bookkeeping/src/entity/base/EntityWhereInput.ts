@@ -19,7 +19,7 @@ import { StringFilter } from "../../util/StringFilter";
 import { JsonFilter } from "../../util/JsonFilter";
 import { ItemListRelationFilter } from "../../item/base/ItemListRelationFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { UserListRelationFilter } from "../../user/base/UserListRelationFilter";
+import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class EntityWhereInput {
@@ -93,15 +93,15 @@ class EntityWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => UserListRelationFilter,
+    type: () => UserWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => UserListRelationFilter)
+  @Type(() => UserWhereUniqueInput)
   @IsOptional()
-  @Field(() => UserListRelationFilter, {
+  @Field(() => UserWhereUniqueInput, {
     nullable: true,
   })
-  users?: UserListRelationFilter;
+  users?: UserWhereUniqueInput;
 }
 
 export { EntityWhereInput as EntityWhereInput };

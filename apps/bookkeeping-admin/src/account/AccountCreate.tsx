@@ -7,10 +7,12 @@ import {
   BooleanInput,
   TextInput,
   SelectInput,
+  ReferenceInput,
   ReferenceArrayInput,
   SelectArrayInput,
 } from "react-admin";
 
+import { DocumentTitle } from "../document/DocumentTitle";
 import { ItemTitle } from "../item/ItemTitle";
 import { TransactionTitle } from "../transaction/TransactionTitle";
 
@@ -31,6 +33,13 @@ export const AccountCreate = (props: CreateProps): React.ReactElement => {
           allowEmpty
           optionValue="value"
         />
+        <ReferenceInput
+          source="documents.id"
+          reference="Document"
+          label="Documents"
+        >
+          <SelectInput optionText={DocumentTitle} />
+        </ReferenceInput>
         <ReferenceArrayInput
           source="items"
           reference="Item"

@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import {
   List,
   Datagrid,
@@ -6,8 +7,11 @@ import {
   BooleanField,
   DateField,
   TextField,
+  ReferenceField,
 } from "react-admin";
+
 import Pagination from "../Components/Pagination";
+import { USER_TITLE_FIELD } from "../user/UserTitle";
 
 export const EntityList = (props: ListProps): React.ReactElement => {
   return (
@@ -25,6 +29,9 @@ export const EntityList = (props: ListProps): React.ReactElement => {
         <TextField label="info" source="info" />
         <TextField label="name" source="name" />
         <DateField source="updatedAt" label="Updated At" />
+        <ReferenceField label="Users" source="user.id" reference="User">
+          <TextField source={USER_TITLE_FIELD} />
+        </ReferenceField>
       </Datagrid>
     </List>
   );

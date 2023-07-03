@@ -10,7 +10,7 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
-import { Prisma, Supplier } from "@prisma/client";
+import { Prisma, Supplier, Document } from "@prisma/client";
 
 export class SupplierServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -45,5 +45,16 @@ export class SupplierServiceBase {
     args: Prisma.SelectSubset<T, Prisma.SupplierDeleteArgs>
   ): Promise<Supplier> {
     return this.prisma.supplier.delete(args);
+  }
+
+  async findDocuments(
+    parentId: string,
+    args: Prisma.DocumentFindManyArgs
+  ): Promise<Document[]> {
+    return this.prisma.supplier
+      .findUniqueOrThrow({
+        where: { id: parentId },
+      })
+      .documents(args);
   }
 }

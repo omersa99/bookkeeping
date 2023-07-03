@@ -11,7 +11,7 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { Client } from "../../client/base/Client";
+import { Account } from "../../account/base/Account";
 import {
   ValidateNested,
   IsOptional,
@@ -20,12 +20,21 @@ import {
   IsString,
 } from "class-validator";
 import { Type } from "class-transformer";
+import { Client } from "../../client/base/Client";
 import { EnumDocumentDocType } from "./EnumDocumentDocType";
-import { EnumDocumentLinkType } from "./EnumDocumentLinkType";
-import { EnumDocumentVatType } from "./EnumDocumentVatType";
+import { Supplier } from "../../supplier/base/Supplier";
 
 @ObjectType()
 class Document {
+  @ApiProperty({
+    required: false,
+    type: () => Account,
+  })
+  @ValidateNested()
+  @Type(() => Account)
+  @IsOptional()
+  cashAccount?: Account | null;
+
   @ApiProperty({
     required: false,
     type: () => Client,
@@ -52,14 +61,7 @@ class Document {
   @Field(() => EnumDocumentDocType, {
     nullable: true,
   })
-  docType?:
-    | "PriceOffer"
-    | "Order"
-    | "DeliveryCertificate"
-    | "Invoice"
-    | "CreditInvoice"
-    | "Receipt"
-    | null;
+  docType?: "Invoice" | "Receipt" | "Bill" | null;
 
   @ApiProperty({
     required: false,
@@ -82,25 +84,12 @@ class Document {
 
   @ApiProperty({
     required: false,
-    type: String,
+    type: () => Supplier,
   })
-  @IsString()
+  @ValidateNested()
+  @Type(() => Supplier)
   @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  linkedDocumentIds!: string | null;
-
-  @ApiProperty({
-    required: false,
-    enum: EnumDocumentLinkType,
-  })
-  @IsEnum(EnumDocumentLinkType)
-  @IsOptional()
-  @Field(() => EnumDocumentLinkType, {
-    nullable: true,
-  })
-  linkType?: "Related" | "Cancelling" | null;
+  supplier?: Supplier | null;
 
   @ApiProperty({
     required: true,
@@ -109,17 +98,6 @@ class Document {
   @Type(() => Date)
   @Field(() => Date)
   updatedAt!: Date;
-
-  @ApiProperty({
-    required: false,
-    enum: EnumDocumentVatType,
-  })
-  @IsEnum(EnumDocumentVatType)
-  @IsOptional()
-  @Field(() => EnumDocumentVatType, {
-    nullable: true,
-  })
-  vatType?: "Default" | "Exempt" | "Mixed" | null;
 }
 
 export { Document as Document };
