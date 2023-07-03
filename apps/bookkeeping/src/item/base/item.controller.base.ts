@@ -65,6 +65,7 @@ export class ItemControllerBase {
           : undefined,
       },
       select: {
+        active: true,
         additionalInfo: true,
         Amount: true,
         cogsAccount: true,
@@ -106,6 +107,7 @@ export class ItemControllerBase {
     return this.service.findMany({
       ...args,
       select: {
+        active: true,
         additionalInfo: true,
         Amount: true,
         cogsAccount: true,
@@ -148,6 +150,7 @@ export class ItemControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
+        active: true,
         additionalInfo: true,
         Amount: true,
         cogsAccount: true,
@@ -210,6 +213,7 @@ export class ItemControllerBase {
             : undefined,
         },
         select: {
+          active: true,
           additionalInfo: true,
           Amount: true,
           cogsAccount: true,
@@ -260,6 +264,7 @@ export class ItemControllerBase {
       return await this.service.delete({
         where: params,
         select: {
+          active: true,
           additionalInfo: true,
           Amount: true,
           cogsAccount: true,

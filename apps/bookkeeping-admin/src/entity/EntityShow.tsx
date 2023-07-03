@@ -50,6 +50,7 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
         </ReferenceManyField>
         <ReferenceManyField reference="Item" target="entityId" label="Items">
           <Datagrid rowClick="show">
+            <BooleanField label="active" source="active" />
             <TextField label="additional_info" source="additionalInfo" />
             <TextField label="amount" source="Amount" />
             <TextField label="cogs account" source="cogsAccount" />

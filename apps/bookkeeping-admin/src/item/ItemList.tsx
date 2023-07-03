@@ -1,12 +1,15 @@
 import * as React from "react";
+
 import {
   List,
   Datagrid,
   ListProps,
+  BooleanField,
   TextField,
   DateField,
   ReferenceField,
 } from "react-admin";
+
 import Pagination from "../Components/Pagination";
 import { ENTITY_TITLE_FIELD } from "../entity/EntityTitle";
 
@@ -20,6 +23,7 @@ export const ItemList = (props: ListProps): React.ReactElement => {
       pagination={<Pagination />}
     >
       <Datagrid rowClick="show">
+        <BooleanField label="active" source="active" />
         <TextField label="additional_info" source="additionalInfo" />
         <TextField label="amount" source="Amount" />
         <TextField label="cogs account" source="cogsAccount" />

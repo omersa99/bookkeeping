@@ -2,6 +2,7 @@ import { Document } from "../document/Document";
 import { Entity } from "../entity/Entity";
 
 export type Item = {
+  active: boolean | null;
   additionalInfo: string | null;
   Amount: string | null;
   cogsAccount: string | null;

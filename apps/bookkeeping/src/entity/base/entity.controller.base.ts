@@ -374,6 +374,7 @@ export class EntityControllerBase {
     const results = await this.service.findItems(params.id, {
       ...query,
       select: {
+        active: true,
         additionalInfo: true,
         Amount: true,
         cogsAccount: true,

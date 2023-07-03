@@ -33,6 +33,7 @@ model Entity {
 }
 
 model Item {
+  active           Boolean?
   additionalInfo   String?
   Amount           String?
   cogsAccount      String?
