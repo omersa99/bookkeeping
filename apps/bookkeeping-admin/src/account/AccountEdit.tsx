@@ -7,13 +7,10 @@ import {
   BooleanInput,
   TextInput,
   SelectInput,
-  ReferenceInput,
   ReferenceArrayInput,
   SelectArrayInput,
 } from "react-admin";
 
-import { DocumentTitle } from "../document/DocumentTitle";
-import { ItemTitle } from "../item/ItemTitle";
 import { TransactionTitle } from "../transaction/TransactionTitle";
 
 export const AccountEdit = (props: EditProps): React.ReactElement => {
@@ -33,21 +30,6 @@ export const AccountEdit = (props: EditProps): React.ReactElement => {
           allowEmpty
           optionValue="value"
         />
-        <ReferenceInput
-          source="documents.id"
-          reference="Document"
-          label="Documents"
-        >
-          <SelectInput optionText={DocumentTitle} />
-        </ReferenceInput>
-        <ReferenceArrayInput
-          source="items"
-          reference="Item"
-          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
-          format={(value: any) => value && value.map((v: any) => v.id)}
-        >
-          <SelectArrayInput optionText={ItemTitle} />
-        </ReferenceArrayInput>
         <TextInput label="name" source="name" />
         <TextInput label="role" source="role" />
         <ReferenceArrayInput

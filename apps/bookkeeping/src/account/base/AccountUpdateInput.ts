@@ -19,10 +19,8 @@ import {
   ValidateNested,
 } from "class-validator";
 import { EnumAccountDefaultAccountType } from "./EnumAccountDefaultAccountType";
-import { DocumentWhereUniqueInput } from "../../document/base/DocumentWhereUniqueInput";
-import { Type } from "class-transformer";
-import { ItemUpdateManyWithoutAccountsInput } from "./ItemUpdateManyWithoutAccountsInput";
 import { TransactionUpdateManyWithoutAccountsInput } from "./TransactionUpdateManyWithoutAccountsInput";
+import { Type } from "class-transformer";
 
 @InputType()
 class AccountUpdateInput {
@@ -58,30 +56,6 @@ class AccountUpdateInput {
     nullable: true,
   })
   DefaultAccountType?: "Debit" | "Credit" | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => DocumentWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => DocumentWhereUniqueInput)
-  @IsOptional()
-  @Field(() => DocumentWhereUniqueInput, {
-    nullable: true,
-  })
-  documents?: DocumentWhereUniqueInput | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => ItemUpdateManyWithoutAccountsInput,
-  })
-  @ValidateNested()
-  @Type(() => ItemUpdateManyWithoutAccountsInput)
-  @IsOptional()
-  @Field(() => ItemUpdateManyWithoutAccountsInput, {
-    nullable: true,
-  })
-  items?: ItemUpdateManyWithoutAccountsInput;
 
   @ApiProperty({
     required: false,

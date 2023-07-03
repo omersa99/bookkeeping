@@ -21,8 +21,6 @@ import {
 } from "class-validator";
 import { Type } from "class-transformer";
 import { EnumAccountDefaultAccountType } from "./EnumAccountDefaultAccountType";
-import { Document } from "../../document/base/Document";
-import { Item } from "../../item/base/Item";
 import { Transaction } from "../../transaction/base/Transaction";
 
 @ObjectType()
@@ -69,30 +67,12 @@ class Account {
   DefaultAccountType?: "Debit" | "Credit" | null;
 
   @ApiProperty({
-    required: false,
-    type: () => Document,
-  })
-  @ValidateNested()
-  @Type(() => Document)
-  @IsOptional()
-  documents?: Document | null;
-
-  @ApiProperty({
     required: true,
     type: String,
   })
   @IsString()
   @Field(() => String)
   id!: string;
-
-  @ApiProperty({
-    required: false,
-    type: () => [Item],
-  })
-  @ValidateNested()
-  @Type(() => Item)
-  @IsOptional()
-  items?: Array<Item>;
 
   @ApiProperty({
     required: false,

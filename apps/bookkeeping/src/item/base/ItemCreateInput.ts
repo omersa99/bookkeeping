@@ -11,32 +11,20 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
 import {
-  ValidateNested,
-  IsOptional,
   IsString,
+  IsOptional,
+  ValidateNested,
   IsEnum,
   IsNumber,
 } from "class-validator";
+import { DocumentCreateNestedManyWithoutItemsInput } from "./DocumentCreateNestedManyWithoutItemsInput";
 import { Type } from "class-transformer";
 import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
 import { EnumItemItemRole } from "./EnumItemItemRole";
 
 @InputType()
 class ItemCreateInput {
-  @ApiProperty({
-    required: false,
-    type: () => AccountWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => AccountWhereUniqueInput)
-  @IsOptional()
-  @Field(() => AccountWhereUniqueInput, {
-    nullable: true,
-  })
-  account?: AccountWhereUniqueInput | null;
-
   @ApiProperty({
     required: false,
     type: String,
@@ -61,6 +49,40 @@ class ItemCreateInput {
 
   @ApiProperty({
     required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  cogsAccount?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => DocumentCreateNestedManyWithoutItemsInput,
+  })
+  @ValidateNested()
+  @Type(() => DocumentCreateNestedManyWithoutItemsInput)
+  @IsOptional()
+  @Field(() => DocumentCreateNestedManyWithoutItemsInput, {
+    nullable: true,
+  })
+  document?: DocumentCreateNestedManyWithoutItemsInput;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  earningsAccount?: string | null;
+
+  @ApiProperty({
+    required: false,
     type: () => EntityWhereUniqueInput,
   })
   @ValidateNested()
@@ -70,6 +92,28 @@ class ItemCreateInput {
     nullable: true,
   })
   entity?: EntityWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  expenseAccount?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  inventoryAccount?: string | null;
 
   @ApiProperty({
     required: false,

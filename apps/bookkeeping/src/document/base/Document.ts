@@ -11,29 +11,32 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { Account } from "../../account/base/Account";
 import {
-  ValidateNested,
+  IsString,
   IsOptional,
+  ValidateNested,
   IsDate,
   IsEnum,
-  IsString,
 } from "class-validator";
-import { Type } from "class-transformer";
 import { Client } from "../../client/base/Client";
+import { Type } from "class-transformer";
 import { EnumDocumentDocType } from "./EnumDocumentDocType";
+import { Item } from "../../item/base/Item";
+import { EnumDocumentStatus } from "./EnumDocumentStatus";
 import { Supplier } from "../../supplier/base/Supplier";
 
 @ObjectType()
 class Document {
   @ApiProperty({
     required: false,
-    type: () => Account,
+    type: String,
   })
-  @ValidateNested()
-  @Type(() => Account)
+  @IsString()
   @IsOptional()
-  cashAccount?: Account | null;
+  @Field(() => String, {
+    nullable: true,
+  })
+  cashAccount!: string | null;
 
   @ApiProperty({
     required: false,
@@ -84,12 +87,54 @@ class Document {
 
   @ApiProperty({
     required: false,
+    type: () => [Item],
+  })
+  @ValidateNested()
+  @Type(() => Item)
+  @IsOptional()
+  items?: Array<Item>;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  prepaidAccount!: string | null;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumDocumentStatus,
+  })
+  @IsEnum(EnumDocumentStatus)
+  @IsOptional()
+  @Field(() => EnumDocumentStatus, {
+    nullable: true,
+  })
+  status?: "Draft" | "Approved" | "Paid" | "Canceled" | null;
+
+  @ApiProperty({
+    required: false,
     type: () => Supplier,
   })
   @ValidateNested()
   @Type(() => Supplier)
   @IsOptional()
   supplier?: Supplier | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  unearnedAccount!: string | null;
 
   @ApiProperty({
     required: true,

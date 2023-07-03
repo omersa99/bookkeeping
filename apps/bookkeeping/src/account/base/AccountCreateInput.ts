@@ -19,10 +19,8 @@ import {
   ValidateNested,
 } from "class-validator";
 import { EnumAccountDefaultAccountType } from "./EnumAccountDefaultAccountType";
-import { DocumentWhereUniqueInput } from "../../document/base/DocumentWhereUniqueInput";
-import { Type } from "class-transformer";
-import { ItemCreateNestedManyWithoutAccountsInput } from "./ItemCreateNestedManyWithoutAccountsInput";
 import { TransactionCreateNestedManyWithoutAccountsInput } from "./TransactionCreateNestedManyWithoutAccountsInput";
+import { Type } from "class-transformer";
 
 @InputType()
 class AccountCreateInput {
@@ -58,30 +56,6 @@ class AccountCreateInput {
     nullable: true,
   })
   DefaultAccountType?: "Debit" | "Credit" | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => DocumentWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => DocumentWhereUniqueInput)
-  @IsOptional()
-  @Field(() => DocumentWhereUniqueInput, {
-    nullable: true,
-  })
-  documents?: DocumentWhereUniqueInput | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => ItemCreateNestedManyWithoutAccountsInput,
-  })
-  @ValidateNested()
-  @Type(() => ItemCreateNestedManyWithoutAccountsInput)
-  @IsOptional()
-  @Field(() => ItemCreateNestedManyWithoutAccountsInput, {
-    nullable: true,
-  })
-  items?: ItemCreateNestedManyWithoutAccountsInput;
 
   @ApiProperty({
     required: false,

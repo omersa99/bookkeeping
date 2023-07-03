@@ -26,7 +26,8 @@ import { ItemCountArgs } from "./ItemCountArgs";
 import { ItemFindManyArgs } from "./ItemFindManyArgs";
 import { ItemFindUniqueArgs } from "./ItemFindUniqueArgs";
 import { Item } from "./Item";
-import { Account } from "../../account/base/Account";
+import { DocumentFindManyArgs } from "../../document/base/DocumentFindManyArgs";
+import { Document } from "../../document/base/Document";
 import { Entity } from "../../entity/base/Entity";
 import { ItemService } from "../item.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
@@ -91,12 +92,6 @@ export class ItemResolverBase {
       data: {
         ...args.data,
 
-        account: args.data.account
-          ? {
-              connect: args.data.account,
-            }
-          : undefined,
-
         entity: args.data.entity
           ? {
               connect: args.data.entity,
@@ -119,12 +114,6 @@ export class ItemResolverBase {
         ...args,
         data: {
           ...args.data,
-
-          account: args.data.account
-            ? {
-                connect: args.data.account,
-              }
-            : undefined,
 
           entity: args.data.entity
             ? {
@@ -163,24 +152,23 @@ export class ItemResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => Account, {
-    nullable: true,
-    name: "account",
-  })
+  @graphql.ResolveField(() => [Document], { name: "document" })
   @nestAccessControl.UseRoles({
-    resource: "Account",
+    resource: "Document",
     action: "read",
     possession: "any",
   })
-  async resolveFieldAccount(
-    @graphql.Parent() parent: Item
-  ): Promise<Account | null> {
-    const result = await this.service.getAccount(parent.id);
+  async resolveFieldDocument(
+    @graphql.Parent() parent: Item,
+    @graphql.Args() args: DocumentFindManyArgs
+  ): Promise<Document[]> {
+    const results = await this.service.findDocument(parent.id, args);
 
-    if (!result) {
-      return null;
+    if (!results) {
+      return [];
     }
-    return result;
+
+    return results;
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)

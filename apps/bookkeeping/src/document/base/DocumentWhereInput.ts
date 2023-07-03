@@ -11,29 +11,30 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
-import { ValidateNested, IsOptional, IsEnum } from "class-validator";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { Type } from "class-transformer";
+import { IsOptional, ValidateNested, IsEnum } from "class-validator";
 import { ClientWhereUniqueInput } from "../../client/base/ClientWhereUniqueInput";
 import { Client } from "../../client/base/Client";
 import { EnumDocumentDocType } from "./EnumDocumentDocType";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
+import { ItemListRelationFilter } from "../../item/base/ItemListRelationFilter";
+import { EnumDocumentStatus } from "./EnumDocumentStatus";
 import { SupplierWhereUniqueInput } from "../../supplier/base/SupplierWhereUniqueInput";
 
 @InputType()
 class DocumentWhereInput {
   @ApiProperty({
     required: false,
-    type: () => AccountWhereUniqueInput,
+    type: StringNullableFilter,
   })
-  @ValidateNested()
-  @Type(() => AccountWhereUniqueInput)
+  @Type(() => StringNullableFilter)
   @IsOptional()
-  @Field(() => AccountWhereUniqueInput, {
+  @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  cashAccount?: AccountWhereUniqueInput;
+  cashAccount?: StringNullableFilter;
 
   @ApiProperty({
     required: false,
@@ -82,6 +83,40 @@ class DocumentWhereInput {
 
   @ApiProperty({
     required: false,
+    type: () => ItemListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => ItemListRelationFilter)
+  @IsOptional()
+  @Field(() => ItemListRelationFilter, {
+    nullable: true,
+  })
+  items?: ItemListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  prepaidAccount?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumDocumentStatus,
+  })
+  @IsEnum(EnumDocumentStatus)
+  @IsOptional()
+  @Field(() => EnumDocumentStatus, {
+    nullable: true,
+  })
+  status?: "Draft" | "Approved" | "Paid" | "Canceled";
+
+  @ApiProperty({
+    required: false,
     type: () => SupplierWhereUniqueInput,
   })
   @ValidateNested()
@@ -91,6 +126,17 @@ class DocumentWhereInput {
     nullable: true,
   })
   supplier?: SupplierWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  unearnedAccount?: StringNullableFilter;
 }
 
 export { DocumentWhereInput as DocumentWhereInput };

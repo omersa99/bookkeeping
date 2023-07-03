@@ -27,6 +27,10 @@ import { ItemWhereUniqueInput } from "./ItemWhereUniqueInput";
 import { ItemFindManyArgs } from "./ItemFindManyArgs";
 import { ItemUpdateInput } from "./ItemUpdateInput";
 import { Item } from "./Item";
+import { DocumentFindManyArgs } from "../../document/base/DocumentFindManyArgs";
+import { Client } from "../../client/base/Client";
+import { Document } from "../../document/base/Document";
+import { DocumentWhereUniqueInput } from "../../document/base/DocumentWhereUniqueInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -54,12 +58,6 @@ export class ItemControllerBase {
       data: {
         ...data,
 
-        account: data.account
-          ? {
-              connect: data.account,
-            }
-          : undefined,
-
         entity: data.entity
           ? {
               connect: data.entity,
@@ -67,15 +65,11 @@ export class ItemControllerBase {
           : undefined,
       },
       select: {
-        account: {
-          select: {
-            id: true,
-          },
-        },
-
         additionalInfo: true,
         Amount: true,
+        cogsAccount: true,
         createdAt: true,
+        earningsAccount: true,
 
         entity: {
           select: {
@@ -83,7 +77,9 @@ export class ItemControllerBase {
           },
         },
 
+        expenseAccount: true,
         id: true,
+        inventoryAccount: true,
         itemRole: true,
         itemType: true,
         name: true,
@@ -110,15 +106,11 @@ export class ItemControllerBase {
     return this.service.findMany({
       ...args,
       select: {
-        account: {
-          select: {
-            id: true,
-          },
-        },
-
         additionalInfo: true,
         Amount: true,
+        cogsAccount: true,
         createdAt: true,
+        earningsAccount: true,
 
         entity: {
           select: {
@@ -126,7 +118,9 @@ export class ItemControllerBase {
           },
         },
 
+        expenseAccount: true,
         id: true,
+        inventoryAccount: true,
         itemRole: true,
         itemType: true,
         name: true,
@@ -154,15 +148,11 @@ export class ItemControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
-        account: {
-          select: {
-            id: true,
-          },
-        },
-
         additionalInfo: true,
         Amount: true,
+        cogsAccount: true,
         createdAt: true,
+        earningsAccount: true,
 
         entity: {
           select: {
@@ -170,7 +160,9 @@ export class ItemControllerBase {
           },
         },
 
+        expenseAccount: true,
         id: true,
+        inventoryAccount: true,
         itemRole: true,
         itemType: true,
         name: true,
@@ -211,12 +203,6 @@ export class ItemControllerBase {
         data: {
           ...data,
 
-          account: data.account
-            ? {
-                connect: data.account,
-              }
-            : undefined,
-
           entity: data.entity
             ? {
                 connect: data.entity,
@@ -224,15 +210,11 @@ export class ItemControllerBase {
             : undefined,
         },
         select: {
-          account: {
-            select: {
-              id: true,
-            },
-          },
-
           additionalInfo: true,
           Amount: true,
+          cogsAccount: true,
           createdAt: true,
+          earningsAccount: true,
 
           entity: {
             select: {
@@ -240,7 +222,9 @@ export class ItemControllerBase {
             },
           },
 
+          expenseAccount: true,
           id: true,
+          inventoryAccount: true,
           itemRole: true,
           itemType: true,
           name: true,
@@ -276,15 +260,11 @@ export class ItemControllerBase {
       return await this.service.delete({
         where: params,
         select: {
-          account: {
-            select: {
-              id: true,
-            },
-          },
-
           additionalInfo: true,
           Amount: true,
+          cogsAccount: true,
           createdAt: true,
+          earningsAccount: true,
 
           entity: {
             select: {
@@ -292,7 +272,9 @@ export class ItemControllerBase {
             },
           },
 
+          expenseAccount: true,
           id: true,
+          inventoryAccount: true,
           itemRole: true,
           itemType: true,
           name: true,
@@ -308,5 +290,120 @@ export class ItemControllerBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/document")
+  @ApiNestedQuery(DocumentFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Document",
+    action: "read",
+    possession: "any",
+  })
+  async findManyDocument(
+    @common.Req() request: Request,
+    @common.Param() params: ItemWhereUniqueInput
+  ): Promise<Document[]> {
+    const query = plainToClass(DocumentFindManyArgs, request.query);
+    const results = await this.service.findDocument(params.id, {
+      ...query,
+      select: {
+        cashAccount: true,
+
+        Client: {
+          select: {
+            id: true,
+          },
+        },
+
+        createdAt: true,
+        docType: true,
+        dueDate: true,
+        id: true,
+        prepaidAccount: true,
+        status: true,
+
+        supplier: {
+          select: {
+            id: true,
+          },
+        },
+
+        unearnedAccount: true,
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/document")
+  @nestAccessControl.UseRoles({
+    resource: "Item",
+    action: "update",
+    possession: "any",
+  })
+  async connectDocument(
+    @common.Param() params: ItemWhereUniqueInput,
+    @common.Body() body: DocumentWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      document: {
+        connect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/document")
+  @nestAccessControl.UseRoles({
+    resource: "Item",
+    action: "update",
+    possession: "any",
+  })
+  async updateDocument(
+    @common.Param() params: ItemWhereUniqueInput,
+    @common.Body() body: DocumentWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      document: {
+        set: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/document")
+  @nestAccessControl.UseRoles({
+    resource: "Item",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectDocument(
+    @common.Param() params: ItemWhereUniqueInput,
+    @common.Body() body: DocumentWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      document: {
+        disconnect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
   }
 }

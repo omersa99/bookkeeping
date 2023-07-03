@@ -14,7 +14,7 @@ import { ItemWhereUniqueInput } from "../../item/base/ItemWhereUniqueInput";
 import { ApiProperty } from "@nestjs/swagger";
 
 @InputType()
-class ItemCreateNestedManyWithoutAccountsInput {
+class ItemCreateNestedManyWithoutDocumentsInput {
   @Field(() => [ItemWhereUniqueInput], {
     nullable: true,
   })
@@ -25,4 +25,4 @@ class ItemCreateNestedManyWithoutAccountsInput {
   connect?: Array<ItemWhereUniqueInput>;
 }
 
-export { ItemCreateNestedManyWithoutAccountsInput as ItemCreateNestedManyWithoutAccountsInput };
+export { ItemCreateNestedManyWithoutDocumentsInput as ItemCreateNestedManyWithoutDocumentsInput };

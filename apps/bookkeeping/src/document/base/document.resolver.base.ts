@@ -27,7 +27,8 @@ import { DocumentFindManyArgs } from "./DocumentFindManyArgs";
 import { DocumentFindUniqueArgs } from "./DocumentFindUniqueArgs";
 import { Document } from "./Document";
 import { Client } from "../../client/base/Client";
-import { Account } from "../../account/base/Account";
+import { ItemFindManyArgs } from "../../item/base/ItemFindManyArgs";
+import { Item } from "../../item/base/Item";
 import { Supplier } from "../../supplier/base/Supplier";
 import { DocumentService } from "../document.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
@@ -98,12 +99,6 @@ export class DocumentResolverBase {
       data: {
         ...args.data,
 
-        cashAccount: args.data.cashAccount
-          ? {
-              connect: args.data.cashAccount,
-            }
-          : undefined,
-
         Client: args.data.Client
           ? {
               connect: args.data.Client,
@@ -134,12 +129,6 @@ export class DocumentResolverBase {
         ...args,
         data: {
           ...args.data,
-
-          cashAccount: args.data.cashAccount
-            ? {
-                connect: args.data.cashAccount,
-              }
-            : undefined,
 
           Client: args.data.Client
             ? {
@@ -186,24 +175,23 @@ export class DocumentResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => Account, {
-    nullable: true,
-    name: "cashAccount",
-  })
+  @graphql.ResolveField(() => [Item], { name: "items" })
   @nestAccessControl.UseRoles({
-    resource: "Account",
+    resource: "Item",
     action: "read",
     possession: "any",
   })
-  async resolveFieldCashAccount(
-    @graphql.Parent() parent: Document
-  ): Promise<Account | null> {
-    const result = await this.service.getCashAccount(parent.id);
+  async resolveFieldItems(
+    @graphql.Parent() parent: Document,
+    @graphql.Args() args: ItemFindManyArgs
+  ): Promise<Item[]> {
+    const results = await this.service.findItems(parent.id, args);
 
-    if (!result) {
-      return null;
+    if (!results) {
+      return [];
     }
-    return result;
+
+    return results;
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)

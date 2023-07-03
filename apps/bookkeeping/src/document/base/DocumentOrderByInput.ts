@@ -28,7 +28,7 @@ class DocumentOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  ID?: SortOrder;
+  cashAccount?: SortOrder;
 
   @ApiProperty({
     required: false,
@@ -94,7 +94,40 @@ class DocumentOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  prepaidAccount?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @IsOptional()
+  @IsEnum(SortOrder)
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  status?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @IsOptional()
+  @IsEnum(SortOrder)
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   supplierId?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @IsOptional()
+  @IsEnum(SortOrder)
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  unearnedAccount?: SortOrder;
 
   @ApiProperty({
     required: false,
