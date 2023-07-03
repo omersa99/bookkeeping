@@ -61,6 +61,7 @@ export class ItemControllerBase {
           : undefined,
       },
       select: {
+        additionalInfo: true,
         Amount: true,
         createdAt: true,
 
@@ -71,10 +72,9 @@ export class ItemControllerBase {
         },
 
         id: true,
-        isProductOrService: true,
         itemRole: true,
-        itemType: true,
         name: true,
+        price: true,
         updatedAt: true,
       },
     });
@@ -97,6 +97,7 @@ export class ItemControllerBase {
     return this.service.findMany({
       ...args,
       select: {
+        additionalInfo: true,
         Amount: true,
         createdAt: true,
 
@@ -107,10 +108,9 @@ export class ItemControllerBase {
         },
 
         id: true,
-        isProductOrService: true,
         itemRole: true,
-        itemType: true,
         name: true,
+        price: true,
         updatedAt: true,
       },
     });
@@ -134,6 +134,7 @@ export class ItemControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
+        additionalInfo: true,
         Amount: true,
         createdAt: true,
 
@@ -144,10 +145,9 @@ export class ItemControllerBase {
         },
 
         id: true,
-        isProductOrService: true,
         itemRole: true,
-        itemType: true,
         name: true,
+        price: true,
         updatedAt: true,
       },
     });
@@ -191,6 +191,7 @@ export class ItemControllerBase {
             : undefined,
         },
         select: {
+          additionalInfo: true,
           Amount: true,
           createdAt: true,
 
@@ -201,10 +202,9 @@ export class ItemControllerBase {
           },
 
           id: true,
-          isProductOrService: true,
           itemRole: true,
-          itemType: true,
           name: true,
+          price: true,
           updatedAt: true,
         },
       });
@@ -236,6 +236,7 @@ export class ItemControllerBase {
       return await this.service.delete({
         where: params,
         select: {
+          additionalInfo: true,
           Amount: true,
           createdAt: true,
 
@@ -246,10 +247,9 @@ export class ItemControllerBase {
           },
 
           id: true,
-          isProductOrService: true,
           itemRole: true,
-          itemType: true,
           name: true,
+          price: true,
           updatedAt: true,
         },
       });

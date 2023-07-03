@@ -14,18 +14,16 @@ import { ApiProperty } from "@nestjs/swagger";
 import {
   IsBoolean,
   IsOptional,
-  ValidateNested,
   IsDate,
+  ValidateNested,
   IsString,
 } from "class-validator";
-import { ChartOfAccount } from "../../chartOfAccount/base/ChartOfAccount";
 import { Type } from "class-transformer";
-import { Customer } from "../../customer/base/Customer";
+import { Client } from "../../client/base/Client";
 import { IsJSONValue } from "@app/custom-validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
 import { Item } from "../../item/base/Item";
-import { Ledger } from "../../ledger/base/Ledger";
 import { User } from "../../user/base/User";
 
 @ObjectType()
@@ -42,15 +40,6 @@ class Entity {
   accrualMethod!: boolean | null;
 
   @ApiProperty({
-    required: false,
-    type: () => ChartOfAccount,
-  })
-  @ValidateNested()
-  @Type(() => ChartOfAccount)
-  @IsOptional()
-  chartOfAccounts?: ChartOfAccount | null;
-
-  @ApiProperty({
     required: true,
   })
   @IsDate()
@@ -60,12 +49,12 @@ class Entity {
 
   @ApiProperty({
     required: false,
-    type: () => [Customer],
+    type: () => [Client],
   })
   @ValidateNested()
-  @Type(() => Customer)
+  @Type(() => Client)
   @IsOptional()
-  customers?: Array<Customer>;
+  customers?: Array<Client>;
 
   @ApiProperty({
     required: true,
@@ -93,15 +82,6 @@ class Entity {
   @Type(() => Item)
   @IsOptional()
   items?: Array<Item>;
-
-  @ApiProperty({
-    required: false,
-    type: () => [Ledger],
-  })
-  @ValidateNested()
-  @Type(() => Ledger)
-  @IsOptional()
-  ledgers?: Array<Ledger>;
 
   @ApiProperty({
     required: false,

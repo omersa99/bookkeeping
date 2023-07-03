@@ -13,9 +13,8 @@ import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { EnumAccountBalanceType } from "./EnumAccountBalanceType";
 import { IsEnum, IsOptional, ValidateNested } from "class-validator";
-import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
-import { Type } from "class-transformer";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { Type } from "class-transformer";
 import { StringFilter } from "../../util/StringFilter";
 import { TransactionListRelationFilter } from "../../transaction/base/TransactionListRelationFilter";
 
@@ -31,18 +30,6 @@ class AccountWhereInput {
     nullable: true,
   })
   balanceType?: "Debit" | "Credit";
-
-  @ApiProperty({
-    required: false,
-    type: () => ChartOfAccountWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => ChartOfAccountWhereUniqueInput)
-  @IsOptional()
-  @Field(() => ChartOfAccountWhereUniqueInput, {
-    nullable: true,
-  })
-  chartOfAccount?: ChartOfAccountWhereUniqueInput;
 
   @ApiProperty({
     required: false,

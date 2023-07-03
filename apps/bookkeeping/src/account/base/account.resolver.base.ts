@@ -28,7 +28,6 @@ import { AccountFindUniqueArgs } from "./AccountFindUniqueArgs";
 import { Account } from "./Account";
 import { TransactionFindManyArgs } from "../../transaction/base/TransactionFindManyArgs";
 import { Transaction } from "../../transaction/base/Transaction";
-import { ChartOfAccount } from "../../chartOfAccount/base/ChartOfAccount";
 import { AccountService } from "../account.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Account)
@@ -95,15 +94,7 @@ export class AccountResolverBase {
   ): Promise<Account> {
     return await this.service.create({
       ...args,
-      data: {
-        ...args.data,
-
-        chartOfAccount: args.data.chartOfAccount
-          ? {
-              connect: args.data.chartOfAccount,
-            }
-          : undefined,
-      },
+      data: args.data,
     });
   }
 
@@ -120,15 +111,7 @@ export class AccountResolverBase {
     try {
       return await this.service.update({
         ...args,
-        data: {
-          ...args.data,
-
-          chartOfAccount: args.data.chartOfAccount
-            ? {
-                connect: args.data.chartOfAccount,
-              }
-            : undefined,
-        },
+        data: args.data,
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -179,26 +162,5 @@ export class AccountResolverBase {
     }
 
     return results;
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => ChartOfAccount, {
-    nullable: true,
-    name: "chartOfAccount",
-  })
-  @nestAccessControl.UseRoles({
-    resource: "ChartOfAccount",
-    action: "read",
-    possession: "any",
-  })
-  async resolveFieldChartOfAccount(
-    @graphql.Parent() parent: Account
-  ): Promise<ChartOfAccount | null> {
-    const result = await this.service.getChartOfAccount(parent.id);
-
-    if (!result) {
-      return null;
-    }
-    return result;
   }
 }

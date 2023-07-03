@@ -19,37 +19,41 @@ import { ItemService } from "../item.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
+  additionalInfo: "exampleAdditionalInfo",
   Amount: "exampleAmount",
   createdAt: new Date(),
   id: "exampleId",
-  isProductOrService: "true",
   name: "exampleName",
+  price: 42.42,
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
+  additionalInfo: "exampleAdditionalInfo",
   Amount: "exampleAmount",
   createdAt: new Date(),
   id: "exampleId",
-  isProductOrService: "true",
   name: "exampleName",
+  price: 42.42,
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
   {
+    additionalInfo: "exampleAdditionalInfo",
     Amount: "exampleAmount",
     createdAt: new Date(),
     id: "exampleId",
-    isProductOrService: "true",
     name: "exampleName",
+    price: 42.42,
     updatedAt: new Date(),
   },
 ];
 const FIND_ONE_RESULT = {
+  additionalInfo: "exampleAdditionalInfo",
   Amount: "exampleAmount",
   createdAt: new Date(),
   id: "exampleId",
-  isProductOrService: "true",
   name: "exampleName",
+  price: 42.42,
   updatedAt: new Date(),
 };
 

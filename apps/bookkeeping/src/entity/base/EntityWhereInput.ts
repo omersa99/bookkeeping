@@ -14,12 +14,10 @@ import { ApiProperty } from "@nestjs/swagger";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
-import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
-import { CustomerListRelationFilter } from "../../customer/base/CustomerListRelationFilter";
+import { ClientListRelationFilter } from "../../client/base/ClientListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { JsonFilter } from "../../util/JsonFilter";
 import { ItemListRelationFilter } from "../../item/base/ItemListRelationFilter";
-import { LedgerListRelationFilter } from "../../ledger/base/LedgerListRelationFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { UserListRelationFilter } from "../../user/base/UserListRelationFilter";
 
@@ -38,27 +36,15 @@ class EntityWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => ChartOfAccountWhereUniqueInput,
+    type: () => ClientListRelationFilter,
   })
   @ValidateNested()
-  @Type(() => ChartOfAccountWhereUniqueInput)
+  @Type(() => ClientListRelationFilter)
   @IsOptional()
-  @Field(() => ChartOfAccountWhereUniqueInput, {
+  @Field(() => ClientListRelationFilter, {
     nullable: true,
   })
-  chartOfAccounts?: ChartOfAccountWhereUniqueInput;
-
-  @ApiProperty({
-    required: false,
-    type: () => CustomerListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => CustomerListRelationFilter)
-  @IsOptional()
-  @Field(() => CustomerListRelationFilter, {
-    nullable: true,
-  })
-  customers?: CustomerListRelationFilter;
+  customers?: ClientListRelationFilter;
 
   @ApiProperty({
     required: false,
@@ -93,18 +79,6 @@ class EntityWhereInput {
     nullable: true,
   })
   items?: ItemListRelationFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => LedgerListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => LedgerListRelationFilter)
-  @IsOptional()
-  @Field(() => LedgerListRelationFilter, {
-    nullable: true,
-  })
-  ledgers?: LedgerListRelationFilter;
 
   @ApiProperty({
     required: false,

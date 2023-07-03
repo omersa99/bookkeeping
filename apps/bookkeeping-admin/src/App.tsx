@@ -13,10 +13,6 @@ import { EntityList } from "./entity/EntityList";
 import { EntityCreate } from "./entity/EntityCreate";
 import { EntityEdit } from "./entity/EntityEdit";
 import { EntityShow } from "./entity/EntityShow";
-import { LedgerList } from "./ledger/LedgerList";
-import { LedgerCreate } from "./ledger/LedgerCreate";
-import { LedgerEdit } from "./ledger/LedgerEdit";
-import { LedgerShow } from "./ledger/LedgerShow";
 import { ItemList } from "./item/ItemList";
 import { ItemCreate } from "./item/ItemCreate";
 import { ItemEdit } from "./item/ItemEdit";
@@ -29,14 +25,22 @@ import { AccountList } from "./account/AccountList";
 import { AccountCreate } from "./account/AccountCreate";
 import { AccountEdit } from "./account/AccountEdit";
 import { AccountShow } from "./account/AccountShow";
-import { CustomerList } from "./customer/CustomerList";
-import { CustomerCreate } from "./customer/CustomerCreate";
-import { CustomerEdit } from "./customer/CustomerEdit";
-import { CustomerShow } from "./customer/CustomerShow";
-import { ChartOfAccountList } from "./chartOfAccount/ChartOfAccountList";
-import { ChartOfAccountCreate } from "./chartOfAccount/ChartOfAccountCreate";
-import { ChartOfAccountEdit } from "./chartOfAccount/ChartOfAccountEdit";
-import { ChartOfAccountShow } from "./chartOfAccount/ChartOfAccountShow";
+import { ClientList } from "./client/ClientList";
+import { ClientCreate } from "./client/ClientCreate";
+import { ClientEdit } from "./client/ClientEdit";
+import { ClientShow } from "./client/ClientShow";
+import { MetaList } from "./meta/MetaList";
+import { MetaCreate } from "./meta/MetaCreate";
+import { MetaEdit } from "./meta/MetaEdit";
+import { MetaShow } from "./meta/MetaShow";
+import { DocumentList } from "./document/DocumentList";
+import { DocumentCreate } from "./document/DocumentCreate";
+import { DocumentEdit } from "./document/DocumentEdit";
+import { DocumentShow } from "./document/DocumentShow";
+import { SupplierList } from "./supplier/SupplierList";
+import { SupplierCreate } from "./supplier/SupplierCreate";
+import { SupplierEdit } from "./supplier/SupplierEdit";
+import { SupplierShow } from "./supplier/SupplierShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -78,13 +82,6 @@ const App = (): React.ReactElement => {
           show={EntityShow}
         />
         <Resource
-          name="Ledger"
-          list={LedgerList}
-          edit={LedgerEdit}
-          create={LedgerCreate}
-          show={LedgerShow}
-        />
-        <Resource
           name="Item"
           list={ItemList}
           edit={ItemEdit}
@@ -106,18 +103,32 @@ const App = (): React.ReactElement => {
           show={AccountShow}
         />
         <Resource
-          name="Customer"
-          list={CustomerList}
-          edit={CustomerEdit}
-          create={CustomerCreate}
-          show={CustomerShow}
+          name="Client"
+          list={ClientList}
+          edit={ClientEdit}
+          create={ClientCreate}
+          show={ClientShow}
         />
         <Resource
-          name="ChartOfAccount"
-          list={ChartOfAccountList}
-          edit={ChartOfAccountEdit}
-          create={ChartOfAccountCreate}
-          show={ChartOfAccountShow}
+          name="Meta"
+          list={MetaList}
+          edit={MetaEdit}
+          create={MetaCreate}
+          show={MetaShow}
+        />
+        <Resource
+          name="Document"
+          list={DocumentList}
+          edit={DocumentEdit}
+          create={DocumentCreate}
+          show={DocumentShow}
+        />
+        <Resource
+          name="Supplier"
+          list={SupplierList}
+          edit={SupplierEdit}
+          create={SupplierCreate}
+          show={SupplierShow}
         />
       </Admin>
     </div>

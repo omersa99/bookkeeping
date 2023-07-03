@@ -15,16 +15,26 @@ import {
   IsString,
   IsOptional,
   ValidateNested,
-  IsBoolean,
   IsEnum,
+  IsNumber,
 } from "class-validator";
 import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
 import { Type } from "class-transformer";
 import { EnumItemItemRole } from "./EnumItemItemRole";
-import { EnumItemItemType } from "./EnumItemItemType";
 
 @InputType()
 class ItemUpdateInput {
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  additionalInfo?: string | null;
+
   @ApiProperty({
     required: false,
     type: String,
@@ -50,17 +60,6 @@ class ItemUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: Boolean,
-  })
-  @IsBoolean()
-  @IsOptional()
-  @Field(() => Boolean, {
-    nullable: true,
-  })
-  isProductOrService?: boolean | null;
-
-  @ApiProperty({
-    required: false,
     enum: EnumItemItemRole,
   })
   @IsEnum(EnumItemItemRole)
@@ -72,17 +71,6 @@ class ItemUpdateInput {
 
   @ApiProperty({
     required: false,
-    enum: EnumItemItemType,
-  })
-  @IsEnum(EnumItemItemType)
-  @IsOptional()
-  @Field(() => EnumItemItemType, {
-    nullable: true,
-  })
-  itemType?: "Labor" | "Material" | "LumpSum" | "Equipment" | "Other" | null;
-
-  @ApiProperty({
-    required: false,
     type: String,
   })
   @IsString()
@@ -91,6 +79,17 @@ class ItemUpdateInput {
     nullable: true,
   })
   name?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsNumber()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  price?: number | null;
 }
 
 export { ItemUpdateInput as ItemUpdateInput };

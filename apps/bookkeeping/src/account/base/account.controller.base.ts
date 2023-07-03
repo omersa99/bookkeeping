@@ -54,24 +54,9 @@ export class AccountControllerBase {
   })
   async create(@common.Body() data: AccountCreateInput): Promise<Account> {
     return await this.service.create({
-      data: {
-        ...data,
-
-        chartOfAccount: data.chartOfAccount
-          ? {
-              connect: data.chartOfAccount,
-            }
-          : undefined,
-      },
+      data: data,
       select: {
         balanceType: true,
-
-        chartOfAccount: {
-          select: {
-            id: true,
-          },
-        },
-
         code: true,
         createdAt: true,
         id: true,
@@ -100,13 +85,6 @@ export class AccountControllerBase {
       ...args,
       select: {
         balanceType: true,
-
-        chartOfAccount: {
-          select: {
-            id: true,
-          },
-        },
-
         code: true,
         createdAt: true,
         id: true,
@@ -136,13 +114,6 @@ export class AccountControllerBase {
       where: params,
       select: {
         balanceType: true,
-
-        chartOfAccount: {
-          select: {
-            id: true,
-          },
-        },
-
         code: true,
         createdAt: true,
         id: true,
@@ -181,24 +152,9 @@ export class AccountControllerBase {
     try {
       return await this.service.update({
         where: params,
-        data: {
-          ...data,
-
-          chartOfAccount: data.chartOfAccount
-            ? {
-                connect: data.chartOfAccount,
-              }
-            : undefined,
-        },
+        data: data,
         select: {
           balanceType: true,
-
-          chartOfAccount: {
-            select: {
-              id: true,
-            },
-          },
-
           code: true,
           createdAt: true,
           id: true,
@@ -236,13 +192,6 @@ export class AccountControllerBase {
         where: params,
         select: {
           balanceType: true,
-
-          chartOfAccount: {
-            select: {
-              id: true,
-            },
-          },
-
           code: true,
           createdAt: true,
           id: true,

@@ -7,7 +7,7 @@ import {
   TextInput,
   ReferenceInput,
   SelectInput,
-  BooleanInput,
+  NumberInput,
 } from "react-admin";
 
 import { EntityTitle } from "../entity/EntityTitle";
@@ -16,14 +16,11 @@ export const ItemCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
+        <TextInput label="additional_info" source="additionalInfo" />
         <TextInput label="amount" source="Amount" />
         <ReferenceInput source="entity.id" reference="Entity" label="entity">
           <SelectInput optionText={EntityTitle} />
         </ReferenceInput>
-        <BooleanInput
-          label="is_product_or_service"
-          source="isProductOrService"
-        />
         <SelectInput
           source="itemRole"
           label="item_role"
@@ -37,21 +34,8 @@ export const ItemCreate = (props: CreateProps): React.ReactElement => {
           allowEmpty
           optionValue="value"
         />
-        <SelectInput
-          source="itemType"
-          label="item_type"
-          choices={[
-            { label: "labor", value: "Labor" },
-            { label: "material", value: "Material" },
-            { label: "lump sum", value: "LumpSum" },
-            { label: "equipment", value: "Equipment" },
-            { label: "other", value: "Other" },
-          ]}
-          optionText="label"
-          allowEmpty
-          optionValue="value"
-        />
         <TextInput label="name" source="name" />
+        <NumberInput label="price" source="price" />
       </SimpleForm>
     </Create>
   );

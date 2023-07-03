@@ -17,14 +17,12 @@ import {
   ValidateNested,
   IsString,
 } from "class-validator";
-import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
+import { ClientUpdateManyWithoutEntitiesInput } from "./ClientUpdateManyWithoutEntitiesInput";
 import { Type } from "class-transformer";
-import { CustomerUpdateManyWithoutEntitiesInput } from "./CustomerUpdateManyWithoutEntitiesInput";
 import { IsJSONValue } from "@app/custom-validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
 import { ItemUpdateManyWithoutEntitiesInput } from "./ItemUpdateManyWithoutEntitiesInput";
-import { LedgerUpdateManyWithoutEntitiesInput } from "./LedgerUpdateManyWithoutEntitiesInput";
 import { UserUpdateManyWithoutEntitiesInput } from "./UserUpdateManyWithoutEntitiesInput";
 
 @InputType()
@@ -42,27 +40,15 @@ class EntityUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: () => ChartOfAccountWhereUniqueInput,
+    type: () => ClientUpdateManyWithoutEntitiesInput,
   })
   @ValidateNested()
-  @Type(() => ChartOfAccountWhereUniqueInput)
+  @Type(() => ClientUpdateManyWithoutEntitiesInput)
   @IsOptional()
-  @Field(() => ChartOfAccountWhereUniqueInput, {
+  @Field(() => ClientUpdateManyWithoutEntitiesInput, {
     nullable: true,
   })
-  chartOfAccounts?: ChartOfAccountWhereUniqueInput | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => CustomerUpdateManyWithoutEntitiesInput,
-  })
-  @ValidateNested()
-  @Type(() => CustomerUpdateManyWithoutEntitiesInput)
-  @IsOptional()
-  @Field(() => CustomerUpdateManyWithoutEntitiesInput, {
-    nullable: true,
-  })
-  customers?: CustomerUpdateManyWithoutEntitiesInput;
+  customers?: ClientUpdateManyWithoutEntitiesInput;
 
   @ApiProperty({
     required: false,
@@ -85,18 +71,6 @@ class EntityUpdateInput {
     nullable: true,
   })
   items?: ItemUpdateManyWithoutEntitiesInput;
-
-  @ApiProperty({
-    required: false,
-    type: () => LedgerUpdateManyWithoutEntitiesInput,
-  })
-  @ValidateNested()
-  @Type(() => LedgerUpdateManyWithoutEntitiesInput)
-  @IsOptional()
-  @Field(() => LedgerUpdateManyWithoutEntitiesInput, {
-    nullable: true,
-  })
-  ledgers?: LedgerUpdateManyWithoutEntitiesInput;
 
   @ApiProperty({
     required: false,

@@ -17,14 +17,12 @@ import {
   ValidateNested,
   IsString,
 } from "class-validator";
-import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
+import { ClientCreateNestedManyWithoutEntitiesInput } from "./ClientCreateNestedManyWithoutEntitiesInput";
 import { Type } from "class-transformer";
-import { CustomerCreateNestedManyWithoutEntitiesInput } from "./CustomerCreateNestedManyWithoutEntitiesInput";
 import { IsJSONValue } from "@app/custom-validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
 import { ItemCreateNestedManyWithoutEntitiesInput } from "./ItemCreateNestedManyWithoutEntitiesInput";
-import { LedgerCreateNestedManyWithoutEntitiesInput } from "./LedgerCreateNestedManyWithoutEntitiesInput";
 import { UserCreateNestedManyWithoutEntitiesInput } from "./UserCreateNestedManyWithoutEntitiesInput";
 
 @InputType()
@@ -42,27 +40,15 @@ class EntityCreateInput {
 
   @ApiProperty({
     required: false,
-    type: () => ChartOfAccountWhereUniqueInput,
+    type: () => ClientCreateNestedManyWithoutEntitiesInput,
   })
   @ValidateNested()
-  @Type(() => ChartOfAccountWhereUniqueInput)
+  @Type(() => ClientCreateNestedManyWithoutEntitiesInput)
   @IsOptional()
-  @Field(() => ChartOfAccountWhereUniqueInput, {
+  @Field(() => ClientCreateNestedManyWithoutEntitiesInput, {
     nullable: true,
   })
-  chartOfAccounts?: ChartOfAccountWhereUniqueInput | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => CustomerCreateNestedManyWithoutEntitiesInput,
-  })
-  @ValidateNested()
-  @Type(() => CustomerCreateNestedManyWithoutEntitiesInput)
-  @IsOptional()
-  @Field(() => CustomerCreateNestedManyWithoutEntitiesInput, {
-    nullable: true,
-  })
-  customers?: CustomerCreateNestedManyWithoutEntitiesInput;
+  customers?: ClientCreateNestedManyWithoutEntitiesInput;
 
   @ApiProperty({
     required: false,
@@ -85,18 +71,6 @@ class EntityCreateInput {
     nullable: true,
   })
   items?: ItemCreateNestedManyWithoutEntitiesInput;
-
-  @ApiProperty({
-    required: false,
-    type: () => LedgerCreateNestedManyWithoutEntitiesInput,
-  })
-  @ValidateNested()
-  @Type(() => LedgerCreateNestedManyWithoutEntitiesInput)
-  @IsOptional()
-  @Field(() => LedgerCreateNestedManyWithoutEntitiesInput, {
-    nullable: true,
-  })
-  ledgers?: LedgerCreateNestedManyWithoutEntitiesInput;
 
   @ApiProperty({
     required: false,
