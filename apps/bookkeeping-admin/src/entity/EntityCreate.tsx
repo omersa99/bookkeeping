@@ -39,7 +39,7 @@ export const EntityCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={ItemTitle} />
         </ReferenceArrayInput>
         <TextInput label="name" source="name" />
-        <ReferenceInput source="users.id" reference="User" label="Users">
+        <ReferenceInput source="users.id" reference="User" label="User">
           <SelectInput optionText={UserTitle} />
         </ReferenceInput>
       </SimpleForm>
