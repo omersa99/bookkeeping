@@ -8,6 +8,8 @@ import {
   ReferenceArrayInput,
   SelectArrayInput,
   TextInput,
+  ReferenceInput,
+  SelectInput,
 } from "react-admin";
 
 import { ClientTitle } from "../client/ClientTitle";
@@ -37,14 +39,9 @@ export const EntityCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={ItemTitle} />
         </ReferenceArrayInput>
         <TextInput label="name" source="name" />
-        <ReferenceArrayInput
-          source="users"
-          reference="User"
-          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
-          format={(value: any) => value && value.map((v: any) => v.id)}
-        >
-          <SelectArrayInput optionText={UserTitle} />
-        </ReferenceArrayInput>
+        <ReferenceInput source="users.id" reference="User" label="Users">
+          <SelectInput optionText={UserTitle} />
+        </ReferenceInput>
       </SimpleForm>
     </Create>
   );

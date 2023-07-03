@@ -23,7 +23,7 @@ import { IsJSONValue } from "@app/custom-validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
 import { ItemUpdateManyWithoutEntitiesInput } from "./ItemUpdateManyWithoutEntitiesInput";
-import { UserUpdateManyWithoutEntitiesInput } from "./UserUpdateManyWithoutEntitiesInput";
+import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class EntityUpdateInput {
@@ -85,15 +85,15 @@ class EntityUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: () => UserUpdateManyWithoutEntitiesInput,
+    type: () => UserWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => UserUpdateManyWithoutEntitiesInput)
+  @Type(() => UserWhereUniqueInput)
   @IsOptional()
-  @Field(() => UserUpdateManyWithoutEntitiesInput, {
+  @Field(() => UserWhereUniqueInput, {
     nullable: true,
   })
-  users?: UserUpdateManyWithoutEntitiesInput;
+  users?: UserWhereUniqueInput | null;
 }
 
 export { EntityUpdateInput as EntityUpdateInput };

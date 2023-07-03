@@ -1,20 +1,14 @@
+import { Account } from "../account/Account";
 import { Client } from "../client/Client";
+import { Supplier } from "../supplier/Supplier";
 
 export type Document = {
+  cashAccount?: Account | null;
   Client?: Client | null;
   createdAt: Date;
-  docType?:
-    | "PriceOffer"
-    | "Order"
-    | "DeliveryCertificate"
-    | "Invoice"
-    | "CreditInvoice"
-    | "Receipt"
-    | null;
+  docType?: "Invoice" | "Receipt" | "Bill" | null;
   dueDate: Date | null;
   id: string;
-  linkedDocumentIds: string | null;
-  linkType?: "Related" | "Cancelling" | null;
+  supplier?: Supplier | null;
   updatedAt: Date;
-  vatType?: "Default" | "Exempt" | "Mixed" | null;
 };

@@ -12,5 +12,5 @@ export type Entity = {
   items?: Array<Item>;
   name: string | null;
   updatedAt: Date;
-  users?: Array<User>;
+  users?: User | null;
 };

@@ -16,6 +16,7 @@ import { Type } from "class-transformer";
 import { IsOptional, IsEnum, ValidateNested } from "class-validator";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { EnumAccountDefaultAccountType } from "./EnumAccountDefaultAccountType";
+import { DocumentWhereUniqueInput } from "../../document/base/DocumentWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
 import { ItemListRelationFilter } from "../../item/base/ItemListRelationFilter";
 import { TransactionListRelationFilter } from "../../transaction/base/TransactionListRelationFilter";
@@ -54,6 +55,18 @@ class AccountWhereInput {
     nullable: true,
   })
   DefaultAccountType?: "Debit" | "Credit";
+
+  @ApiProperty({
+    required: false,
+    type: () => DocumentWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => DocumentWhereUniqueInput)
+  @IsOptional()
+  @Field(() => DocumentWhereUniqueInput, {
+    nullable: true,
+  })
+  documents?: DocumentWhereUniqueInput;
 
   @ApiProperty({
     required: false,

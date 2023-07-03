@@ -1,7 +1,7 @@
 import { ClientCreateNestedManyWithoutEntitiesInput } from "./ClientCreateNestedManyWithoutEntitiesInput";
 import { InputJsonValue } from "../../types";
 import { ItemCreateNestedManyWithoutEntitiesInput } from "./ItemCreateNestedManyWithoutEntitiesInput";
-import { UserCreateNestedManyWithoutEntitiesInput } from "./UserCreateNestedManyWithoutEntitiesInput";
+import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type EntityCreateInput = {
   accrualMethod?: boolean | null;
@@ -9,5 +9,5 @@ export type EntityCreateInput = {
   info?: InputJsonValue;
   items?: ItemCreateNestedManyWithoutEntitiesInput;
   name?: string | null;
-  users?: UserCreateNestedManyWithoutEntitiesInput;
+  users?: UserWhereUniqueInput | null;
 };

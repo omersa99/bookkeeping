@@ -7,13 +7,14 @@ import {
   BooleanField,
   TextField,
   DateField,
+  ReferenceField,
   ReferenceManyField,
   Datagrid,
-  ReferenceField,
 } from "react-admin";
 
 import { ACCOUNT_TITLE_FIELD } from "./AccountTitle";
 import { ENTITY_TITLE_FIELD } from "../entity/EntityTitle";
+import { DOCUMENT_TITLE_FIELD } from "../document/DocumentTitle";
 
 export const AccountShow = (props: ShowProps): React.ReactElement => {
   return (
@@ -23,6 +24,13 @@ export const AccountShow = (props: ShowProps): React.ReactElement => {
         <TextField label="code" source="code" />
         <DateField source="createdAt" label="Created At" />
         <TextField label="default Account type" source="DefaultAccountType" />
+        <ReferenceField
+          label="Documents"
+          source="document.id"
+          reference="Document"
+        >
+          <TextField source={DOCUMENT_TITLE_FIELD} />
+        </ReferenceField>
         <TextField label="ID" source="id" />
         <TextField label="name" source="name" />
         <TextField label="role" source="role" />

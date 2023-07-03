@@ -7,15 +7,23 @@ import {
   ReferenceInput,
   SelectInput,
   DateTimeInput,
-  TextInput,
 } from "react-admin";
 
+import { AccountTitle } from "../account/AccountTitle";
 import { ClientTitle } from "../client/ClientTitle";
+import { SupplierTitle } from "../supplier/SupplierTitle";
 
 export const DocumentCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
+        <ReferenceInput
+          source="cashAccount.id"
+          reference="Account"
+          label="cash account"
+        >
+          <SelectInput optionText={AccountTitle} />
+        </ReferenceInput>
         <ReferenceInput source="Client.id" reference="Client" label="Client">
           <SelectInput optionText={ClientTitle} />
         </ReferenceInput>
@@ -23,42 +31,22 @@ export const DocumentCreate = (props: CreateProps): React.ReactElement => {
           source="docType"
           label="doc_type"
           choices={[
-            { label: "Price Offer", value: "PriceOffer" },
-            { label: "Order", value: "Order" },
-            { label: "delivery certificate", value: "DeliveryCertificate" },
             { label: "Invoice", value: "Invoice" },
-            { label: "Credit invoice", value: "CreditInvoice" },
             { label: "Receipt", value: "Receipt" },
+            { label: "bill", value: "Bill" },
           ]}
           optionText="label"
           allowEmpty
           optionValue="value"
         />
         <DateTimeInput label="dueDate" source="dueDate" />
-        <TextInput label="linkedDocumentIds" source="linkedDocumentIds" />
-        <SelectInput
-          source="linkType"
-          label="linkType"
-          choices={[
-            { label: "related", value: "Related" },
-            { label: "cancelling", value: "Cancelling" },
-          ]}
-          optionText="label"
-          allowEmpty
-          optionValue="value"
-        />
-        <SelectInput
-          source="vatType"
-          label="vatType"
-          choices={[
-            { label: "Default", value: "Default" },
-            { label: "Exempt", value: "Exempt" },
-            { label: "Mixed", value: "Mixed" },
-          ]}
-          optionText="label"
-          allowEmpty
-          optionValue="value"
-        />
+        <ReferenceInput
+          source="supplier.id"
+          reference="Supplier"
+          label="Supplier"
+        >
+          <SelectInput optionText={SupplierTitle} />
+        </ReferenceInput>
       </SimpleForm>
     </Create>
   );

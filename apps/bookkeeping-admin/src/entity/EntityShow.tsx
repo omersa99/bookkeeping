@@ -7,13 +7,14 @@ import {
   BooleanField,
   DateField,
   TextField,
+  ReferenceField,
   ReferenceManyField,
   Datagrid,
-  ReferenceField,
 } from "react-admin";
 
 import { ENTITY_TITLE_FIELD } from "./EntityTitle";
 import { ACCOUNT_TITLE_FIELD } from "../account/AccountTitle";
+import { USER_TITLE_FIELD } from "../user/UserTitle";
 
 export const EntityShow = (props: ShowProps): React.ReactElement => {
   return (
@@ -25,6 +26,9 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
         <TextField label="info" source="info" />
         <TextField label="name" source="name" />
         <DateField source="updatedAt" label="Updated At" />
+        <ReferenceField label="Users" source="user.id" reference="User">
+          <TextField source={USER_TITLE_FIELD} />
+        </ReferenceField>
         <ReferenceManyField
           reference="Client"
           target="entityId"
@@ -70,24 +74,6 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
             <TextField label="name" source="name" />
             <TextField label="price" source="price" />
             <DateField source="updatedAt" label="Updated At" />
-          </Datagrid>
-        </ReferenceManyField>
-        <ReferenceManyField reference="User" target="entityId" label="Users">
-          <Datagrid rowClick="show">
-            <DateField source="createdAt" label="Created At" />
-            <ReferenceField
-              label="Entity"
-              source="entity.id"
-              reference="Entity"
-            >
-              <TextField source={ENTITY_TITLE_FIELD} />
-            </ReferenceField>
-            <TextField label="First Name" source="firstName" />
-            <TextField label="ID" source="id" />
-            <TextField label="Last Name" source="lastName" />
-            <TextField label="Roles" source="roles" />
-            <DateField source="updatedAt" label="Updated At" />
-            <TextField label="Username" source="username" />
           </Datagrid>
         </ReferenceManyField>
       </SimpleShowLayout>

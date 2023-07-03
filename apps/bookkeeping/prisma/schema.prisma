@@ -9,8 +9,7 @@ generator client {
 
 model User {
   createdAt DateTime @default(now())
-  entity    Entity?  @relation(fields: [entityId], references: [id])
-  entityId  String?
+  entity    Entity?
   firstName String?
   id        String   @id @default(cuid())
   lastName  String?
@@ -29,7 +28,8 @@ model Entity {
   items         Item[]
   name          String?
   updatedAt     DateTime @updatedAt
-  users         User[]
+  users         User?    @relation(fields: [usersId], references: [id])
+  usersId       String?  @unique
 }
 
 model Item {
@@ -63,6 +63,7 @@ model Account {
   code               String?
   createdAt          DateTime                       @default(now())
   DefaultAccountType EnumAccountDefaultAccountType?
+  documents          Document?
   id                 String                         @id @default(cuid())
   items              Item[]
   name               String?
@@ -97,24 +98,26 @@ model Meta {
 }
 
 model Document {
-  Client            Client?               @relation(fields: [ClientId], references: [id])
-  ClientId          String?
-  createdAt         DateTime              @default(now())
-  docType           EnumDocumentDocType?
-  dueDate           DateTime?
-  id                String                @id @default(cuid())
-  linkedDocumentIds String?
-  linkType          EnumDocumentLinkType?
-  updatedAt         DateTime              @updatedAt
-  vatType           EnumDocumentVatType?
+  cashAccount Account?             @relation(fields: [ID], references: [id])
+  ID          String?              @unique
+  Client      Client?              @relation(fields: [ClientId], references: [id])
+  ClientId    String?
+  createdAt   DateTime             @default(now())
+  docType     EnumDocumentDocType?
+  dueDate     DateTime?
+  id          String               @id @default(cuid())
+  supplier    Supplier?            @relation(fields: [supplierId], references: [id])
+  supplierId  String?
+  updatedAt   DateTime             @updatedAt
 }
 
 model Supplier {
   active    String?
-  createdAt DateTime @default(now())
-  id        String   @id @default(cuid())
+  createdAt DateTime   @default(now())
+  documents Document[]
+  id        String     @id @default(cuid())
   name      String?
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime   @updatedAt
 }
 
 enum EnumItemItemRole {
@@ -141,21 +144,7 @@ enum EnumMetaPaymentType {
 }
 
 enum EnumDocumentDocType {
-  PriceOffer
-  Order
-  DeliveryCertificate
   Invoice
-  CreditInvoice
   Receipt
-}
-
-enum EnumDocumentLinkType {
-  Related
-  Cancelling
-}
-
-enum EnumDocumentVatType {
-  Default
-  Exempt
-  Mixed
+  Bill
 }

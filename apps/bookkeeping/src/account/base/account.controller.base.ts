@@ -57,12 +57,27 @@ export class AccountControllerBase {
   })
   async create(@common.Body() data: AccountCreateInput): Promise<Account> {
     return await this.service.create({
-      data: data,
+      data: {
+        ...data,
+
+        documents: data.documents
+          ? {
+              connect: data.documents,
+            }
+          : undefined,
+      },
       select: {
         active: true,
         code: true,
         createdAt: true,
         DefaultAccountType: true,
+
+        documents: {
+          select: {
+            id: true,
+          },
+        },
+
         id: true,
         name: true,
         role: true,
@@ -92,6 +107,13 @@ export class AccountControllerBase {
         code: true,
         createdAt: true,
         DefaultAccountType: true,
+
+        documents: {
+          select: {
+            id: true,
+          },
+        },
+
         id: true,
         name: true,
         role: true,
@@ -122,6 +144,13 @@ export class AccountControllerBase {
         code: true,
         createdAt: true,
         DefaultAccountType: true,
+
+        documents: {
+          select: {
+            id: true,
+          },
+        },
+
         id: true,
         name: true,
         role: true,
@@ -158,12 +187,27 @@ export class AccountControllerBase {
     try {
       return await this.service.update({
         where: params,
-        data: data,
+        data: {
+          ...data,
+
+          documents: data.documents
+            ? {
+                connect: data.documents,
+              }
+            : undefined,
+        },
         select: {
           active: true,
           code: true,
           createdAt: true,
           DefaultAccountType: true,
+
+          documents: {
+            select: {
+              id: true,
+            },
+          },
+
           id: true,
           name: true,
           role: true,
@@ -202,6 +246,13 @@ export class AccountControllerBase {
           code: true,
           createdAt: true,
           DefaultAccountType: true,
+
+          documents: {
+            select: {
+              id: true,
+            },
+          },
+
           id: true,
           name: true,
           role: true,

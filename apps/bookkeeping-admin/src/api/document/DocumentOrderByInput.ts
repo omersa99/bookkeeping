@@ -1,13 +1,12 @@
 import { SortOrder } from "../../util/SortOrder";
 
 export type DocumentOrderByInput = {
+  ID?: SortOrder;
   ClientId?: SortOrder;
   createdAt?: SortOrder;
   docType?: SortOrder;
   dueDate?: SortOrder;
   id?: SortOrder;
-  linkedDocumentIds?: SortOrder;
-  linkType?: SortOrder;
+  supplierId?: SortOrder;
   updatedAt?: SortOrder;
-  vatType?: SortOrder;
 };

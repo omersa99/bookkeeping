@@ -104,12 +104,12 @@ class Entity {
 
   @ApiProperty({
     required: false,
-    type: () => [User],
+    type: () => User,
   })
   @ValidateNested()
   @Type(() => User)
   @IsOptional()
-  users?: Array<User>;
+  users?: User | null;
 }
 
 export { Entity as Entity };

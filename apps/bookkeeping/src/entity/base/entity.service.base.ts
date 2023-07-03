@@ -69,14 +69,11 @@ export class EntityServiceBase {
       .items(args);
   }
 
-  async findUsers(
-    parentId: string,
-    args: Prisma.UserFindManyArgs
-  ): Promise<User[]> {
+  async getUsers(parentId: string): Promise<User | null> {
     return this.prisma.entity
-      .findUniqueOrThrow({
+      .findUnique({
         where: { id: parentId },
       })
-      .users(args);
+      .users();
   }
 }

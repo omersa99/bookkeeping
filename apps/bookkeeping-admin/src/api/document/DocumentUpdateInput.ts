@@ -1,18 +1,12 @@
+import { AccountWhereUniqueInput } from "../account/AccountWhereUniqueInput";
 import { ClientWhereUniqueInput } from "../client/ClientWhereUniqueInput";
 import { Client } from "../client/Client";
+import { SupplierWhereUniqueInput } from "../supplier/SupplierWhereUniqueInput";
 
 export type DocumentUpdateInput = {
+  cashAccount?: AccountWhereUniqueInput | null;
   Client?: ClientWhereUniqueInput | null;
-  docType?:
-    | "PriceOffer"
-    | "Order"
-    | "DeliveryCertificate"
-    | "Invoice"
-    | "CreditInvoice"
-    | "Receipt"
-    | null;
+  docType?: "Invoice" | "Receipt" | "Bill" | null;
   dueDate?: Date | null;
-  linkedDocumentIds?: string | null;
-  linkType?: "Related" | "Cancelling" | null;
-  vatType?: "Default" | "Exempt" | "Mixed" | null;
+  supplier?: SupplierWhereUniqueInput | null;
 };

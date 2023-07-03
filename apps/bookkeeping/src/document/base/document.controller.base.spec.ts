@@ -22,14 +22,12 @@ const CREATE_INPUT = {
   createdAt: new Date(),
   dueDate: new Date(),
   id: "exampleId",
-  linkedDocumentIds: "exampleLinkedDocumentIds",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
   createdAt: new Date(),
   dueDate: new Date(),
   id: "exampleId",
-  linkedDocumentIds: "exampleLinkedDocumentIds",
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
@@ -37,7 +35,6 @@ const FIND_MANY_RESULT = [
     createdAt: new Date(),
     dueDate: new Date(),
     id: "exampleId",
-    linkedDocumentIds: "exampleLinkedDocumentIds",
     updatedAt: new Date(),
   },
 ];
@@ -45,7 +42,6 @@ const FIND_ONE_RESULT = {
   createdAt: new Date(),
   dueDate: new Date(),
   id: "exampleId",
-  linkedDocumentIds: "exampleLinkedDocumentIds",
   updatedAt: new Date(),
 };
 

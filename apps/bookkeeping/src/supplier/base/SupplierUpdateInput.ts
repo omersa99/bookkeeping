@@ -11,7 +11,9 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional } from "class-validator";
+import { IsString, IsOptional, ValidateNested } from "class-validator";
+import { DocumentUpdateManyWithoutSuppliersInput } from "./DocumentUpdateManyWithoutSuppliersInput";
+import { Type } from "class-transformer";
 
 @InputType()
 class SupplierUpdateInput {
@@ -25,6 +27,18 @@ class SupplierUpdateInput {
     nullable: true,
   })
   active?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => DocumentUpdateManyWithoutSuppliersInput,
+  })
+  @ValidateNested()
+  @Type(() => DocumentUpdateManyWithoutSuppliersInput)
+  @IsOptional()
+  @Field(() => DocumentUpdateManyWithoutSuppliersInput, {
+    nullable: true,
+  })
+  documents?: DocumentUpdateManyWithoutSuppliersInput;
 
   @ApiProperty({
     required: false,

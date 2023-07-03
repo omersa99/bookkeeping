@@ -12,12 +12,9 @@ https://docs.amplication.com/how-to/custom-code
 import { registerEnumType } from "@nestjs/graphql";
 
 export enum EnumDocumentDocType {
-  PriceOffer = "PriceOffer",
-  Order = "Order",
-  DeliveryCertificate = "DeliveryCertificate",
   Invoice = "Invoice",
-  CreditInvoice = "CreditInvoice",
   Receipt = "Receipt",
+  Bill = "Bill",
 }
 
 registerEnumType(EnumDocumentDocType, {

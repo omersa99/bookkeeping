@@ -11,22 +11,28 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { ClientWhereUniqueInput } from "../../client/base/ClientWhereUniqueInput";
-import {
-  ValidateNested,
-  IsOptional,
-  IsEnum,
-  IsDate,
-  IsString,
-} from "class-validator";
+import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
+import { ValidateNested, IsOptional, IsEnum, IsDate } from "class-validator";
 import { Type } from "class-transformer";
+import { ClientWhereUniqueInput } from "../../client/base/ClientWhereUniqueInput";
 import { Client } from "../../client/base/Client";
 import { EnumDocumentDocType } from "./EnumDocumentDocType";
-import { EnumDocumentLinkType } from "./EnumDocumentLinkType";
-import { EnumDocumentVatType } from "./EnumDocumentVatType";
+import { SupplierWhereUniqueInput } from "../../supplier/base/SupplierWhereUniqueInput";
 
 @InputType()
 class DocumentUpdateInput {
+  @ApiProperty({
+    required: false,
+    type: () => AccountWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => AccountWhereUniqueInput)
+  @IsOptional()
+  @Field(() => AccountWhereUniqueInput, {
+    nullable: true,
+  })
+  cashAccount?: AccountWhereUniqueInput | null;
+
   @ApiProperty({
     required: false,
     type: () => ClientWhereUniqueInput,
@@ -48,14 +54,7 @@ class DocumentUpdateInput {
   @Field(() => EnumDocumentDocType, {
     nullable: true,
   })
-  docType?:
-    | "PriceOffer"
-    | "Order"
-    | "DeliveryCertificate"
-    | "Invoice"
-    | "CreditInvoice"
-    | "Receipt"
-    | null;
+  docType?: "Invoice" | "Receipt" | "Bill" | null;
 
   @ApiProperty({
     required: false,
@@ -70,36 +69,15 @@ class DocumentUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: String,
+    type: () => SupplierWhereUniqueInput,
   })
-  @IsString()
+  @ValidateNested()
+  @Type(() => SupplierWhereUniqueInput)
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => SupplierWhereUniqueInput, {
     nullable: true,
   })
-  linkedDocumentIds?: string | null;
-
-  @ApiProperty({
-    required: false,
-    enum: EnumDocumentLinkType,
-  })
-  @IsEnum(EnumDocumentLinkType)
-  @IsOptional()
-  @Field(() => EnumDocumentLinkType, {
-    nullable: true,
-  })
-  linkType?: "Related" | "Cancelling" | null;
-
-  @ApiProperty({
-    required: false,
-    enum: EnumDocumentVatType,
-  })
-  @IsEnum(EnumDocumentVatType)
-  @IsOptional()
-  @Field(() => EnumDocumentVatType, {
-    nullable: true,
-  })
-  vatType?: "Default" | "Exempt" | "Mixed" | null;
+  supplier?: SupplierWhereUniqueInput | null;
 }
 
 export { DocumentUpdateInput as DocumentUpdateInput };

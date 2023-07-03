@@ -4,7 +4,7 @@ import { StringFilter } from "../../util/StringFilter";
 import { JsonFilter } from "../../util/JsonFilter";
 import { ItemListRelationFilter } from "../item/ItemListRelationFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { UserListRelationFilter } from "../user/UserListRelationFilter";
+import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type EntityWhereInput = {
   accrualMethod?: BooleanNullableFilter;
@@ -13,5 +13,5 @@ export type EntityWhereInput = {
   info?: JsonFilter;
   items?: ItemListRelationFilter;
   name?: StringNullableFilter;
-  users?: UserListRelationFilter;
+  users?: UserWhereUniqueInput;
 };

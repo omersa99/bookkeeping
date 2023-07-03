@@ -5,6 +5,7 @@ export type AccountOrderByInput = {
   code?: SortOrder;
   createdAt?: SortOrder;
   DefaultAccountType?: SortOrder;
+  documentsId?: SortOrder;
   id?: SortOrder;
   name?: SortOrder;
   role?: SortOrder;
