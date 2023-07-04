@@ -26,8 +26,6 @@ import { UserCountArgs } from "./UserCountArgs";
 import { UserFindManyArgs } from "./UserFindManyArgs";
 import { UserFindUniqueArgs } from "./UserFindUniqueArgs";
 import { User } from "./User";
-import { EntityFindManyArgs } from "../../entity/base/EntityFindManyArgs";
-import { Entity } from "../../entity/base/Entity";
 import { UserService } from "../user.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => User)
@@ -132,25 +130,5 @@ export class UserResolverBase {
       }
       throw error;
     }
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [Entity], { name: "entities" })
-  @nestAccessControl.UseRoles({
-    resource: "Entity",
-    action: "read",
-    possession: "any",
-  })
-  async resolveFieldEntities(
-    @graphql.Parent() parent: User,
-    @graphql.Args() args: EntityFindManyArgs
-  ): Promise<Entity[]> {
-    const results = await this.service.findEntities(parent.id, args);
-
-    if (!results) {
-      return [];
-    }
-
-    return results;
   }
 }
