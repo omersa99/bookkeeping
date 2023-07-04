@@ -30,7 +30,6 @@ import { ClientFindManyArgs } from "../../client/base/ClientFindManyArgs";
 import { Client } from "../../client/base/Client";
 import { ItemFindManyArgs } from "../../item/base/ItemFindManyArgs";
 import { Item } from "../../item/base/Item";
-import { User } from "../../user/base/User";
 import { EntityService } from "../entity.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Entity)
@@ -93,15 +92,7 @@ export class EntityResolverBase {
   async createEntity(@graphql.Args() args: CreateEntityArgs): Promise<Entity> {
     return await this.service.create({
       ...args,
-      data: {
-        ...args.data,
-
-        users: args.data.users
-          ? {
-              connect: args.data.users,
-            }
-          : undefined,
-      },
+      data: args.data,
     });
   }
 
@@ -118,15 +109,7 @@ export class EntityResolverBase {
     try {
       return await this.service.update({
         ...args,
-        data: {
-          ...args.data,
-
-          users: args.data.users
-            ? {
-                connect: args.data.users,
-              }
-            : undefined,
-        },
+        data: args.data,
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -197,26 +180,5 @@ export class EntityResolverBase {
     }
 
     return results;
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => User, {
-    nullable: true,
-    name: "users",
-  })
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "read",
-    possession: "any",
-  })
-  async resolveFieldUsers(
-    @graphql.Parent() parent: Entity
-  ): Promise<User | null> {
-    const result = await this.service.getUsers(parent.id);
-
-    if (!result) {
-      return null;
-    }
-    return result;
   }
 }

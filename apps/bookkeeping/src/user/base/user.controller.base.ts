@@ -51,24 +51,9 @@ export class UserControllerBase {
   })
   async create(@common.Body() data: UserCreateInput): Promise<User> {
     return await this.service.create({
-      data: {
-        ...data,
-
-        entity: data.entity
-          ? {
-              connect: data.entity,
-            }
-          : undefined,
-      },
+      data: data,
       select: {
         createdAt: true,
-
-        entity: {
-          select: {
-            id: true,
-          },
-        },
-
         firstName: true,
         id: true,
         lastName: true,
@@ -97,13 +82,6 @@ export class UserControllerBase {
       ...args,
       select: {
         createdAt: true,
-
-        entity: {
-          select: {
-            id: true,
-          },
-        },
-
         firstName: true,
         id: true,
         lastName: true,
@@ -133,13 +111,6 @@ export class UserControllerBase {
       where: params,
       select: {
         createdAt: true,
-
-        entity: {
-          select: {
-            id: true,
-          },
-        },
-
         firstName: true,
         id: true,
         lastName: true,
@@ -178,24 +149,9 @@ export class UserControllerBase {
     try {
       return await this.service.update({
         where: params,
-        data: {
-          ...data,
-
-          entity: data.entity
-            ? {
-                connect: data.entity,
-              }
-            : undefined,
-        },
+        data: data,
         select: {
           createdAt: true,
-
-          entity: {
-            select: {
-              id: true,
-            },
-          },
-
           firstName: true,
           id: true,
           lastName: true,
@@ -233,13 +189,6 @@ export class UserControllerBase {
         where: params,
         select: {
           createdAt: true,
-
-          entity: {
-            select: {
-              id: true,
-            },
-          },
-
           firstName: true,
           id: true,
           lastName: true,

@@ -9,7 +9,6 @@ generator client {
 
 model User {
   createdAt DateTime @default(now())
-  entity    Entity?
   firstName String?
   id        String   @id @default(cuid())
   lastName  String?
@@ -28,8 +27,6 @@ model Entity {
   items         Item[]
   name          String?
   updatedAt     DateTime @updatedAt
-  users         User?    @relation(fields: [usersId], references: [id])
-  usersId       String?  @unique
 }
 
 model Item {
