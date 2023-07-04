@@ -24,7 +24,6 @@ import { IsJSONValue } from "@app/custom-validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
 import { Item } from "../../item/base/Item";
-import { User } from "../../user/base/User";
 
 @ObjectType()
 class Entity {
@@ -93,15 +92,6 @@ class Entity {
     nullable: true,
   })
   name!: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => User,
-  })
-  @ValidateNested()
-  @Type(() => User)
-  @IsOptional()
-  uid?: User | null;
 
   @ApiProperty({
     required: true,
