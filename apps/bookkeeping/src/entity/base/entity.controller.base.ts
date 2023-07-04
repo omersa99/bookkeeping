@@ -57,15 +57,7 @@ export class EntityControllerBase {
   })
   async create(@common.Body() data: EntityCreateInput): Promise<Entity> {
     return await this.service.create({
-      data: {
-        ...data,
-
-        users: data.users
-          ? {
-              connect: data.users,
-            }
-          : undefined,
-      },
+      data: data,
       select: {
         accrualMethod: true,
         createdAt: true,
@@ -73,12 +65,6 @@ export class EntityControllerBase {
         info: true,
         name: true,
         updatedAt: true,
-
-        users: {
-          select: {
-            id: true,
-          },
-        },
       },
     });
   }
@@ -106,12 +92,6 @@ export class EntityControllerBase {
         info: true,
         name: true,
         updatedAt: true,
-
-        users: {
-          select: {
-            id: true,
-          },
-        },
       },
     });
   }
@@ -140,12 +120,6 @@ export class EntityControllerBase {
         info: true,
         name: true,
         updatedAt: true,
-
-        users: {
-          select: {
-            id: true,
-          },
-        },
       },
     });
     if (result === null) {
@@ -178,15 +152,7 @@ export class EntityControllerBase {
     try {
       return await this.service.update({
         where: params,
-        data: {
-          ...data,
-
-          users: data.users
-            ? {
-                connect: data.users,
-              }
-            : undefined,
-        },
+        data: data,
         select: {
           accrualMethod: true,
           createdAt: true,
@@ -194,12 +160,6 @@ export class EntityControllerBase {
           info: true,
           name: true,
           updatedAt: true,
-
-          users: {
-            select: {
-              id: true,
-            },
-          },
         },
       });
     } catch (error) {
@@ -236,12 +196,6 @@ export class EntityControllerBase {
           info: true,
           name: true,
           updatedAt: true,
-
-          users: {
-            select: {
-              id: true,
-            },
-          },
         },
       });
     } catch (error) {

@@ -10,7 +10,7 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
-import { Prisma, Entity, Client, Item, User } from "@prisma/client";
+import { Prisma, Entity, Client, Item } from "@prisma/client";
 
 export class EntityServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -67,13 +67,5 @@ export class EntityServiceBase {
         where: { id: parentId },
       })
       .items(args);
-  }
-
-  async getUsers(parentId: string): Promise<User | null> {
-    return this.prisma.entity
-      .findUnique({
-        where: { id: parentId },
-      })
-      .users();
   }
 }
