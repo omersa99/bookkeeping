@@ -4,6 +4,7 @@ import {
   Create,
   SimpleForm,
   CreateProps,
+  BooleanInput,
   TextInput,
   ReferenceArrayInput,
   SelectArrayInput,
@@ -18,6 +19,7 @@ export const ClientCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
+        <BooleanInput label="active" source="active" />
         <TextInput label="customer_name" source="customerName" />
         <ReferenceArrayInput
           source="documents"
@@ -31,6 +33,8 @@ export const ClientCreate = (props: CreateProps): React.ReactElement => {
           <SelectInput optionText={EntityTitle} />
         </ReferenceInput>
         <div />
+        <TextInput label="name" source="name" />
+        <TextInput label="taxId" source="taxId" />
       </SimpleForm>
     </Create>
   );

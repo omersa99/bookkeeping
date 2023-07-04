@@ -5,7 +5,9 @@ import { ItemCreateNestedManyWithoutEntitiesInput } from "./ItemCreateNestedMany
 export type EntityCreateInput = {
   accrualMethod?: boolean | null;
   customers?: ClientCreateNestedManyWithoutEntitiesInput;
+  deductionRate?: string | null;
   info?: InputJsonValue;
+  irsId?: string | null;
   items?: ItemCreateNestedManyWithoutEntitiesInput;
   name?: string | null;
 };

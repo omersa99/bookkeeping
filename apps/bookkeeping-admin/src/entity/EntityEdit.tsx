@@ -26,7 +26,9 @@ export const EntityEdit = (props: EditProps): React.ReactElement => {
         >
           <SelectArrayInput optionText={ClientTitle} />
         </ReferenceArrayInput>
+        <TextInput label="deductionRate" source="deductionRate" />
         <div />
+        <TextInput label="IRS_ID" source="irsId" />
         <ReferenceArrayInput
           source="items"
           reference="Item"

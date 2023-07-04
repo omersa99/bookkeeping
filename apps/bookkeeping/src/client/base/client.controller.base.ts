@@ -64,6 +64,7 @@ export class ClientControllerBase {
           : undefined,
       },
       select: {
+        active: true,
         createdAt: true,
         customerName: true,
 
@@ -75,6 +76,8 @@ export class ClientControllerBase {
 
         id: true,
         info: true,
+        name: true,
+        taxId: true,
         updatedAt: true,
       },
     });
@@ -97,6 +100,7 @@ export class ClientControllerBase {
     return this.service.findMany({
       ...args,
       select: {
+        active: true,
         createdAt: true,
         customerName: true,
 
@@ -108,6 +112,8 @@ export class ClientControllerBase {
 
         id: true,
         info: true,
+        name: true,
+        taxId: true,
         updatedAt: true,
       },
     });
@@ -131,6 +137,7 @@ export class ClientControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
+        active: true,
         createdAt: true,
         customerName: true,
 
@@ -142,6 +149,8 @@ export class ClientControllerBase {
 
         id: true,
         info: true,
+        name: true,
+        taxId: true,
         updatedAt: true,
       },
     });
@@ -185,6 +194,7 @@ export class ClientControllerBase {
             : undefined,
         },
         select: {
+          active: true,
           createdAt: true,
           customerName: true,
 
@@ -196,6 +206,8 @@ export class ClientControllerBase {
 
           id: true,
           info: true,
+          name: true,
+          taxId: true,
           updatedAt: true,
         },
       });
@@ -227,6 +239,7 @@ export class ClientControllerBase {
       return await this.service.delete({
         where: params,
         select: {
+          active: true,
           createdAt: true,
           customerName: true,
 
@@ -238,6 +251,8 @@ export class ClientControllerBase {
 
           id: true,
           info: true,
+          name: true,
+          taxId: true,
           updatedAt: true,
         },
       });

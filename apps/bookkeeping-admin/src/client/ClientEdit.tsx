@@ -4,6 +4,7 @@ import {
   Edit,
   SimpleForm,
   EditProps,
+  BooleanInput,
   TextInput,
   ReferenceArrayInput,
   SelectArrayInput,
@@ -18,6 +19,7 @@ export const ClientEdit = (props: EditProps): React.ReactElement => {
   return (
     <Edit {...props}>
       <SimpleForm>
+        <BooleanInput label="active" source="active" />
         <TextInput label="customer_name" source="customerName" />
         <ReferenceArrayInput
           source="documents"
@@ -31,6 +33,8 @@ export const ClientEdit = (props: EditProps): React.ReactElement => {
           <SelectInput optionText={EntityTitle} />
         </ReferenceInput>
         <div />
+        <TextInput label="name" source="name" />
+        <TextInput label="taxId" source="taxId" />
       </SimpleForm>
     </Edit>
   );
