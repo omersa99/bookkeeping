@@ -8,10 +8,13 @@ import {
   ReferenceArrayInput,
   SelectArrayInput,
   TextInput,
+  ReferenceInput,
+  SelectInput,
 } from "react-admin";
 
 import { ClientTitle } from "../client/ClientTitle";
 import { ItemTitle } from "../item/ItemTitle";
+import { UserTitle } from "../user/UserTitle";
 
 export const EntityEdit = (props: EditProps): React.ReactElement => {
   return (
@@ -36,6 +39,9 @@ export const EntityEdit = (props: EditProps): React.ReactElement => {
           <SelectArrayInput optionText={ItemTitle} />
         </ReferenceArrayInput>
         <TextInput label="name" source="name" />
+        <ReferenceInput source="uid.id" reference="User" label="UID">
+          <SelectInput optionText={UserTitle} />
+        </ReferenceInput>
       </SimpleForm>
     </Edit>
   );
