@@ -19,29 +19,41 @@ import { ClientService } from "../client.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
+  active: "true",
   createdAt: new Date(),
   customerName: "exampleCustomerName",
   id: "exampleId",
+  name: "exampleName",
+  taxId: "exampleTaxId",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
+  active: "true",
   createdAt: new Date(),
   customerName: "exampleCustomerName",
   id: "exampleId",
+  name: "exampleName",
+  taxId: "exampleTaxId",
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
   {
+    active: "true",
     createdAt: new Date(),
     customerName: "exampleCustomerName",
     id: "exampleId",
+    name: "exampleName",
+    taxId: "exampleTaxId",
     updatedAt: new Date(),
   },
 ];
 const FIND_ONE_RESULT = {
+  active: "true",
   createdAt: new Date(),
   customerName: "exampleCustomerName",
   id: "exampleId",
+  name: "exampleName",
+  taxId: "exampleTaxId",
   updatedAt: new Date(),
 };
 

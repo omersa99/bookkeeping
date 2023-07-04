@@ -56,6 +56,17 @@ class Entity {
   customers?: Array<Client>;
 
   @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  deductionRate!: string | null;
+
+  @ApiProperty({
     required: true,
     type: String,
   })
@@ -72,6 +83,17 @@ class Entity {
     nullable: true,
   })
   info!: JsonValue;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  irsId!: string | null;
 
   @ApiProperty({
     required: false,

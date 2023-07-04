@@ -61,8 +61,10 @@ export class EntityControllerBase {
       select: {
         accrualMethod: true,
         createdAt: true,
+        deductionRate: true,
         id: true,
         info: true,
+        irsId: true,
         name: true,
         updatedAt: true,
       },
@@ -88,8 +90,10 @@ export class EntityControllerBase {
       select: {
         accrualMethod: true,
         createdAt: true,
+        deductionRate: true,
         id: true,
         info: true,
+        irsId: true,
         name: true,
         updatedAt: true,
       },
@@ -116,8 +120,10 @@ export class EntityControllerBase {
       select: {
         accrualMethod: true,
         createdAt: true,
+        deductionRate: true,
         id: true,
         info: true,
+        irsId: true,
         name: true,
         updatedAt: true,
       },
@@ -156,8 +162,10 @@ export class EntityControllerBase {
         select: {
           accrualMethod: true,
           createdAt: true,
+          deductionRate: true,
           id: true,
           info: true,
+          irsId: true,
           name: true,
           updatedAt: true,
         },
@@ -192,8 +200,10 @@ export class EntityControllerBase {
         select: {
           accrualMethod: true,
           createdAt: true,
+          deductionRate: true,
           id: true,
           info: true,
+          irsId: true,
           name: true,
           updatedAt: true,
         },
@@ -224,6 +234,7 @@ export class EntityControllerBase {
     const results = await this.service.findCustomers(params.id, {
       ...query,
       select: {
+        active: true,
         createdAt: true,
         customerName: true,
 
@@ -235,6 +246,8 @@ export class EntityControllerBase {
 
         id: true,
         info: true,
+        name: true,
+        taxId: true,
         updatedAt: true,
       },
     });

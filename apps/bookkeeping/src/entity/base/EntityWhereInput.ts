@@ -15,10 +15,10 @@ import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
 import { ClientListRelationFilter } from "../../client/base/ClientListRelationFilter";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { JsonFilter } from "../../util/JsonFilter";
 import { ItemListRelationFilter } from "../../item/base/ItemListRelationFilter";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
 
 @InputType()
 class EntityWhereInput {
@@ -47,6 +47,17 @@ class EntityWhereInput {
 
   @ApiProperty({
     required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  deductionRate?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
     type: StringFilter,
   })
   @Type(() => StringFilter)
@@ -66,6 +77,17 @@ class EntityWhereInput {
     nullable: true,
   })
   info?: JsonFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  irsId?: StringNullableFilter;
 
   @ApiProperty({
     required: false,

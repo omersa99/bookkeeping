@@ -20,8 +20,10 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
       <SimpleShowLayout>
         <BooleanField label="accrual_method" source="accrualMethod" />
         <DateField source="createdAt" label="Created At" />
+        <TextField label="deductionRate" source="deductionRate" />
         <TextField label="ID" source="id" />
         <TextField label="info" source="info" />
+        <TextField label="IRS_ID" source="irsId" />
         <TextField label="name" source="name" />
         <DateField source="updatedAt" label="Updated At" />
         <ReferenceManyField
@@ -30,6 +32,7 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
           label="clients"
         >
           <Datagrid rowClick="show">
+            <BooleanField label="active" source="active" />
             <DateField source="createdAt" label="Created At" />
             <TextField label="customer_name" source="customerName" />
             <ReferenceField
@@ -41,6 +44,8 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
             </ReferenceField>
             <TextField label="ID" source="id" />
             <TextField label="info" source="info" />
+            <TextField label="name" source="name" />
+            <TextField label="taxId" source="taxId" />
             <DateField source="updatedAt" label="Updated At" />
           </Datagrid>
         </ReferenceManyField>

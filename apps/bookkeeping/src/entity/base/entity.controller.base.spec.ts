@@ -21,14 +21,18 @@ const existingId = "existingId";
 const CREATE_INPUT = {
   accrualMethod: "true",
   createdAt: new Date(),
+  deductionRate: "exampleDeductionRate",
   id: "exampleId",
+  irsId: "exampleIrsId",
   name: "exampleName",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
   accrualMethod: "true",
   createdAt: new Date(),
+  deductionRate: "exampleDeductionRate",
   id: "exampleId",
+  irsId: "exampleIrsId",
   name: "exampleName",
   updatedAt: new Date(),
 };
@@ -36,7 +40,9 @@ const FIND_MANY_RESULT = [
   {
     accrualMethod: "true",
     createdAt: new Date(),
+    deductionRate: "exampleDeductionRate",
     id: "exampleId",
+    irsId: "exampleIrsId",
     name: "exampleName",
     updatedAt: new Date(),
   },
@@ -44,7 +50,9 @@ const FIND_MANY_RESULT = [
 const FIND_ONE_RESULT = {
   accrualMethod: "true",
   createdAt: new Date(),
+  deductionRate: "exampleDeductionRate",
   id: "exampleId",
+  irsId: "exampleIrsId",
   name: "exampleName",
   updatedAt: new Date(),
 };

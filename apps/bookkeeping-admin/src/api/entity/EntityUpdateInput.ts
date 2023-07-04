@@ -5,7 +5,9 @@ import { ItemUpdateManyWithoutEntitiesInput } from "./ItemUpdateManyWithoutEntit
 export type EntityUpdateInput = {
   accrualMethod?: boolean | null;
   customers?: ClientUpdateManyWithoutEntitiesInput;
+  deductionRate?: string | null;
   info?: InputJsonValue;
+  irsId?: string | null;
   items?: ItemUpdateManyWithoutEntitiesInput;
   name?: string | null;
 };

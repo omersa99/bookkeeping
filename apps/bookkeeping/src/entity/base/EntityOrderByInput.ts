@@ -50,6 +50,17 @@ class EntityOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  deductionRate?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @IsOptional()
+  @IsEnum(SortOrder)
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   id?: SortOrder;
 
   @ApiProperty({
@@ -62,6 +73,17 @@ class EntityOrderByInput {
     nullable: true,
   })
   info?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @IsOptional()
+  @IsEnum(SortOrder)
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  irsId?: SortOrder;
 
   @ApiProperty({
     required: false,

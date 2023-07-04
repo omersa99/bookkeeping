@@ -21,8 +21,10 @@ export const EntityList = (props: ListProps): React.ReactElement => {
       <Datagrid rowClick="show">
         <BooleanField label="accrual_method" source="accrualMethod" />
         <DateField source="createdAt" label="Created At" />
+        <TextField label="deductionRate" source="deductionRate" />
         <TextField label="ID" source="id" />
         <TextField label="info" source="info" />
+        <TextField label="IRS_ID" source="irsId" />
         <TextField label="name" source="name" />
         <DateField source="updatedAt" label="Updated At" />
       </Datagrid>

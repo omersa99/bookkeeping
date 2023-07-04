@@ -4,6 +4,7 @@ import {
   Show,
   SimpleShowLayout,
   ShowProps,
+  BooleanField,
   DateField,
   TextField,
   ReferenceField,
@@ -19,6 +20,7 @@ export const ClientShow = (props: ShowProps): React.ReactElement => {
   return (
     <Show {...props}>
       <SimpleShowLayout>
+        <BooleanField label="active" source="active" />
         <DateField source="createdAt" label="Created At" />
         <TextField label="customer_name" source="customerName" />
         <ReferenceField label="entity" source="entity.id" reference="Entity">
@@ -26,6 +28,8 @@ export const ClientShow = (props: ShowProps): React.ReactElement => {
         </ReferenceField>
         <TextField label="ID" source="id" />
         <TextField label="info" source="info" />
+        <TextField label="name" source="name" />
+        <TextField label="taxId" source="taxId" />
         <DateField source="updatedAt" label="Updated At" />
         <ReferenceManyField
           reference="Document"
