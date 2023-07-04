@@ -19,6 +19,7 @@ import { StringFilter } from "../../util/StringFilter";
 import { JsonFilter } from "../../util/JsonFilter";
 import { ItemListRelationFilter } from "../../item/base/ItemListRelationFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class EntityWhereInput {
@@ -89,6 +90,18 @@ class EntityWhereInput {
     nullable: true,
   })
   name?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => UserWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => UserWhereUniqueInput)
+  @IsOptional()
+  @Field(() => UserWhereUniqueInput, {
+    nullable: true,
+  })
+  uid?: UserWhereUniqueInput;
 }
 
 export { EntityWhereInput as EntityWhereInput };

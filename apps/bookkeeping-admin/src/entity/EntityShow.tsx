@@ -7,12 +7,13 @@ import {
   BooleanField,
   DateField,
   TextField,
+  ReferenceField,
   ReferenceManyField,
   Datagrid,
-  ReferenceField,
 } from "react-admin";
 
 import { ENTITY_TITLE_FIELD } from "./EntityTitle";
+import { USER_TITLE_FIELD } from "../user/UserTitle";
 
 export const EntityShow = (props: ShowProps): React.ReactElement => {
   return (
@@ -23,6 +24,9 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
         <TextField label="ID" source="id" />
         <TextField label="info" source="info" />
         <TextField label="name" source="name" />
+        <ReferenceField label="UID" source="user.id" reference="User">
+          <TextField source={USER_TITLE_FIELD} />
+        </ReferenceField>
         <DateField source="updatedAt" label="Updated At" />
         <ReferenceManyField
           reference="Client"

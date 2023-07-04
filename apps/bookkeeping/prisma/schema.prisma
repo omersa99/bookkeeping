@@ -9,6 +9,7 @@ generator client {
 
 model User {
   createdAt DateTime @default(now())
+  entities  Entity[]
   firstName String?
   id        String   @id @default(cuid())
   lastName  String?
@@ -26,6 +27,8 @@ model Entity {
   info          Json?
   items         Item[]
   name          String?
+  uid           User?    @relation(fields: [UID], references: [id])
+  UID           String?
   updatedAt     DateTime @updatedAt
 }
 

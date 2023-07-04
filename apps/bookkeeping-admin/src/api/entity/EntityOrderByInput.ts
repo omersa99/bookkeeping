@@ -6,5 +6,6 @@ export type EntityOrderByInput = {
   id?: SortOrder;
   info?: SortOrder;
   name?: SortOrder;
+  UID?: SortOrder;
   updatedAt?: SortOrder;
 };

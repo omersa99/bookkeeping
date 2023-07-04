@@ -57,13 +57,28 @@ export class EntityControllerBase {
   })
   async create(@common.Body() data: EntityCreateInput): Promise<Entity> {
     return await this.service.create({
-      data: data,
+      data: {
+        ...data,
+
+        uid: data.uid
+          ? {
+              connect: data.uid,
+            }
+          : undefined,
+      },
       select: {
         accrualMethod: true,
         createdAt: true,
         id: true,
         info: true,
         name: true,
+
+        uid: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
       },
     });
@@ -91,6 +106,13 @@ export class EntityControllerBase {
         id: true,
         info: true,
         name: true,
+
+        uid: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
       },
     });
@@ -119,6 +141,13 @@ export class EntityControllerBase {
         id: true,
         info: true,
         name: true,
+
+        uid: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
       },
     });
@@ -152,13 +181,28 @@ export class EntityControllerBase {
     try {
       return await this.service.update({
         where: params,
-        data: data,
+        data: {
+          ...data,
+
+          uid: data.uid
+            ? {
+                connect: data.uid,
+              }
+            : undefined,
+        },
         select: {
           accrualMethod: true,
           createdAt: true,
           id: true,
           info: true,
           name: true,
+
+          uid: {
+            select: {
+              id: true,
+            },
+          },
+
           updatedAt: true,
         },
       });
@@ -195,6 +239,13 @@ export class EntityControllerBase {
           id: true,
           info: true,
           name: true,
+
+          uid: {
+            select: {
+              id: true,
+            },
+          },
+
           updatedAt: true,
         },
       });
