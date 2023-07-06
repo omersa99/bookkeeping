@@ -10,7 +10,6 @@ import {
 } from "react-admin";
 
 import { EntityTitle } from "../entity/EntityTitle";
-import { TransactionTitle } from "../transaction/TransactionTitle";
 
 export const AccountEdit = (props: EditProps): React.ReactElement => {
   return (
@@ -28,14 +27,6 @@ export const AccountEdit = (props: EditProps): React.ReactElement => {
         </ReferenceArrayInput>
         <TextInput label="name" source="name" />
         <TextInput label="role" source="role" />
-        <ReferenceArrayInput
-          source="transactions"
-          reference="Transaction"
-          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
-          format={(value: any) => value && value.map((v: any) => v.id)}
-        >
-          <SelectArrayInput optionText={TransactionTitle} />
-        </ReferenceArrayInput>
       </SimpleForm>
     </Edit>
   );

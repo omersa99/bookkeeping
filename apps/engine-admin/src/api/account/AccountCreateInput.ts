@@ -1,5 +1,4 @@
 import { EntityCreateNestedManyWithoutAccountsInput } from "./EntityCreateNestedManyWithoutAccountsInput";
-import { TransactionCreateNestedManyWithoutAccountsInput } from "./TransactionCreateNestedManyWithoutAccountsInput";
 
 export type AccountCreateInput = {
   balanceType?: string | null;
@@ -7,5 +6,4 @@ export type AccountCreateInput = {
   entity?: EntityCreateNestedManyWithoutAccountsInput;
   name?: string | null;
   role?: string | null;
-  transactions?: TransactionCreateNestedManyWithoutAccountsInput;
 };

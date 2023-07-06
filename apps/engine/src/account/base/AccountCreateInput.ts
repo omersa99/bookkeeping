@@ -14,7 +14,6 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsString, IsOptional, ValidateNested } from "class-validator";
 import { EntityCreateNestedManyWithoutAccountsInput } from "./EntityCreateNestedManyWithoutAccountsInput";
 import { Type } from "class-transformer";
-import { TransactionCreateNestedManyWithoutAccountsInput } from "./TransactionCreateNestedManyWithoutAccountsInput";
 
 @InputType()
 class AccountCreateInput {
@@ -73,18 +72,6 @@ class AccountCreateInput {
     nullable: true,
   })
   role?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => TransactionCreateNestedManyWithoutAccountsInput,
-  })
-  @ValidateNested()
-  @Type(() => TransactionCreateNestedManyWithoutAccountsInput)
-  @IsOptional()
-  @Field(() => TransactionCreateNestedManyWithoutAccountsInput, {
-    nullable: true,
-  })
-  transactions?: TransactionCreateNestedManyWithoutAccountsInput;
 }
 
 export { AccountCreateInput as AccountCreateInput };

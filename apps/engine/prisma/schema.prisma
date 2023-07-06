@@ -21,8 +21,6 @@ model User {
 }
 
 model Transaction {
-  account   Account? @relation(fields: [accountID], references: [id])
-  accountID String?
   amount    String?
   createdAt DateTime @default(now())
   id        String   @id @default(cuid())
@@ -51,15 +49,14 @@ model Ledger {
 }
 
 model Account {
-  balanceType  String?
-  code         String?
-  createdAt    DateTime      @default(now())
-  entity       Entity[]
-  id           String        @id @default(cuid())
-  name         String?
-  role         String?
-  transactions Transaction[]
-  updatedAt    DateTime      @updatedAt
+  balanceType String?
+  code        String?
+  createdAt   DateTime @default(now())
+  entity      Entity[]
+  id          String   @id @default(cuid())
+  name        String?
+  role        String?
+  updatedAt   DateTime @updatedAt
 }
 
 model Entity {

@@ -14,7 +14,6 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsString, IsOptional, IsDate, ValidateNested } from "class-validator";
 import { Type } from "class-transformer";
 import { Entity } from "../../entity/base/Entity";
-import { Transaction } from "../../transaction/base/Transaction";
 
 @ObjectType()
 class Account {
@@ -86,15 +85,6 @@ class Account {
     nullable: true,
   })
   role!: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => [Transaction],
-  })
-  @ValidateNested()
-  @Type(() => Transaction)
-  @IsOptional()
-  transactions?: Array<Transaction>;
 
   @ApiProperty({
     required: true,
