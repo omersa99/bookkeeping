@@ -251,12 +251,6 @@ export class JournalControllerBase {
     const results = await this.service.findTransactions(params.id, {
       ...query,
       select: {
-        account: {
-          select: {
-            id: true,
-          },
-        },
-
         amount: true,
         createdAt: true,
         id: true,
