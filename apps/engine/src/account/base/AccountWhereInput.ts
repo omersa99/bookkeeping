@@ -14,7 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
-import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
+import { EntityListRelationFilter } from "../../entity/base/EntityListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { TransactionListRelationFilter } from "../../transaction/base/TransactionListRelationFilter";
 
@@ -44,15 +44,15 @@ class AccountWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => EntityWhereUniqueInput,
+    type: () => EntityListRelationFilter,
   })
   @ValidateNested()
-  @Type(() => EntityWhereUniqueInput)
+  @Type(() => EntityListRelationFilter)
   @IsOptional()
-  @Field(() => EntityWhereUniqueInput, {
+  @Field(() => EntityListRelationFilter, {
     nullable: true,
   })
-  entity?: EntityWhereUniqueInput;
+  entity?: EntityListRelationFilter;
 
   @ApiProperty({
     required: false,

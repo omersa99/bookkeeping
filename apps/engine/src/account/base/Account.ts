@@ -50,12 +50,12 @@ class Account {
 
   @ApiProperty({
     required: false,
-    type: () => Entity,
+    type: () => [Entity],
   })
   @ValidateNested()
   @Type(() => Entity)
   @IsOptional()
-  entity?: Entity | null;
+  entity?: Array<Entity>;
 
   @ApiProperty({
     required: true,

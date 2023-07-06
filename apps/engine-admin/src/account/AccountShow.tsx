@@ -6,14 +6,13 @@ import {
   ShowProps,
   TextField,
   DateField,
-  ReferenceField,
   ReferenceManyField,
   Datagrid,
+  ReferenceField,
 } from "react-admin";
 
 import { ACCOUNT_TITLE_FIELD } from "./AccountTitle";
 import { JOURNAL_TITLE_FIELD } from "../journal/JournalTitle";
-import { ENTITY_TITLE_FIELD } from "../entity/EntityTitle";
 
 export const AccountShow = (props: ShowProps): React.ReactElement => {
   return (
@@ -22,9 +21,6 @@ export const AccountShow = (props: ShowProps): React.ReactElement => {
         <TextField label="balanceType" source="balanceType" />
         <TextField label="code" source="code" />
         <DateField source="createdAt" label="Created At" />
-        <ReferenceField label="entity" source="entity.id" reference="Entity">
-          <TextField source={ENTITY_TITLE_FIELD} />
-        </ReferenceField>
         <TextField label="ID" source="id" />
         <TextField label="name" source="name" />
         <TextField label="role" source="role" />

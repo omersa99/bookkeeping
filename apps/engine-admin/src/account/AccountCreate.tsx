@@ -5,8 +5,6 @@ import {
   SimpleForm,
   CreateProps,
   TextInput,
-  ReferenceInput,
-  SelectInput,
   ReferenceArrayInput,
   SelectArrayInput,
 } from "react-admin";
@@ -20,9 +18,14 @@ export const AccountCreate = (props: CreateProps): React.ReactElement => {
       <SimpleForm>
         <TextInput label="balanceType" source="balanceType" />
         <TextInput label="code" source="code" />
-        <ReferenceInput source="entity.id" reference="Entity" label="entity">
-          <SelectInput optionText={EntityTitle} />
-        </ReferenceInput>
+        <ReferenceArrayInput
+          source="entity"
+          reference="Entity"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={EntityTitle} />
+        </ReferenceArrayInput>
         <TextInput label="name" source="name" />
         <TextInput label="role" source="role" />
         <ReferenceArrayInput

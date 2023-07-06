@@ -61,17 +61,6 @@ class AccountOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  entityID?: SortOrder;
-
-  @ApiProperty({
-    required: false,
-    enum: ["asc", "desc"],
-  })
-  @IsOptional()
-  @IsEnum(SortOrder)
-  @Field(() => SortOrder, {
-    nullable: true,
-  })
   id?: SortOrder;
 
   @ApiProperty({
