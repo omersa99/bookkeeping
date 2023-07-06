@@ -14,9 +14,11 @@ import { ApiProperty } from "@nestjs/swagger";
 import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
 import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
+import { CustomerListRelationFilter } from "../../customer/base/CustomerListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { ItemWhereUniqueInput } from "../../item/base/ItemWhereUniqueInput";
 import { ItemTransactionListRelationFilter } from "../../itemTransaction/base/ItemTransactionListRelationFilter";
+import { JournalListRelationFilter } from "../../journal/base/JournalListRelationFilter";
 import { LedgerListRelationFilter } from "../../ledger/base/LedgerListRelationFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
@@ -34,6 +36,18 @@ class EntityWhereInput {
     nullable: true,
   })
   coa?: ChartOfAccountWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => CustomerListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => CustomerListRelationFilter)
+  @IsOptional()
+  @Field(() => CustomerListRelationFilter, {
+    nullable: true,
+  })
+  customers?: CustomerListRelationFilter;
 
   @ApiProperty({
     required: false,
@@ -69,6 +83,18 @@ class EntityWhereInput {
     nullable: true,
   })
   itemTransactions?: ItemTransactionListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => JournalListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => JournalListRelationFilter)
+  @IsOptional()
+  @Field(() => JournalListRelationFilter, {
+    nullable: true,
+  })
+  journals?: JournalListRelationFilter;
 
   @ApiProperty({
     required: false,

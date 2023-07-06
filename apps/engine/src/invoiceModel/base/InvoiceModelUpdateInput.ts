@@ -11,10 +11,13 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional, IsEnum, ValidateNested } from "class-validator";
+import { IsString, IsOptional, ValidateNested, IsEnum } from "class-validator";
+import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
+import { Type } from "class-transformer";
+import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
 import { EnumInvoiceModelInvoiceStatus } from "./EnumInvoiceModelInvoiceStatus";
 import { ItemTransactionWhereUniqueInput } from "../../itemTransaction/base/ItemTransactionWhereUniqueInput";
-import { Type } from "class-transformer";
+import { LedgerWhereUniqueInput } from "../../ledger/base/LedgerWhereUniqueInput";
 
 @InputType()
 class InvoiceModelUpdateInput {
@@ -27,7 +30,7 @@ class InvoiceModelUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  cashAccount?: string | null;
+  amountDue?: string | null;
 
   @ApiProperty({
     required: false,
@@ -38,7 +41,31 @@ class InvoiceModelUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  customer?: string | null;
+  amountPaid?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => AccountWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => AccountWhereUniqueInput)
+  @IsOptional()
+  @Field(() => AccountWhereUniqueInput, {
+    nullable: true,
+  })
+  cashAccount?: AccountWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => CustomerWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => CustomerWhereUniqueInput)
+  @IsOptional()
+  @Field(() => CustomerWhereUniqueInput, {
+    nullable: true,
+  })
+  customer?: CustomerWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,
@@ -84,6 +111,18 @@ class InvoiceModelUpdateInput {
     nullable: true,
   })
   itemTransactions?: ItemTransactionWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => LedgerWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => LedgerWhereUniqueInput)
+  @IsOptional()
+  @Field(() => LedgerWhereUniqueInput, {
+    nullable: true,
+  })
+  ledger?: LedgerWhereUniqueInput | null;
 }
 
 export { InvoiceModelUpdateInput as InvoiceModelUpdateInput };

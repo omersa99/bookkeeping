@@ -14,8 +14,10 @@ import { ApiProperty } from "@nestjs/swagger";
 import { ChartOfAccount } from "../../chartOfAccount/base/ChartOfAccount";
 import { ValidateNested, IsOptional, IsDate, IsString } from "class-validator";
 import { Type } from "class-transformer";
+import { Customer } from "../../customer/base/Customer";
 import { Item } from "../../item/base/Item";
 import { ItemTransaction } from "../../itemTransaction/base/ItemTransaction";
+import { Journal } from "../../journal/base/Journal";
 import { Ledger } from "../../ledger/base/Ledger";
 import { User } from "../../user/base/User";
 
@@ -37,6 +39,15 @@ class Entity {
   @Type(() => Date)
   @Field(() => Date)
   createdAt!: Date;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Customer],
+  })
+  @ValidateNested()
+  @Type(() => Customer)
+  @IsOptional()
+  customers?: Array<Customer>;
 
   @ApiProperty({
     required: true,
@@ -63,6 +74,15 @@ class Entity {
   @Type(() => ItemTransaction)
   @IsOptional()
   itemTransactions?: Array<ItemTransaction>;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Journal],
+  })
+  @ValidateNested()
+  @Type(() => Journal)
+  @IsOptional()
+  journals?: Array<Journal>;
 
   @ApiProperty({
     required: false,

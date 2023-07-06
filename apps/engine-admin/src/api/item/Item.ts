@@ -10,7 +10,5 @@ export type Item = {
   inventoryAccount: string | null;
   itemTransactions?: Array<ItemTransaction>;
   name: string | null;
-  pricePerUnit: number | null;
-  quantity: number | null;
   updatedAt: Date;
 };

@@ -14,13 +14,16 @@ import { ApiProperty } from "@nestjs/swagger";
 import {
   IsString,
   IsOptional,
+  ValidateNested,
   IsDate,
   IsEnum,
-  ValidateNested,
 } from "class-validator";
+import { Account } from "../../account/base/Account";
 import { Type } from "class-transformer";
+import { Customer } from "../../customer/base/Customer";
 import { EnumInvoiceModelInvoiceStatus } from "./EnumInvoiceModelInvoiceStatus";
 import { ItemTransaction } from "../../itemTransaction/base/ItemTransaction";
+import { Ledger } from "../../ledger/base/Ledger";
 
 @ObjectType()
 class InvoiceModel {
@@ -33,7 +36,27 @@ class InvoiceModel {
   @Field(() => String, {
     nullable: true,
   })
-  cashAccount!: string | null;
+  amountDue!: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  amountPaid!: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => Account,
+  })
+  @ValidateNested()
+  @Type(() => Account)
+  @IsOptional()
+  cashAccount?: Account | null;
 
   @ApiProperty({
     required: true,
@@ -45,14 +68,12 @@ class InvoiceModel {
 
   @ApiProperty({
     required: false,
-    type: String,
+    type: () => Customer,
   })
-  @IsString()
+  @ValidateNested()
+  @Type(() => Customer)
   @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  customer!: string | null;
+  customer?: Customer | null;
 
   @ApiProperty({
     required: true,
@@ -103,6 +124,15 @@ class InvoiceModel {
   @Type(() => ItemTransaction)
   @IsOptional()
   itemTransactions?: ItemTransaction | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => Ledger,
+  })
+  @ValidateNested()
+  @Type(() => Ledger)
+  @IsOptional()
+  ledger?: Ledger | null;
 
   @ApiProperty({
     required: true,

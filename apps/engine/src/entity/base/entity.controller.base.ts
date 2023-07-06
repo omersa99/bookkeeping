@@ -27,9 +27,15 @@ import { EntityWhereUniqueInput } from "./EntityWhereUniqueInput";
 import { EntityFindManyArgs } from "./EntityFindManyArgs";
 import { EntityUpdateInput } from "./EntityUpdateInput";
 import { Entity } from "./Entity";
+import { CustomerFindManyArgs } from "../../customer/base/CustomerFindManyArgs";
+import { Customer } from "../../customer/base/Customer";
+import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
 import { ItemTransactionFindManyArgs } from "../../itemTransaction/base/ItemTransactionFindManyArgs";
 import { ItemTransaction } from "../../itemTransaction/base/ItemTransaction";
 import { ItemTransactionWhereUniqueInput } from "../../itemTransaction/base/ItemTransactionWhereUniqueInput";
+import { JournalFindManyArgs } from "../../journal/base/JournalFindManyArgs";
+import { Journal } from "../../journal/base/Journal";
+import { JournalWhereUniqueInput } from "../../journal/base/JournalWhereUniqueInput";
 import { LedgerFindManyArgs } from "../../ledger/base/LedgerFindManyArgs";
 import { Ledger } from "../../ledger/base/Ledger";
 import { LedgerWhereUniqueInput } from "../../ledger/base/LedgerWhereUniqueInput";
@@ -328,6 +334,111 @@ export class EntityControllerBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/customers")
+  @ApiNestedQuery(CustomerFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Customer",
+    action: "read",
+    possession: "any",
+  })
+  async findManyCustomers(
+    @common.Req() request: Request,
+    @common.Param() params: EntityWhereUniqueInput
+  ): Promise<Customer[]> {
+    const query = plainToClass(CustomerFindManyArgs, request.query);
+    const results = await this.service.findCustomers(params.id, {
+      ...query,
+      select: {
+        active: true,
+        createdAt: true,
+
+        entity: {
+          select: {
+            id: true,
+          },
+        },
+
+        id: true,
+        name: true,
+        salesTaxRate: true,
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/customers")
+  @nestAccessControl.UseRoles({
+    resource: "Entity",
+    action: "update",
+    possession: "any",
+  })
+  async connectCustomers(
+    @common.Param() params: EntityWhereUniqueInput,
+    @common.Body() body: CustomerWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      customers: {
+        connect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/customers")
+  @nestAccessControl.UseRoles({
+    resource: "Entity",
+    action: "update",
+    possession: "any",
+  })
+  async updateCustomers(
+    @common.Param() params: EntityWhereUniqueInput,
+    @common.Body() body: CustomerWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      customers: {
+        set: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/customers")
+  @nestAccessControl.UseRoles({
+    resource: "Entity",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectCustomers(
+    @common.Param() params: EntityWhereUniqueInput,
+    @common.Body() body: CustomerWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      customers: {
+        disconnect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get("/:id/itemTransactions")
   @ApiNestedQuery(ItemTransactionFindManyArgs)
   @nestAccessControl.UseRoles({
@@ -446,6 +557,115 @@ export class EntityControllerBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/journals")
+  @ApiNestedQuery(JournalFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Journal",
+    action: "read",
+    possession: "any",
+  })
+  async findManyJournals(
+    @common.Req() request: Request,
+    @common.Param() params: EntityWhereUniqueInput
+  ): Promise<Journal[]> {
+    const query = plainToClass(JournalFindManyArgs, request.query);
+    const results = await this.service.findJournals(params.id, {
+      ...query,
+      select: {
+        createdAt: true,
+
+        entity: {
+          select: {
+            id: true,
+          },
+        },
+
+        id: true,
+
+        ledger: {
+          select: {
+            id: true,
+          },
+        },
+
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/journals")
+  @nestAccessControl.UseRoles({
+    resource: "Entity",
+    action: "update",
+    possession: "any",
+  })
+  async connectJournals(
+    @common.Param() params: EntityWhereUniqueInput,
+    @common.Body() body: JournalWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      journals: {
+        connect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/journals")
+  @nestAccessControl.UseRoles({
+    resource: "Entity",
+    action: "update",
+    possession: "any",
+  })
+  async updateJournals(
+    @common.Param() params: EntityWhereUniqueInput,
+    @common.Body() body: JournalWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      journals: {
+        set: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/journals")
+  @nestAccessControl.UseRoles({
+    resource: "Entity",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectJournals(
+    @common.Param() params: EntityWhereUniqueInput,
+    @common.Body() body: JournalWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      journals: {
+        disconnect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get("/:id/ledgers")
   @ApiNestedQuery(LedgerFindManyArgs)
   @nestAccessControl.UseRoles({
@@ -470,6 +690,13 @@ export class EntityControllerBase {
         },
 
         id: true,
+
+        invoiceModels: {
+          select: {
+            id: true,
+          },
+        },
+
         name: true,
         updatedAt: true,
       },

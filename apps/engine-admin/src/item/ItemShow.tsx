@@ -28,8 +28,6 @@ export const ItemShow = (props: ShowProps): React.ReactElement => {
         <TextField label="ID" source="id" />
         <TextField label="inventory_account" source="inventoryAccount" />
         <TextField label="name" source="name" />
-        <TextField label="pricePerUnit" source="pricePerUnit" />
-        <TextField label="quantity" source="quantity" />
         <DateField source="updatedAt" label="Updated At" />
         <ReferenceManyField
           reference="ItemTransaction"

@@ -29,6 +29,7 @@ import { Ledger } from "./Ledger";
 import { JournalFindManyArgs } from "../../journal/base/JournalFindManyArgs";
 import { Journal } from "../../journal/base/Journal";
 import { Entity } from "../../entity/base/Entity";
+import { InvoiceModel } from "../../invoiceModel/base/InvoiceModel";
 import { LedgerService } from "../ledger.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Ledger)
@@ -99,6 +100,12 @@ export class LedgerResolverBase {
               connect: args.data.entity,
             }
           : undefined,
+
+        invoiceModels: args.data.invoiceModels
+          ? {
+              connect: args.data.invoiceModels,
+            }
+          : undefined,
       },
     });
   }
@@ -122,6 +129,12 @@ export class LedgerResolverBase {
           entity: args.data.entity
             ? {
                 connect: args.data.entity,
+              }
+            : undefined,
+
+          invoiceModels: args.data.invoiceModels
+            ? {
+                connect: args.data.invoiceModels,
               }
             : undefined,
         },
@@ -191,6 +204,27 @@ export class LedgerResolverBase {
     @graphql.Parent() parent: Ledger
   ): Promise<Entity | null> {
     const result = await this.service.getEntity(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => InvoiceModel, {
+    nullable: true,
+    name: "invoiceModels",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "InvoiceModel",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldInvoiceModels(
+    @graphql.Parent() parent: Ledger
+  ): Promise<InvoiceModel | null> {
+    const result = await this.service.getInvoiceModels(parent.id);
 
     if (!result) {
       return null;

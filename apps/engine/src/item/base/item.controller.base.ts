@@ -74,8 +74,6 @@ export class ItemControllerBase {
         id: true,
         inventoryAccount: true,
         name: true,
-        pricePerUnit: true,
-        quantity: true,
         updatedAt: true,
       },
     });
@@ -111,8 +109,6 @@ export class ItemControllerBase {
         id: true,
         inventoryAccount: true,
         name: true,
-        pricePerUnit: true,
-        quantity: true,
         updatedAt: true,
       },
     });
@@ -149,8 +145,6 @@ export class ItemControllerBase {
         id: true,
         inventoryAccount: true,
         name: true,
-        pricePerUnit: true,
-        quantity: true,
         updatedAt: true,
       },
     });
@@ -204,8 +198,6 @@ export class ItemControllerBase {
           id: true,
           inventoryAccount: true,
           name: true,
-          pricePerUnit: true,
-          quantity: true,
           updatedAt: true,
         },
       });
@@ -250,8 +242,6 @@ export class ItemControllerBase {
           id: true,
           inventoryAccount: true,
           name: true,
-          pricePerUnit: true,
-          quantity: true,
           updatedAt: true,
         },
       });

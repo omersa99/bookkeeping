@@ -16,6 +16,7 @@ import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
 import { ChartOfAccountListRelationFilter } from "../../chartOfAccount/base/ChartOfAccountListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
+import { InvoiceModelListRelationFilter } from "../../invoiceModel/base/InvoiceModelListRelationFilter";
 import { TransactionListRelationFilter } from "../../transaction/base/TransactionListRelationFilter";
 
 @InputType()
@@ -64,6 +65,18 @@ class AccountWhereInput {
     nullable: true,
   })
   id?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => InvoiceModelListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => InvoiceModelListRelationFilter)
+  @IsOptional()
+  @Field(() => InvoiceModelListRelationFilter, {
+    nullable: true,
+  })
+  invoiceModels?: InvoiceModelListRelationFilter;
 
   @ApiProperty({
     required: false,

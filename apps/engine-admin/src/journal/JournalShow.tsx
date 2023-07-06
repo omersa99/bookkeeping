@@ -5,14 +5,15 @@ import {
   SimpleShowLayout,
   ShowProps,
   DateField,
-  TextField,
   ReferenceField,
+  TextField,
   ReferenceManyField,
   Datagrid,
 } from "react-admin";
 
 import { ACCOUNT_TITLE_FIELD } from "../account/AccountTitle";
 import { JOURNAL_TITLE_FIELD } from "./JournalTitle";
+import { ENTITY_TITLE_FIELD } from "../entity/EntityTitle";
 import { LEDGER_TITLE_FIELD } from "../ledger/LedgerTitle";
 
 export const JournalShow = (props: ShowProps): React.ReactElement => {
@@ -20,6 +21,9 @@ export const JournalShow = (props: ShowProps): React.ReactElement => {
     <Show {...props}>
       <SimpleShowLayout>
         <DateField source="createdAt" label="Created At" />
+        <ReferenceField label="entity" source="entity.id" reference="Entity">
+          <TextField source={ENTITY_TITLE_FIELD} />
+        </ReferenceField>
         <TextField label="ID" source="id" />
         <ReferenceField label="ledger" source="ledger.id" reference="Ledger">
           <TextField source={LEDGER_TITLE_FIELD} />

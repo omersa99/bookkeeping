@@ -26,7 +26,10 @@ import { InvoiceModelCountArgs } from "./InvoiceModelCountArgs";
 import { InvoiceModelFindManyArgs } from "./InvoiceModelFindManyArgs";
 import { InvoiceModelFindUniqueArgs } from "./InvoiceModelFindUniqueArgs";
 import { InvoiceModel } from "./InvoiceModel";
+import { Account } from "../../account/base/Account";
+import { Customer } from "../../customer/base/Customer";
 import { ItemTransaction } from "../../itemTransaction/base/ItemTransaction";
+import { Ledger } from "../../ledger/base/Ledger";
 import { InvoiceModelService } from "../invoiceModel.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => InvoiceModel)
@@ -96,9 +99,27 @@ export class InvoiceModelResolverBase {
       data: {
         ...args.data,
 
+        cashAccount: args.data.cashAccount
+          ? {
+              connect: args.data.cashAccount,
+            }
+          : undefined,
+
+        customer: args.data.customer
+          ? {
+              connect: args.data.customer,
+            }
+          : undefined,
+
         itemTransactions: args.data.itemTransactions
           ? {
               connect: args.data.itemTransactions,
+            }
+          : undefined,
+
+        ledger: args.data.ledger
+          ? {
+              connect: args.data.ledger,
             }
           : undefined,
       },
@@ -121,9 +142,27 @@ export class InvoiceModelResolverBase {
         data: {
           ...args.data,
 
+          cashAccount: args.data.cashAccount
+            ? {
+                connect: args.data.cashAccount,
+              }
+            : undefined,
+
+          customer: args.data.customer
+            ? {
+                connect: args.data.customer,
+              }
+            : undefined,
+
           itemTransactions: args.data.itemTransactions
             ? {
                 connect: args.data.itemTransactions,
+              }
+            : undefined,
+
+          ledger: args.data.ledger
+            ? {
+                connect: args.data.ledger,
               }
             : undefined,
         },
@@ -160,6 +199,48 @@ export class InvoiceModelResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Account, {
+    nullable: true,
+    name: "cashAccount",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Account",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldCashAccount(
+    @graphql.Parent() parent: InvoiceModel
+  ): Promise<Account | null> {
+    const result = await this.service.getCashAccount(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Customer, {
+    nullable: true,
+    name: "customer",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Customer",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldCustomer(
+    @graphql.Parent() parent: InvoiceModel
+  ): Promise<Customer | null> {
+    const result = await this.service.getCustomer(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => ItemTransaction, {
     nullable: true,
     name: "itemTransactions",
@@ -173,6 +254,27 @@ export class InvoiceModelResolverBase {
     @graphql.Parent() parent: InvoiceModel
   ): Promise<ItemTransaction | null> {
     const result = await this.service.getItemTransactions(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Ledger, {
+    nullable: true,
+    name: "ledger",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Ledger",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldLedger(
+    @graphql.Parent() parent: InvoiceModel
+  ): Promise<Ledger | null> {
+    const result = await this.service.getLedger(parent.id);
 
     if (!result) {
       return null;

@@ -54,6 +54,12 @@ export class JournalControllerBase {
       data: {
         ...data,
 
+        entity: data.entity
+          ? {
+              connect: data.entity,
+            }
+          : undefined,
+
         ledger: data.ledger
           ? {
               connect: data.ledger,
@@ -62,6 +68,13 @@ export class JournalControllerBase {
       },
       select: {
         createdAt: true,
+
+        entity: {
+          select: {
+            id: true,
+          },
+        },
+
         id: true,
 
         ledger: {
@@ -93,6 +106,13 @@ export class JournalControllerBase {
       ...args,
       select: {
         createdAt: true,
+
+        entity: {
+          select: {
+            id: true,
+          },
+        },
+
         id: true,
 
         ledger: {
@@ -125,6 +145,13 @@ export class JournalControllerBase {
       where: params,
       select: {
         createdAt: true,
+
+        entity: {
+          select: {
+            id: true,
+          },
+        },
+
         id: true,
 
         ledger: {
@@ -166,6 +193,12 @@ export class JournalControllerBase {
         data: {
           ...data,
 
+          entity: data.entity
+            ? {
+                connect: data.entity,
+              }
+            : undefined,
+
           ledger: data.ledger
             ? {
                 connect: data.ledger,
@@ -174,6 +207,13 @@ export class JournalControllerBase {
         },
         select: {
           createdAt: true,
+
+          entity: {
+            select: {
+              id: true,
+            },
+          },
+
           id: true,
 
           ledger: {
@@ -214,6 +254,13 @@ export class JournalControllerBase {
         where: params,
         select: {
           createdAt: true,
+
+          entity: {
+            select: {
+              id: true,
+            },
+          },
+
           id: true,
 
           ledger: {

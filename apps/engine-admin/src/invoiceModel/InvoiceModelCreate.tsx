@@ -4,17 +4,34 @@ import {
   SimpleForm,
   CreateProps,
   TextInput,
-  SelectInput,
   ReferenceInput,
+  SelectInput,
 } from "react-admin";
+import { AccountTitle } from "../account/AccountTitle";
+import { CustomerTitle } from "../customer/CustomerTitle";
 import { ItemTransactionTitle } from "../itemTransaction/ItemTransactionTitle";
+import { LedgerTitle } from "../ledger/LedgerTitle";
 
 export const InvoiceModelCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
-        <TextInput label="cash_account" source="cashAccount" />
-        <TextInput label="customer" source="customer" />
+        <TextInput label="amount_due" source="amountDue" />
+        <TextInput label="amount_paid" source="amountPaid" />
+        <ReferenceInput
+          source="cashAccount.id"
+          reference="Account"
+          label="cash_account"
+        >
+          <SelectInput optionText={AccountTitle} />
+        </ReferenceInput>
+        <ReferenceInput
+          source="customer.id"
+          reference="Customer"
+          label="customer"
+        >
+          <SelectInput optionText={CustomerTitle} />
+        </ReferenceInput>
         <TextInput label="info" source="info" />
         <TextInput label="invoice_number" source="invoiceNumber" />
         <SelectInput
@@ -35,6 +52,9 @@ export const InvoiceModelCreate = (props: CreateProps): React.ReactElement => {
           label="ItemTransactions"
         >
           <SelectInput optionText={ItemTransactionTitle} />
+        </ReferenceInput>
+        <ReferenceInput source="ledger.id" reference="Ledger" label="ledger">
+          <SelectInput optionText={LedgerTitle} />
         </ReferenceInput>
       </SimpleForm>
     </Create>

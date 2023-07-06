@@ -53,22 +53,60 @@ export class InvoiceModelControllerBase {
       data: {
         ...data,
 
+        cashAccount: data.cashAccount
+          ? {
+              connect: data.cashAccount,
+            }
+          : undefined,
+
+        customer: data.customer
+          ? {
+              connect: data.customer,
+            }
+          : undefined,
+
         itemTransactions: data.itemTransactions
           ? {
               connect: data.itemTransactions,
             }
           : undefined,
+
+        ledger: data.ledger
+          ? {
+              connect: data.ledger,
+            }
+          : undefined,
       },
       select: {
-        cashAccount: true,
+        amountDue: true,
+        amountPaid: true,
+
+        cashAccount: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
-        customer: true,
+
+        customer: {
+          select: {
+            id: true,
+          },
+        },
+
         id: true,
         info: true,
         invoiceNumber: true,
         invoiceStatus: true,
 
         itemTransactions: {
+          select: {
+            id: true,
+          },
+        },
+
+        ledger: {
           select: {
             id: true,
           },
@@ -96,15 +134,35 @@ export class InvoiceModelControllerBase {
     return this.service.findMany({
       ...args,
       select: {
-        cashAccount: true,
+        amountDue: true,
+        amountPaid: true,
+
+        cashAccount: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
-        customer: true,
+
+        customer: {
+          select: {
+            id: true,
+          },
+        },
+
         id: true,
         info: true,
         invoiceNumber: true,
         invoiceStatus: true,
 
         itemTransactions: {
+          select: {
+            id: true,
+          },
+        },
+
+        ledger: {
           select: {
             id: true,
           },
@@ -133,15 +191,35 @@ export class InvoiceModelControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
-        cashAccount: true,
+        amountDue: true,
+        amountPaid: true,
+
+        cashAccount: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
-        customer: true,
+
+        customer: {
+          select: {
+            id: true,
+          },
+        },
+
         id: true,
         info: true,
         invoiceNumber: true,
         invoiceStatus: true,
 
         itemTransactions: {
+          select: {
+            id: true,
+          },
+        },
+
+        ledger: {
           select: {
             id: true,
           },
@@ -180,22 +258,60 @@ export class InvoiceModelControllerBase {
         data: {
           ...data,
 
+          cashAccount: data.cashAccount
+            ? {
+                connect: data.cashAccount,
+              }
+            : undefined,
+
+          customer: data.customer
+            ? {
+                connect: data.customer,
+              }
+            : undefined,
+
           itemTransactions: data.itemTransactions
             ? {
                 connect: data.itemTransactions,
               }
             : undefined,
+
+          ledger: data.ledger
+            ? {
+                connect: data.ledger,
+              }
+            : undefined,
         },
         select: {
-          cashAccount: true,
+          amountDue: true,
+          amountPaid: true,
+
+          cashAccount: {
+            select: {
+              id: true,
+            },
+          },
+
           createdAt: true,
-          customer: true,
+
+          customer: {
+            select: {
+              id: true,
+            },
+          },
+
           id: true,
           info: true,
           invoiceNumber: true,
           invoiceStatus: true,
 
           itemTransactions: {
+            select: {
+              id: true,
+            },
+          },
+
+          ledger: {
             select: {
               id: true,
             },
@@ -232,15 +348,35 @@ export class InvoiceModelControllerBase {
       return await this.service.delete({
         where: params,
         select: {
-          cashAccount: true,
+          amountDue: true,
+          amountPaid: true,
+
+          cashAccount: {
+            select: {
+              id: true,
+            },
+          },
+
           createdAt: true,
-          customer: true,
+
+          customer: {
+            select: {
+              id: true,
+            },
+          },
+
           id: true,
           info: true,
           invoiceNumber: true,
           invoiceStatus: true,
 
           itemTransactions: {
+            select: {
+              id: true,
+            },
+          },
+
+          ledger: {
             select: {
               id: true,
             },

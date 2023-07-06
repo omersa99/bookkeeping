@@ -14,8 +14,10 @@ import { ApiProperty } from "@nestjs/swagger";
 import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
 import { ValidateNested, IsOptional, IsString } from "class-validator";
 import { Type } from "class-transformer";
+import { CustomerCreateNestedManyWithoutEntitiesInput } from "./CustomerCreateNestedManyWithoutEntitiesInput";
 import { ItemWhereUniqueInput } from "../../item/base/ItemWhereUniqueInput";
 import { ItemTransactionCreateNestedManyWithoutEntitiesInput } from "./ItemTransactionCreateNestedManyWithoutEntitiesInput";
+import { JournalCreateNestedManyWithoutEntitiesInput } from "./JournalCreateNestedManyWithoutEntitiesInput";
 import { LedgerCreateNestedManyWithoutEntitiesInput } from "./LedgerCreateNestedManyWithoutEntitiesInput";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
@@ -32,6 +34,18 @@ class EntityCreateInput {
     nullable: true,
   })
   coa?: ChartOfAccountWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => CustomerCreateNestedManyWithoutEntitiesInput,
+  })
+  @ValidateNested()
+  @Type(() => CustomerCreateNestedManyWithoutEntitiesInput)
+  @IsOptional()
+  @Field(() => CustomerCreateNestedManyWithoutEntitiesInput, {
+    nullable: true,
+  })
+  customers?: CustomerCreateNestedManyWithoutEntitiesInput;
 
   @ApiProperty({
     required: false,
@@ -56,6 +70,18 @@ class EntityCreateInput {
     nullable: true,
   })
   itemTransactions?: ItemTransactionCreateNestedManyWithoutEntitiesInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => JournalCreateNestedManyWithoutEntitiesInput,
+  })
+  @ValidateNested()
+  @Type(() => JournalCreateNestedManyWithoutEntitiesInput)
+  @IsOptional()
+  @Field(() => JournalCreateNestedManyWithoutEntitiesInput, {
+    nullable: true,
+  })
+  journals?: JournalCreateNestedManyWithoutEntitiesInput;
 
   @ApiProperty({
     required: false,
