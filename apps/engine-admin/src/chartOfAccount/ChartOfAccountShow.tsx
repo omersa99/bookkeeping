@@ -14,7 +14,7 @@ export const ChartOfAccountShow = (props: ShowProps): React.ReactElement => {
     <Show {...props}>
       <SimpleShowLayout>
         <DateField source="createdAt" label="Created At" />
-        <ReferenceField label="entity" source="entity.id" reference="Entity">
+        <ReferenceField label="entitie" source="entity.id" reference="Entity">
           <TextField source={ENTITY_TITLE_FIELD} />
         </ReferenceField>
         <TextField label="ID" source="id" />

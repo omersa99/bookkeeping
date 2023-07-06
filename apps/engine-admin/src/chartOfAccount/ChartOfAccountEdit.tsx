@@ -25,7 +25,7 @@ export const ChartOfAccountEdit = (props: EditProps): React.ReactElement => {
         >
           <SelectArrayInput optionText={AccountTitle} />
         </ReferenceArrayInput>
-        <ReferenceInput source="entity.id" reference="Entity" label="entity">
+        <ReferenceInput source="entitie.id" reference="Entity" label="entitie">
           <SelectInput optionText={EntityTitle} />
         </ReferenceInput>
       </SimpleForm>

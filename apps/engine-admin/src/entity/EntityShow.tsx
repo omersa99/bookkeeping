@@ -20,7 +20,7 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
     <Show {...props}>
       <SimpleShowLayout>
         <ReferenceField
-          label="chartOfAccounts"
+          label="coa"
           source="chartofaccount.id"
           reference="ChartOfAccount"
         >

@@ -3,7 +3,7 @@ import { LedgerUpdateManyWithoutEntitiesInput } from "./LedgerUpdateManyWithoutE
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type EntityUpdateInput = {
-  chartOfAccounts?: ChartOfAccountWhereUniqueInput | null;
+  coa?: ChartOfAccountWhereUniqueInput | null;
   ledgers?: LedgerUpdateManyWithoutEntitiesInput;
   name?: string | null;
   user?: UserWhereUniqueInput | null;

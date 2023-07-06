@@ -63,21 +63,20 @@ model Account {
 }
 
 model Entity {
-  chartOfAccounts   ChartOfAccount? @relation(fields: [chartOfAccountsId], references: [id])
-  chartOfAccountsId String?         @unique
-  createdAt         DateTime        @default(now())
-  id                String          @id @default(cuid())
-  ledgers           Ledger[]
-  name              String?
-  updatedAt         DateTime        @updatedAt
-  user              User?
+  coa       ChartOfAccount? @relation(fields: [coaID], references: [id])
+  coaID     String?         @unique
+  createdAt DateTime        @default(now())
+  id        String          @id @default(cuid())
+  ledgers   Ledger[]
+  name      String?
+  updatedAt DateTime        @updatedAt
+  user      User?
 }
 
 model ChartOfAccount {
   accounts  Account[]
   createdAt DateTime  @default(now())
-  entity    Entity?   @relation(fields: [entityId], references: [id])
-  entityId  String?   @unique
+  entitie   Entity?
   id        String    @id @default(cuid())
   updatedAt DateTime  @updatedAt
 }

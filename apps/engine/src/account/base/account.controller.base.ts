@@ -225,7 +225,7 @@ export class AccountControllerBase {
       select: {
         createdAt: true,
 
-        entity: {
+        entitie: {
           select: {
             id: true,
           },

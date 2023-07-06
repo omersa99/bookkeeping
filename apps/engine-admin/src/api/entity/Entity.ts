@@ -3,7 +3,7 @@ import { Ledger } from "../ledger/Ledger";
 import { User } from "../user/User";
 
 export type Entity = {
-  chartOfAccounts?: ChartOfAccount | null;
+  coa?: ChartOfAccount | null;
   createdAt: Date;
   id: string;
   ledgers?: Array<Ledger>;

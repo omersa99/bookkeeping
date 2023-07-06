@@ -22,7 +22,7 @@ export const EntityList = (props: ListProps): React.ReactElement => {
     >
       <Datagrid rowClick="show">
         <ReferenceField
-          label="chartOfAccounts"
+          label="coa"
           source="chartofaccount.id"
           reference="ChartOfAccount"
         >

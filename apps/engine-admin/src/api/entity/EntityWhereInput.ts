@@ -5,7 +5,7 @@ import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type EntityWhereInput = {
-  chartOfAccounts?: ChartOfAccountWhereUniqueInput;
+  coa?: ChartOfAccountWhereUniqueInput;
   id?: StringFilter;
   ledgers?: LedgerListRelationFilter;
   name?: StringNullableFilter;

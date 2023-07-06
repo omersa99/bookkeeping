@@ -29,7 +29,7 @@ class EntityUpdateInput {
   @Field(() => ChartOfAccountWhereUniqueInput, {
     nullable: true,
   })
-  chartOfAccounts?: ChartOfAccountWhereUniqueInput | null;
+  coa?: ChartOfAccountWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,

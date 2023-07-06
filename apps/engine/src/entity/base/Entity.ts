@@ -26,7 +26,7 @@ class Entity {
   @ValidateNested()
   @Type(() => ChartOfAccount)
   @IsOptional()
-  chartOfAccounts?: ChartOfAccount | null;
+  coa?: ChartOfAccount | null;
 
   @ApiProperty({
     required: true,

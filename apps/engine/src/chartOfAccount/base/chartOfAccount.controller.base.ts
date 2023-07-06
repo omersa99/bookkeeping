@@ -56,16 +56,16 @@ export class ChartOfAccountControllerBase {
       data: {
         ...data,
 
-        entity: data.entity
+        entitie: data.entitie
           ? {
-              connect: data.entity,
+              connect: data.entitie,
             }
           : undefined,
       },
       select: {
         createdAt: true,
 
-        entity: {
+        entitie: {
           select: {
             id: true,
           },
@@ -96,7 +96,7 @@ export class ChartOfAccountControllerBase {
       select: {
         createdAt: true,
 
-        entity: {
+        entitie: {
           select: {
             id: true,
           },
@@ -128,7 +128,7 @@ export class ChartOfAccountControllerBase {
       select: {
         createdAt: true,
 
-        entity: {
+        entitie: {
           select: {
             id: true,
           },
@@ -168,16 +168,16 @@ export class ChartOfAccountControllerBase {
         data: {
           ...data,
 
-          entity: data.entity
+          entitie: data.entitie
             ? {
-                connect: data.entity,
+                connect: data.entitie,
               }
             : undefined,
         },
         select: {
           createdAt: true,
 
-          entity: {
+          entitie: {
             select: {
               id: true,
             },
@@ -217,7 +217,7 @@ export class ChartOfAccountControllerBase {
         select: {
           createdAt: true,
 
-          entity: {
+          entitie: {
             select: {
               id: true,
             },

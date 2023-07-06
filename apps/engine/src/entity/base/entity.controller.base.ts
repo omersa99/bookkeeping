@@ -54,9 +54,9 @@ export class EntityControllerBase {
       data: {
         ...data,
 
-        chartOfAccounts: data.chartOfAccounts
+        coa: data.coa
           ? {
-              connect: data.chartOfAccounts,
+              connect: data.coa,
             }
           : undefined,
 
@@ -67,7 +67,7 @@ export class EntityControllerBase {
           : undefined,
       },
       select: {
-        chartOfAccounts: {
+        coa: {
           select: {
             id: true,
           },
@@ -104,7 +104,7 @@ export class EntityControllerBase {
     return this.service.findMany({
       ...args,
       select: {
-        chartOfAccounts: {
+        coa: {
           select: {
             id: true,
           },
@@ -142,7 +142,7 @@ export class EntityControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
-        chartOfAccounts: {
+        coa: {
           select: {
             id: true,
           },
@@ -190,9 +190,9 @@ export class EntityControllerBase {
         data: {
           ...data,
 
-          chartOfAccounts: data.chartOfAccounts
+          coa: data.coa
             ? {
-                connect: data.chartOfAccounts,
+                connect: data.coa,
               }
             : undefined,
 
@@ -203,7 +203,7 @@ export class EntityControllerBase {
             : undefined,
         },
         select: {
-          chartOfAccounts: {
+          coa: {
             select: {
               id: true,
             },
@@ -249,7 +249,7 @@ export class EntityControllerBase {
       return await this.service.delete({
         where: params,
         select: {
-          chartOfAccounts: {
+          coa: {
             select: {
               id: true,
             },
