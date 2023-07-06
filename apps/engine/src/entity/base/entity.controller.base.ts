@@ -257,13 +257,6 @@ export class EntityControllerBase {
         balanceType: true,
         code: true,
         createdAt: true,
-
-        entity: {
-          select: {
-            id: true,
-          },
-        },
-
         id: true,
         name: true,
         role: true,

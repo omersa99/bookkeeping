@@ -26,28 +26,6 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
           <TextField source={USER_TITLE_FIELD} />
         </ReferenceField>
         <ReferenceManyField
-          reference="Account"
-          target="entityID"
-          label="accounts"
-        >
-          <Datagrid rowClick="show">
-            <TextField label="balanceType" source="balanceType" />
-            <TextField label="code" source="code" />
-            <DateField source="createdAt" label="Created At" />
-            <ReferenceField
-              label="entity"
-              source="entity.id"
-              reference="Entity"
-            >
-              <TextField source={ENTITY_TITLE_FIELD} />
-            </ReferenceField>
-            <TextField label="ID" source="id" />
-            <TextField label="name" source="name" />
-            <TextField label="role" source="role" />
-            <DateField source="updatedAt" label="Updated At" />
-          </Datagrid>
-        </ReferenceManyField>
-        <ReferenceManyField
           reference="Ledger"
           target="entityID"
           label="ledgers"

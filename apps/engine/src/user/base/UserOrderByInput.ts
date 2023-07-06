@@ -39,7 +39,7 @@ class UserOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  entitiesId?: SortOrder;
+  entityID?: SortOrder;
 
   @ApiProperty({
     required: false,

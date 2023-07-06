@@ -27,6 +27,9 @@ import { AccountWhereUniqueInput } from "./AccountWhereUniqueInput";
 import { AccountFindManyArgs } from "./AccountFindManyArgs";
 import { AccountUpdateInput } from "./AccountUpdateInput";
 import { Account } from "./Account";
+import { EntityFindManyArgs } from "../../entity/base/EntityFindManyArgs";
+import { Entity } from "../../entity/base/Entity";
+import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
 import { TransactionFindManyArgs } from "../../transaction/base/TransactionFindManyArgs";
 import { Transaction } from "../../transaction/base/Transaction";
 import { TransactionWhereUniqueInput } from "../../transaction/base/TransactionWhereUniqueInput";
@@ -51,26 +54,11 @@ export class AccountControllerBase {
   })
   async create(@common.Body() data: AccountCreateInput): Promise<Account> {
     return await this.service.create({
-      data: {
-        ...data,
-
-        entity: data.entity
-          ? {
-              connect: data.entity,
-            }
-          : undefined,
-      },
+      data: data,
       select: {
         balanceType: true,
         code: true,
         createdAt: true,
-
-        entity: {
-          select: {
-            id: true,
-          },
-        },
-
         id: true,
         name: true,
         role: true,
@@ -99,13 +87,6 @@ export class AccountControllerBase {
         balanceType: true,
         code: true,
         createdAt: true,
-
-        entity: {
-          select: {
-            id: true,
-          },
-        },
-
         id: true,
         name: true,
         role: true,
@@ -135,13 +116,6 @@ export class AccountControllerBase {
         balanceType: true,
         code: true,
         createdAt: true,
-
-        entity: {
-          select: {
-            id: true,
-          },
-        },
-
         id: true,
         name: true,
         role: true,
@@ -175,26 +149,11 @@ export class AccountControllerBase {
     try {
       return await this.service.update({
         where: params,
-        data: {
-          ...data,
-
-          entity: data.entity
-            ? {
-                connect: data.entity,
-              }
-            : undefined,
-        },
+        data: data,
         select: {
           balanceType: true,
           code: true,
           createdAt: true,
-
-          entity: {
-            select: {
-              id: true,
-            },
-          },
-
           id: true,
           name: true,
           role: true,
@@ -232,13 +191,6 @@ export class AccountControllerBase {
           balanceType: true,
           code: true,
           createdAt: true,
-
-          entity: {
-            select: {
-              id: true,
-            },
-          },
-
           id: true,
           name: true,
           role: true,
@@ -253,6 +205,108 @@ export class AccountControllerBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/entity")
+  @ApiNestedQuery(EntityFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Entity",
+    action: "read",
+    possession: "any",
+  })
+  async findManyEntity(
+    @common.Req() request: Request,
+    @common.Param() params: AccountWhereUniqueInput
+  ): Promise<Entity[]> {
+    const query = plainToClass(EntityFindManyArgs, request.query);
+    const results = await this.service.findEntity(params.id, {
+      ...query,
+      select: {
+        createdAt: true,
+        id: true,
+        name: true,
+        updatedAt: true,
+
+        user: {
+          select: {
+            id: true,
+          },
+        },
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/entity")
+  @nestAccessControl.UseRoles({
+    resource: "Account",
+    action: "update",
+    possession: "any",
+  })
+  async connectEntity(
+    @common.Param() params: AccountWhereUniqueInput,
+    @common.Body() body: EntityWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      entity: {
+        connect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/entity")
+  @nestAccessControl.UseRoles({
+    resource: "Account",
+    action: "update",
+    possession: "any",
+  })
+  async updateEntity(
+    @common.Param() params: AccountWhereUniqueInput,
+    @common.Body() body: EntityWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      entity: {
+        set: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/entity")
+  @nestAccessControl.UseRoles({
+    resource: "Account",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectEntity(
+    @common.Param() params: AccountWhereUniqueInput,
+    @common.Body() body: EntityWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      entity: {
+        disconnect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)

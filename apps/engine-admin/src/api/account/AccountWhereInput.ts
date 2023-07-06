@@ -1,12 +1,12 @@
 import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { EntityWhereUniqueInput } from "../entity/EntityWhereUniqueInput";
+import { EntityListRelationFilter } from "../entity/EntityListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { TransactionListRelationFilter } from "../transaction/TransactionListRelationFilter";
 
 export type AccountWhereInput = {
   balanceType?: StringNullableFilter;
   code?: StringNullableFilter;
-  entity?: EntityWhereUniqueInput;
+  entity?: EntityListRelationFilter;
   id?: StringFilter;
   name?: StringNullableFilter;
   role?: StringNullableFilter;
