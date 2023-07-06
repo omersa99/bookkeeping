@@ -52,6 +52,17 @@ class TransactionCreateInput {
     nullable: true,
   })
   journal?: JournalWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  trxType?: string | null;
 }
 
 export { TransactionCreateInput as TransactionCreateInput };

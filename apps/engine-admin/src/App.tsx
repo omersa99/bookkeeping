@@ -33,6 +33,18 @@ import { ChartOfAccountList } from "./chartOfAccount/ChartOfAccountList";
 import { ChartOfAccountCreate } from "./chartOfAccount/ChartOfAccountCreate";
 import { ChartOfAccountEdit } from "./chartOfAccount/ChartOfAccountEdit";
 import { ChartOfAccountShow } from "./chartOfAccount/ChartOfAccountShow";
+import { ItemList } from "./item/ItemList";
+import { ItemCreate } from "./item/ItemCreate";
+import { ItemEdit } from "./item/ItemEdit";
+import { ItemShow } from "./item/ItemShow";
+import { InvoiceModelList } from "./invoiceModel/InvoiceModelList";
+import { InvoiceModelCreate } from "./invoiceModel/InvoiceModelCreate";
+import { InvoiceModelEdit } from "./invoiceModel/InvoiceModelEdit";
+import { InvoiceModelShow } from "./invoiceModel/InvoiceModelShow";
+import { ItemTransactionList } from "./itemTransaction/ItemTransactionList";
+import { ItemTransactionCreate } from "./itemTransaction/ItemTransactionCreate";
+import { ItemTransactionEdit } from "./itemTransaction/ItemTransactionEdit";
+import { ItemTransactionShow } from "./itemTransaction/ItemTransactionShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -107,6 +119,27 @@ const App = (): React.ReactElement => {
           edit={ChartOfAccountEdit}
           create={ChartOfAccountCreate}
           show={ChartOfAccountShow}
+        />
+        <Resource
+          name="Item"
+          list={ItemList}
+          edit={ItemEdit}
+          create={ItemCreate}
+          show={ItemShow}
+        />
+        <Resource
+          name="InvoiceModel"
+          list={InvoiceModelList}
+          edit={InvoiceModelEdit}
+          create={InvoiceModelCreate}
+          show={InvoiceModelShow}
+        />
+        <Resource
+          name="ItemTransaction"
+          list={ItemTransactionList}
+          edit={ItemTransactionEdit}
+          create={ItemTransactionCreate}
+          show={ItemTransactionShow}
         />
       </Admin>
     </div>

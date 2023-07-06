@@ -9,6 +9,7 @@ import {
 } from "react-admin";
 import Pagination from "../Components/Pagination";
 import { CHARTOFACCOUNT_TITLE_FIELD } from "../chartOfAccount/ChartOfAccountTitle";
+import { ITEM_TITLE_FIELD } from "../item/ItemTitle";
 import { USER_TITLE_FIELD } from "../user/UserTitle";
 
 export const EntityList = (props: ListProps): React.ReactElement => {
@@ -30,6 +31,9 @@ export const EntityList = (props: ListProps): React.ReactElement => {
         </ReferenceField>
         <DateField source="createdAt" label="Created At" />
         <TextField label="ID" source="id" />
+        <ReferenceField label="items" source="item.id" reference="Item">
+          <TextField source={ITEM_TITLE_FIELD} />
+        </ReferenceField>
         <TextField label="name" source="name" />
         <DateField source="updatedAt" label="Updated At" />
         <ReferenceField label="user" source="user.id" reference="User">

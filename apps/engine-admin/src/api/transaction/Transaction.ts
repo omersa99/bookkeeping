@@ -7,5 +7,6 @@ export type Transaction = {
   createdAt: Date;
   id: string;
   journal?: Journal | null;
+  trxType: string | null;
   updatedAt: Date;
 };

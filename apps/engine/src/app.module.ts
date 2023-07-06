@@ -8,6 +8,9 @@ import { LedgerModule } from "./ledger/ledger.module";
 import { AccountModule } from "./account/account.module";
 import { EntityModule } from "./entity/entity.module";
 import { ChartOfAccountModule } from "./chartOfAccount/chartOfAccount.module";
+import { ItemModule } from "./item/item.module";
+import { InvoiceModelModule } from "./invoiceModel/invoiceModel.module";
+import { ItemTransactionModule } from "./itemTransaction/itemTransaction.module";
 import { HealthModule } from "./health/health.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { SecretsManagerModule } from "./providers/secrets/secretsManager.module";
@@ -31,6 +34,9 @@ import { AuthModule } from "./auth/auth.module";
     AccountModule,
     EntityModule,
     ChartOfAccountModule,
+    ItemModule,
+    InvoiceModelModule,
+    ItemTransactionModule,
     HealthModule,
     PrismaModule,
     SecretsManagerModule,

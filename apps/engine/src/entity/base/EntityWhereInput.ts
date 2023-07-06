@@ -15,6 +15,8 @@ import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartO
 import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
 import { StringFilter } from "../../util/StringFilter";
+import { ItemWhereUniqueInput } from "../../item/base/ItemWhereUniqueInput";
+import { ItemTransactionListRelationFilter } from "../../itemTransaction/base/ItemTransactionListRelationFilter";
 import { LedgerListRelationFilter } from "../../ledger/base/LedgerListRelationFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
@@ -43,6 +45,30 @@ class EntityWhereInput {
     nullable: true,
   })
   id?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => ItemWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => ItemWhereUniqueInput)
+  @IsOptional()
+  @Field(() => ItemWhereUniqueInput, {
+    nullable: true,
+  })
+  items?: ItemWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => ItemTransactionListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => ItemTransactionListRelationFilter)
+  @IsOptional()
+  @Field(() => ItemTransactionListRelationFilter, {
+    nullable: true,
+  })
+  itemTransactions?: ItemTransactionListRelationFilter;
 
   @ApiProperty({
     required: false,

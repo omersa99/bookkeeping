@@ -65,6 +65,17 @@ class TransactionWhereInput {
     nullable: true,
   })
   journal?: JournalWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  trxType?: StringNullableFilter;
 }
 
 export { TransactionWhereInput as TransactionWhereInput };

@@ -23,6 +23,7 @@ export const TransactionShow = (props: ShowProps): React.ReactElement => {
         <ReferenceField label="journal" source="journal.id" reference="Journal">
           <TextField source={JOURNAL_TITLE_FIELD} />
         </ReferenceField>
+        <TextField label="trxType" source="trxType" />
         <DateField source="updatedAt" label="Updated At" />
       </SimpleShowLayout>
     </Show>

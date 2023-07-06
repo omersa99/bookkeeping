@@ -21,6 +21,7 @@ export const TransactionCreate = (props: CreateProps): React.ReactElement => {
         <ReferenceInput source="journal.id" reference="Journal" label="journal">
           <SelectInput optionText={JournalTitle} />
         </ReferenceInput>
+        <TextInput label="trxType" source="trxType" />
       </SimpleForm>
     </Create>
   );
