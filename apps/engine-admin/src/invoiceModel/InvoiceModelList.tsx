@@ -4,11 +4,14 @@ import {
   Datagrid,
   ListProps,
   TextField,
-  DateField,
   ReferenceField,
+  DateField,
 } from "react-admin";
 import Pagination from "../Components/Pagination";
+import { ACCOUNT_TITLE_FIELD } from "../account/AccountTitle";
+import { CUSTOMER_TITLE_FIELD } from "../customer/CustomerTitle";
 import { ITEMTRANSACTION_TITLE_FIELD } from "../itemTransaction/ItemTransactionTitle";
+import { LEDGER_TITLE_FIELD } from "../ledger/LedgerTitle";
 
 export const InvoiceModelList = (props: ListProps): React.ReactElement => {
   return (
@@ -20,9 +23,23 @@ export const InvoiceModelList = (props: ListProps): React.ReactElement => {
       pagination={<Pagination />}
     >
       <Datagrid rowClick="show">
-        <TextField label="cash_account" source="cashAccount" />
+        <TextField label="amount_due" source="amountDue" />
+        <TextField label="amount_paid" source="amountPaid" />
+        <ReferenceField
+          label="cash_account"
+          source="account.id"
+          reference="Account"
+        >
+          <TextField source={ACCOUNT_TITLE_FIELD} />
+        </ReferenceField>
         <DateField source="createdAt" label="Created At" />
-        <TextField label="customer" source="customer" />
+        <ReferenceField
+          label="customer"
+          source="customer.id"
+          reference="Customer"
+        >
+          <TextField source={CUSTOMER_TITLE_FIELD} />
+        </ReferenceField>
         <TextField label="ID" source="id" />
         <TextField label="info" source="info" />
         <TextField label="invoice_number" source="invoiceNumber" />
@@ -33,6 +50,9 @@ export const InvoiceModelList = (props: ListProps): React.ReactElement => {
           reference="ItemTransaction"
         >
           <TextField source={ITEMTRANSACTION_TITLE_FIELD} />
+        </ReferenceField>
+        <ReferenceField label="ledger" source="ledger.id" reference="Ledger">
+          <TextField source={LEDGER_TITLE_FIELD} />
         </ReferenceField>
         <DateField source="updatedAt" label="Updated At" />
       </Datagrid>

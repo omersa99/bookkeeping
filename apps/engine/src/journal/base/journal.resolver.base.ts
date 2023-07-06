@@ -28,6 +28,7 @@ import { JournalFindUniqueArgs } from "./JournalFindUniqueArgs";
 import { Journal } from "./Journal";
 import { TransactionFindManyArgs } from "../../transaction/base/TransactionFindManyArgs";
 import { Transaction } from "../../transaction/base/Transaction";
+import { Entity } from "../../entity/base/Entity";
 import { Ledger } from "../../ledger/base/Ledger";
 import { JournalService } from "../journal.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
@@ -98,6 +99,12 @@ export class JournalResolverBase {
       data: {
         ...args.data,
 
+        entity: args.data.entity
+          ? {
+              connect: args.data.entity,
+            }
+          : undefined,
+
         ledger: args.data.ledger
           ? {
               connect: args.data.ledger,
@@ -122,6 +129,12 @@ export class JournalResolverBase {
         ...args,
         data: {
           ...args.data,
+
+          entity: args.data.entity
+            ? {
+                connect: args.data.entity,
+              }
+            : undefined,
 
           ledger: args.data.ledger
             ? {
@@ -179,6 +192,27 @@ export class JournalResolverBase {
     }
 
     return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Entity, {
+    nullable: true,
+    name: "entity",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Entity",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldEntity(
+    @graphql.Parent() parent: Journal
+  ): Promise<Entity | null> {
+    const result = await this.service.getEntity(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)

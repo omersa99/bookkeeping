@@ -17,8 +17,6 @@ import { IsOptional, ValidateNested } from "class-validator";
 import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
 import { ItemTransactionListRelationFilter } from "../../itemTransaction/base/ItemTransactionListRelationFilter";
-import { FloatNullableFilter } from "../../util/FloatNullableFilter";
-import { IntNullableFilter } from "../../util/IntNullableFilter";
 
 @InputType()
 class ItemWhereInput {
@@ -100,28 +98,6 @@ class ItemWhereInput {
     nullable: true,
   })
   name?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: FloatNullableFilter,
-  })
-  @Type(() => FloatNullableFilter)
-  @IsOptional()
-  @Field(() => FloatNullableFilter, {
-    nullable: true,
-  })
-  pricePerUnit?: FloatNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: IntNullableFilter,
-  })
-  @Type(() => IntNullableFilter)
-  @IsOptional()
-  @Field(() => IntNullableFilter, {
-    nullable: true,
-  })
-  quantity?: IntNullableFilter;
 }
 
 export { ItemWhereInput as ItemWhereInput };

@@ -8,6 +8,4 @@ export type ItemUpdateInput = {
   inventoryAccount?: string | null;
   itemTransactions?: ItemTransactionUpdateManyWithoutItemsInput;
   name?: string | null;
-  pricePerUnit?: number | null;
-  quantity?: number | null;
 };

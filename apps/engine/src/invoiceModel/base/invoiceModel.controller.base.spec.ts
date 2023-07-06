@@ -19,18 +19,18 @@ import { InvoiceModelService } from "../invoiceModel.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
-  cashAccount: "exampleCashAccount",
+  amountDue: "exampleAmountDue",
+  amountPaid: "exampleAmountPaid",
   createdAt: new Date(),
-  customer: "exampleCustomer",
   id: "exampleId",
   info: "exampleInfo",
   invoiceNumber: "exampleInvoiceNumber",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
-  cashAccount: "exampleCashAccount",
+  amountDue: "exampleAmountDue",
+  amountPaid: "exampleAmountPaid",
   createdAt: new Date(),
-  customer: "exampleCustomer",
   id: "exampleId",
   info: "exampleInfo",
   invoiceNumber: "exampleInvoiceNumber",
@@ -38,9 +38,9 @@ const CREATE_RESULT = {
 };
 const FIND_MANY_RESULT = [
   {
-    cashAccount: "exampleCashAccount",
+    amountDue: "exampleAmountDue",
+    amountPaid: "exampleAmountPaid",
     createdAt: new Date(),
-    customer: "exampleCustomer",
     id: "exampleId",
     info: "exampleInfo",
     invoiceNumber: "exampleInvoiceNumber",
@@ -48,9 +48,9 @@ const FIND_MANY_RESULT = [
   },
 ];
 const FIND_ONE_RESULT = {
-  cashAccount: "exampleCashAccount",
+  amountDue: "exampleAmountDue",
+  amountPaid: "exampleAmountPaid",
   createdAt: new Date(),
-  customer: "exampleCustomer",
   id: "exampleId",
   info: "exampleInfo",
   invoiceNumber: "exampleInvoiceNumber",

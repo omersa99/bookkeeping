@@ -14,6 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsString, IsOptional, ValidateNested } from "class-validator";
 import { ChartOfAccountCreateNestedManyWithoutAccountsInput } from "./ChartOfAccountCreateNestedManyWithoutAccountsInput";
 import { Type } from "class-transformer";
+import { InvoiceModelCreateNestedManyWithoutAccountsInput } from "./InvoiceModelCreateNestedManyWithoutAccountsInput";
 import { TransactionCreateNestedManyWithoutAccountsInput } from "./TransactionCreateNestedManyWithoutAccountsInput";
 
 @InputType()
@@ -51,6 +52,18 @@ class AccountCreateInput {
     nullable: true,
   })
   code?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => InvoiceModelCreateNestedManyWithoutAccountsInput,
+  })
+  @ValidateNested()
+  @Type(() => InvoiceModelCreateNestedManyWithoutAccountsInput)
+  @IsOptional()
+  @Field(() => InvoiceModelCreateNestedManyWithoutAccountsInput, {
+    nullable: true,
+  })
+  invoiceModels?: InvoiceModelCreateNestedManyWithoutAccountsInput;
 
   @ApiProperty({
     required: false,

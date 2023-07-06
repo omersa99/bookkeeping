@@ -28,6 +28,8 @@ import { AccountFindUniqueArgs } from "./AccountFindUniqueArgs";
 import { Account } from "./Account";
 import { ChartOfAccountFindManyArgs } from "../../chartOfAccount/base/ChartOfAccountFindManyArgs";
 import { ChartOfAccount } from "../../chartOfAccount/base/ChartOfAccount";
+import { InvoiceModelFindManyArgs } from "../../invoiceModel/base/InvoiceModelFindManyArgs";
+import { InvoiceModel } from "../../invoiceModel/base/InvoiceModel";
 import { TransactionFindManyArgs } from "../../transaction/base/TransactionFindManyArgs";
 import { Transaction } from "../../transaction/base/Transaction";
 import { AccountService } from "../account.service";
@@ -158,6 +160,26 @@ export class AccountResolverBase {
     @graphql.Args() args: ChartOfAccountFindManyArgs
   ): Promise<ChartOfAccount[]> {
     const results = await this.service.findChartOfAccount(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [InvoiceModel], { name: "invoiceModels" })
+  @nestAccessControl.UseRoles({
+    resource: "InvoiceModel",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldInvoiceModels(
+    @graphql.Parent() parent: Account,
+    @graphql.Args() args: InvoiceModelFindManyArgs
+  ): Promise<InvoiceModel[]> {
+    const results = await this.service.findInvoiceModels(parent.id, args);
 
     if (!results) {
       return [];

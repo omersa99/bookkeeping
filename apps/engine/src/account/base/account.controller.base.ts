@@ -30,6 +30,9 @@ import { Account } from "./Account";
 import { ChartOfAccountFindManyArgs } from "../../chartOfAccount/base/ChartOfAccountFindManyArgs";
 import { ChartOfAccount } from "../../chartOfAccount/base/ChartOfAccount";
 import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
+import { InvoiceModelFindManyArgs } from "../../invoiceModel/base/InvoiceModelFindManyArgs";
+import { InvoiceModel } from "../../invoiceModel/base/InvoiceModel";
+import { InvoiceModelWhereUniqueInput } from "../../invoiceModel/base/InvoiceModelWhereUniqueInput";
 import { TransactionFindManyArgs } from "../../transaction/base/TransactionFindManyArgs";
 import { Transaction } from "../../transaction/base/Transaction";
 import { TransactionWhereUniqueInput } from "../../transaction/base/TransactionWhereUniqueInput";
@@ -299,6 +302,133 @@ export class AccountControllerBase {
   ): Promise<void> {
     const data = {
       chartOfAccount: {
+        disconnect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/invoiceModels")
+  @ApiNestedQuery(InvoiceModelFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "InvoiceModel",
+    action: "read",
+    possession: "any",
+  })
+  async findManyInvoiceModels(
+    @common.Req() request: Request,
+    @common.Param() params: AccountWhereUniqueInput
+  ): Promise<InvoiceModel[]> {
+    const query = plainToClass(InvoiceModelFindManyArgs, request.query);
+    const results = await this.service.findInvoiceModels(params.id, {
+      ...query,
+      select: {
+        amountDue: true,
+        amountPaid: true,
+
+        cashAccount: {
+          select: {
+            id: true,
+          },
+        },
+
+        createdAt: true,
+
+        customer: {
+          select: {
+            id: true,
+          },
+        },
+
+        id: true,
+        info: true,
+        invoiceNumber: true,
+        invoiceStatus: true,
+
+        itemTransactions: {
+          select: {
+            id: true,
+          },
+        },
+
+        ledger: {
+          select: {
+            id: true,
+          },
+        },
+
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/invoiceModels")
+  @nestAccessControl.UseRoles({
+    resource: "Account",
+    action: "update",
+    possession: "any",
+  })
+  async connectInvoiceModels(
+    @common.Param() params: AccountWhereUniqueInput,
+    @common.Body() body: InvoiceModelWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      invoiceModels: {
+        connect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/invoiceModels")
+  @nestAccessControl.UseRoles({
+    resource: "Account",
+    action: "update",
+    possession: "any",
+  })
+  async updateInvoiceModels(
+    @common.Param() params: AccountWhereUniqueInput,
+    @common.Body() body: InvoiceModelWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      invoiceModels: {
+        set: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/invoiceModels")
+  @nestAccessControl.UseRoles({
+    resource: "Account",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectInvoiceModels(
+    @common.Param() params: AccountWhereUniqueInput,
+    @common.Body() body: InvoiceModelWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      invoiceModels: {
         disconnect: body,
       },
     };

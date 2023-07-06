@@ -8,7 +8,5 @@ export type ItemOrderByInput = {
   id?: SortOrder;
   inventoryAccount?: SortOrder;
   name?: SortOrder;
-  pricePerUnit?: SortOrder;
-  quantity?: SortOrder;
   updatedAt?: SortOrder;
 };

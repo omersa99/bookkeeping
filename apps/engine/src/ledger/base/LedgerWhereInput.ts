@@ -15,6 +15,7 @@ import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput
 import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
 import { StringFilter } from "../../util/StringFilter";
+import { InvoiceModelWhereUniqueInput } from "../../invoiceModel/base/InvoiceModelWhereUniqueInput";
 import { JournalListRelationFilter } from "../../journal/base/JournalListRelationFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 
@@ -42,6 +43,18 @@ class LedgerWhereInput {
     nullable: true,
   })
   id?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => InvoiceModelWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => InvoiceModelWhereUniqueInput)
+  @IsOptional()
+  @Field(() => InvoiceModelWhereUniqueInput, {
+    nullable: true,
+  })
+  invoiceModels?: InvoiceModelWhereUniqueInput;
 
   @ApiProperty({
     required: false,

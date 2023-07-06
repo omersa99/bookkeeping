@@ -26,8 +26,12 @@ import { EntityCountArgs } from "./EntityCountArgs";
 import { EntityFindManyArgs } from "./EntityFindManyArgs";
 import { EntityFindUniqueArgs } from "./EntityFindUniqueArgs";
 import { Entity } from "./Entity";
+import { CustomerFindManyArgs } from "../../customer/base/CustomerFindManyArgs";
+import { Customer } from "../../customer/base/Customer";
 import { ItemTransactionFindManyArgs } from "../../itemTransaction/base/ItemTransactionFindManyArgs";
 import { ItemTransaction } from "../../itemTransaction/base/ItemTransaction";
+import { JournalFindManyArgs } from "../../journal/base/JournalFindManyArgs";
+import { Journal } from "../../journal/base/Journal";
 import { LedgerFindManyArgs } from "../../ledger/base/LedgerFindManyArgs";
 import { Ledger } from "../../ledger/base/Ledger";
 import { ChartOfAccount } from "../../chartOfAccount/base/ChartOfAccount";
@@ -186,6 +190,26 @@ export class EntityResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [Customer], { name: "customers" })
+  @nestAccessControl.UseRoles({
+    resource: "Customer",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldCustomers(
+    @graphql.Parent() parent: Entity,
+    @graphql.Args() args: CustomerFindManyArgs
+  ): Promise<Customer[]> {
+    const results = await this.service.findCustomers(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => [ItemTransaction], { name: "itemTransactions" })
   @nestAccessControl.UseRoles({
     resource: "ItemTransaction",
@@ -197,6 +221,26 @@ export class EntityResolverBase {
     @graphql.Args() args: ItemTransactionFindManyArgs
   ): Promise<ItemTransaction[]> {
     const results = await this.service.findItemTransactions(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [Journal], { name: "journals" })
+  @nestAccessControl.UseRoles({
+    resource: "Journal",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldJournals(
+    @graphql.Parent() parent: Entity,
+    @graphql.Args() args: JournalFindManyArgs
+  ): Promise<Journal[]> {
+    const results = await this.service.findJournals(parent.id, args);
 
     if (!results) {
       return [];

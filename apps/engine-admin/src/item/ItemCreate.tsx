@@ -9,7 +9,6 @@ import {
   SelectInput,
   ReferenceArrayInput,
   SelectArrayInput,
-  NumberInput,
 } from "react-admin";
 
 import { EntityTitle } from "../entity/EntityTitle";
@@ -34,8 +33,6 @@ export const ItemCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={ItemTransactionTitle} />
         </ReferenceArrayInput>
         <TextInput label="name" source="name" />
-        <NumberInput label="pricePerUnit" source="pricePerUnit" />
-        <NumberInput step={1} label="quantity" source="quantity" />
       </SimpleForm>
     </Create>
   );

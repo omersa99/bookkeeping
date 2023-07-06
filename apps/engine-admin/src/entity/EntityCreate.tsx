@@ -12,8 +12,10 @@ import {
 } from "react-admin";
 
 import { ChartOfAccountTitle } from "../chartOfAccount/ChartOfAccountTitle";
+import { CustomerTitle } from "../customer/CustomerTitle";
 import { ItemTitle } from "../item/ItemTitle";
 import { ItemTransactionTitle } from "../itemTransaction/ItemTransactionTitle";
+import { JournalTitle } from "../journal/JournalTitle";
 import { LedgerTitle } from "../ledger/LedgerTitle";
 import { UserTitle } from "../user/UserTitle";
 
@@ -24,6 +26,14 @@ export const EntityCreate = (props: CreateProps): React.ReactElement => {
         <ReferenceInput source="coa.id" reference="ChartOfAccount" label="coa">
           <SelectInput optionText={ChartOfAccountTitle} />
         </ReferenceInput>
+        <ReferenceArrayInput
+          source="customers"
+          reference="Customer"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={CustomerTitle} />
+        </ReferenceArrayInput>
         <ReferenceInput source="items.id" reference="Item" label="items">
           <SelectInput optionText={ItemTitle} />
         </ReferenceInput>
@@ -34,6 +44,14 @@ export const EntityCreate = (props: CreateProps): React.ReactElement => {
           format={(value: any) => value && value.map((v: any) => v.id)}
         >
           <SelectArrayInput optionText={ItemTransactionTitle} />
+        </ReferenceArrayInput>
+        <ReferenceArrayInput
+          source="journals"
+          reference="Journal"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={JournalTitle} />
         </ReferenceArrayInput>
         <ReferenceArrayInput
           source="ledgers"

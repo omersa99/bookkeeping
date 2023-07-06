@@ -11,8 +11,9 @@ import {
   Datagrid,
 } from "react-admin";
 
-import { LEDGER_TITLE_FIELD } from "./LedgerTitle";
 import { ENTITY_TITLE_FIELD } from "../entity/EntityTitle";
+import { LEDGER_TITLE_FIELD } from "./LedgerTitle";
+import { INVOICEMODEL_TITLE_FIELD } from "../invoiceModel/InvoiceModelTitle";
 
 export const LedgerShow = (props: ShowProps): React.ReactElement => {
   return (
@@ -23,6 +24,13 @@ export const LedgerShow = (props: ShowProps): React.ReactElement => {
           <TextField source={ENTITY_TITLE_FIELD} />
         </ReferenceField>
         <TextField label="ID" source="id" />
+        <ReferenceField
+          label="InvoiceModels"
+          source="invoicemodel.id"
+          reference="InvoiceModel"
+        >
+          <TextField source={INVOICEMODEL_TITLE_FIELD} />
+        </ReferenceField>
         <TextField label="name" source="name" />
         <DateField source="updatedAt" label="Updated At" />
         <ReferenceManyField
@@ -32,6 +40,13 @@ export const LedgerShow = (props: ShowProps): React.ReactElement => {
         >
           <Datagrid rowClick="show">
             <DateField source="createdAt" label="Created At" />
+            <ReferenceField
+              label="entity"
+              source="entity.id"
+              reference="Entity"
+            >
+              <TextField source={ENTITY_TITLE_FIELD} />
+            </ReferenceField>
             <TextField label="ID" source="id" />
             <ReferenceField
               label="ledger"

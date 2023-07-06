@@ -13,10 +13,13 @@ import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { Type } from "class-transformer";
-import { IsOptional, IsEnum, ValidateNested } from "class-validator";
+import { IsOptional, ValidateNested, IsEnum } from "class-validator";
+import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
+import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
 import { EnumInvoiceModelInvoiceStatus } from "./EnumInvoiceModelInvoiceStatus";
 import { ItemTransactionWhereUniqueInput } from "../../itemTransaction/base/ItemTransactionWhereUniqueInput";
+import { LedgerWhereUniqueInput } from "../../ledger/base/LedgerWhereUniqueInput";
 
 @InputType()
 class InvoiceModelWhereInput {
@@ -29,7 +32,7 @@ class InvoiceModelWhereInput {
   @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  cashAccount?: StringNullableFilter;
+  amountDue?: StringNullableFilter;
 
   @ApiProperty({
     required: false,
@@ -40,7 +43,31 @@ class InvoiceModelWhereInput {
   @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  customer?: StringNullableFilter;
+  amountPaid?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => AccountWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => AccountWhereUniqueInput)
+  @IsOptional()
+  @Field(() => AccountWhereUniqueInput, {
+    nullable: true,
+  })
+  cashAccount?: AccountWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => CustomerWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => CustomerWhereUniqueInput)
+  @IsOptional()
+  @Field(() => CustomerWhereUniqueInput, {
+    nullable: true,
+  })
+  customer?: CustomerWhereUniqueInput;
 
   @ApiProperty({
     required: false,
@@ -97,6 +124,18 @@ class InvoiceModelWhereInput {
     nullable: true,
   })
   itemTransactions?: ItemTransactionWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => LedgerWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => LedgerWhereUniqueInput)
+  @IsOptional()
+  @Field(() => LedgerWhereUniqueInput, {
+    nullable: true,
+  })
+  ledger?: LedgerWhereUniqueInput;
 }
 
 export { InvoiceModelWhereInput as InvoiceModelWhereInput };

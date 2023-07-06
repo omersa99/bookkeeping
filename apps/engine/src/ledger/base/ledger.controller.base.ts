@@ -59,6 +59,12 @@ export class LedgerControllerBase {
               connect: data.entity,
             }
           : undefined,
+
+        invoiceModels: data.invoiceModels
+          ? {
+              connect: data.invoiceModels,
+            }
+          : undefined,
       },
       select: {
         createdAt: true,
@@ -70,6 +76,13 @@ export class LedgerControllerBase {
         },
 
         id: true,
+
+        invoiceModels: {
+          select: {
+            id: true,
+          },
+        },
+
         name: true,
         updatedAt: true,
       },
@@ -102,6 +115,13 @@ export class LedgerControllerBase {
         },
 
         id: true,
+
+        invoiceModels: {
+          select: {
+            id: true,
+          },
+        },
+
         name: true,
         updatedAt: true,
       },
@@ -135,6 +155,13 @@ export class LedgerControllerBase {
         },
 
         id: true,
+
+        invoiceModels: {
+          select: {
+            id: true,
+          },
+        },
+
         name: true,
         updatedAt: true,
       },
@@ -174,6 +201,12 @@ export class LedgerControllerBase {
                 connect: data.entity,
               }
             : undefined,
+
+          invoiceModels: data.invoiceModels
+            ? {
+                connect: data.invoiceModels,
+              }
+            : undefined,
         },
         select: {
           createdAt: true,
@@ -185,6 +218,13 @@ export class LedgerControllerBase {
           },
 
           id: true,
+
+          invoiceModels: {
+            select: {
+              id: true,
+            },
+          },
+
           name: true,
           updatedAt: true,
         },
@@ -226,6 +266,13 @@ export class LedgerControllerBase {
           },
 
           id: true,
+
+          invoiceModels: {
+            select: {
+              id: true,
+            },
+          },
+
           name: true,
           updatedAt: true,
         },
@@ -257,6 +304,13 @@ export class LedgerControllerBase {
       ...query,
       select: {
         createdAt: true,
+
+        entity: {
+          select: {
+            id: true,
+          },
+        },
+
         id: true,
 
         ledger: {

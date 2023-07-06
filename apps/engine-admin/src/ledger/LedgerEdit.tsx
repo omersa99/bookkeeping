@@ -12,6 +12,7 @@ import {
 } from "react-admin";
 
 import { EntityTitle } from "../entity/EntityTitle";
+import { InvoiceModelTitle } from "../invoiceModel/InvoiceModelTitle";
 import { JournalTitle } from "../journal/JournalTitle";
 
 export const LedgerEdit = (props: EditProps): React.ReactElement => {
@@ -20,6 +21,13 @@ export const LedgerEdit = (props: EditProps): React.ReactElement => {
       <SimpleForm>
         <ReferenceInput source="entity.id" reference="Entity" label="entity">
           <SelectInput optionText={EntityTitle} />
+        </ReferenceInput>
+        <ReferenceInput
+          source="invoiceModels.id"
+          reference="InvoiceModel"
+          label="InvoiceModels"
+        >
+          <SelectInput optionText={InvoiceModelTitle} />
         </ReferenceInput>
         <ReferenceArrayInput
           source="journals"

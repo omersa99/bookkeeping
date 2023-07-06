@@ -14,6 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsDate, ValidateNested, IsOptional, IsString } from "class-validator";
 import { Type } from "class-transformer";
 import { Entity } from "../../entity/base/Entity";
+import { InvoiceModel } from "../../invoiceModel/base/InvoiceModel";
 import { Journal } from "../../journal/base/Journal";
 
 @ObjectType()
@@ -42,6 +43,15 @@ class Ledger {
   @IsString()
   @Field(() => String)
   id!: string;
+
+  @ApiProperty({
+    required: false,
+    type: () => InvoiceModel,
+  })
+  @ValidateNested()
+  @Type(() => InvoiceModel)
+  @IsOptional()
+  invoiceModels?: InvoiceModel | null;
 
   @ApiProperty({
     required: false,

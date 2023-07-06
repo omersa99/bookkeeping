@@ -11,13 +11,26 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { LedgerWhereUniqueInput } from "../../ledger/base/LedgerWhereUniqueInput";
+import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
 import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
+import { LedgerWhereUniqueInput } from "../../ledger/base/LedgerWhereUniqueInput";
 import { TransactionUpdateManyWithoutJournalsInput } from "./TransactionUpdateManyWithoutJournalsInput";
 
 @InputType()
 class JournalUpdateInput {
+  @ApiProperty({
+    required: false,
+    type: () => EntityWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => EntityWhereUniqueInput)
+  @IsOptional()
+  @Field(() => EntityWhereUniqueInput, {
+    nullable: true,
+  })
+  entity?: EntityWhereUniqueInput | null;
+
   @ApiProperty({
     required: false,
     type: () => LedgerWhereUniqueInput,

@@ -1,13 +1,16 @@
 import { SortOrder } from "../../util/SortOrder";
 
 export type InvoiceModelOrderByInput = {
-  cashAccount?: SortOrder;
+  amountDue?: SortOrder;
+  amountPaid?: SortOrder;
+  cashAccountId?: SortOrder;
   createdAt?: SortOrder;
-  customer?: SortOrder;
+  customerId?: SortOrder;
   id?: SortOrder;
   info?: SortOrder;
   invoiceNumber?: SortOrder;
   invoiceStatus?: SortOrder;
   itemTransactionsId?: SortOrder;
+  ledgerId?: SortOrder;
   updatedAt?: SortOrder;
 };
