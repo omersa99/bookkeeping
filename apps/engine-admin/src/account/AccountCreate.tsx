@@ -10,6 +10,7 @@ import {
 } from "react-admin";
 
 import { ChartOfAccountTitle } from "../chartOfAccount/ChartOfAccountTitle";
+import { TransactionTitle } from "../transaction/TransactionTitle";
 
 export const AccountCreate = (props: CreateProps): React.ReactElement => {
   return (
@@ -27,6 +28,14 @@ export const AccountCreate = (props: CreateProps): React.ReactElement => {
         <TextInput label="code" source="code" />
         <TextInput label="name" source="name" />
         <TextInput label="role" source="role" />
+        <ReferenceArrayInput
+          source="transactions"
+          reference="Transaction"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={TransactionTitle} />
+        </ReferenceArrayInput>
       </SimpleForm>
     </Create>
   );

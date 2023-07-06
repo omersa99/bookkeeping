@@ -50,7 +50,7 @@ class JournalOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  legerID?: SortOrder;
+  ledgerId?: SortOrder;
 
   @ApiProperty({
     required: false,

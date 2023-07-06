@@ -39,7 +39,7 @@ class LedgerOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  entityID?: SortOrder;
+  entityId?: SortOrder;
 
   @ApiProperty({
     required: false,

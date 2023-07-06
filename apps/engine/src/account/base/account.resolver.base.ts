@@ -28,6 +28,8 @@ import { AccountFindUniqueArgs } from "./AccountFindUniqueArgs";
 import { Account } from "./Account";
 import { ChartOfAccountFindManyArgs } from "../../chartOfAccount/base/ChartOfAccountFindManyArgs";
 import { ChartOfAccount } from "../../chartOfAccount/base/ChartOfAccount";
+import { TransactionFindManyArgs } from "../../transaction/base/TransactionFindManyArgs";
+import { Transaction } from "../../transaction/base/Transaction";
 import { AccountService } from "../account.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Account)
@@ -156,6 +158,26 @@ export class AccountResolverBase {
     @graphql.Args() args: ChartOfAccountFindManyArgs
   ): Promise<ChartOfAccount[]> {
     const results = await this.service.findChartOfAccount(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [Transaction], { name: "transactions" })
+  @nestAccessControl.UseRoles({
+    resource: "Transaction",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldTransactions(
+    @graphql.Parent() parent: Account,
+    @graphql.Args() args: TransactionFindManyArgs
+  ): Promise<Transaction[]> {
+    const results = await this.service.findTransactions(parent.id, args);
 
     if (!results) {
       return [];
