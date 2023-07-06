@@ -1,9 +1,9 @@
-import { EntityCreateNestedManyWithoutAccountsInput } from "./EntityCreateNestedManyWithoutAccountsInput";
+import { ChartOfAccountCreateNestedManyWithoutAccountsInput } from "./ChartOfAccountCreateNestedManyWithoutAccountsInput";
 
 export type AccountCreateInput = {
   balanceType?: string | null;
+  chartOfAccount?: ChartOfAccountCreateNestedManyWithoutAccountsInput;
   code?: string | null;
-  entity?: EntityCreateNestedManyWithoutAccountsInput;
   name?: string | null;
   role?: string | null;
 };

@@ -27,9 +27,6 @@ import { EntityWhereUniqueInput } from "./EntityWhereUniqueInput";
 import { EntityFindManyArgs } from "./EntityFindManyArgs";
 import { EntityUpdateInput } from "./EntityUpdateInput";
 import { Entity } from "./Entity";
-import { AccountFindManyArgs } from "../../account/base/AccountFindManyArgs";
-import { Account } from "../../account/base/Account";
-import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
 import { LedgerFindManyArgs } from "../../ledger/base/LedgerFindManyArgs";
 import { Ledger } from "../../ledger/base/Ledger";
 import { LedgerWhereUniqueInput } from "../../ledger/base/LedgerWhereUniqueInput";
@@ -57,6 +54,12 @@ export class EntityControllerBase {
       data: {
         ...data,
 
+        chartOfAccounts: data.chartOfAccounts
+          ? {
+              connect: data.chartOfAccounts,
+            }
+          : undefined,
+
         user: data.user
           ? {
               connect: data.user,
@@ -64,6 +67,12 @@ export class EntityControllerBase {
           : undefined,
       },
       select: {
+        chartOfAccounts: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
         id: true,
         name: true,
@@ -95,6 +104,12 @@ export class EntityControllerBase {
     return this.service.findMany({
       ...args,
       select: {
+        chartOfAccounts: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
         id: true,
         name: true,
@@ -127,6 +142,12 @@ export class EntityControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
+        chartOfAccounts: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
         id: true,
         name: true,
@@ -169,6 +190,12 @@ export class EntityControllerBase {
         data: {
           ...data,
 
+          chartOfAccounts: data.chartOfAccounts
+            ? {
+                connect: data.chartOfAccounts,
+              }
+            : undefined,
+
           user: data.user
             ? {
                 connect: data.user,
@@ -176,6 +203,12 @@ export class EntityControllerBase {
             : undefined,
         },
         select: {
+          chartOfAccounts: {
+            select: {
+              id: true,
+            },
+          },
+
           createdAt: true,
           id: true,
           name: true,
@@ -216,6 +249,12 @@ export class EntityControllerBase {
       return await this.service.delete({
         where: params,
         select: {
+          chartOfAccounts: {
+            select: {
+              id: true,
+            },
+          },
+
           createdAt: true,
           id: true,
           name: true,
@@ -236,105 +275,6 @@ export class EntityControllerBase {
       }
       throw error;
     }
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @common.Get("/:id/accounts")
-  @ApiNestedQuery(AccountFindManyArgs)
-  @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "read",
-    possession: "any",
-  })
-  async findManyAccounts(
-    @common.Req() request: Request,
-    @common.Param() params: EntityWhereUniqueInput
-  ): Promise<Account[]> {
-    const query = plainToClass(AccountFindManyArgs, request.query);
-    const results = await this.service.findAccounts(params.id, {
-      ...query,
-      select: {
-        balanceType: true,
-        code: true,
-        createdAt: true,
-        id: true,
-        name: true,
-        role: true,
-        updatedAt: true,
-      },
-    });
-    if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
-    }
-    return results;
-  }
-
-  @common.Post("/:id/accounts")
-  @nestAccessControl.UseRoles({
-    resource: "Entity",
-    action: "update",
-    possession: "any",
-  })
-  async connectAccounts(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: AccountWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      accounts: {
-        connect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Patch("/:id/accounts")
-  @nestAccessControl.UseRoles({
-    resource: "Entity",
-    action: "update",
-    possession: "any",
-  })
-  async updateAccounts(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: AccountWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      accounts: {
-        set: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Delete("/:id/accounts")
-  @nestAccessControl.UseRoles({
-    resource: "Entity",
-    action: "update",
-    possession: "any",
-  })
-  async disconnectAccounts(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: AccountWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      accounts: {
-        disconnect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)

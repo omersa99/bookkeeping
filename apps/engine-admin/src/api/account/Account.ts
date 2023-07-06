@@ -1,10 +1,10 @@
-import { Entity } from "../entity/Entity";
+import { ChartOfAccount } from "../chartOfAccount/ChartOfAccount";
 
 export type Account = {
   balanceType: string | null;
+  chartOfAccount?: Array<ChartOfAccount>;
   code: string | null;
   createdAt: Date;
-  entity?: Array<Entity>;
   id: string;
   name: string | null;
   role: string | null;

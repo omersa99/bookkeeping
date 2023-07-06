@@ -11,7 +11,7 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { AccountUpdateManyWithoutEntitiesInput } from "./AccountUpdateManyWithoutEntitiesInput";
+import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
 import { ValidateNested, IsOptional, IsString } from "class-validator";
 import { Type } from "class-transformer";
 import { LedgerUpdateManyWithoutEntitiesInput } from "./LedgerUpdateManyWithoutEntitiesInput";
@@ -21,15 +21,15 @@ import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 class EntityUpdateInput {
   @ApiProperty({
     required: false,
-    type: () => AccountUpdateManyWithoutEntitiesInput,
+    type: () => ChartOfAccountWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => AccountUpdateManyWithoutEntitiesInput)
+  @Type(() => ChartOfAccountWhereUniqueInput)
   @IsOptional()
-  @Field(() => AccountUpdateManyWithoutEntitiesInput, {
+  @Field(() => ChartOfAccountWhereUniqueInput, {
     nullable: true,
   })
-  accounts?: AccountUpdateManyWithoutEntitiesInput;
+  chartOfAccounts?: ChartOfAccountWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,

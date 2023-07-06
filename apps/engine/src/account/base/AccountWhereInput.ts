@@ -14,7 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
-import { EntityListRelationFilter } from "../../entity/base/EntityListRelationFilter";
+import { ChartOfAccountListRelationFilter } from "../../chartOfAccount/base/ChartOfAccountListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
 
 @InputType()
@@ -32,6 +32,18 @@ class AccountWhereInput {
 
   @ApiProperty({
     required: false,
+    type: () => ChartOfAccountListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => ChartOfAccountListRelationFilter)
+  @IsOptional()
+  @Field(() => ChartOfAccountListRelationFilter, {
+    nullable: true,
+  })
+  chartOfAccount?: ChartOfAccountListRelationFilter;
+
+  @ApiProperty({
+    required: false,
     type: StringNullableFilter,
   })
   @Type(() => StringNullableFilter)
@@ -40,18 +52,6 @@ class AccountWhereInput {
     nullable: true,
   })
   code?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => EntityListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => EntityListRelationFilter)
-  @IsOptional()
-  @Field(() => EntityListRelationFilter, {
-    nullable: true,
-  })
-  entity?: EntityListRelationFilter;
 
   @ApiProperty({
     required: false,

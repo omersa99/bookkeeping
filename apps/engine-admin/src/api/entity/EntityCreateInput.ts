@@ -1,9 +1,9 @@
-import { AccountCreateNestedManyWithoutEntitiesInput } from "./AccountCreateNestedManyWithoutEntitiesInput";
+import { ChartOfAccountWhereUniqueInput } from "../chartOfAccount/ChartOfAccountWhereUniqueInput";
 import { LedgerCreateNestedManyWithoutEntitiesInput } from "./LedgerCreateNestedManyWithoutEntitiesInput";
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type EntityCreateInput = {
-  accounts?: AccountCreateNestedManyWithoutEntitiesInput;
+  chartOfAccounts?: ChartOfAccountWhereUniqueInput | null;
   ledgers?: LedgerCreateNestedManyWithoutEntitiesInput;
   name?: string | null;
   user?: UserWhereUniqueInput | null;

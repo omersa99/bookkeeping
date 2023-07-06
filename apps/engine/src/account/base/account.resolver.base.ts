@@ -26,8 +26,8 @@ import { AccountCountArgs } from "./AccountCountArgs";
 import { AccountFindManyArgs } from "./AccountFindManyArgs";
 import { AccountFindUniqueArgs } from "./AccountFindUniqueArgs";
 import { Account } from "./Account";
-import { EntityFindManyArgs } from "../../entity/base/EntityFindManyArgs";
-import { Entity } from "../../entity/base/Entity";
+import { ChartOfAccountFindManyArgs } from "../../chartOfAccount/base/ChartOfAccountFindManyArgs";
+import { ChartOfAccount } from "../../chartOfAccount/base/ChartOfAccount";
 import { AccountService } from "../account.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Account)
@@ -145,17 +145,17 @@ export class AccountResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [Entity], { name: "entity" })
+  @graphql.ResolveField(() => [ChartOfAccount], { name: "chartOfAccount" })
   @nestAccessControl.UseRoles({
-    resource: "Entity",
+    resource: "ChartOfAccount",
     action: "read",
     possession: "any",
   })
-  async resolveFieldEntity(
+  async resolveFieldChartOfAccount(
     @graphql.Parent() parent: Account,
-    @graphql.Args() args: EntityFindManyArgs
-  ): Promise<Entity[]> {
-    const results = await this.service.findEntity(parent.id, args);
+    @graphql.Args() args: ChartOfAccountFindManyArgs
+  ): Promise<ChartOfAccount[]> {
+    const results = await this.service.findChartOfAccount(parent.id, args);
 
     if (!results) {
       return [];

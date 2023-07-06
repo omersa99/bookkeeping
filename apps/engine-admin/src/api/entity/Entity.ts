@@ -1,9 +1,9 @@
-import { Account } from "../account/Account";
+import { ChartOfAccount } from "../chartOfAccount/ChartOfAccount";
 import { Ledger } from "../ledger/Ledger";
 import { User } from "../user/User";
 
 export type Entity = {
-  accounts?: Array<Account>;
+  chartOfAccounts?: ChartOfAccount | null;
   createdAt: Date;
   id: string;
   ledgers?: Array<Ledger>;

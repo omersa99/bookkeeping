@@ -49,22 +49,31 @@ model Ledger {
 }
 
 model Account {
-  balanceType String?
-  code        String?
-  createdAt   DateTime @default(now())
-  entity      Entity[]
-  id          String   @id @default(cuid())
-  name        String?
-  role        String?
-  updatedAt   DateTime @updatedAt
+  balanceType    String?
+  chartOfAccount ChartOfAccount[]
+  code           String?
+  createdAt      DateTime         @default(now())
+  id             String           @id @default(cuid())
+  name           String?
+  role           String?
+  updatedAt      DateTime         @updatedAt
 }
 
 model Entity {
+  chartOfAccounts ChartOfAccount?
+  createdAt       DateTime        @default(now())
+  id              String          @id @default(cuid())
+  ledgers         Ledger[]
+  name            String?
+  updatedAt       DateTime        @updatedAt
+  user            User?
+}
+
+model ChartOfAccount {
   accounts  Account[]
   createdAt DateTime  @default(now())
+  entity    Entity?   @relation(fields: [entityId], references: [id])
+  entityId  String?   @unique
   id        String    @id @default(cuid())
-  ledgers   Ledger[]
-  name      String?
   updatedAt DateTime  @updatedAt
-  user      User?
 }

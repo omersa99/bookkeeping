@@ -3,11 +3,12 @@ import {
   List,
   Datagrid,
   ListProps,
-  DateField,
-  TextField,
   ReferenceField,
+  TextField,
+  DateField,
 } from "react-admin";
 import Pagination from "../Components/Pagination";
+import { CHARTOFACCOUNT_TITLE_FIELD } from "../chartOfAccount/ChartOfAccountTitle";
 import { USER_TITLE_FIELD } from "../user/UserTitle";
 
 export const EntityList = (props: ListProps): React.ReactElement => {
@@ -20,6 +21,13 @@ export const EntityList = (props: ListProps): React.ReactElement => {
       pagination={<Pagination />}
     >
       <Datagrid rowClick="show">
+        <ReferenceField
+          label="chartOfAccounts"
+          source="chartofaccount.id"
+          reference="ChartOfAccount"
+        >
+          <TextField source={CHARTOFACCOUNT_TITLE_FIELD} />
+        </ReferenceField>
         <DateField source="createdAt" label="Created At" />
         <TextField label="ID" source="id" />
         <TextField label="name" source="name" />

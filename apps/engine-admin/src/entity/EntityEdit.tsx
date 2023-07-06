@@ -4,14 +4,14 @@ import {
   Edit,
   SimpleForm,
   EditProps,
+  ReferenceInput,
+  SelectInput,
   ReferenceArrayInput,
   SelectArrayInput,
   TextInput,
-  ReferenceInput,
-  SelectInput,
 } from "react-admin";
 
-import { AccountTitle } from "../account/AccountTitle";
+import { ChartOfAccountTitle } from "../chartOfAccount/ChartOfAccountTitle";
 import { LedgerTitle } from "../ledger/LedgerTitle";
 import { UserTitle } from "../user/UserTitle";
 
@@ -19,14 +19,13 @@ export const EntityEdit = (props: EditProps): React.ReactElement => {
   return (
     <Edit {...props}>
       <SimpleForm>
-        <ReferenceArrayInput
-          source="accounts"
-          reference="Account"
-          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
-          format={(value: any) => value && value.map((v: any) => v.id)}
+        <ReferenceInput
+          source="chartOfAccounts.id"
+          reference="ChartOfAccount"
+          label="chartOfAccounts"
         >
-          <SelectArrayInput optionText={AccountTitle} />
-        </ReferenceArrayInput>
+          <SelectInput optionText={ChartOfAccountTitle} />
+        </ReferenceInput>
         <ReferenceArrayInput
           source="ledgers"
           reference="Ledger"
