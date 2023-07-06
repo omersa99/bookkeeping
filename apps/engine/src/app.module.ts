@@ -7,6 +7,7 @@ import { JournalModule } from "./journal/journal.module";
 import { LedgerModule } from "./ledger/ledger.module";
 import { AccountModule } from "./account/account.module";
 import { EntityModule } from "./entity/entity.module";
+import { ChartOfAccountModule } from "./chartOfAccount/chartOfAccount.module";
 import { HealthModule } from "./health/health.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { SecretsManagerModule } from "./providers/secrets/secretsManager.module";
@@ -29,6 +30,7 @@ import { AuthModule } from "./auth/auth.module";
     LedgerModule,
     AccountModule,
     EntityModule,
+    ChartOfAccountModule,
     HealthModule,
     PrismaModule,
     SecretsManagerModule,

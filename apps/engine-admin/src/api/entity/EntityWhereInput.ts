@@ -1,11 +1,11 @@
-import { AccountListRelationFilter } from "../account/AccountListRelationFilter";
+import { ChartOfAccountWhereUniqueInput } from "../chartOfAccount/ChartOfAccountWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
 import { LedgerListRelationFilter } from "../ledger/LedgerListRelationFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type EntityWhereInput = {
-  accounts?: AccountListRelationFilter;
+  chartOfAccounts?: ChartOfAccountWhereUniqueInput;
   id?: StringFilter;
   ledgers?: LedgerListRelationFilter;
   name?: StringNullableFilter;

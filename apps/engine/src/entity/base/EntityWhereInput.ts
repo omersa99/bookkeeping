@@ -11,7 +11,7 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { AccountListRelationFilter } from "../../account/base/AccountListRelationFilter";
+import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
 import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
 import { StringFilter } from "../../util/StringFilter";
@@ -23,15 +23,15 @@ import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 class EntityWhereInput {
   @ApiProperty({
     required: false,
-    type: () => AccountListRelationFilter,
+    type: () => ChartOfAccountWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => AccountListRelationFilter)
+  @Type(() => ChartOfAccountWhereUniqueInput)
   @IsOptional()
-  @Field(() => AccountListRelationFilter, {
+  @Field(() => ChartOfAccountWhereUniqueInput, {
     nullable: true,
   })
-  accounts?: AccountListRelationFilter;
+  chartOfAccounts?: ChartOfAccountWhereUniqueInput;
 
   @ApiProperty({
     required: false,

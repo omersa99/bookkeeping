@@ -9,22 +9,22 @@ import {
   SelectArrayInput,
 } from "react-admin";
 
-import { EntityTitle } from "../entity/EntityTitle";
+import { ChartOfAccountTitle } from "../chartOfAccount/ChartOfAccountTitle";
 
 export const AccountEdit = (props: EditProps): React.ReactElement => {
   return (
     <Edit {...props}>
       <SimpleForm>
         <TextInput label="balanceType" source="balanceType" />
-        <TextInput label="code" source="code" />
         <ReferenceArrayInput
-          source="entity"
-          reference="Entity"
+          source="chartOfAccount"
+          reference="ChartOfAccount"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
         >
-          <SelectArrayInput optionText={EntityTitle} />
+          <SelectArrayInput optionText={ChartOfAccountTitle} />
         </ReferenceArrayInput>
+        <TextInput label="code" source="code" />
         <TextInput label="name" source="name" />
         <TextInput label="role" source="role" />
       </SimpleForm>

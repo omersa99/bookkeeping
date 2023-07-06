@@ -14,7 +14,7 @@ import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueIn
 import { ApiProperty } from "@nestjs/swagger";
 
 @InputType()
-class AccountUpdateManyWithoutEntitiesInput {
+class AccountUpdateManyWithoutChartOfAccountsInput {
   @Field(() => [AccountWhereUniqueInput], {
     nullable: true,
   })
@@ -43,4 +43,4 @@ class AccountUpdateManyWithoutEntitiesInput {
   set?: Array<AccountWhereUniqueInput>;
 }
 
-export { AccountUpdateManyWithoutEntitiesInput as AccountUpdateManyWithoutEntitiesInput };
+export { AccountUpdateManyWithoutChartOfAccountsInput as AccountUpdateManyWithoutChartOfAccountsInput };

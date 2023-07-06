@@ -4,20 +4,28 @@ import {
   Show,
   SimpleShowLayout,
   ShowProps,
-  DateField,
-  TextField,
   ReferenceField,
+  TextField,
+  DateField,
   ReferenceManyField,
   Datagrid,
 } from "react-admin";
 
 import { ENTITY_TITLE_FIELD } from "./EntityTitle";
+import { CHARTOFACCOUNT_TITLE_FIELD } from "../chartOfAccount/ChartOfAccountTitle";
 import { USER_TITLE_FIELD } from "../user/UserTitle";
 
 export const EntityShow = (props: ShowProps): React.ReactElement => {
   return (
     <Show {...props}>
       <SimpleShowLayout>
+        <ReferenceField
+          label="chartOfAccounts"
+          source="chartofaccount.id"
+          reference="ChartOfAccount"
+        >
+          <TextField source={CHARTOFACCOUNT_TITLE_FIELD} />
+        </ReferenceField>
         <DateField source="createdAt" label="Created At" />
         <TextField label="ID" source="id" />
         <TextField label="name" source="name" />

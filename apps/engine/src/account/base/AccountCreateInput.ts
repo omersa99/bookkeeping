@@ -12,7 +12,7 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsString, IsOptional, ValidateNested } from "class-validator";
-import { EntityCreateNestedManyWithoutAccountsInput } from "./EntityCreateNestedManyWithoutAccountsInput";
+import { ChartOfAccountCreateNestedManyWithoutAccountsInput } from "./ChartOfAccountCreateNestedManyWithoutAccountsInput";
 import { Type } from "class-transformer";
 
 @InputType()
@@ -30,6 +30,18 @@ class AccountCreateInput {
 
   @ApiProperty({
     required: false,
+    type: () => ChartOfAccountCreateNestedManyWithoutAccountsInput,
+  })
+  @ValidateNested()
+  @Type(() => ChartOfAccountCreateNestedManyWithoutAccountsInput)
+  @IsOptional()
+  @Field(() => ChartOfAccountCreateNestedManyWithoutAccountsInput, {
+    nullable: true,
+  })
+  chartOfAccount?: ChartOfAccountCreateNestedManyWithoutAccountsInput;
+
+  @ApiProperty({
+    required: false,
     type: String,
   })
   @IsString()
@@ -38,18 +50,6 @@ class AccountCreateInput {
     nullable: true,
   })
   code?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => EntityCreateNestedManyWithoutAccountsInput,
-  })
-  @ValidateNested()
-  @Type(() => EntityCreateNestedManyWithoutAccountsInput)
-  @IsOptional()
-  @Field(() => EntityCreateNestedManyWithoutAccountsInput, {
-    nullable: true,
-  })
-  entity?: EntityCreateNestedManyWithoutAccountsInput;
 
   @ApiProperty({
     required: false,

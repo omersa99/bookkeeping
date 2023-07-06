@@ -11,9 +11,9 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional, IsDate, ValidateNested } from "class-validator";
+import { IsString, IsOptional, ValidateNested, IsDate } from "class-validator";
+import { ChartOfAccount } from "../../chartOfAccount/base/ChartOfAccount";
 import { Type } from "class-transformer";
-import { Entity } from "../../entity/base/Entity";
 
 @ObjectType()
 class Account {
@@ -27,6 +27,15 @@ class Account {
     nullable: true,
   })
   balanceType!: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => [ChartOfAccount],
+  })
+  @ValidateNested()
+  @Type(() => ChartOfAccount)
+  @IsOptional()
+  chartOfAccount?: Array<ChartOfAccount>;
 
   @ApiProperty({
     required: false,
@@ -46,15 +55,6 @@ class Account {
   @Type(() => Date)
   @Field(() => Date)
   createdAt!: Date;
-
-  @ApiProperty({
-    required: false,
-    type: () => [Entity],
-  })
-  @ValidateNested()
-  @Type(() => Entity)
-  @IsOptional()
-  entity?: Array<Entity>;
 
   @ApiProperty({
     required: true,

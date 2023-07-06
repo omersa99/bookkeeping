@@ -27,9 +27,9 @@ import { AccountWhereUniqueInput } from "./AccountWhereUniqueInput";
 import { AccountFindManyArgs } from "./AccountFindManyArgs";
 import { AccountUpdateInput } from "./AccountUpdateInput";
 import { Account } from "./Account";
-import { EntityFindManyArgs } from "../../entity/base/EntityFindManyArgs";
-import { Entity } from "../../entity/base/Entity";
-import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
+import { ChartOfAccountFindManyArgs } from "../../chartOfAccount/base/ChartOfAccountFindManyArgs";
+import { ChartOfAccount } from "../../chartOfAccount/base/ChartOfAccount";
+import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -205,31 +205,31 @@ export class AccountControllerBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @common.Get("/:id/entity")
-  @ApiNestedQuery(EntityFindManyArgs)
+  @common.Get("/:id/chartOfAccount")
+  @ApiNestedQuery(ChartOfAccountFindManyArgs)
   @nestAccessControl.UseRoles({
-    resource: "Entity",
+    resource: "ChartOfAccount",
     action: "read",
     possession: "any",
   })
-  async findManyEntity(
+  async findManyChartOfAccount(
     @common.Req() request: Request,
     @common.Param() params: AccountWhereUniqueInput
-  ): Promise<Entity[]> {
-    const query = plainToClass(EntityFindManyArgs, request.query);
-    const results = await this.service.findEntity(params.id, {
+  ): Promise<ChartOfAccount[]> {
+    const query = plainToClass(ChartOfAccountFindManyArgs, request.query);
+    const results = await this.service.findChartOfAccount(params.id, {
       ...query,
       select: {
         createdAt: true,
-        id: true,
-        name: true,
-        updatedAt: true,
 
-        user: {
+        entity: {
           select: {
             id: true,
           },
         },
+
+        id: true,
+        updatedAt: true,
       },
     });
     if (results === null) {
@@ -240,18 +240,18 @@ export class AccountControllerBase {
     return results;
   }
 
-  @common.Post("/:id/entity")
+  @common.Post("/:id/chartOfAccount")
   @nestAccessControl.UseRoles({
     resource: "Account",
     action: "update",
     possession: "any",
   })
-  async connectEntity(
+  async connectChartOfAccount(
     @common.Param() params: AccountWhereUniqueInput,
-    @common.Body() body: EntityWhereUniqueInput[]
+    @common.Body() body: ChartOfAccountWhereUniqueInput[]
   ): Promise<void> {
     const data = {
-      entity: {
+      chartOfAccount: {
         connect: body,
       },
     };
@@ -262,18 +262,18 @@ export class AccountControllerBase {
     });
   }
 
-  @common.Patch("/:id/entity")
+  @common.Patch("/:id/chartOfAccount")
   @nestAccessControl.UseRoles({
     resource: "Account",
     action: "update",
     possession: "any",
   })
-  async updateEntity(
+  async updateChartOfAccount(
     @common.Param() params: AccountWhereUniqueInput,
-    @common.Body() body: EntityWhereUniqueInput[]
+    @common.Body() body: ChartOfAccountWhereUniqueInput[]
   ): Promise<void> {
     const data = {
-      entity: {
+      chartOfAccount: {
         set: body,
       },
     };
@@ -284,18 +284,18 @@ export class AccountControllerBase {
     });
   }
 
-  @common.Delete("/:id/entity")
+  @common.Delete("/:id/chartOfAccount")
   @nestAccessControl.UseRoles({
     resource: "Account",
     action: "update",
     possession: "any",
   })
-  async disconnectEntity(
+  async disconnectChartOfAccount(
     @common.Param() params: AccountWhereUniqueInput,
-    @common.Body() body: EntityWhereUniqueInput[]
+    @common.Body() body: ChartOfAccountWhereUniqueInput[]
   ): Promise<void> {
     const data = {
-      entity: {
+      chartOfAccount: {
         disconnect: body,
       },
     };
