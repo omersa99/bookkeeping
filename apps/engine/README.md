@@ -9,7 +9,7 @@
 This service was generated with Amplication. The server-side of the generated project. This component provides the different backend services - i.e., REST API, GraphQL API, authentication, authorization, logging, data validation and the connection to the database. Additional information about the server component and the architecture around it, can be found on the [documentation](https://docs.amplication.com/guides/getting-started) site.
 
 # Getting started
-dfsd
+
 ## Step 1: Configuration
 
 Configuration for the server component can be provided through the use of environment variables. These can be passed to the application via the use of the `.env` file in the base directory of the generated service. Below a table can be found which show the different variables that can be passed - these are the variables which exist by default, through the use of plugins additional integrations could require additional values. These values are provided default values after generation, change them to the desired values.
@@ -28,7 +28,7 @@ Configuration for the server component can be provided through the use of enviro
 | JWT_EXPIRATION       | the expiration time for the json-web token   | 2d                                                                  |
 
 > **Note**
-> Amplication generates default values and stores them under the .env file. It is advised to use some form of secrets manager/vault solution when using in production.
+> Amplication generates default values and stores them under the .env file. It is advised to use some form of secrets manager/vault solution when using in production. 
 
 ## Step 2.1: Scripts - pre-requisites
 
