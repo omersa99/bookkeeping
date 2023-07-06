@@ -267,6 +267,7 @@ export class JournalControllerBase {
           },
         },
 
+        trxType: true,
         updatedAt: true,
       },
     });

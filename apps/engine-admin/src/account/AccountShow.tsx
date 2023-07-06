@@ -48,6 +48,7 @@ export const AccountShow = (props: ShowProps): React.ReactElement => {
             >
               <TextField source={JOURNAL_TITLE_FIELD} />
             </ReferenceField>
+            <TextField label="trxType" source="trxType" />
             <DateField source="updatedAt" label="Updated At" />
           </Datagrid>
         </ReferenceManyField>

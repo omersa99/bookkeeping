@@ -64,6 +64,17 @@ class Transaction {
   journal?: Journal | null;
 
   @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  trxType!: string | null;
+
+  @ApiProperty({
     required: true,
   })
   @IsDate()

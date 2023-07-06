@@ -82,6 +82,7 @@ export class TransactionControllerBase {
           },
         },
 
+        trxType: true,
         updatedAt: true,
       },
     });
@@ -120,6 +121,7 @@ export class TransactionControllerBase {
           },
         },
 
+        trxType: true,
         updatedAt: true,
       },
     });
@@ -159,6 +161,7 @@ export class TransactionControllerBase {
           },
         },
 
+        trxType: true,
         updatedAt: true,
       },
     });
@@ -221,6 +224,7 @@ export class TransactionControllerBase {
             },
           },
 
+          trxType: true,
           updatedAt: true,
         },
       });
@@ -268,6 +272,7 @@ export class TransactionControllerBase {
             },
           },
 
+          trxType: true,
           updatedAt: true,
         },
       });

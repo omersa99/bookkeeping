@@ -14,6 +14,8 @@ import { ApiProperty } from "@nestjs/swagger";
 import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
 import { ValidateNested, IsOptional, IsString } from "class-validator";
 import { Type } from "class-transformer";
+import { ItemWhereUniqueInput } from "../../item/base/ItemWhereUniqueInput";
+import { ItemTransactionCreateNestedManyWithoutEntitiesInput } from "./ItemTransactionCreateNestedManyWithoutEntitiesInput";
 import { LedgerCreateNestedManyWithoutEntitiesInput } from "./LedgerCreateNestedManyWithoutEntitiesInput";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
@@ -30,6 +32,30 @@ class EntityCreateInput {
     nullable: true,
   })
   coa?: ChartOfAccountWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => ItemWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => ItemWhereUniqueInput)
+  @IsOptional()
+  @Field(() => ItemWhereUniqueInput, {
+    nullable: true,
+  })
+  items?: ItemWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => ItemTransactionCreateNestedManyWithoutEntitiesInput,
+  })
+  @ValidateNested()
+  @Type(() => ItemTransactionCreateNestedManyWithoutEntitiesInput)
+  @IsOptional()
+  @Field(() => ItemTransactionCreateNestedManyWithoutEntitiesInput, {
+    nullable: true,
+  })
+  itemTransactions?: ItemTransactionCreateNestedManyWithoutEntitiesInput;
 
   @ApiProperty({
     required: false,

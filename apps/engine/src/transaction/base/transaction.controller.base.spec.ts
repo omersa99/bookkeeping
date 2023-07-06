@@ -22,12 +22,14 @@ const CREATE_INPUT = {
   amount: "exampleAmount",
   createdAt: new Date(),
   id: "exampleId",
+  trxType: "exampleTrxType",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
   amount: "exampleAmount",
   createdAt: new Date(),
   id: "exampleId",
+  trxType: "exampleTrxType",
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
@@ -35,6 +37,7 @@ const FIND_MANY_RESULT = [
     amount: "exampleAmount",
     createdAt: new Date(),
     id: "exampleId",
+    trxType: "exampleTrxType",
     updatedAt: new Date(),
   },
 ];
@@ -42,6 +45,7 @@ const FIND_ONE_RESULT = {
   amount: "exampleAmount",
   createdAt: new Date(),
   id: "exampleId",
+  trxType: "exampleTrxType",
   updatedAt: new Date(),
 };
 

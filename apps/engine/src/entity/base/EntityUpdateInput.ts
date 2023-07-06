@@ -14,6 +14,8 @@ import { ApiProperty } from "@nestjs/swagger";
 import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
 import { ValidateNested, IsOptional, IsString } from "class-validator";
 import { Type } from "class-transformer";
+import { ItemWhereUniqueInput } from "../../item/base/ItemWhereUniqueInput";
+import { ItemTransactionUpdateManyWithoutEntitiesInput } from "./ItemTransactionUpdateManyWithoutEntitiesInput";
 import { LedgerUpdateManyWithoutEntitiesInput } from "./LedgerUpdateManyWithoutEntitiesInput";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
@@ -30,6 +32,30 @@ class EntityUpdateInput {
     nullable: true,
   })
   coa?: ChartOfAccountWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => ItemWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => ItemWhereUniqueInput)
+  @IsOptional()
+  @Field(() => ItemWhereUniqueInput, {
+    nullable: true,
+  })
+  items?: ItemWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => ItemTransactionUpdateManyWithoutEntitiesInput,
+  })
+  @ValidateNested()
+  @Type(() => ItemTransactionUpdateManyWithoutEntitiesInput)
+  @IsOptional()
+  @Field(() => ItemTransactionUpdateManyWithoutEntitiesInput, {
+    nullable: true,
+  })
+  itemTransactions?: ItemTransactionUpdateManyWithoutEntitiesInput;
 
   @ApiProperty({
     required: false,

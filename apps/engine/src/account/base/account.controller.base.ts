@@ -341,6 +341,7 @@ export class AccountControllerBase {
           },
         },
 
+        trxType: true,
         updatedAt: true,
       },
     });

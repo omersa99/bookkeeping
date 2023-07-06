@@ -8,4 +8,5 @@ export type TransactionWhereInput = {
   amount?: StringNullableFilter;
   id?: StringFilter;
   journal?: JournalWhereUniqueInput;
+  trxType?: StringNullableFilter;
 };

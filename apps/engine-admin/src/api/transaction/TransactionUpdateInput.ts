@@ -5,4 +5,5 @@ export type TransactionUpdateInput = {
   account?: AccountWhereUniqueInput | null;
   amount?: string | null;
   journal?: JournalWhereUniqueInput | null;
+  trxType?: string | null;
 };
