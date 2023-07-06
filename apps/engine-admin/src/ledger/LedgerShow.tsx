@@ -27,7 +27,7 @@ export const LedgerShow = (props: ShowProps): React.ReactElement => {
         <DateField source="updatedAt" label="Updated At" />
         <ReferenceManyField
           reference="Journal"
-          target="legerID"
+          target="ledgerId"
           label="journals"
         >
           <Datagrid rowClick="show">

@@ -83,7 +83,7 @@ class EntityOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  userID?: SortOrder;
+  userId?: SortOrder;
 }
 
 export { EntityOrderByInput as EntityOrderByInput };

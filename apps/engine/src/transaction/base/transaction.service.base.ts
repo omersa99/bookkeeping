@@ -10,7 +10,7 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
-import { Prisma, Transaction, Journal } from "@prisma/client";
+import { Prisma, Transaction, Account, Journal } from "@prisma/client";
 
 export class TransactionServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -45,6 +45,14 @@ export class TransactionServiceBase {
     args: Prisma.SelectSubset<T, Prisma.TransactionDeleteArgs>
   ): Promise<Transaction> {
     return this.prisma.transaction.delete(args);
+  }
+
+  async getAccount(parentId: string): Promise<Account | null> {
+    return this.prisma.transaction
+      .findUnique({
+        where: { id: parentId },
+      })
+      .account();
   }
 
   async getJournal(parentId: string): Promise<Journal | null> {

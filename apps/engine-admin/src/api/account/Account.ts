@@ -1,4 +1,5 @@
 import { ChartOfAccount } from "../chartOfAccount/ChartOfAccount";
+import { Transaction } from "../transaction/Transaction";
 
 export type Account = {
   balanceType: string | null;
@@ -8,5 +9,6 @@ export type Account = {
   id: string;
   name: string | null;
   role: string | null;
+  transactions?: Array<Transaction>;
   updatedAt: Date;
 };

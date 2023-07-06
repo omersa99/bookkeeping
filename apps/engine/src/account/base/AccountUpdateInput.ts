@@ -14,6 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsString, IsOptional, ValidateNested } from "class-validator";
 import { ChartOfAccountUpdateManyWithoutAccountsInput } from "./ChartOfAccountUpdateManyWithoutAccountsInput";
 import { Type } from "class-transformer";
+import { TransactionUpdateManyWithoutAccountsInput } from "./TransactionUpdateManyWithoutAccountsInput";
 
 @InputType()
 class AccountUpdateInput {
@@ -72,6 +73,18 @@ class AccountUpdateInput {
     nullable: true,
   })
   role?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => TransactionUpdateManyWithoutAccountsInput,
+  })
+  @ValidateNested()
+  @Type(() => TransactionUpdateManyWithoutAccountsInput)
+  @IsOptional()
+  @Field(() => TransactionUpdateManyWithoutAccountsInput, {
+    nullable: true,
+  })
+  transactions?: TransactionUpdateManyWithoutAccountsInput;
 }
 
 export { AccountUpdateInput as AccountUpdateInput };

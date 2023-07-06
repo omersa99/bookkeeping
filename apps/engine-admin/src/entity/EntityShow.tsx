@@ -35,7 +35,7 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
         </ReferenceField>
         <ReferenceManyField
           reference="Ledger"
-          target="entityID"
+          target="entityId"
           label="ledgers"
         >
           <Datagrid rowClick="show">
