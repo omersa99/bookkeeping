@@ -2,7 +2,7 @@ import { SortOrder } from "../../util/SortOrder";
 
 export type ChartOfAccountOrderByInput = {
   createdAt?: SortOrder;
-  entityId?: SortOrder;
+  entitieId?: SortOrder;
   id?: SortOrder;
   updatedAt?: SortOrder;
 };

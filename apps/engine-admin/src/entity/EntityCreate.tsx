@@ -19,11 +19,7 @@ export const EntityCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
-        <ReferenceInput
-          source="chartOfAccounts.id"
-          reference="ChartOfAccount"
-          label="chartOfAccounts"
-        >
+        <ReferenceInput source="coa.id" reference="ChartOfAccount" label="coa">
           <SelectInput optionText={ChartOfAccountTitle} />
         </ReferenceInput>
         <ReferenceArrayInput

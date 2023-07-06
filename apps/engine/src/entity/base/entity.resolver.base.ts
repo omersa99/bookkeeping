@@ -95,9 +95,9 @@ export class EntityResolverBase {
       data: {
         ...args.data,
 
-        chartOfAccounts: args.data.chartOfAccounts
+        coa: args.data.coa
           ? {
-              connect: args.data.chartOfAccounts,
+              connect: args.data.coa,
             }
           : undefined,
 
@@ -126,9 +126,9 @@ export class EntityResolverBase {
         data: {
           ...args.data,
 
-          chartOfAccounts: args.data.chartOfAccounts
+          coa: args.data.coa
             ? {
-                connect: args.data.chartOfAccounts,
+                connect: args.data.coa,
               }
             : undefined,
 
@@ -193,17 +193,17 @@ export class EntityResolverBase {
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => ChartOfAccount, {
     nullable: true,
-    name: "chartOfAccounts",
+    name: "coa",
   })
   @nestAccessControl.UseRoles({
     resource: "ChartOfAccount",
     action: "read",
     possession: "any",
   })
-  async resolveFieldChartOfAccounts(
+  async resolveFieldCoa(
     @graphql.Parent() parent: Entity
   ): Promise<ChartOfAccount | null> {
-    const result = await this.service.getChartOfAccounts(parent.id);
+    const result = await this.service.getCoa(parent.id);
 
     if (!result) {
       return null;

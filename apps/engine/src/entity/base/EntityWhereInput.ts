@@ -31,7 +31,7 @@ class EntityWhereInput {
   @Field(() => ChartOfAccountWhereUniqueInput, {
     nullable: true,
   })
-  chartOfAccounts?: ChartOfAccountWhereUniqueInput;
+  coa?: ChartOfAccountWhereUniqueInput;
 
   @ApiProperty({
     required: false,

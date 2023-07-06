@@ -39,7 +39,7 @@ class ChartOfAccountOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  entityId?: SortOrder;
+  entitieId?: SortOrder;
 
   @ApiProperty({
     required: false,

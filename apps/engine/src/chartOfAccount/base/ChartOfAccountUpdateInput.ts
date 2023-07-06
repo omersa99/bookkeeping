@@ -40,7 +40,7 @@ class ChartOfAccountUpdateInput {
   @Field(() => EntityWhereUniqueInput, {
     nullable: true,
   })
-  entity?: EntityWhereUniqueInput | null;
+  entitie?: EntityWhereUniqueInput | null;
 }
 
 export { ChartOfAccountUpdateInput as ChartOfAccountUpdateInput };

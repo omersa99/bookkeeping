@@ -28,7 +28,7 @@ class EntityOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  chartOfAccountsId?: SortOrder;
+  coaID?: SortOrder;
 
   @ApiProperty({
     required: false,

@@ -58,11 +58,11 @@ export class ChartOfAccountServiceBase {
       .accounts(args);
   }
 
-  async getEntity(parentId: string): Promise<Entity | null> {
+  async getEntitie(parentId: string): Promise<Entity | null> {
     return this.prisma.chartOfAccount
       .findUnique({
         where: { id: parentId },
       })
-      .entity();
+      .entitie();
   }
 }

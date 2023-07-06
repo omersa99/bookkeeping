@@ -58,12 +58,12 @@ export class EntityServiceBase {
       .ledgers(args);
   }
 
-  async getChartOfAccounts(parentId: string): Promise<ChartOfAccount | null> {
+  async getCoa(parentId: string): Promise<ChartOfAccount | null> {
     return this.prisma.entity
       .findUnique({
         where: { id: parentId },
       })
-      .chartOfAccounts();
+      .coa();
   }
 
   async getUser(parentId: string): Promise<User | null> {

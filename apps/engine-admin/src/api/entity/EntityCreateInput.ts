@@ -3,7 +3,7 @@ import { LedgerCreateNestedManyWithoutEntitiesInput } from "./LedgerCreateNested
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type EntityCreateInput = {
-  chartOfAccounts?: ChartOfAccountWhereUniqueInput | null;
+  coa?: ChartOfAccountWhereUniqueInput | null;
   ledgers?: LedgerCreateNestedManyWithoutEntitiesInput;
   name?: string | null;
   user?: UserWhereUniqueInput | null;

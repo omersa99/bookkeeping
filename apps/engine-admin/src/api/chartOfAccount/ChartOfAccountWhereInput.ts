@@ -4,6 +4,6 @@ import { StringFilter } from "../../util/StringFilter";
 
 export type ChartOfAccountWhereInput = {
   accounts?: AccountListRelationFilter;
-  entity?: EntityWhereUniqueInput;
+  entitie?: EntityWhereUniqueInput;
   id?: StringFilter;
 };
