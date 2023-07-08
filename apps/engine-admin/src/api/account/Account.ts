@@ -3,6 +3,7 @@ import { InvoiceModel } from "../invoiceModel/InvoiceModel";
 import { Transaction } from "../transaction/Transaction";
 
 export type Account = {
+  balance: string | null;
   balanceType: string | null;
   chartOfAccount?: Array<ChartOfAccount>;
   code: string | null;

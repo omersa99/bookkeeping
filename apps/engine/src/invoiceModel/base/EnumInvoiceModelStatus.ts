@@ -9,19 +9,13 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { IsString } from "class-validator";
+import { registerEnumType } from "@nestjs/graphql";
 
-@InputType()
-class ItemTransactionWhereUniqueInput {
-  @ApiProperty({
-    required: true,
-    type: String,
-  })
-  @IsString()
-  @Field(() => String)
-  id!: string;
+export enum EnumInvoiceModelStatus {
+  Draft = "Draft",
+  Paid = "Paid",
 }
 
-export { ItemTransactionWhereUniqueInput as ItemTransactionWhereUniqueInput };
+registerEnumType(EnumInvoiceModelStatus, {
+  name: "EnumInvoiceModelStatus",
+});

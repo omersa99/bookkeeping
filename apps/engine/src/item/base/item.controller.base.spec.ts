@@ -21,39 +21,55 @@ const existingId = "existingId";
 const CREATE_INPUT = {
   cogsAccount: "exampleCogsAccount",
   createdAt: new Date(),
+  description: "exampleDescription",
   earningsAccount: "exampleEarningsAccount",
   id: "exampleId",
   inventoryAccount: "exampleInventoryAccount",
   name: "exampleName",
+  price: 42.42,
+  pricePerUnit: 42.42,
+  quantity: 42,
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
   cogsAccount: "exampleCogsAccount",
   createdAt: new Date(),
+  description: "exampleDescription",
   earningsAccount: "exampleEarningsAccount",
   id: "exampleId",
   inventoryAccount: "exampleInventoryAccount",
   name: "exampleName",
+  price: 42.42,
+  pricePerUnit: 42.42,
+  quantity: 42,
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
   {
     cogsAccount: "exampleCogsAccount",
     createdAt: new Date(),
+    description: "exampleDescription",
     earningsAccount: "exampleEarningsAccount",
     id: "exampleId",
     inventoryAccount: "exampleInventoryAccount",
     name: "exampleName",
+    price: 42.42,
+    pricePerUnit: 42.42,
+    quantity: 42,
     updatedAt: new Date(),
   },
 ];
 const FIND_ONE_RESULT = {
   cogsAccount: "exampleCogsAccount",
   createdAt: new Date(),
+  description: "exampleDescription",
   earningsAccount: "exampleEarningsAccount",
   id: "exampleId",
   inventoryAccount: "exampleInventoryAccount",
   name: "exampleName",
+  price: 42.42,
+  pricePerUnit: 42.42,
+  quantity: 42,
   updatedAt: new Date(),
 };
 

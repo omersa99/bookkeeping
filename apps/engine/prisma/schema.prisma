@@ -55,6 +55,7 @@ model Ledger {
 }
 
 model Account {
+  balance        String?
   balanceType    String?
   chartOfAccount ChartOfAccount[]
   code           String?
@@ -68,18 +69,23 @@ model Account {
 }
 
 model Entity {
-  coa              ChartOfAccount?   @relation(fields: [coaID], references: [id])
-  coaID            String?           @unique
-  createdAt        DateTime          @default(now())
-  customers        Customer[]
-  id               String            @id @default(cuid())
-  items            Item?
-  itemTransactions ItemTransaction[]
-  journals         Journal[]
-  ledgers          Ledger[]
-  name             String?
-  updatedAt        DateTime          @updatedAt
-  user             User?
+  accountingType EnumEntityAccountingType?
+  address        String?
+  coa            ChartOfAccount?           @relation(fields: [coaID], references: [id])
+  coaID          String?                   @unique
+  createdAt      DateTime                  @default(now())
+  customers      Customer[]
+  deductionId    String?
+  deductionRate  String?
+  exemption      Boolean?
+  id             String                    @id @default(cuid())
+  items          Item?
+  journals       Journal[]
+  ledgers        Ledger[]
+  name           String?
+  taxId          String?
+  updatedAt      DateTime                  @updatedAt
+  user           User?
 }
 
 model ChartOfAccount {
@@ -92,48 +98,36 @@ model ChartOfAccount {
 
 model Item {
   cogsAccount      String?
-  createdAt        DateTime          @default(now())
+  createdAt        DateTime @default(now())
+  description      String?
   earningsAccount  String?
-  entity           Entity?           @relation(fields: [entityId], references: [id])
-  entityId         String?           @unique
-  id               String            @id @default(cuid())
+  entity           Entity?  @relation(fields: [entityId], references: [id])
+  entityId         String?  @unique
+  id               String   @id @default(cuid())
   inventoryAccount String?
-  itemTransactions ItemTransaction[]
   name             String?
-  updatedAt        DateTime          @updatedAt
+  price            Float?
+  pricePerUnit     Float?
+  quantity         Int?
+  updatedAt        DateTime @updatedAt
 }
 
 model InvoiceModel {
-  amountDue          String?
-  amountPaid         String?
-  cashAccount        Account?                       @relation(fields: [cashAccountId], references: [id])
-  cashAccountId      String?
-  createdAt          DateTime                       @default(now())
-  customer           Customer?                      @relation(fields: [customerId], references: [id])
-  customerId         String?
-  id                 String                         @id @default(cuid())
-  info               String?
-  invoiceNumber      String?
-  invoiceStatus      EnumInvoiceModelInvoiceStatus?
-  itemTransactions   ItemTransaction?               @relation(fields: [itemTransactionsId], references: [id])
-  itemTransactionsId String?                        @unique
-  ledger             Ledger?                        @relation(fields: [ledgerId], references: [id])
-  ledgerId           String?                        @unique
-  updatedAt          DateTime                       @updatedAt
-}
-
-model ItemTransaction {
-  createdAt    DateTime      @default(now())
-  entity       Entity?       @relation(fields: [entityId], references: [id])
-  entityId     String?
-  id           String        @id @default(cuid())
-  invoiceModel InvoiceModel?
-  item         Item?         @relation(fields: [itemId], references: [id])
-  itemId       String?
-  quantity     Int?
-  totalAmount  String?
-  unitCost     String?
-  updatedAt    DateTime      @updatedAt
+  amountDue     String?
+  amountPaid    String?
+  cashAccount   Account?                       @relation(fields: [cashAccountId], references: [id])
+  cashAccountId String?
+  createdAt     DateTime                       @default(now())
+  customer      Customer?                      @relation(fields: [customerId], references: [id])
+  customerId    String?
+  id            String                         @id @default(cuid())
+  info          String?
+  invoiceNumber String?
+  invoiceStatus EnumInvoiceModelInvoiceStatus?
+  ledger        Ledger?                        @relation(fields: [ledgerId], references: [id])
+  ledgerId      String?                        @unique
+  status        EnumInvoiceModelStatus?
+  updatedAt     DateTime                       @updatedAt
 }
 
 model Customer {
@@ -148,8 +142,18 @@ model Customer {
   updatedAt     DateTime       @updatedAt
 }
 
+enum EnumEntityAccountingType {
+  Cash
+  Cumulative
+}
+
 enum EnumInvoiceModelInvoiceStatus {
   Draft
   Paid
   Canceled
+}
+
+enum EnumInvoiceModelStatus {
+  Draft
+  Paid
 }

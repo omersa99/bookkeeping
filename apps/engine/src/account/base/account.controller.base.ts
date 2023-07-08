@@ -59,6 +59,7 @@ export class AccountControllerBase {
     return await this.service.create({
       data: data,
       select: {
+        balance: true,
         balanceType: true,
         code: true,
         createdAt: true,
@@ -87,6 +88,7 @@ export class AccountControllerBase {
     return this.service.findMany({
       ...args,
       select: {
+        balance: true,
         balanceType: true,
         code: true,
         createdAt: true,
@@ -116,6 +118,7 @@ export class AccountControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
+        balance: true,
         balanceType: true,
         code: true,
         createdAt: true,
@@ -154,6 +157,7 @@ export class AccountControllerBase {
         where: params,
         data: data,
         select: {
+          balance: true,
           balanceType: true,
           code: true,
           createdAt: true,
@@ -191,6 +195,7 @@ export class AccountControllerBase {
       return await this.service.delete({
         where: params,
         select: {
+          balance: true,
           balanceType: true,
           code: true,
           createdAt: true,
@@ -350,18 +355,13 @@ export class AccountControllerBase {
         invoiceNumber: true,
         invoiceStatus: true,
 
-        itemTransactions: {
-          select: {
-            id: true,
-          },
-        },
-
         ledger: {
           select: {
             id: true,
           },
         },
 
+        status: true,
         updatedAt: true,
       },
     });

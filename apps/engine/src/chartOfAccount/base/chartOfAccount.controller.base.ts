@@ -253,6 +253,7 @@ export class ChartOfAccountControllerBase {
     const results = await this.service.findAccounts(params.id, {
       ...query,
       select: {
+        balance: true,
         balanceType: true,
         code: true,
         createdAt: true,

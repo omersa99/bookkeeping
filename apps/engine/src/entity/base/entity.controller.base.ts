@@ -30,9 +30,6 @@ import { Entity } from "./Entity";
 import { CustomerFindManyArgs } from "../../customer/base/CustomerFindManyArgs";
 import { Customer } from "../../customer/base/Customer";
 import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
-import { ItemTransactionFindManyArgs } from "../../itemTransaction/base/ItemTransactionFindManyArgs";
-import { ItemTransaction } from "../../itemTransaction/base/ItemTransaction";
-import { ItemTransactionWhereUniqueInput } from "../../itemTransaction/base/ItemTransactionWhereUniqueInput";
 import { JournalFindManyArgs } from "../../journal/base/JournalFindManyArgs";
 import { Journal } from "../../journal/base/Journal";
 import { JournalWhereUniqueInput } from "../../journal/base/JournalWhereUniqueInput";
@@ -82,6 +79,9 @@ export class EntityControllerBase {
           : undefined,
       },
       select: {
+        accountingType: true,
+        address: true,
+
         coa: {
           select: {
             id: true,
@@ -89,6 +89,9 @@ export class EntityControllerBase {
         },
 
         createdAt: true,
+        deductionId: true,
+        deductionRate: true,
+        exemption: true,
         id: true,
 
         items: {
@@ -98,6 +101,7 @@ export class EntityControllerBase {
         },
 
         name: true,
+        taxId: true,
         updatedAt: true,
 
         user: {
@@ -126,6 +130,9 @@ export class EntityControllerBase {
     return this.service.findMany({
       ...args,
       select: {
+        accountingType: true,
+        address: true,
+
         coa: {
           select: {
             id: true,
@@ -133,6 +140,9 @@ export class EntityControllerBase {
         },
 
         createdAt: true,
+        deductionId: true,
+        deductionRate: true,
+        exemption: true,
         id: true,
 
         items: {
@@ -142,6 +152,7 @@ export class EntityControllerBase {
         },
 
         name: true,
+        taxId: true,
         updatedAt: true,
 
         user: {
@@ -171,6 +182,9 @@ export class EntityControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
+        accountingType: true,
+        address: true,
+
         coa: {
           select: {
             id: true,
@@ -178,6 +192,9 @@ export class EntityControllerBase {
         },
 
         createdAt: true,
+        deductionId: true,
+        deductionRate: true,
+        exemption: true,
         id: true,
 
         items: {
@@ -187,6 +204,7 @@ export class EntityControllerBase {
         },
 
         name: true,
+        taxId: true,
         updatedAt: true,
 
         user: {
@@ -245,6 +263,9 @@ export class EntityControllerBase {
             : undefined,
         },
         select: {
+          accountingType: true,
+          address: true,
+
           coa: {
             select: {
               id: true,
@@ -252,6 +273,9 @@ export class EntityControllerBase {
           },
 
           createdAt: true,
+          deductionId: true,
+          deductionRate: true,
+          exemption: true,
           id: true,
 
           items: {
@@ -261,6 +285,7 @@ export class EntityControllerBase {
           },
 
           name: true,
+          taxId: true,
           updatedAt: true,
 
           user: {
@@ -298,6 +323,9 @@ export class EntityControllerBase {
       return await this.service.delete({
         where: params,
         select: {
+          accountingType: true,
+          address: true,
+
           coa: {
             select: {
               id: true,
@@ -305,6 +333,9 @@ export class EntityControllerBase {
           },
 
           createdAt: true,
+          deductionId: true,
+          deductionRate: true,
+          exemption: true,
           id: true,
 
           items: {
@@ -314,6 +345,7 @@ export class EntityControllerBase {
           },
 
           name: true,
+          taxId: true,
           updatedAt: true,
 
           user: {
@@ -428,124 +460,6 @@ export class EntityControllerBase {
   ): Promise<void> {
     const data = {
       customers: {
-        disconnect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @common.Get("/:id/itemTransactions")
-  @ApiNestedQuery(ItemTransactionFindManyArgs)
-  @nestAccessControl.UseRoles({
-    resource: "ItemTransaction",
-    action: "read",
-    possession: "any",
-  })
-  async findManyItemTransactions(
-    @common.Req() request: Request,
-    @common.Param() params: EntityWhereUniqueInput
-  ): Promise<ItemTransaction[]> {
-    const query = plainToClass(ItemTransactionFindManyArgs, request.query);
-    const results = await this.service.findItemTransactions(params.id, {
-      ...query,
-      select: {
-        createdAt: true,
-
-        entity: {
-          select: {
-            id: true,
-          },
-        },
-
-        id: true,
-
-        invoiceModel: {
-          select: {
-            id: true,
-          },
-        },
-
-        item: {
-          select: {
-            id: true,
-          },
-        },
-
-        quantity: true,
-        totalAmount: true,
-        unitCost: true,
-        updatedAt: true,
-      },
-    });
-    if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
-    }
-    return results;
-  }
-
-  @common.Post("/:id/itemTransactions")
-  @nestAccessControl.UseRoles({
-    resource: "Entity",
-    action: "update",
-    possession: "any",
-  })
-  async connectItemTransactions(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: ItemTransactionWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      itemTransactions: {
-        connect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Patch("/:id/itemTransactions")
-  @nestAccessControl.UseRoles({
-    resource: "Entity",
-    action: "update",
-    possession: "any",
-  })
-  async updateItemTransactions(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: ItemTransactionWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      itemTransactions: {
-        set: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Delete("/:id/itemTransactions")
-  @nestAccessControl.UseRoles({
-    resource: "Entity",
-    action: "update",
-    possession: "any",
-  })
-  async disconnectItemTransactions(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: ItemTransactionWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      itemTransactions: {
         disconnect: body,
       },
     };

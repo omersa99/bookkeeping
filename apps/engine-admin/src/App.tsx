@@ -41,10 +41,6 @@ import { InvoiceModelList } from "./invoiceModel/InvoiceModelList";
 import { InvoiceModelCreate } from "./invoiceModel/InvoiceModelCreate";
 import { InvoiceModelEdit } from "./invoiceModel/InvoiceModelEdit";
 import { InvoiceModelShow } from "./invoiceModel/InvoiceModelShow";
-import { ItemTransactionList } from "./itemTransaction/ItemTransactionList";
-import { ItemTransactionCreate } from "./itemTransaction/ItemTransactionCreate";
-import { ItemTransactionEdit } from "./itemTransaction/ItemTransactionEdit";
-import { ItemTransactionShow } from "./itemTransaction/ItemTransactionShow";
 import { CustomerList } from "./customer/CustomerList";
 import { CustomerCreate } from "./customer/CustomerCreate";
 import { CustomerEdit } from "./customer/CustomerEdit";
@@ -137,13 +133,6 @@ const App = (): React.ReactElement => {
           edit={InvoiceModelEdit}
           create={InvoiceModelCreate}
           show={InvoiceModelShow}
-        />
-        <Resource
-          name="ItemTransaction"
-          list={ItemTransactionList}
-          edit={ItemTransactionEdit}
-          create={ItemTransactionCreate}
-          show={ItemTransactionShow}
         />
         <Resource
           name="Customer"

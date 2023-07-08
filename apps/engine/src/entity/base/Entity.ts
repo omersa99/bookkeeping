@@ -11,18 +11,47 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
+import { EnumEntityAccountingType } from "./EnumEntityAccountingType";
+import {
+  IsEnum,
+  IsOptional,
+  IsString,
+  ValidateNested,
+  IsDate,
+  IsBoolean,
+} from "class-validator";
 import { ChartOfAccount } from "../../chartOfAccount/base/ChartOfAccount";
-import { ValidateNested, IsOptional, IsDate, IsString } from "class-validator";
 import { Type } from "class-transformer";
 import { Customer } from "../../customer/base/Customer";
 import { Item } from "../../item/base/Item";
-import { ItemTransaction } from "../../itemTransaction/base/ItemTransaction";
 import { Journal } from "../../journal/base/Journal";
 import { Ledger } from "../../ledger/base/Ledger";
 import { User } from "../../user/base/User";
 
 @ObjectType()
 class Entity {
+  @ApiProperty({
+    required: false,
+    enum: EnumEntityAccountingType,
+  })
+  @IsEnum(EnumEntityAccountingType)
+  @IsOptional()
+  @Field(() => EnumEntityAccountingType, {
+    nullable: true,
+  })
+  accountingType?: "Cash" | "Cumulative" | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  address!: string | null;
+
   @ApiProperty({
     required: false,
     type: () => ChartOfAccount,
@@ -50,6 +79,39 @@ class Entity {
   customers?: Array<Customer>;
 
   @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  deductionId!: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  deductionRate!: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @IsOptional()
+  @Field(() => Boolean, {
+    nullable: true,
+  })
+  exemption!: boolean | null;
+
+  @ApiProperty({
     required: true,
     type: String,
   })
@@ -65,15 +127,6 @@ class Entity {
   @Type(() => Item)
   @IsOptional()
   items?: Item | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => [ItemTransaction],
-  })
-  @ValidateNested()
-  @Type(() => ItemTransaction)
-  @IsOptional()
-  itemTransactions?: Array<ItemTransaction>;
 
   @ApiProperty({
     required: false,
@@ -103,6 +156,17 @@ class Entity {
     nullable: true,
   })
   name!: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  taxId!: string | null;
 
   @ApiProperty({
     required: true,

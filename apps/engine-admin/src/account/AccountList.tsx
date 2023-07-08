@@ -12,6 +12,7 @@ export const AccountList = (props: ListProps): React.ReactElement => {
       pagination={<Pagination />}
     >
       <Datagrid rowClick="show">
+        <TextField label="balance" source="balance" />
         <TextField label="balanceType" source="balanceType" />
         <TextField label="code" source="code" />
         <DateField source="createdAt" label="Created At" />

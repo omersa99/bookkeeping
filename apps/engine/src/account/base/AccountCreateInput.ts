@@ -28,6 +28,17 @@ class AccountCreateInput {
   @Field(() => String, {
     nullable: true,
   })
+  balance?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
   balanceType?: string | null;
 
   @ApiProperty({

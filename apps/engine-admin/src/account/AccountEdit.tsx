@@ -17,6 +17,7 @@ export const AccountEdit = (props: EditProps): React.ReactElement => {
   return (
     <Edit {...props}>
       <SimpleForm>
+        <TextInput label="balance" source="balance" />
         <TextInput label="balanceType" source="balanceType" />
         <ReferenceArrayInput
           source="chartOfAccount"
