@@ -15,7 +15,6 @@ import {
   InvoiceModel,
   Account,
   Customer,
-  ItemTransaction,
   Ledger,
 } from "@prisma/client";
 
@@ -68,14 +67,6 @@ export class InvoiceModelServiceBase {
         where: { id: parentId },
       })
       .customer();
-  }
-
-  async getItemTransactions(parentId: string): Promise<ItemTransaction | null> {
-    return this.prisma.invoiceModel
-      .findUnique({
-        where: { id: parentId },
-      })
-      .itemTransactions();
   }
 
   async getLedger(parentId: string): Promise<Ledger | null> {

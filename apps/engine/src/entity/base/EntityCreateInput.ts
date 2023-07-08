@@ -11,18 +11,46 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
+import { EnumEntityAccountingType } from "./EnumEntityAccountingType";
+import {
+  IsEnum,
+  IsOptional,
+  IsString,
+  ValidateNested,
+  IsBoolean,
+} from "class-validator";
 import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
-import { ValidateNested, IsOptional, IsString } from "class-validator";
 import { Type } from "class-transformer";
 import { CustomerCreateNestedManyWithoutEntitiesInput } from "./CustomerCreateNestedManyWithoutEntitiesInput";
 import { ItemWhereUniqueInput } from "../../item/base/ItemWhereUniqueInput";
-import { ItemTransactionCreateNestedManyWithoutEntitiesInput } from "./ItemTransactionCreateNestedManyWithoutEntitiesInput";
 import { JournalCreateNestedManyWithoutEntitiesInput } from "./JournalCreateNestedManyWithoutEntitiesInput";
 import { LedgerCreateNestedManyWithoutEntitiesInput } from "./LedgerCreateNestedManyWithoutEntitiesInput";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class EntityCreateInput {
+  @ApiProperty({
+    required: false,
+    enum: EnumEntityAccountingType,
+  })
+  @IsEnum(EnumEntityAccountingType)
+  @IsOptional()
+  @Field(() => EnumEntityAccountingType, {
+    nullable: true,
+  })
+  accountingType?: "Cash" | "Cumulative" | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  address?: string | null;
+
   @ApiProperty({
     required: false,
     type: () => ChartOfAccountWhereUniqueInput,
@@ -49,6 +77,39 @@ class EntityCreateInput {
 
   @ApiProperty({
     required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  deductionId?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  deductionRate?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @IsOptional()
+  @Field(() => Boolean, {
+    nullable: true,
+  })
+  exemption?: boolean | null;
+
+  @ApiProperty({
+    required: false,
     type: () => ItemWhereUniqueInput,
   })
   @ValidateNested()
@@ -58,18 +119,6 @@ class EntityCreateInput {
     nullable: true,
   })
   items?: ItemWhereUniqueInput | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => ItemTransactionCreateNestedManyWithoutEntitiesInput,
-  })
-  @ValidateNested()
-  @Type(() => ItemTransactionCreateNestedManyWithoutEntitiesInput)
-  @IsOptional()
-  @Field(() => ItemTransactionCreateNestedManyWithoutEntitiesInput, {
-    nullable: true,
-  })
-  itemTransactions?: ItemTransactionCreateNestedManyWithoutEntitiesInput;
 
   @ApiProperty({
     required: false,
@@ -105,6 +154,17 @@ class EntityCreateInput {
     nullable: true,
   })
   name?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  taxId?: string | null;
 
   @ApiProperty({
     required: false,

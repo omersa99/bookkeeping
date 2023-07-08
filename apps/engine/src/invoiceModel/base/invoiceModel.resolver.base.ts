@@ -28,7 +28,6 @@ import { InvoiceModelFindUniqueArgs } from "./InvoiceModelFindUniqueArgs";
 import { InvoiceModel } from "./InvoiceModel";
 import { Account } from "../../account/base/Account";
 import { Customer } from "../../customer/base/Customer";
-import { ItemTransaction } from "../../itemTransaction/base/ItemTransaction";
 import { Ledger } from "../../ledger/base/Ledger";
 import { InvoiceModelService } from "../invoiceModel.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
@@ -111,12 +110,6 @@ export class InvoiceModelResolverBase {
             }
           : undefined,
 
-        itemTransactions: args.data.itemTransactions
-          ? {
-              connect: args.data.itemTransactions,
-            }
-          : undefined,
-
         ledger: args.data.ledger
           ? {
               connect: args.data.ledger,
@@ -151,12 +144,6 @@ export class InvoiceModelResolverBase {
           customer: args.data.customer
             ? {
                 connect: args.data.customer,
-              }
-            : undefined,
-
-          itemTransactions: args.data.itemTransactions
-            ? {
-                connect: args.data.itemTransactions,
               }
             : undefined,
 
@@ -233,27 +220,6 @@ export class InvoiceModelResolverBase {
     @graphql.Parent() parent: InvoiceModel
   ): Promise<Customer | null> {
     const result = await this.service.getCustomer(parent.id);
-
-    if (!result) {
-      return null;
-    }
-    return result;
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => ItemTransaction, {
-    nullable: true,
-    name: "itemTransactions",
-  })
-  @nestAccessControl.UseRoles({
-    resource: "ItemTransaction",
-    action: "read",
-    possession: "any",
-  })
-  async resolveFieldItemTransactions(
-    @graphql.Parent() parent: InvoiceModel
-  ): Promise<ItemTransaction | null> {
-    const result = await this.service.getItemTransactions(parent.id);
 
     if (!result) {
       return null;

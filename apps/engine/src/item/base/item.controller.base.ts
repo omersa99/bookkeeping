@@ -27,9 +27,6 @@ import { ItemWhereUniqueInput } from "./ItemWhereUniqueInput";
 import { ItemFindManyArgs } from "./ItemFindManyArgs";
 import { ItemUpdateInput } from "./ItemUpdateInput";
 import { Item } from "./Item";
-import { ItemTransactionFindManyArgs } from "../../itemTransaction/base/ItemTransactionFindManyArgs";
-import { ItemTransaction } from "../../itemTransaction/base/ItemTransaction";
-import { ItemTransactionWhereUniqueInput } from "../../itemTransaction/base/ItemTransactionWhereUniqueInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -63,6 +60,7 @@ export class ItemControllerBase {
       select: {
         cogsAccount: true,
         createdAt: true,
+        description: true,
         earningsAccount: true,
 
         entity: {
@@ -74,6 +72,9 @@ export class ItemControllerBase {
         id: true,
         inventoryAccount: true,
         name: true,
+        price: true,
+        pricePerUnit: true,
+        quantity: true,
         updatedAt: true,
       },
     });
@@ -98,6 +99,7 @@ export class ItemControllerBase {
       select: {
         cogsAccount: true,
         createdAt: true,
+        description: true,
         earningsAccount: true,
 
         entity: {
@@ -109,6 +111,9 @@ export class ItemControllerBase {
         id: true,
         inventoryAccount: true,
         name: true,
+        price: true,
+        pricePerUnit: true,
+        quantity: true,
         updatedAt: true,
       },
     });
@@ -134,6 +139,7 @@ export class ItemControllerBase {
       select: {
         cogsAccount: true,
         createdAt: true,
+        description: true,
         earningsAccount: true,
 
         entity: {
@@ -145,6 +151,9 @@ export class ItemControllerBase {
         id: true,
         inventoryAccount: true,
         name: true,
+        price: true,
+        pricePerUnit: true,
+        quantity: true,
         updatedAt: true,
       },
     });
@@ -187,6 +196,7 @@ export class ItemControllerBase {
         select: {
           cogsAccount: true,
           createdAt: true,
+          description: true,
           earningsAccount: true,
 
           entity: {
@@ -198,6 +208,9 @@ export class ItemControllerBase {
           id: true,
           inventoryAccount: true,
           name: true,
+          price: true,
+          pricePerUnit: true,
+          quantity: true,
           updatedAt: true,
         },
       });
@@ -231,6 +244,7 @@ export class ItemControllerBase {
         select: {
           cogsAccount: true,
           createdAt: true,
+          description: true,
           earningsAccount: true,
 
           entity: {
@@ -242,6 +256,9 @@ export class ItemControllerBase {
           id: true,
           inventoryAccount: true,
           name: true,
+          price: true,
+          pricePerUnit: true,
+          quantity: true,
           updatedAt: true,
         },
       });
@@ -253,123 +270,5 @@ export class ItemControllerBase {
       }
       throw error;
     }
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @common.Get("/:id/itemTransactions")
-  @ApiNestedQuery(ItemTransactionFindManyArgs)
-  @nestAccessControl.UseRoles({
-    resource: "ItemTransaction",
-    action: "read",
-    possession: "any",
-  })
-  async findManyItemTransactions(
-    @common.Req() request: Request,
-    @common.Param() params: ItemWhereUniqueInput
-  ): Promise<ItemTransaction[]> {
-    const query = plainToClass(ItemTransactionFindManyArgs, request.query);
-    const results = await this.service.findItemTransactions(params.id, {
-      ...query,
-      select: {
-        createdAt: true,
-
-        entity: {
-          select: {
-            id: true,
-          },
-        },
-
-        id: true,
-
-        invoiceModel: {
-          select: {
-            id: true,
-          },
-        },
-
-        item: {
-          select: {
-            id: true,
-          },
-        },
-
-        quantity: true,
-        totalAmount: true,
-        unitCost: true,
-        updatedAt: true,
-      },
-    });
-    if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
-    }
-    return results;
-  }
-
-  @common.Post("/:id/itemTransactions")
-  @nestAccessControl.UseRoles({
-    resource: "Item",
-    action: "update",
-    possession: "any",
-  })
-  async connectItemTransactions(
-    @common.Param() params: ItemWhereUniqueInput,
-    @common.Body() body: ItemTransactionWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      itemTransactions: {
-        connect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Patch("/:id/itemTransactions")
-  @nestAccessControl.UseRoles({
-    resource: "Item",
-    action: "update",
-    possession: "any",
-  })
-  async updateItemTransactions(
-    @common.Param() params: ItemWhereUniqueInput,
-    @common.Body() body: ItemTransactionWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      itemTransactions: {
-        set: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Delete("/:id/itemTransactions")
-  @nestAccessControl.UseRoles({
-    resource: "Item",
-    action: "update",
-    possession: "any",
-  })
-  async disconnectItemTransactions(
-    @common.Param() params: ItemWhereUniqueInput,
-    @common.Body() body: ItemTransactionWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      itemTransactions: {
-        disconnect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
   }
 }

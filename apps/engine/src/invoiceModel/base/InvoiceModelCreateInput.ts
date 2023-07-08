@@ -16,8 +16,8 @@ import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueIn
 import { Type } from "class-transformer";
 import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
 import { EnumInvoiceModelInvoiceStatus } from "./EnumInvoiceModelInvoiceStatus";
-import { ItemTransactionWhereUniqueInput } from "../../itemTransaction/base/ItemTransactionWhereUniqueInput";
 import { LedgerWhereUniqueInput } from "../../ledger/base/LedgerWhereUniqueInput";
+import { EnumInvoiceModelStatus } from "./EnumInvoiceModelStatus";
 
 @InputType()
 class InvoiceModelCreateInput {
@@ -102,18 +102,6 @@ class InvoiceModelCreateInput {
 
   @ApiProperty({
     required: false,
-    type: () => ItemTransactionWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => ItemTransactionWhereUniqueInput)
-  @IsOptional()
-  @Field(() => ItemTransactionWhereUniqueInput, {
-    nullable: true,
-  })
-  itemTransactions?: ItemTransactionWhereUniqueInput | null;
-
-  @ApiProperty({
-    required: false,
     type: () => LedgerWhereUniqueInput,
   })
   @ValidateNested()
@@ -123,6 +111,17 @@ class InvoiceModelCreateInput {
     nullable: true,
   })
   ledger?: LedgerWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumInvoiceModelStatus,
+  })
+  @IsEnum(EnumInvoiceModelStatus)
+  @IsOptional()
+  @Field(() => EnumInvoiceModelStatus, {
+    nullable: true,
+  })
+  status?: "Draft" | "Paid" | null;
 }
 
 export { InvoiceModelCreateInput as InvoiceModelCreateInput };

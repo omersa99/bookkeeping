@@ -18,8 +18,8 @@ import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueIn
 import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
 import { EnumInvoiceModelInvoiceStatus } from "./EnumInvoiceModelInvoiceStatus";
-import { ItemTransactionWhereUniqueInput } from "../../itemTransaction/base/ItemTransactionWhereUniqueInput";
 import { LedgerWhereUniqueInput } from "../../ledger/base/LedgerWhereUniqueInput";
+import { EnumInvoiceModelStatus } from "./EnumInvoiceModelStatus";
 
 @InputType()
 class InvoiceModelWhereInput {
@@ -115,18 +115,6 @@ class InvoiceModelWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => ItemTransactionWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => ItemTransactionWhereUniqueInput)
-  @IsOptional()
-  @Field(() => ItemTransactionWhereUniqueInput, {
-    nullable: true,
-  })
-  itemTransactions?: ItemTransactionWhereUniqueInput;
-
-  @ApiProperty({
-    required: false,
     type: () => LedgerWhereUniqueInput,
   })
   @ValidateNested()
@@ -136,6 +124,17 @@ class InvoiceModelWhereInput {
     nullable: true,
   })
   ledger?: LedgerWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumInvoiceModelStatus,
+  })
+  @IsEnum(EnumInvoiceModelStatus)
+  @IsOptional()
+  @Field(() => EnumInvoiceModelStatus, {
+    nullable: true,
+  })
+  status?: "Draft" | "Paid";
 }
 
 export { InvoiceModelWhereInput as InvoiceModelWhereInput };

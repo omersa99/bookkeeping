@@ -16,7 +16,8 @@ import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
 import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
-import { ItemTransactionListRelationFilter } from "../../itemTransaction/base/ItemTransactionListRelationFilter";
+import { FloatNullableFilter } from "../../util/FloatNullableFilter";
+import { IntNullableFilter } from "../../util/IntNullableFilter";
 
 @InputType()
 class ItemWhereInput {
@@ -30,6 +31,17 @@ class ItemWhereInput {
     nullable: true,
   })
   cogsAccount?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  description?: StringNullableFilter;
 
   @ApiProperty({
     required: false,
@@ -78,18 +90,6 @@ class ItemWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => ItemTransactionListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => ItemTransactionListRelationFilter)
-  @IsOptional()
-  @Field(() => ItemTransactionListRelationFilter, {
-    nullable: true,
-  })
-  itemTransactions?: ItemTransactionListRelationFilter;
-
-  @ApiProperty({
-    required: false,
     type: StringNullableFilter,
   })
   @Type(() => StringNullableFilter)
@@ -98,6 +98,39 @@ class ItemWhereInput {
     nullable: true,
   })
   name?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: FloatNullableFilter,
+  })
+  @Type(() => FloatNullableFilter)
+  @IsOptional()
+  @Field(() => FloatNullableFilter, {
+    nullable: true,
+  })
+  price?: FloatNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: FloatNullableFilter,
+  })
+  @Type(() => FloatNullableFilter)
+  @IsOptional()
+  @Field(() => FloatNullableFilter, {
+    nullable: true,
+  })
+  pricePerUnit?: FloatNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: IntNullableFilter,
+  })
+  @Type(() => IntNullableFilter)
+  @IsOptional()
+  @Field(() => IntNullableFilter, {
+    nullable: true,
+  })
+  quantity?: IntNullableFilter;
 }
 
 export { ItemWhereInput as ItemWhereInput };

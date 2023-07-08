@@ -28,8 +28,6 @@ import { EntityFindUniqueArgs } from "./EntityFindUniqueArgs";
 import { Entity } from "./Entity";
 import { CustomerFindManyArgs } from "../../customer/base/CustomerFindManyArgs";
 import { Customer } from "../../customer/base/Customer";
-import { ItemTransactionFindManyArgs } from "../../itemTransaction/base/ItemTransactionFindManyArgs";
-import { ItemTransaction } from "../../itemTransaction/base/ItemTransaction";
 import { JournalFindManyArgs } from "../../journal/base/JournalFindManyArgs";
 import { Journal } from "../../journal/base/Journal";
 import { LedgerFindManyArgs } from "../../ledger/base/LedgerFindManyArgs";
@@ -201,26 +199,6 @@ export class EntityResolverBase {
     @graphql.Args() args: CustomerFindManyArgs
   ): Promise<Customer[]> {
     const results = await this.service.findCustomers(parent.id, args);
-
-    if (!results) {
-      return [];
-    }
-
-    return results;
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [ItemTransaction], { name: "itemTransactions" })
-  @nestAccessControl.UseRoles({
-    resource: "ItemTransaction",
-    action: "read",
-    possession: "any",
-  })
-  async resolveFieldItemTransactions(
-    @graphql.Parent() parent: Entity,
-    @graphql.Args() args: ItemTransactionFindManyArgs
-  ): Promise<ItemTransaction[]> {
-    const results = await this.service.findItemTransactions(parent.id, args);
 
     if (!results) {
       return [];

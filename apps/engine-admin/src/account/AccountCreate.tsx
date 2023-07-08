@@ -17,6 +17,7 @@ export const AccountCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
+        <TextInput label="balance" source="balance" />
         <TextInput label="balanceType" source="balanceType" />
         <ReferenceArrayInput
           source="chartOfAccount"

@@ -5,6 +5,7 @@ import { InvoiceModelListRelationFilter } from "../invoiceModel/InvoiceModelList
 import { TransactionListRelationFilter } from "../transaction/TransactionListRelationFilter";
 
 export type AccountWhereInput = {
+  balance?: StringNullableFilter;
   balanceType?: StringNullableFilter;
   chartOfAccount?: ChartOfAccountListRelationFilter;
   code?: StringNullableFilter;

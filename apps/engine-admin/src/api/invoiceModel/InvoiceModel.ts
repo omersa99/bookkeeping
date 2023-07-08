@@ -1,6 +1,5 @@
 import { Account } from "../account/Account";
 import { Customer } from "../customer/Customer";
-import { ItemTransaction } from "../itemTransaction/ItemTransaction";
 import { Ledger } from "../ledger/Ledger";
 
 export type InvoiceModel = {
@@ -13,7 +12,7 @@ export type InvoiceModel = {
   info: string | null;
   invoiceNumber: string | null;
   invoiceStatus?: "Draft" | "Paid" | "Canceled" | null;
-  itemTransactions?: ItemTransaction | null;
   ledger?: Ledger | null;
+  status?: "Draft" | "Paid" | null;
   updatedAt: Date;
 };

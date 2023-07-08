@@ -288,18 +288,13 @@ export class CustomerControllerBase {
         invoiceNumber: true,
         invoiceStatus: true,
 
-        itemTransactions: {
-          select: {
-            id: true,
-          },
-        },
-
         ledger: {
           select: {
             id: true,
           },
         },
 
+        status: true,
         updatedAt: true,
       },
     });

@@ -1,6 +1,5 @@
 import { AccountWhereUniqueInput } from "../account/AccountWhereUniqueInput";
 import { CustomerWhereUniqueInput } from "../customer/CustomerWhereUniqueInput";
-import { ItemTransactionWhereUniqueInput } from "../itemTransaction/ItemTransactionWhereUniqueInput";
 import { LedgerWhereUniqueInput } from "../ledger/LedgerWhereUniqueInput";
 
 export type InvoiceModelCreateInput = {
@@ -11,6 +10,6 @@ export type InvoiceModelCreateInput = {
   info?: string | null;
   invoiceNumber?: string | null;
   invoiceStatus?: "Draft" | "Paid" | "Canceled" | null;
-  itemTransactions?: ItemTransactionWhereUniqueInput | null;
   ledger?: LedgerWhereUniqueInput | null;
+  status?: "Draft" | "Paid" | null;
 };

@@ -11,20 +11,43 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
-import { ValidateNested, IsOptional } from "class-validator";
+import { EnumEntityAccountingType } from "./EnumEntityAccountingType";
+import { IsEnum, IsOptional, ValidateNested } from "class-validator";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { Type } from "class-transformer";
+import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
 import { CustomerListRelationFilter } from "../../customer/base/CustomerListRelationFilter";
+import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { ItemWhereUniqueInput } from "../../item/base/ItemWhereUniqueInput";
-import { ItemTransactionListRelationFilter } from "../../itemTransaction/base/ItemTransactionListRelationFilter";
 import { JournalListRelationFilter } from "../../journal/base/JournalListRelationFilter";
 import { LedgerListRelationFilter } from "../../ledger/base/LedgerListRelationFilter";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class EntityWhereInput {
+  @ApiProperty({
+    required: false,
+    enum: EnumEntityAccountingType,
+  })
+  @IsEnum(EnumEntityAccountingType)
+  @IsOptional()
+  @Field(() => EnumEntityAccountingType, {
+    nullable: true,
+  })
+  accountingType?: "Cash" | "Cumulative";
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  address?: StringNullableFilter;
+
   @ApiProperty({
     required: false,
     type: () => ChartOfAccountWhereUniqueInput,
@@ -51,6 +74,39 @@ class EntityWhereInput {
 
   @ApiProperty({
     required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  deductionId?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  deductionRate?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: BooleanNullableFilter,
+  })
+  @Type(() => BooleanNullableFilter)
+  @IsOptional()
+  @Field(() => BooleanNullableFilter, {
+    nullable: true,
+  })
+  exemption?: BooleanNullableFilter;
+
+  @ApiProperty({
+    required: false,
     type: StringFilter,
   })
   @Type(() => StringFilter)
@@ -71,18 +127,6 @@ class EntityWhereInput {
     nullable: true,
   })
   items?: ItemWhereUniqueInput;
-
-  @ApiProperty({
-    required: false,
-    type: () => ItemTransactionListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => ItemTransactionListRelationFilter)
-  @IsOptional()
-  @Field(() => ItemTransactionListRelationFilter, {
-    nullable: true,
-  })
-  itemTransactions?: ItemTransactionListRelationFilter;
 
   @ApiProperty({
     required: false,
@@ -118,6 +162,17 @@ class EntityWhereInput {
     nullable: true,
   })
   name?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  taxId?: StringNullableFilter;
 
   @ApiProperty({
     required: false,

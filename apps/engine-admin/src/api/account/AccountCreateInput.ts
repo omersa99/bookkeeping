@@ -3,6 +3,7 @@ import { InvoiceModelCreateNestedManyWithoutAccountsInput } from "./InvoiceModel
 import { TransactionCreateNestedManyWithoutAccountsInput } from "./TransactionCreateNestedManyWithoutAccountsInput";
 
 export type AccountCreateInput = {
+  balance?: string | null;
   balanceType?: string | null;
   chartOfAccount?: ChartOfAccountCreateNestedManyWithoutAccountsInput;
   code?: string | null;

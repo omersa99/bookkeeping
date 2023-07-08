@@ -10,12 +10,10 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
-
 import {
   Prisma,
   Entity,
   Customer,
-  ItemTransaction,
   Journal,
   Ledger,
   ChartOfAccount,
@@ -67,17 +65,6 @@ export class EntityServiceBase {
         where: { id: parentId },
       })
       .customers(args);
-  }
-
-  async findItemTransactions(
-    parentId: string,
-    args: Prisma.ItemTransactionFindManyArgs
-  ): Promise<ItemTransaction[]> {
-    return this.prisma.entity
-      .findUniqueOrThrow({
-        where: { id: parentId },
-      })
-      .itemTransactions(args);
   }
 
   async findJournals(

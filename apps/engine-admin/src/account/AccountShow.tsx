@@ -13,7 +13,6 @@ import {
 
 import { ACCOUNT_TITLE_FIELD } from "./AccountTitle";
 import { CUSTOMER_TITLE_FIELD } from "../customer/CustomerTitle";
-import { ITEMTRANSACTION_TITLE_FIELD } from "../itemTransaction/ItemTransactionTitle";
 import { LEDGER_TITLE_FIELD } from "../ledger/LedgerTitle";
 import { JOURNAL_TITLE_FIELD } from "../journal/JournalTitle";
 
@@ -21,6 +20,7 @@ export const AccountShow = (props: ShowProps): React.ReactElement => {
   return (
     <Show {...props}>
       <SimpleShowLayout>
+        <TextField label="balance" source="balance" />
         <TextField label="balanceType" source="balanceType" />
         <TextField label="code" source="code" />
         <DateField source="createdAt" label="Created At" />
@@ -56,19 +56,13 @@ export const AccountShow = (props: ShowProps): React.ReactElement => {
             <TextField label="invoice_number" source="invoiceNumber" />
             <TextField label="invoice_status" source="invoiceStatus" />
             <ReferenceField
-              label="ItemTransactions"
-              source="itemtransaction.id"
-              reference="ItemTransaction"
-            >
-              <TextField source={ITEMTRANSACTION_TITLE_FIELD} />
-            </ReferenceField>
-            <ReferenceField
               label="ledger"
               source="ledger.id"
               reference="Ledger"
             >
               <TextField source={LEDGER_TITLE_FIELD} />
             </ReferenceField>
+            <TextField label="status" source="status" />
             <DateField source="updatedAt" label="Updated At" />
           </Datagrid>
         </ReferenceManyField>

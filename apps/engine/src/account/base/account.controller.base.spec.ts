@@ -19,6 +19,7 @@ import { AccountService } from "../account.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
+  balance: "exampleBalance",
   balanceType: "exampleBalanceType",
   code: "exampleCode",
   createdAt: new Date(),
@@ -28,6 +29,7 @@ const CREATE_INPUT = {
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
+  balance: "exampleBalance",
   balanceType: "exampleBalanceType",
   code: "exampleCode",
   createdAt: new Date(),
@@ -38,6 +40,7 @@ const CREATE_RESULT = {
 };
 const FIND_MANY_RESULT = [
   {
+    balance: "exampleBalance",
     balanceType: "exampleBalanceType",
     code: "exampleCode",
     createdAt: new Date(),
@@ -48,6 +51,7 @@ const FIND_MANY_RESULT = [
   },
 ];
 const FIND_ONE_RESULT = {
+  balance: "exampleBalance",
   balanceType: "exampleBalanceType",
   code: "exampleCode",
   createdAt: new Date(),

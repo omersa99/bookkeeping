@@ -19,29 +19,49 @@ import { EntityService } from "../entity.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
+  address: "exampleAddress",
   createdAt: new Date(),
+  deductionId: "exampleDeductionId",
+  deductionRate: "exampleDeductionRate",
+  exemption: "true",
   id: "exampleId",
   name: "exampleName",
+  taxId: "exampleTaxId",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
+  address: "exampleAddress",
   createdAt: new Date(),
+  deductionId: "exampleDeductionId",
+  deductionRate: "exampleDeductionRate",
+  exemption: "true",
   id: "exampleId",
   name: "exampleName",
+  taxId: "exampleTaxId",
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
   {
+    address: "exampleAddress",
     createdAt: new Date(),
+    deductionId: "exampleDeductionId",
+    deductionRate: "exampleDeductionRate",
+    exemption: "true",
     id: "exampleId",
     name: "exampleName",
+    taxId: "exampleTaxId",
     updatedAt: new Date(),
   },
 ];
 const FIND_ONE_RESULT = {
+  address: "exampleAddress",
   createdAt: new Date(),
+  deductionId: "exampleDeductionId",
+  deductionRate: "exampleDeductionRate",
+  exemption: "true",
   id: "exampleId",
   name: "exampleName",
+  taxId: "exampleTaxId",
   updatedAt: new Date(),
 };
 

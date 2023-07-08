@@ -10,7 +10,6 @@ import { EntityModule } from "./entity/entity.module";
 import { ChartOfAccountModule } from "./chartOfAccount/chartOfAccount.module";
 import { ItemModule } from "./item/item.module";
 import { InvoiceModelModule } from "./invoiceModel/invoiceModel.module";
-import { ItemTransactionModule } from "./itemTransaction/itemTransaction.module";
 import { CustomerModule } from "./customer/customer.module";
 import { HealthModule } from "./health/health.module";
 import { PrismaModule } from "./prisma/prisma.module";
@@ -37,7 +36,6 @@ import { AuthModule } from "./auth/auth.module";
     ChartOfAccountModule,
     ItemModule,
     InvoiceModelModule,
-    ItemTransactionModule,
     CustomerModule,
     HealthModule,
     PrismaModule,

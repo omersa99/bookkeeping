@@ -30,6 +30,17 @@ class AccountWhereInput {
   @Field(() => StringNullableFilter, {
     nullable: true,
   })
+  balance?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
   balanceType?: StringNullableFilter;
 
   @ApiProperty({
