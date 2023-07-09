@@ -16,6 +16,7 @@ import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
 import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
+import { InvoiceModelWhereUniqueInput } from "../../invoiceModel/base/InvoiceModelWhereUniqueInput";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { IntNullableFilter } from "../../util/IntNullableFilter";
 
@@ -87,6 +88,18 @@ class ItemWhereInput {
     nullable: true,
   })
   inventoryAccount?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => InvoiceModelWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => InvoiceModelWhereUniqueInput)
+  @IsOptional()
+  @Field(() => InvoiceModelWhereUniqueInput, {
+    nullable: true,
+  })
+  invoiceModels?: InvoiceModelWhereUniqueInput;
 
   @ApiProperty({
     required: false,

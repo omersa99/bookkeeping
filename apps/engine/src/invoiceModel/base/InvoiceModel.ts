@@ -22,8 +22,8 @@ import { Account } from "../../account/base/Account";
 import { Type } from "class-transformer";
 import { Customer } from "../../customer/base/Customer";
 import { EnumInvoiceModelInvoiceStatus } from "./EnumInvoiceModelInvoiceStatus";
+import { Item } from "../../item/base/Item";
 import { Ledger } from "../../ledger/base/Ledger";
-import { EnumInvoiceModelStatus } from "./EnumInvoiceModelStatus";
 
 @ObjectType()
 class InvoiceModel {
@@ -118,23 +118,21 @@ class InvoiceModel {
 
   @ApiProperty({
     required: false,
+    type: () => Item,
+  })
+  @ValidateNested()
+  @Type(() => Item)
+  @IsOptional()
+  item?: Item | null;
+
+  @ApiProperty({
+    required: false,
     type: () => Ledger,
   })
   @ValidateNested()
   @Type(() => Ledger)
   @IsOptional()
   ledger?: Ledger | null;
-
-  @ApiProperty({
-    required: false,
-    enum: EnumInvoiceModelStatus,
-  })
-  @IsEnum(EnumInvoiceModelStatus)
-  @IsOptional()
-  @Field(() => EnumInvoiceModelStatus, {
-    nullable: true,
-  })
-  status?: "Draft" | "Paid" | null;
 
   @ApiProperty({
     required: true,

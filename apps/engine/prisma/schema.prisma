@@ -98,18 +98,19 @@ model ChartOfAccount {
 
 model Item {
   cogsAccount      String?
-  createdAt        DateTime @default(now())
+  createdAt        DateTime      @default(now())
   description      String?
   earningsAccount  String?
-  entity           Entity?  @relation(fields: [entityId], references: [id])
-  entityId         String?  @unique
-  id               String   @id @default(cuid())
+  entity           Entity?       @relation(fields: [entityId], references: [id])
+  entityId         String?       @unique
+  id               String        @id @default(cuid())
   inventoryAccount String?
+  invoiceModels    InvoiceModel?
   name             String?
   price            Float?
   pricePerUnit     Float?
   quantity         Int?
-  updatedAt        DateTime @updatedAt
+  updatedAt        DateTime      @updatedAt
 }
 
 model InvoiceModel {
@@ -124,9 +125,10 @@ model InvoiceModel {
   info          String?
   invoiceNumber String?
   invoiceStatus EnumInvoiceModelInvoiceStatus?
+  item          Item?                          @relation(fields: [itemId], references: [id])
+  itemId        String?                        @unique
   ledger        Ledger?                        @relation(fields: [ledgerId], references: [id])
   ledgerId      String?                        @unique
-  status        EnumInvoiceModelStatus?
   updatedAt     DateTime                       @updatedAt
 }
 
@@ -151,9 +153,4 @@ enum EnumInvoiceModelInvoiceStatus {
   Draft
   Paid
   Canceled
-}
-
-enum EnumInvoiceModelStatus {
-  Draft
-  Paid
 }

@@ -28,6 +28,7 @@ import { InvoiceModelFindUniqueArgs } from "./InvoiceModelFindUniqueArgs";
 import { InvoiceModel } from "./InvoiceModel";
 import { Account } from "../../account/base/Account";
 import { Customer } from "../../customer/base/Customer";
+import { Item } from "../../item/base/Item";
 import { Ledger } from "../../ledger/base/Ledger";
 import { InvoiceModelService } from "../invoiceModel.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
@@ -110,6 +111,12 @@ export class InvoiceModelResolverBase {
             }
           : undefined,
 
+        item: args.data.item
+          ? {
+              connect: args.data.item,
+            }
+          : undefined,
+
         ledger: args.data.ledger
           ? {
               connect: args.data.ledger,
@@ -144,6 +151,12 @@ export class InvoiceModelResolverBase {
           customer: args.data.customer
             ? {
                 connect: args.data.customer,
+              }
+            : undefined,
+
+          item: args.data.item
+            ? {
+                connect: args.data.item,
               }
             : undefined,
 
@@ -220,6 +233,27 @@ export class InvoiceModelResolverBase {
     @graphql.Parent() parent: InvoiceModel
   ): Promise<Customer | null> {
     const result = await this.service.getCustomer(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Item, {
+    nullable: true,
+    name: "item",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Item",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldItem(
+    @graphql.Parent() parent: InvoiceModel
+  ): Promise<Item | null> {
+    const result = await this.service.getItem(parent.id);
 
     if (!result) {
       return null;

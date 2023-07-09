@@ -10,7 +10,7 @@ export type InvoiceModelOrderByInput = {
   info?: SortOrder;
   invoiceNumber?: SortOrder;
   invoiceStatus?: SortOrder;
+  itemId?: SortOrder;
   ledgerId?: SortOrder;
-  status?: SortOrder;
   updatedAt?: SortOrder;
 };
