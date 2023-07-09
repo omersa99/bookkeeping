@@ -11,6 +11,7 @@ import {
 } from "react-admin";
 
 import { EntityTitle } from "../entity/EntityTitle";
+import { InvoiceModelTitle } from "../invoiceModel/InvoiceModelTitle";
 
 export const ItemEdit = (props: EditProps): React.ReactElement => {
   return (
@@ -23,6 +24,13 @@ export const ItemEdit = (props: EditProps): React.ReactElement => {
           <SelectInput optionText={EntityTitle} />
         </ReferenceInput>
         <TextInput label="inventory_account" source="inventoryAccount" />
+        <ReferenceInput
+          source="invoiceModels.id"
+          reference="InvoiceModel"
+          label="InvoiceModels"
+        >
+          <SelectInput optionText={InvoiceModelTitle} />
+        </ReferenceInput>
         <TextInput label="name" source="name" />
         <NumberInput label="price" source="price" />
         <NumberInput label="price per unit" source="pricePerUnit" />

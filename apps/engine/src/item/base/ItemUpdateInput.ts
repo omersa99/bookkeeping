@@ -20,6 +20,7 @@ import {
 } from "class-validator";
 import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
 import { Type } from "class-transformer";
+import { InvoiceModelWhereUniqueInput } from "../../invoiceModel/base/InvoiceModelWhereUniqueInput";
 
 @InputType()
 class ItemUpdateInput {
@@ -78,6 +79,18 @@ class ItemUpdateInput {
     nullable: true,
   })
   inventoryAccount?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => InvoiceModelWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => InvoiceModelWhereUniqueInput)
+  @IsOptional()
+  @Field(() => InvoiceModelWhereUniqueInput, {
+    nullable: true,
+  })
+  invoiceModels?: InvoiceModelWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,

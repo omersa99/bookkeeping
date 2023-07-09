@@ -56,6 +56,12 @@ export class ItemControllerBase {
               connect: data.entity,
             }
           : undefined,
+
+        invoiceModels: data.invoiceModels
+          ? {
+              connect: data.invoiceModels,
+            }
+          : undefined,
       },
       select: {
         cogsAccount: true,
@@ -71,6 +77,13 @@ export class ItemControllerBase {
 
         id: true,
         inventoryAccount: true,
+
+        invoiceModels: {
+          select: {
+            id: true,
+          },
+        },
+
         name: true,
         price: true,
         pricePerUnit: true,
@@ -110,6 +123,13 @@ export class ItemControllerBase {
 
         id: true,
         inventoryAccount: true,
+
+        invoiceModels: {
+          select: {
+            id: true,
+          },
+        },
+
         name: true,
         price: true,
         pricePerUnit: true,
@@ -150,6 +170,13 @@ export class ItemControllerBase {
 
         id: true,
         inventoryAccount: true,
+
+        invoiceModels: {
+          select: {
+            id: true,
+          },
+        },
+
         name: true,
         price: true,
         pricePerUnit: true,
@@ -192,6 +219,12 @@ export class ItemControllerBase {
                 connect: data.entity,
               }
             : undefined,
+
+          invoiceModels: data.invoiceModels
+            ? {
+                connect: data.invoiceModels,
+              }
+            : undefined,
         },
         select: {
           cogsAccount: true,
@@ -207,6 +240,13 @@ export class ItemControllerBase {
 
           id: true,
           inventoryAccount: true,
+
+          invoiceModels: {
+            select: {
+              id: true,
+            },
+          },
+
           name: true,
           price: true,
           pricePerUnit: true,
@@ -255,6 +295,13 @@ export class ItemControllerBase {
 
           id: true,
           inventoryAccount: true,
+
+          invoiceModels: {
+            select: {
+              id: true,
+            },
+          },
+
           name: true,
           price: true,
           pricePerUnit: true,

@@ -127,7 +127,7 @@ class InvoiceModelOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  ledgerId?: SortOrder;
+  itemId?: SortOrder;
 
   @ApiProperty({
     required: false,
@@ -138,7 +138,7 @@ class InvoiceModelOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  status?: SortOrder;
+  ledgerId?: SortOrder;
 
   @ApiProperty({
     required: false,

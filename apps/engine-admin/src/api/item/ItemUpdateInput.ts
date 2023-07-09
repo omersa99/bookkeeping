@@ -1,4 +1,5 @@
 import { EntityWhereUniqueInput } from "../entity/EntityWhereUniqueInput";
+import { InvoiceModelWhereUniqueInput } from "../invoiceModel/InvoiceModelWhereUniqueInput";
 
 export type ItemUpdateInput = {
   cogsAccount?: string | null;
@@ -6,6 +7,7 @@ export type ItemUpdateInput = {
   earningsAccount?: string | null;
   entity?: EntityWhereUniqueInput | null;
   inventoryAccount?: string | null;
+  invoiceModels?: InvoiceModelWhereUniqueInput | null;
   name?: string | null;
   price?: number | null;
   pricePerUnit?: number | null;

@@ -65,6 +65,12 @@ export class InvoiceModelControllerBase {
             }
           : undefined,
 
+        item: data.item
+          ? {
+              connect: data.item,
+            }
+          : undefined,
+
         ledger: data.ledger
           ? {
               connect: data.ledger,
@@ -94,13 +100,18 @@ export class InvoiceModelControllerBase {
         invoiceNumber: true,
         invoiceStatus: true,
 
+        item: {
+          select: {
+            id: true,
+          },
+        },
+
         ledger: {
           select: {
             id: true,
           },
         },
 
-        status: true,
         updatedAt: true,
       },
     });
@@ -145,13 +156,18 @@ export class InvoiceModelControllerBase {
         invoiceNumber: true,
         invoiceStatus: true,
 
+        item: {
+          select: {
+            id: true,
+          },
+        },
+
         ledger: {
           select: {
             id: true,
           },
         },
 
-        status: true,
         updatedAt: true,
       },
     });
@@ -197,13 +213,18 @@ export class InvoiceModelControllerBase {
         invoiceNumber: true,
         invoiceStatus: true,
 
+        item: {
+          select: {
+            id: true,
+          },
+        },
+
         ledger: {
           select: {
             id: true,
           },
         },
 
-        status: true,
         updatedAt: true,
       },
     });
@@ -249,6 +270,12 @@ export class InvoiceModelControllerBase {
               }
             : undefined,
 
+          item: data.item
+            ? {
+                connect: data.item,
+              }
+            : undefined,
+
           ledger: data.ledger
             ? {
                 connect: data.ledger,
@@ -278,13 +305,18 @@ export class InvoiceModelControllerBase {
           invoiceNumber: true,
           invoiceStatus: true,
 
+          item: {
+            select: {
+              id: true,
+            },
+          },
+
           ledger: {
             select: {
               id: true,
             },
           },
 
-          status: true,
           updatedAt: true,
         },
       });
@@ -338,13 +370,18 @@ export class InvoiceModelControllerBase {
           invoiceNumber: true,
           invoiceStatus: true,
 
+          item: {
+            select: {
+              id: true,
+            },
+          },
+
           ledger: {
             select: {
               id: true,
             },
           },
 
-          status: true,
           updatedAt: true,
         },
       });

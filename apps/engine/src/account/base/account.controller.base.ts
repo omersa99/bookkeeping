@@ -355,13 +355,18 @@ export class AccountControllerBase {
         invoiceNumber: true,
         invoiceStatus: true,
 
+        item: {
+          select: {
+            id: true,
+          },
+        },
+
         ledger: {
           select: {
             id: true,
           },
         },
 
-        status: true,
         updatedAt: true,
       },
     });

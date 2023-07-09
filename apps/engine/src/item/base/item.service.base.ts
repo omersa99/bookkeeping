@@ -10,7 +10,7 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
-import { Prisma, Item, Entity } from "@prisma/client";
+import { Prisma, Item, Entity, InvoiceModel } from "@prisma/client";
 
 export class ItemServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -53,5 +53,13 @@ export class ItemServiceBase {
         where: { id: parentId },
       })
       .entity();
+  }
+
+  async getInvoiceModels(parentId: string): Promise<InvoiceModel | null> {
+    return this.prisma.item
+      .findUnique({
+        where: { id: parentId },
+      })
+      .invoiceModels();
   }
 }

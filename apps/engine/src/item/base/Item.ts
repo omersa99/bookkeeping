@@ -21,6 +21,7 @@ import {
 } from "class-validator";
 import { Type } from "class-transformer";
 import { Entity } from "../../entity/base/Entity";
+import { InvoiceModel } from "../../invoiceModel/base/InvoiceModel";
 
 @ObjectType()
 class Item {
@@ -92,6 +93,15 @@ class Item {
     nullable: true,
   })
   inventoryAccount!: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => InvoiceModel,
+  })
+  @ValidateNested()
+  @Type(() => InvoiceModel)
+  @IsOptional()
+  invoiceModels?: InvoiceModel | null;
 
   @ApiProperty({
     required: false,

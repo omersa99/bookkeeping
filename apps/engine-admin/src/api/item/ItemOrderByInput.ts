@@ -8,6 +8,7 @@ export type ItemOrderByInput = {
   entityId?: SortOrder;
   id?: SortOrder;
   inventoryAccount?: SortOrder;
+  invoiceModelsId?: SortOrder;
   name?: SortOrder;
   price?: SortOrder;
   pricePerUnit?: SortOrder;

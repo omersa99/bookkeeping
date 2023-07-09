@@ -9,6 +9,7 @@ import {
 } from "react-admin";
 import { AccountTitle } from "../account/AccountTitle";
 import { CustomerTitle } from "../customer/CustomerTitle";
+import { ItemTitle } from "../item/ItemTitle";
 import { LedgerTitle } from "../ledger/LedgerTitle";
 
 export const InvoiceModelEdit = (props: EditProps): React.ReactElement => {
@@ -45,20 +46,12 @@ export const InvoiceModelEdit = (props: EditProps): React.ReactElement => {
           allowEmpty
           optionValue="value"
         />
+        <ReferenceInput source="item.id" reference="Item" label="item">
+          <SelectInput optionText={ItemTitle} />
+        </ReferenceInput>
         <ReferenceInput source="ledger.id" reference="Ledger" label="ledger">
           <SelectInput optionText={LedgerTitle} />
         </ReferenceInput>
-        <SelectInput
-          source="status"
-          label="status"
-          choices={[
-            { label: "draft", value: "Draft" },
-            { label: "paid", value: "Paid" },
-          ]}
-          optionText="label"
-          allowEmpty
-          optionValue="value"
-        />
       </SimpleForm>
     </Edit>
   );
