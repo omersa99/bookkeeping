@@ -49,6 +49,10 @@ import { ItemTransactionList } from "./itemTransaction/ItemTransactionList";
 import { ItemTransactionCreate } from "./itemTransaction/ItemTransactionCreate";
 import { ItemTransactionEdit } from "./itemTransaction/ItemTransactionEdit";
 import { ItemTransactionShow } from "./itemTransaction/ItemTransactionShow";
+import { PaymentList } from "./payment/PaymentList";
+import { PaymentCreate } from "./payment/PaymentCreate";
+import { PaymentEdit } from "./payment/PaymentEdit";
+import { PaymentShow } from "./payment/PaymentShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -151,6 +155,13 @@ const App = (): React.ReactElement => {
           edit={ItemTransactionEdit}
           create={ItemTransactionCreate}
           show={ItemTransactionShow}
+        />
+        <Resource
+          name="Payment"
+          list={PaymentList}
+          edit={PaymentEdit}
+          create={PaymentCreate}
+          show={PaymentShow}
         />
       </Admin>
     </div>
