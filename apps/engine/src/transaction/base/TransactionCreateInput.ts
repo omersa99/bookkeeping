@@ -15,6 +15,7 @@ import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueIn
 import { ValidateNested, IsOptional, IsNumber, IsEnum } from "class-validator";
 import { Type } from "class-transformer";
 import { JournalWhereUniqueInput } from "../../journal/base/JournalWhereUniqueInput";
+import { PaymentWhereUniqueInput } from "../../payment/base/PaymentWhereUniqueInput";
 import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
 
 @InputType()
@@ -53,6 +54,18 @@ class TransactionCreateInput {
     nullable: true,
   })
   journal?: JournalWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => PaymentWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => PaymentWhereUniqueInput)
+  @IsOptional()
+  @Field(() => PaymentWhereUniqueInput, {
+    nullable: true,
+  })
+  payments?: PaymentWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,
