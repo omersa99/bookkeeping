@@ -22,6 +22,7 @@ import {
 } from "class-validator";
 import { Type } from "class-transformer";
 import { Journal } from "../../journal/base/Journal";
+import { Payment } from "../../payment/base/Payment";
 import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
 
 @ObjectType()
@@ -70,6 +71,15 @@ class Transaction {
   @Type(() => Journal)
   @IsOptional()
   journal?: Journal | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => Payment,
+  })
+  @ValidateNested()
+  @Type(() => Payment)
+  @IsOptional()
+  payments?: Payment | null;
 
   @ApiProperty({
     required: false,
