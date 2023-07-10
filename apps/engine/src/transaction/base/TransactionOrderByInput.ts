@@ -83,17 +83,6 @@ class TransactionOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  paymentsId?: SortOrder;
-
-  @ApiProperty({
-    required: false,
-    enum: ["asc", "desc"],
-  })
-  @IsOptional()
-  @IsEnum(SortOrder)
-  @Field(() => SortOrder, {
-    nullable: true,
-  })
   transactionType?: SortOrder;
 
   @ApiProperty({
