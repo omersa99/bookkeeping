@@ -28,7 +28,6 @@ import { TransactionFindUniqueArgs } from "./TransactionFindUniqueArgs";
 import { Transaction } from "./Transaction";
 import { Account } from "../../account/base/Account";
 import { Journal } from "../../journal/base/Journal";
-import { Payment } from "../../payment/base/Payment";
 import { TransactionService } from "../transaction.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Transaction)
@@ -109,12 +108,6 @@ export class TransactionResolverBase {
               connect: args.data.journal,
             }
           : undefined,
-
-        payments: args.data.payments
-          ? {
-              connect: args.data.payments,
-            }
-          : undefined,
       },
     });
   }
@@ -144,12 +137,6 @@ export class TransactionResolverBase {
           journal: args.data.journal
             ? {
                 connect: args.data.journal,
-              }
-            : undefined,
-
-          payments: args.data.payments
-            ? {
-                connect: args.data.payments,
               }
             : undefined,
         },
@@ -220,27 +207,6 @@ export class TransactionResolverBase {
     @graphql.Parent() parent: Transaction
   ): Promise<Journal | null> {
     const result = await this.service.getJournal(parent.id);
-
-    if (!result) {
-      return null;
-    }
-    return result;
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => Payment, {
-    nullable: true,
-    name: "payments",
-  })
-  @nestAccessControl.UseRoles({
-    resource: "Payment",
-    action: "read",
-    possession: "any",
-  })
-  async resolveFieldPayments(
-    @graphql.Parent() parent: Transaction
-  ): Promise<Payment | null> {
-    const result = await this.service.getPayments(parent.id);
 
     if (!result) {
       return null;
