@@ -64,6 +64,12 @@ export class TransactionControllerBase {
               connect: data.journal,
             }
           : undefined,
+
+        payments: data.payments
+          ? {
+              connect: data.payments,
+            }
+          : undefined,
       },
       select: {
         account: {
@@ -82,7 +88,13 @@ export class TransactionControllerBase {
           },
         },
 
-        trxType: true,
+        payments: {
+          select: {
+            id: true,
+          },
+        },
+
+        transactionType: true,
         updatedAt: true,
       },
     });
@@ -121,7 +133,13 @@ export class TransactionControllerBase {
           },
         },
 
-        trxType: true,
+        payments: {
+          select: {
+            id: true,
+          },
+        },
+
+        transactionType: true,
         updatedAt: true,
       },
     });
@@ -161,7 +179,13 @@ export class TransactionControllerBase {
           },
         },
 
-        trxType: true,
+        payments: {
+          select: {
+            id: true,
+          },
+        },
+
+        transactionType: true,
         updatedAt: true,
       },
     });
@@ -206,6 +230,12 @@ export class TransactionControllerBase {
                 connect: data.journal,
               }
             : undefined,
+
+          payments: data.payments
+            ? {
+                connect: data.payments,
+              }
+            : undefined,
         },
         select: {
           account: {
@@ -224,7 +254,13 @@ export class TransactionControllerBase {
             },
           },
 
-          trxType: true,
+          payments: {
+            select: {
+              id: true,
+            },
+          },
+
+          transactionType: true,
           updatedAt: true,
         },
       });
@@ -272,7 +308,13 @@ export class TransactionControllerBase {
             },
           },
 
-          trxType: true,
+          payments: {
+            select: {
+              id: true,
+            },
+          },
+
+          transactionType: true,
           updatedAt: true,
         },
       });

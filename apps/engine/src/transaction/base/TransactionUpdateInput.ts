@@ -12,9 +12,11 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
-import { ValidateNested, IsOptional, IsString } from "class-validator";
+import { ValidateNested, IsOptional, IsNumber, IsEnum } from "class-validator";
 import { Type } from "class-transformer";
 import { JournalWhereUniqueInput } from "../../journal/base/JournalWhereUniqueInput";
+import { PaymentWhereUniqueInput } from "../../payment/base/PaymentWhereUniqueInput";
+import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
 
 @InputType()
 class TransactionUpdateInput {
@@ -32,14 +34,14 @@ class TransactionUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: String,
+    type: Number,
   })
-  @IsString()
+  @IsNumber()
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => Number, {
     nullable: true,
   })
-  amount?: string | null;
+  amount?: number | null;
 
   @ApiProperty({
     required: false,
@@ -55,14 +57,26 @@ class TransactionUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: String,
+    type: () => PaymentWhereUniqueInput,
   })
-  @IsString()
+  @ValidateNested()
+  @Type(() => PaymentWhereUniqueInput)
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => PaymentWhereUniqueInput, {
     nullable: true,
   })
-  trxType?: string | null;
+  payments?: PaymentWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumTransactionTransactionType,
+  })
+  @IsEnum(EnumTransactionTransactionType)
+  @IsOptional()
+  @Field(() => EnumTransactionTransactionType, {
+    nullable: true,
+  })
+  transactionType?: "Debit" | "Credit" | null;
 }
 
 export { TransactionUpdateInput as TransactionUpdateInput };

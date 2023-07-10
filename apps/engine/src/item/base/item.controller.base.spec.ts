@@ -19,12 +19,9 @@ import { ItemService } from "../item.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
-  cogsAccount: "exampleCogsAccount",
   createdAt: new Date(),
   description: "exampleDescription",
-  earningsAccount: "exampleEarningsAccount",
   id: "exampleId",
-  inventoryAccount: "exampleInventoryAccount",
   name: "exampleName",
   price: 42.42,
   pricePerUnit: 42.42,
@@ -32,12 +29,9 @@ const CREATE_INPUT = {
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
-  cogsAccount: "exampleCogsAccount",
   createdAt: new Date(),
   description: "exampleDescription",
-  earningsAccount: "exampleEarningsAccount",
   id: "exampleId",
-  inventoryAccount: "exampleInventoryAccount",
   name: "exampleName",
   price: 42.42,
   pricePerUnit: 42.42,
@@ -46,12 +40,9 @@ const CREATE_RESULT = {
 };
 const FIND_MANY_RESULT = [
   {
-    cogsAccount: "exampleCogsAccount",
     createdAt: new Date(),
     description: "exampleDescription",
-    earningsAccount: "exampleEarningsAccount",
     id: "exampleId",
-    inventoryAccount: "exampleInventoryAccount",
     name: "exampleName",
     price: 42.42,
     pricePerUnit: 42.42,
@@ -60,12 +51,9 @@ const FIND_MANY_RESULT = [
   },
 ];
 const FIND_ONE_RESULT = {
-  cogsAccount: "exampleCogsAccount",
   createdAt: new Date(),
   description: "exampleDescription",
-  earningsAccount: "exampleEarningsAccount",
   id: "exampleId",
-  inventoryAccount: "exampleInventoryAccount",
   name: "exampleName",
   price: 42.42,
   pricePerUnit: 42.42,

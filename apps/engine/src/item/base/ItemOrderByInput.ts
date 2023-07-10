@@ -28,17 +28,6 @@ class ItemOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  cogsAccount?: SortOrder;
-
-  @ApiProperty({
-    required: false,
-    enum: ["asc", "desc"],
-  })
-  @IsOptional()
-  @IsEnum(SortOrder)
-  @Field(() => SortOrder, {
-    nullable: true,
-  })
   createdAt?: SortOrder;
 
   @ApiProperty({
@@ -61,17 +50,6 @@ class ItemOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  earningsAccount?: SortOrder;
-
-  @ApiProperty({
-    required: false,
-    enum: ["asc", "desc"],
-  })
-  @IsOptional()
-  @IsEnum(SortOrder)
-  @Field(() => SortOrder, {
-    nullable: true,
-  })
   entityId?: SortOrder;
 
   @ApiProperty({
@@ -84,17 +62,6 @@ class ItemOrderByInput {
     nullable: true,
   })
   id?: SortOrder;
-
-  @ApiProperty({
-    required: false,
-    enum: ["asc", "desc"],
-  })
-  @IsOptional()
-  @IsEnum(SortOrder)
-  @Field(() => SortOrder, {
-    nullable: true,
-  })
-  inventoryAccount?: SortOrder;
 
   @ApiProperty({
     required: false,

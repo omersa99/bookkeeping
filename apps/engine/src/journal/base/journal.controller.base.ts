@@ -314,7 +314,13 @@ export class JournalControllerBase {
           },
         },
 
-        trxType: true,
+        payments: {
+          select: {
+            id: true,
+          },
+        },
+
+        transactionType: true,
         updatedAt: true,
       },
     });

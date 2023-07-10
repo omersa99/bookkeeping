@@ -1,15 +1,14 @@
 import { Entity } from "../entity/Entity";
 import { InvoiceModel } from "../invoiceModel/InvoiceModel";
+import { ItemTransaction } from "../itemTransaction/ItemTransaction";
 
 export type Item = {
-  cogsAccount: string | null;
   createdAt: Date;
   description: string | null;
-  earningsAccount: string | null;
   entity?: Entity | null;
   id: string;
-  inventoryAccount: string | null;
   invoiceModels?: InvoiceModel | null;
+  itemTransactions?: Array<ItemTransaction>;
   name: string | null;
   price: number | null;
   pricePerUnit: number | null;

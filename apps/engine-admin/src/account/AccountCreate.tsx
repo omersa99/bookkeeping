@@ -4,6 +4,7 @@ import {
   Create,
   SimpleForm,
   CreateProps,
+  NumberInput,
   TextInput,
   ReferenceArrayInput,
   SelectArrayInput,
@@ -17,7 +18,7 @@ export const AccountCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
-        <TextInput label="balance" source="balance" />
+        <NumberInput step={1} label="balance" source="balance" />
         <TextInput label="balanceType" source="balanceType" />
         <ReferenceArrayInput
           source="chartOfAccount"

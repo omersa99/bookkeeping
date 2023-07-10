@@ -21,15 +21,17 @@ model User {
 }
 
 model Transaction {
-  account   Account? @relation(fields: [accountId], references: [id])
-  accountId String?
-  amount    String?
-  createdAt DateTime @default(now())
-  id        String   @id @default(cuid())
-  journal   Journal? @relation(fields: [journalId], references: [id])
-  journalId String?
-  trxType   String?
-  updatedAt DateTime @updatedAt
+  account         Account?                        @relation(fields: [accountId], references: [id])
+  accountId       String?
+  amount          Float?
+  createdAt       DateTime                        @default(now())
+  id              String                          @id @default(cuid())
+  journal         Journal?                        @relation(fields: [journalId], references: [id])
+  journalId       String?
+  payments        Payment?                        @relation(fields: [paymentsId], references: [id])
+  paymentsId      String?                         @unique
+  transactionType EnumTransactionTransactionType?
+  updatedAt       DateTime                        @updatedAt
 }
 
 model Journal {
@@ -55,7 +57,7 @@ model Ledger {
 }
 
 model Account {
-  balance        String?
+  balance        Int?
   balanceType    String?
   chartOfAccount ChartOfAccount[]
   code           String?
@@ -97,20 +99,18 @@ model ChartOfAccount {
 }
 
 model Item {
-  cogsAccount      String?
-  createdAt        DateTime      @default(now())
+  createdAt        DateTime          @default(now())
   description      String?
-  earningsAccount  String?
-  entity           Entity?       @relation(fields: [entityId], references: [id])
-  entityId         String?       @unique
-  id               String        @id @default(cuid())
-  inventoryAccount String?
+  entity           Entity?           @relation(fields: [entityId], references: [id])
+  entityId         String?           @unique
+  id               String            @id @default(cuid())
   invoiceModels    InvoiceModel?
+  itemTransactions ItemTransaction[]
   name             String?
   price            Float?
   pricePerUnit     Float?
   quantity         Int?
-  updatedAt        DateTime      @updatedAt
+  updatedAt        DateTime          @updatedAt
 }
 
 model InvoiceModel {
@@ -144,6 +144,32 @@ model Customer {
   updatedAt     DateTime       @updatedAt
 }
 
+model ItemTransaction {
+  createdAt       DateTime                            @default(now())
+  id              String                              @id @default(cuid())
+  item            Item?                               @relation(fields: [itemId], references: [id])
+  itemId          String?
+  quantity        Int?
+  totalCost       String?
+  transactionType EnumItemTransactionTransactionType?
+  unitPrice       Float?
+  updatedAt       DateTime                            @updatedAt
+}
+
+model Payment {
+  amountPaid    Int?
+  createdAt     DateTime                  @default(now())
+  id            String                    @id @default(cuid())
+  invoice       Transaction?
+  paymentMethod EnumPaymentPaymentMethod?
+  updatedAt     DateTime                  @updatedAt
+}
+
+enum EnumTransactionTransactionType {
+  Debit
+  Credit
+}
+
 enum EnumEntityAccountingType {
   Cash
   Cumulative
@@ -153,4 +179,18 @@ enum EnumInvoiceModelInvoiceStatus {
   Draft
   Paid
   Canceled
+}
+
+enum EnumItemTransactionTransactionType {
+  Purchase
+  Return
+  Adjustment
+}
+
+enum EnumPaymentPaymentMethod {
+  Cash
+  CreditCard
+  Check
+  BankTransfer
+  App
 }

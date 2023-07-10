@@ -476,7 +476,13 @@ export class AccountControllerBase {
           },
         },
 
-        trxType: true,
+        payments: {
+          select: {
+            id: true,
+          },
+        },
+
+        transactionType: true,
         updatedAt: true,
       },
     });

@@ -12,9 +12,18 @@ https://docs.amplication.com/how-to/custom-code
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { Account } from "../../account/base/Account";
-import { ValidateNested, IsOptional, IsString, IsDate } from "class-validator";
+import {
+  ValidateNested,
+  IsOptional,
+  IsNumber,
+  IsDate,
+  IsString,
+  IsEnum,
+} from "class-validator";
 import { Type } from "class-transformer";
 import { Journal } from "../../journal/base/Journal";
+import { Payment } from "../../payment/base/Payment";
+import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
 
 @ObjectType()
 class Transaction {
@@ -29,14 +38,14 @@ class Transaction {
 
   @ApiProperty({
     required: false,
-    type: String,
+    type: Number,
   })
-  @IsString()
+  @IsNumber()
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => Number, {
     nullable: true,
   })
-  amount!: string | null;
+  amount!: number | null;
 
   @ApiProperty({
     required: true,
@@ -65,14 +74,23 @@ class Transaction {
 
   @ApiProperty({
     required: false,
-    type: String,
+    type: () => Payment,
   })
-  @IsString()
+  @ValidateNested()
+  @Type(() => Payment)
   @IsOptional()
-  @Field(() => String, {
+  payments?: Payment | null;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumTransactionTransactionType,
+  })
+  @IsEnum(EnumTransactionTransactionType)
+  @IsOptional()
+  @Field(() => EnumTransactionTransactionType, {
     nullable: true,
   })
-  trxType!: string | null;
+  transactionType?: "Debit" | "Credit" | null;
 
   @ApiProperty({
     required: true,
