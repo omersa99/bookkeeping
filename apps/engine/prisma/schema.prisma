@@ -28,6 +28,8 @@ model Transaction {
   id              String                          @id @default(cuid())
   journal         Journal?                        @relation(fields: [journalId], references: [id])
   journalId       String?
+  payments        Payment?                        @relation(fields: [paymentsId], references: [id])
+  paymentsId      String?                         @unique
   transactionType EnumTransactionTransactionType?
   updatedAt       DateTime                        @updatedAt
 }
@@ -154,6 +156,15 @@ model ItemTransaction {
   updatedAt       DateTime                            @updatedAt
 }
 
+model Payment {
+  amountPaid    Int?
+  createdAt     DateTime                  @default(now())
+  id            String                    @id @default(cuid())
+  invoice       Transaction?
+  paymentMethod EnumPaymentPaymentMethod?
+  updatedAt     DateTime                  @updatedAt
+}
+
 enum EnumTransactionTransactionType {
   Debit
   Credit
@@ -174,4 +185,12 @@ enum EnumItemTransactionTransactionType {
   Purchase
   Return
   Adjustment
+}
+
+enum EnumPaymentPaymentMethod {
+  Cash
+  CreditCard
+  Check
+  BankTransfer
+  App
 }
