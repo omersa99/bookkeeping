@@ -17,7 +17,6 @@ import { Type } from "class-transformer";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { JournalWhereUniqueInput } from "../../journal/base/JournalWhereUniqueInput";
-import { PaymentWhereUniqueInput } from "../../payment/base/PaymentWhereUniqueInput";
 import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
 
 @InputType()
@@ -67,18 +66,6 @@ class TransactionWhereInput {
     nullable: true,
   })
   journal?: JournalWhereUniqueInput;
-
-  @ApiProperty({
-    required: false,
-    type: () => PaymentWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => PaymentWhereUniqueInput)
-  @IsOptional()
-  @Field(() => PaymentWhereUniqueInput, {
-    nullable: true,
-  })
-  payments?: PaymentWhereUniqueInput;
 
   @ApiProperty({
     required: false,
