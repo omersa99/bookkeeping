@@ -6,6 +6,7 @@ export type TransactionOrderByInput = {
   createdAt?: SortOrder;
   id?: SortOrder;
   journalId?: SortOrder;
+  paymentsId?: SortOrder;
   transactionType?: SortOrder;
   updatedAt?: SortOrder;
 };
