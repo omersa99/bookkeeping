@@ -314,12 +314,6 @@ export class JournalControllerBase {
           },
         },
 
-        payments: {
-          select: {
-            id: true,
-          },
-        },
-
         transactionType: true,
         updatedAt: true,
       },

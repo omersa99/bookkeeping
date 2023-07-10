@@ -9,7 +9,6 @@ import {
 } from "react-admin";
 import { AccountTitle } from "../account/AccountTitle";
 import { JournalTitle } from "../journal/JournalTitle";
-import { PaymentTitle } from "../payment/PaymentTitle";
 
 export const TransactionCreate = (props: CreateProps): React.ReactElement => {
   return (
@@ -21,13 +20,6 @@ export const TransactionCreate = (props: CreateProps): React.ReactElement => {
         <NumberInput label="amount" source="amount" />
         <ReferenceInput source="journal.id" reference="Journal" label="journal">
           <SelectInput optionText={JournalTitle} />
-        </ReferenceInput>
-        <ReferenceInput
-          source="payments.id"
-          reference="Payment"
-          label="Payments"
-        >
-          <SelectInput optionText={PaymentTitle} />
         </ReferenceInput>
         <SelectInput
           source="transactionType"
