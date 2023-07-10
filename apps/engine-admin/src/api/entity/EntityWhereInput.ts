@@ -3,7 +3,7 @@ import { ChartOfAccountWhereUniqueInput } from "../chartOfAccount/ChartOfAccount
 import { CustomerListRelationFilter } from "../customer/CustomerListRelationFilter";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
-import { ItemWhereUniqueInput } from "../item/ItemWhereUniqueInput";
+import { ItemListRelationFilter } from "../item/ItemListRelationFilter";
 import { JournalListRelationFilter } from "../journal/JournalListRelationFilter";
 import { LedgerListRelationFilter } from "../ledger/LedgerListRelationFilter";
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
@@ -17,7 +17,7 @@ export type EntityWhereInput = {
   deductionRate?: StringNullableFilter;
   exemption?: BooleanNullableFilter;
   id?: StringFilter;
-  items?: ItemWhereUniqueInput;
+  items?: ItemListRelationFilter;
   journals?: JournalListRelationFilter;
   ledgers?: LedgerListRelationFilter;
   name?: StringNullableFilter;

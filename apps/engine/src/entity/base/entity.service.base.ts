@@ -14,10 +14,10 @@ import {
   Prisma,
   Entity,
   Customer,
+  Item,
   Journal,
   Ledger,
   ChartOfAccount,
-  Item,
   User,
 } from "@prisma/client";
 
@@ -67,6 +67,17 @@ export class EntityServiceBase {
       .customers(args);
   }
 
+  async findItems(
+    parentId: string,
+    args: Prisma.ItemFindManyArgs
+  ): Promise<Item[]> {
+    return this.prisma.entity
+      .findUniqueOrThrow({
+        where: { id: parentId },
+      })
+      .items(args);
+  }
+
   async findJournals(
     parentId: string,
     args: Prisma.JournalFindManyArgs
@@ -95,14 +106,6 @@ export class EntityServiceBase {
         where: { id: parentId },
       })
       .coa();
-  }
-
-  async getItems(parentId: string): Promise<Item | null> {
-    return this.prisma.entity
-      .findUnique({
-        where: { id: parentId },
-      })
-      .items();
   }
 
   async getUser(parentId: string): Promise<User | null> {

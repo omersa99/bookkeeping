@@ -121,12 +121,12 @@ class Entity {
 
   @ApiProperty({
     required: false,
-    type: () => Item,
+    type: () => [Item],
   })
   @ValidateNested()
   @Type(() => Item)
   @IsOptional()
-  items?: Item | null;
+  items?: Array<Item>;
 
   @ApiProperty({
     required: false,

@@ -15,7 +15,7 @@ export type Entity = {
   deductionRate: string | null;
   exemption: boolean | null;
   id: string;
-  items?: Item | null;
+  items?: Array<Item>;
   journals?: Array<Journal>;
   ledgers?: Array<Ledger>;
   name: string | null;
