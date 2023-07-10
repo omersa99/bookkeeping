@@ -64,6 +64,12 @@ export class TransactionControllerBase {
               connect: data.journal,
             }
           : undefined,
+
+        payments: data.payments
+          ? {
+              connect: data.payments,
+            }
+          : undefined,
       },
       select: {
         account: {
@@ -77,6 +83,12 @@ export class TransactionControllerBase {
         id: true,
 
         journal: {
+          select: {
+            id: true,
+          },
+        },
+
+        payments: {
           select: {
             id: true,
           },
@@ -121,6 +133,12 @@ export class TransactionControllerBase {
           },
         },
 
+        payments: {
+          select: {
+            id: true,
+          },
+        },
+
         transactionType: true,
         updatedAt: true,
       },
@@ -156,6 +174,12 @@ export class TransactionControllerBase {
         id: true,
 
         journal: {
+          select: {
+            id: true,
+          },
+        },
+
+        payments: {
           select: {
             id: true,
           },
@@ -206,6 +230,12 @@ export class TransactionControllerBase {
                 connect: data.journal,
               }
             : undefined,
+
+          payments: data.payments
+            ? {
+                connect: data.payments,
+              }
+            : undefined,
         },
         select: {
           account: {
@@ -219,6 +249,12 @@ export class TransactionControllerBase {
           id: true,
 
           journal: {
+            select: {
+              id: true,
+            },
+          },
+
+          payments: {
             select: {
               id: true,
             },
@@ -267,6 +303,12 @@ export class TransactionControllerBase {
           id: true,
 
           journal: {
+            select: {
+              id: true,
+            },
+          },
+
+          payments: {
             select: {
               id: true,
             },
