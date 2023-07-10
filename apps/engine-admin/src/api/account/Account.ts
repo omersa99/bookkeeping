@@ -11,7 +11,7 @@ export type Account = {
   id: string;
   invoiceModels?: Array<InvoiceModel>;
   name: string | null;
-  role: string | null;
+  role?: "Asset" | "Liability" | "Income" | "Cogs" | "Expenses" | null;
   transactions?: Array<Transaction>;
   updatedAt: Date;
 };

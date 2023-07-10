@@ -63,7 +63,7 @@ model Account {
   id             String           @id @default(cuid())
   invoiceModels  InvoiceModel[]
   name           String?
-  role           String?
+  role           EnumAccountRole?
   transactions   Transaction[]
   updatedAt      DateTime         @updatedAt
 }
@@ -157,6 +157,14 @@ model ItemTransaction {
 enum EnumTransactionTransactionType {
   Debit
   Credit
+}
+
+enum EnumAccountRole {
+  Asset
+  Liability
+  Income
+  Cogs
+  Expenses
 }
 
 enum EnumEntityAccountingType {

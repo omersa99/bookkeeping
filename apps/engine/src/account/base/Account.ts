@@ -17,10 +17,12 @@ import {
   IsString,
   ValidateNested,
   IsDate,
+  IsEnum,
 } from "class-validator";
 import { ChartOfAccount } from "../../chartOfAccount/base/ChartOfAccount";
 import { Type } from "class-transformer";
 import { InvoiceModel } from "../../invoiceModel/base/InvoiceModel";
+import { EnumAccountRole } from "./EnumAccountRole";
 import { Transaction } from "../../transaction/base/Transaction";
 
 @ObjectType()
@@ -105,14 +107,14 @@ class Account {
 
   @ApiProperty({
     required: false,
-    type: String,
+    enum: EnumAccountRole,
   })
-  @IsString()
+  @IsEnum(EnumAccountRole)
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => EnumAccountRole, {
     nullable: true,
   })
-  role!: string | null;
+  role?: "Asset" | "Liability" | "Income" | "Cogs" | "Expenses" | null;
 
   @ApiProperty({
     required: false,
