@@ -19,33 +19,29 @@ import { TransactionService } from "../transaction.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
-  amount: "exampleAmount",
+  amount: 42.42,
   createdAt: new Date(),
   id: "exampleId",
-  trxType: "exampleTrxType",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
-  amount: "exampleAmount",
+  amount: 42.42,
   createdAt: new Date(),
   id: "exampleId",
-  trxType: "exampleTrxType",
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
   {
-    amount: "exampleAmount",
+    amount: 42.42,
     createdAt: new Date(),
     id: "exampleId",
-    trxType: "exampleTrxType",
     updatedAt: new Date(),
   },
 ];
 const FIND_ONE_RESULT = {
-  amount: "exampleAmount",
+  amount: 42.42,
   createdAt: new Date(),
   id: "exampleId",
-  trxType: "exampleTrxType",
   updatedAt: new Date(),
 };
 

@@ -12,9 +12,9 @@ https://docs.amplication.com/how-to/custom-code
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import {
+  IsDate,
   IsString,
   IsOptional,
-  IsDate,
   ValidateNested,
   IsNumber,
   IsInt,
@@ -22,20 +22,10 @@ import {
 import { Type } from "class-transformer";
 import { Entity } from "../../entity/base/Entity";
 import { InvoiceModel } from "../../invoiceModel/base/InvoiceModel";
+import { ItemTransaction } from "../../itemTransaction/base/ItemTransaction";
 
 @ObjectType()
 class Item {
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  cogsAccount!: string | null;
-
   @ApiProperty({
     required: true,
   })
@@ -57,17 +47,6 @@ class Item {
 
   @ApiProperty({
     required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  earningsAccount!: string | null;
-
-  @ApiProperty({
-    required: false,
     type: () => Entity,
   })
   @ValidateNested()
@@ -85,23 +64,21 @@ class Item {
 
   @ApiProperty({
     required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  inventoryAccount!: string | null;
-
-  @ApiProperty({
-    required: false,
     type: () => InvoiceModel,
   })
   @ValidateNested()
   @Type(() => InvoiceModel)
   @IsOptional()
   invoiceModels?: InvoiceModel | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => [ItemTransaction],
+  })
+  @ValidateNested()
+  @Type(() => ItemTransaction)
+  @IsOptional()
+  itemTransactions?: Array<ItemTransaction>;
 
   @ApiProperty({
     required: false,

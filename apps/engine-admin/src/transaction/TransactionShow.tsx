@@ -9,6 +9,7 @@ import {
 } from "react-admin";
 import { ACCOUNT_TITLE_FIELD } from "../account/AccountTitle";
 import { JOURNAL_TITLE_FIELD } from "../journal/JournalTitle";
+import { PAYMENT_TITLE_FIELD } from "../payment/PaymentTitle";
 
 export const TransactionShow = (props: ShowProps): React.ReactElement => {
   return (
@@ -23,7 +24,14 @@ export const TransactionShow = (props: ShowProps): React.ReactElement => {
         <ReferenceField label="journal" source="journal.id" reference="Journal">
           <TextField source={JOURNAL_TITLE_FIELD} />
         </ReferenceField>
-        <TextField label="trxType" source="trxType" />
+        <ReferenceField
+          label="Payments"
+          source="payment.id"
+          reference="Payment"
+        >
+          <TextField source={PAYMENT_TITLE_FIELD} />
+        </ReferenceField>
+        <TextField label="transaction type" source="transactionType" />
         <DateField source="updatedAt" label="Updated At" />
       </SimpleShowLayout>
     </Show>

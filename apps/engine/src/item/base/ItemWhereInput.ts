@@ -17,6 +17,7 @@ import { IsOptional, ValidateNested } from "class-validator";
 import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
 import { InvoiceModelWhereUniqueInput } from "../../invoiceModel/base/InvoiceModelWhereUniqueInput";
+import { ItemTransactionListRelationFilter } from "../../itemTransaction/base/ItemTransactionListRelationFilter";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { IntNullableFilter } from "../../util/IntNullableFilter";
 
@@ -31,29 +32,7 @@ class ItemWhereInput {
   @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  cogsAccount?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: StringNullableFilter,
-  })
-  @Type(() => StringNullableFilter)
-  @IsOptional()
-  @Field(() => StringNullableFilter, {
-    nullable: true,
-  })
   description?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: StringNullableFilter,
-  })
-  @Type(() => StringNullableFilter)
-  @IsOptional()
-  @Field(() => StringNullableFilter, {
-    nullable: true,
-  })
-  earningsAccount?: StringNullableFilter;
 
   @ApiProperty({
     required: false,
@@ -80,17 +59,6 @@ class ItemWhereInput {
 
   @ApiProperty({
     required: false,
-    type: StringNullableFilter,
-  })
-  @Type(() => StringNullableFilter)
-  @IsOptional()
-  @Field(() => StringNullableFilter, {
-    nullable: true,
-  })
-  inventoryAccount?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
     type: () => InvoiceModelWhereUniqueInput,
   })
   @ValidateNested()
@@ -100,6 +68,18 @@ class ItemWhereInput {
     nullable: true,
   })
   invoiceModels?: InvoiceModelWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => ItemTransactionListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => ItemTransactionListRelationFilter)
+  @IsOptional()
+  @Field(() => ItemTransactionListRelationFilter, {
+    nullable: true,
+  })
+  itemTransactions?: ItemTransactionListRelationFilter;
 
   @ApiProperty({
     required: false,

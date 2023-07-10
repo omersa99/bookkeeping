@@ -3,7 +3,7 @@ import { InvoiceModelUpdateManyWithoutAccountsInput } from "./InvoiceModelUpdate
 import { TransactionUpdateManyWithoutAccountsInput } from "./TransactionUpdateManyWithoutAccountsInput";
 
 export type AccountUpdateInput = {
-  balance?: string | null;
+  balance?: number | null;
   balanceType?: string | null;
   chartOfAccount?: ChartOfAccountUpdateManyWithoutAccountsInput;
   code?: string | null;

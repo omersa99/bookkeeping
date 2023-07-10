@@ -1,12 +1,14 @@
 import { AccountWhereUniqueInput } from "../account/AccountWhereUniqueInput";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { JournalWhereUniqueInput } from "../journal/JournalWhereUniqueInput";
+import { PaymentWhereUniqueInput } from "../payment/PaymentWhereUniqueInput";
 
 export type TransactionWhereInput = {
   account?: AccountWhereUniqueInput;
-  amount?: StringNullableFilter;
+  amount?: FloatNullableFilter;
   id?: StringFilter;
   journal?: JournalWhereUniqueInput;
-  trxType?: StringNullableFilter;
+  payments?: PaymentWhereUniqueInput;
+  transactionType?: "Debit" | "Credit";
 };

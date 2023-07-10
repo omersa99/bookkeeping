@@ -26,6 +26,8 @@ import { ItemCountArgs } from "./ItemCountArgs";
 import { ItemFindManyArgs } from "./ItemFindManyArgs";
 import { ItemFindUniqueArgs } from "./ItemFindUniqueArgs";
 import { Item } from "./Item";
+import { ItemTransactionFindManyArgs } from "../../itemTransaction/base/ItemTransactionFindManyArgs";
+import { ItemTransaction } from "../../itemTransaction/base/ItemTransaction";
 import { Entity } from "../../entity/base/Entity";
 import { InvoiceModel } from "../../invoiceModel/base/InvoiceModel";
 import { ItemService } from "../item.service";
@@ -160,6 +162,26 @@ export class ItemResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [ItemTransaction], { name: "itemTransactions" })
+  @nestAccessControl.UseRoles({
+    resource: "ItemTransaction",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldItemTransactions(
+    @graphql.Parent() parent: Item,
+    @graphql.Args() args: ItemTransactionFindManyArgs
+  ): Promise<ItemTransaction[]> {
+    const results = await this.service.findItemTransactions(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)

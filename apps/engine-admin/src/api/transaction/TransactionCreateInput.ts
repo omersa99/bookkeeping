@@ -1,9 +1,11 @@
 import { AccountWhereUniqueInput } from "../account/AccountWhereUniqueInput";
 import { JournalWhereUniqueInput } from "../journal/JournalWhereUniqueInput";
+import { PaymentWhereUniqueInput } from "../payment/PaymentWhereUniqueInput";
 
 export type TransactionCreateInput = {
   account?: AccountWhereUniqueInput | null;
-  amount?: string | null;
+  amount?: number | null;
   journal?: JournalWhereUniqueInput | null;
-  trxType?: string | null;
+  payments?: PaymentWhereUniqueInput | null;
+  transactionType?: "Debit" | "Credit" | null;
 };

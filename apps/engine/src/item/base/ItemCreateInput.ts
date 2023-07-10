@@ -21,6 +21,7 @@ import {
 import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
 import { Type } from "class-transformer";
 import { InvoiceModelWhereUniqueInput } from "../../invoiceModel/base/InvoiceModelWhereUniqueInput";
+import { ItemTransactionCreateNestedManyWithoutItemsInput } from "./ItemTransactionCreateNestedManyWithoutItemsInput";
 
 @InputType()
 class ItemCreateInput {
@@ -33,29 +34,7 @@ class ItemCreateInput {
   @Field(() => String, {
     nullable: true,
   })
-  cogsAccount?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
   description?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  earningsAccount?: string | null;
 
   @ApiProperty({
     required: false,
@@ -71,17 +50,6 @@ class ItemCreateInput {
 
   @ApiProperty({
     required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  inventoryAccount?: string | null;
-
-  @ApiProperty({
-    required: false,
     type: () => InvoiceModelWhereUniqueInput,
   })
   @ValidateNested()
@@ -91,6 +59,18 @@ class ItemCreateInput {
     nullable: true,
   })
   invoiceModels?: InvoiceModelWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => ItemTransactionCreateNestedManyWithoutItemsInput,
+  })
+  @ValidateNested()
+  @Type(() => ItemTransactionCreateNestedManyWithoutItemsInput)
+  @IsOptional()
+  @Field(() => ItemTransactionCreateNestedManyWithoutItemsInput, {
+    nullable: true,
+  })
+  itemTransactions?: ItemTransactionCreateNestedManyWithoutItemsInput;
 
   @ApiProperty({
     required: false,

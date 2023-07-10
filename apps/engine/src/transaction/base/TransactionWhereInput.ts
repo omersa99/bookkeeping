@@ -12,11 +12,13 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
-import { ValidateNested, IsOptional } from "class-validator";
+import { ValidateNested, IsOptional, IsEnum } from "class-validator";
 import { Type } from "class-transformer";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { JournalWhereUniqueInput } from "../../journal/base/JournalWhereUniqueInput";
+import { PaymentWhereUniqueInput } from "../../payment/base/PaymentWhereUniqueInput";
+import { EnumTransactionTransactionType } from "./EnumTransactionTransactionType";
 
 @InputType()
 class TransactionWhereInput {
@@ -34,14 +36,14 @@ class TransactionWhereInput {
 
   @ApiProperty({
     required: false,
-    type: StringNullableFilter,
+    type: FloatNullableFilter,
   })
-  @Type(() => StringNullableFilter)
+  @Type(() => FloatNullableFilter)
   @IsOptional()
-  @Field(() => StringNullableFilter, {
+  @Field(() => FloatNullableFilter, {
     nullable: true,
   })
-  amount?: StringNullableFilter;
+  amount?: FloatNullableFilter;
 
   @ApiProperty({
     required: false,
@@ -68,14 +70,26 @@ class TransactionWhereInput {
 
   @ApiProperty({
     required: false,
-    type: StringNullableFilter,
+    type: () => PaymentWhereUniqueInput,
   })
-  @Type(() => StringNullableFilter)
+  @ValidateNested()
+  @Type(() => PaymentWhereUniqueInput)
   @IsOptional()
-  @Field(() => StringNullableFilter, {
+  @Field(() => PaymentWhereUniqueInput, {
     nullable: true,
   })
-  trxType?: StringNullableFilter;
+  payments?: PaymentWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumTransactionTransactionType,
+  })
+  @IsEnum(EnumTransactionTransactionType)
+  @IsOptional()
+  @Field(() => EnumTransactionTransactionType, {
+    nullable: true,
+  })
+  transactionType?: "Debit" | "Credit";
 }
 
 export { TransactionWhereInput as TransactionWhereInput };

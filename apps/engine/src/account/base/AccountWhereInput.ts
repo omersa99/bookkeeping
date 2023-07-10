@@ -11,9 +11,10 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { IntNullableFilter } from "../../util/IntNullableFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { ChartOfAccountListRelationFilter } from "../../chartOfAccount/base/ChartOfAccountListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { InvoiceModelListRelationFilter } from "../../invoiceModel/base/InvoiceModelListRelationFilter";
@@ -23,14 +24,14 @@ import { TransactionListRelationFilter } from "../../transaction/base/Transactio
 class AccountWhereInput {
   @ApiProperty({
     required: false,
-    type: StringNullableFilter,
+    type: IntNullableFilter,
   })
-  @Type(() => StringNullableFilter)
+  @Type(() => IntNullableFilter)
   @IsOptional()
-  @Field(() => StringNullableFilter, {
+  @Field(() => IntNullableFilter, {
     nullable: true,
   })
-  balance?: StringNullableFilter;
+  balance?: IntNullableFilter;
 
   @ApiProperty({
     required: false,

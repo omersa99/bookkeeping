@@ -1,3 +1,4 @@
+import { IntNullableFilter } from "../../util/IntNullableFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { ChartOfAccountListRelationFilter } from "../chartOfAccount/ChartOfAccountListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
@@ -5,7 +6,7 @@ import { InvoiceModelListRelationFilter } from "../invoiceModel/InvoiceModelList
 import { TransactionListRelationFilter } from "../transaction/TransactionListRelationFilter";
 
 export type AccountWhereInput = {
-  balance?: StringNullableFilter;
+  balance?: IntNullableFilter;
   balanceType?: StringNullableFilter;
   chartOfAccount?: ChartOfAccountListRelationFilter;
   code?: StringNullableFilter;
