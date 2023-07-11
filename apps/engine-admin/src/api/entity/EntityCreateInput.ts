@@ -2,7 +2,7 @@ import { AccountCreateNestedManyWithoutEntitiesInput } from "./AccountCreateNest
 import { CustomerCreateNestedManyWithoutEntitiesInput } from "./CustomerCreateNestedManyWithoutEntitiesInput";
 import { InvoiceModelCreateNestedManyWithoutEntitiesInput } from "./InvoiceModelCreateNestedManyWithoutEntitiesInput";
 import { ItemCreateNestedManyWithoutEntitiesInput } from "./ItemCreateNestedManyWithoutEntitiesInput";
-import { JournalCreateNestedManyWithoutEntitiesInput } from "./JournalCreateNestedManyWithoutEntitiesInput";
+import { LedgerCreateNestedManyWithoutEntitiesInput } from "./LedgerCreateNestedManyWithoutEntitiesInput";
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type EntityCreateInput = {
@@ -15,7 +15,7 @@ export type EntityCreateInput = {
   exemption?: boolean | null;
   invoiceModels?: InvoiceModelCreateNestedManyWithoutEntitiesInput;
   items?: ItemCreateNestedManyWithoutEntitiesInput;
-  journals?: JournalCreateNestedManyWithoutEntitiesInput;
+  ledgers?: LedgerCreateNestedManyWithoutEntitiesInput;
   name?: string | null;
   taxId?: string | null;
   user?: UserWhereUniqueInput | null;

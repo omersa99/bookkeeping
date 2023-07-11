@@ -5,14 +5,14 @@ import {
   SimpleShowLayout,
   ShowProps,
   DateField,
-  TextField,
   ReferenceField,
+  TextField,
   ReferenceManyField,
   Datagrid,
 } from "react-admin";
 
-import { ENTITY_TITLE_FIELD } from "../entity/EntityTitle";
 import { LEDGER_TITLE_FIELD } from "./LedgerTitle";
+import { ENTITY_TITLE_FIELD } from "../entity/EntityTitle";
 import { INVOICEMODEL_TITLE_FIELD } from "../invoiceModel/InvoiceModelTitle";
 
 export const LedgerShow = (props: ShowProps): React.ReactElement => {
@@ -20,6 +20,9 @@ export const LedgerShow = (props: ShowProps): React.ReactElement => {
     <Show {...props}>
       <SimpleShowLayout>
         <DateField source="createdAt" label="Created At" />
+        <ReferenceField label="entity" source="entity.id" reference="Entity">
+          <TextField source={ENTITY_TITLE_FIELD} />
+        </ReferenceField>
         <TextField label="ID" source="id" />
         <ReferenceField
           label="InvoiceModels"
@@ -37,13 +40,6 @@ export const LedgerShow = (props: ShowProps): React.ReactElement => {
         >
           <Datagrid rowClick="show">
             <DateField source="createdAt" label="Created At" />
-            <ReferenceField
-              label="entity"
-              source="entity.id"
-              reference="Entity"
-            >
-              <TextField source={ENTITY_TITLE_FIELD} />
-            </ReferenceField>
             <TextField label="ID" source="id" />
             <ReferenceField
               label="ledger"

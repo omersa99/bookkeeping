@@ -25,7 +25,7 @@ import { Type } from "class-transformer";
 import { Customer } from "../../customer/base/Customer";
 import { InvoiceModel } from "../../invoiceModel/base/InvoiceModel";
 import { Item } from "../../item/base/Item";
-import { Journal } from "../../journal/base/Journal";
+import { Ledger } from "../../ledger/base/Ledger";
 import { User } from "../../user/base/User";
 
 @ObjectType()
@@ -139,12 +139,12 @@ class Entity {
 
   @ApiProperty({
     required: false,
-    type: () => [Journal],
+    type: () => [Ledger],
   })
   @ValidateNested()
-  @Type(() => Journal)
+  @Type(() => Ledger)
   @IsOptional()
-  journals?: Array<Journal>;
+  ledgers?: Array<Ledger>;
 
   @ApiProperty({
     required: false,

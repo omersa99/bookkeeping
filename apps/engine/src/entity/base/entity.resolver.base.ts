@@ -34,8 +34,8 @@ import { InvoiceModelFindManyArgs } from "../../invoiceModel/base/InvoiceModelFi
 import { InvoiceModel } from "../../invoiceModel/base/InvoiceModel";
 import { ItemFindManyArgs } from "../../item/base/ItemFindManyArgs";
 import { Item } from "../../item/base/Item";
-import { JournalFindManyArgs } from "../../journal/base/JournalFindManyArgs";
-import { Journal } from "../../journal/base/Journal";
+import { LedgerFindManyArgs } from "../../ledger/base/LedgerFindManyArgs";
+import { Ledger } from "../../ledger/base/Ledger";
 import { User } from "../../user/base/User";
 import { EntityService } from "../entity.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
@@ -246,17 +246,17 @@ export class EntityResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [Journal], { name: "journals" })
+  @graphql.ResolveField(() => [Ledger], { name: "ledgers" })
   @nestAccessControl.UseRoles({
-    resource: "Journal",
+    resource: "Ledger",
     action: "read",
     possession: "any",
   })
-  async resolveFieldJournals(
+  async resolveFieldLedgers(
     @graphql.Parent() parent: Entity,
-    @graphql.Args() args: JournalFindManyArgs
-  ): Promise<Journal[]> {
-    const results = await this.service.findJournals(parent.id, args);
+    @graphql.Args() args: LedgerFindManyArgs
+  ): Promise<Ledger[]> {
+    const results = await this.service.findLedgers(parent.id, args);
 
     if (!results) {
       return [];

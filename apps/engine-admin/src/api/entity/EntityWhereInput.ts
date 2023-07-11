@@ -5,7 +5,7 @@ import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { InvoiceModelListRelationFilter } from "../invoiceModel/InvoiceModelListRelationFilter";
 import { ItemListRelationFilter } from "../item/ItemListRelationFilter";
-import { JournalListRelationFilter } from "../journal/JournalListRelationFilter";
+import { LedgerListRelationFilter } from "../ledger/LedgerListRelationFilter";
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type EntityWhereInput = {
@@ -19,7 +19,7 @@ export type EntityWhereInput = {
   id?: StringFilter;
   invoiceModels?: InvoiceModelListRelationFilter;
   items?: ItemListRelationFilter;
-  journals?: JournalListRelationFilter;
+  ledgers?: LedgerListRelationFilter;
   name?: StringNullableFilter;
   taxId?: StringNullableFilter;
   user?: UserWhereUniqueInput;
