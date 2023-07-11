@@ -6,12 +6,13 @@ import {
   CreateProps,
   NumberInput,
   TextInput,
+  ReferenceInput,
+  SelectInput,
   ReferenceArrayInput,
   SelectArrayInput,
-  SelectInput,
 } from "react-admin";
 
-import { ChartOfAccountTitle } from "../chartOfAccount/ChartOfAccountTitle";
+import { EntityTitle } from "../entity/EntityTitle";
 import { TransactionTitle } from "../transaction/TransactionTitle";
 
 export const AccountCreate = (props: CreateProps): React.ReactElement => {
@@ -20,15 +21,10 @@ export const AccountCreate = (props: CreateProps): React.ReactElement => {
       <SimpleForm>
         <NumberInput step={1} label="balance" source="balance" />
         <TextInput label="balanceType" source="balanceType" />
-        <ReferenceArrayInput
-          source="chartOfAccount"
-          reference="ChartOfAccount"
-          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
-          format={(value: any) => value && value.map((v: any) => v.id)}
-        >
-          <SelectArrayInput optionText={ChartOfAccountTitle} />
-        </ReferenceArrayInput>
         <TextInput label="code" source="code" />
+        <ReferenceInput source="entity.id" reference="Entity" label="entity">
+          <SelectInput optionText={EntityTitle} />
+        </ReferenceInput>
         <TextInput label="name" source="name" />
         <SelectInput
           source="role"

@@ -1,5 +1,5 @@
+import { AccountListRelationFilter } from "../account/AccountListRelationFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { ChartOfAccountWhereUniqueInput } from "../chartOfAccount/ChartOfAccountWhereUniqueInput";
 import { CustomerListRelationFilter } from "../customer/CustomerListRelationFilter";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
@@ -10,8 +10,8 @@ import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type EntityWhereInput = {
   accountingType?: "Cash" | "Cumulative";
+  accounts?: AccountListRelationFilter;
   address?: StringNullableFilter;
-  coa?: ChartOfAccountWhereUniqueInput;
   customers?: CustomerListRelationFilter;
   deductionId?: StringNullableFilter;
   deductionRate?: StringNullableFilter;

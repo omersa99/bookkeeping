@@ -18,7 +18,7 @@ import {
   ValidateNested,
   IsEnum,
 } from "class-validator";
-import { ChartOfAccountUpdateManyWithoutAccountsInput } from "./ChartOfAccountUpdateManyWithoutAccountsInput";
+import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
 import { Type } from "class-transformer";
 import { EnumAccountRole } from "./EnumAccountRole";
 import { TransactionUpdateManyWithoutAccountsInput } from "./TransactionUpdateManyWithoutAccountsInput";
@@ -49,18 +49,6 @@ class AccountUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: () => ChartOfAccountUpdateManyWithoutAccountsInput,
-  })
-  @ValidateNested()
-  @Type(() => ChartOfAccountUpdateManyWithoutAccountsInput)
-  @IsOptional()
-  @Field(() => ChartOfAccountUpdateManyWithoutAccountsInput, {
-    nullable: true,
-  })
-  chartOfAccount?: ChartOfAccountUpdateManyWithoutAccountsInput;
-
-  @ApiProperty({
-    required: false,
     type: String,
   })
   @IsString()
@@ -69,6 +57,18 @@ class AccountUpdateInput {
     nullable: true,
   })
   code?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => EntityWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => EntityWhereUniqueInput)
+  @IsOptional()
+  @Field(() => EntityWhereUniqueInput, {
+    nullable: true,
+  })
+  entity?: EntityWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,

@@ -7,7 +7,6 @@ import { JournalModule } from "./journal/journal.module";
 import { LedgerModule } from "./ledger/ledger.module";
 import { AccountModule } from "./account/account.module";
 import { EntityModule } from "./entity/entity.module";
-import { ChartOfAccountModule } from "./chartOfAccount/chartOfAccount.module";
 import { ItemModule } from "./item/item.module";
 import { InvoiceModelModule } from "./invoiceModel/invoiceModel.module";
 import { CustomerModule } from "./customer/customer.module";
@@ -34,7 +33,6 @@ import { AuthModule } from "./auth/auth.module";
     LedgerModule,
     AccountModule,
     EntityModule,
-    ChartOfAccountModule,
     ItemModule,
     InvoiceModelModule,
     CustomerModule,

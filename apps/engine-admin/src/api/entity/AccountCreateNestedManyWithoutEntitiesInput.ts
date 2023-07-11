@@ -1,5 +1,5 @@
 import { AccountWhereUniqueInput } from "../account/AccountWhereUniqueInput";
 
-export type AccountCreateNestedManyWithoutChartOfAccountsInput = {
+export type AccountCreateNestedManyWithoutEntitiesInput = {
   connect?: Array<AccountWhereUniqueInput>;
 };

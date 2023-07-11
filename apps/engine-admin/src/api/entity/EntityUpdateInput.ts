@@ -1,4 +1,4 @@
-import { ChartOfAccountWhereUniqueInput } from "../chartOfAccount/ChartOfAccountWhereUniqueInput";
+import { AccountUpdateManyWithoutEntitiesInput } from "./AccountUpdateManyWithoutEntitiesInput";
 import { CustomerUpdateManyWithoutEntitiesInput } from "./CustomerUpdateManyWithoutEntitiesInput";
 import { InvoiceModelUpdateManyWithoutEntitiesInput } from "./InvoiceModelUpdateManyWithoutEntitiesInput";
 import { ItemUpdateManyWithoutEntitiesInput } from "./ItemUpdateManyWithoutEntitiesInput";
@@ -7,8 +7,8 @@ import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type EntityUpdateInput = {
   accountingType?: "Cash" | "Cumulative" | null;
+  accounts?: AccountUpdateManyWithoutEntitiesInput;
   address?: string | null;
-  coa?: ChartOfAccountWhereUniqueInput | null;
   customers?: CustomerUpdateManyWithoutEntitiesInput;
   deductionId?: string | null;
   deductionRate?: string | null;

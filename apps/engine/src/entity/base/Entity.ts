@@ -15,12 +15,12 @@ import { EnumEntityAccountingType } from "./EnumEntityAccountingType";
 import {
   IsEnum,
   IsOptional,
-  IsString,
   ValidateNested,
+  IsString,
   IsDate,
   IsBoolean,
 } from "class-validator";
-import { ChartOfAccount } from "../../chartOfAccount/base/ChartOfAccount";
+import { Account } from "../../account/base/Account";
 import { Type } from "class-transformer";
 import { Customer } from "../../customer/base/Customer";
 import { InvoiceModel } from "../../invoiceModel/base/InvoiceModel";
@@ -43,6 +43,15 @@ class Entity {
 
   @ApiProperty({
     required: false,
+    type: () => [Account],
+  })
+  @ValidateNested()
+  @Type(() => Account)
+  @IsOptional()
+  accounts?: Array<Account>;
+
+  @ApiProperty({
+    required: false,
     type: String,
   })
   @IsString()
@@ -51,15 +60,6 @@ class Entity {
     nullable: true,
   })
   address!: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => ChartOfAccount,
-  })
-  @ValidateNested()
-  @Type(() => ChartOfAccount)
-  @IsOptional()
-  coa?: ChartOfAccount | null;
 
   @ApiProperty({
     required: true,

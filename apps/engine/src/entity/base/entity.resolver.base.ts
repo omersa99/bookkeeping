@@ -26,6 +26,8 @@ import { EntityCountArgs } from "./EntityCountArgs";
 import { EntityFindManyArgs } from "./EntityFindManyArgs";
 import { EntityFindUniqueArgs } from "./EntityFindUniqueArgs";
 import { Entity } from "./Entity";
+import { AccountFindManyArgs } from "../../account/base/AccountFindManyArgs";
+import { Account } from "../../account/base/Account";
 import { CustomerFindManyArgs } from "../../customer/base/CustomerFindManyArgs";
 import { Customer } from "../../customer/base/Customer";
 import { InvoiceModelFindManyArgs } from "../../invoiceModel/base/InvoiceModelFindManyArgs";
@@ -34,7 +36,6 @@ import { ItemFindManyArgs } from "../../item/base/ItemFindManyArgs";
 import { Item } from "../../item/base/Item";
 import { JournalFindManyArgs } from "../../journal/base/JournalFindManyArgs";
 import { Journal } from "../../journal/base/Journal";
-import { ChartOfAccount } from "../../chartOfAccount/base/ChartOfAccount";
 import { User } from "../../user/base/User";
 import { EntityService } from "../entity.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
@@ -101,12 +102,6 @@ export class EntityResolverBase {
       data: {
         ...args.data,
 
-        coa: args.data.coa
-          ? {
-              connect: args.data.coa,
-            }
-          : undefined,
-
         user: args.data.user
           ? {
               connect: args.data.user,
@@ -131,12 +126,6 @@ export class EntityResolverBase {
         ...args,
         data: {
           ...args.data,
-
-          coa: args.data.coa
-            ? {
-                connect: args.data.coa,
-              }
-            : undefined,
 
           user: args.data.user
             ? {
@@ -174,6 +163,26 @@ export class EntityResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [Account], { name: "accounts" })
+  @nestAccessControl.UseRoles({
+    resource: "Account",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldAccounts(
+    @graphql.Parent() parent: Entity,
+    @graphql.Args() args: AccountFindManyArgs
+  ): Promise<Account[]> {
+    const results = await this.service.findAccounts(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
@@ -254,27 +263,6 @@ export class EntityResolverBase {
     }
 
     return results;
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => ChartOfAccount, {
-    nullable: true,
-    name: "coa",
-  })
-  @nestAccessControl.UseRoles({
-    resource: "ChartOfAccount",
-    action: "read",
-    possession: "any",
-  })
-  async resolveFieldCoa(
-    @graphql.Parent() parent: Entity
-  ): Promise<ChartOfAccount | null> {
-    const result = await this.service.getCoa(parent.id);
-
-    if (!result) {
-      return null;
-    }
-    return result;
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)

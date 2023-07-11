@@ -10,37 +10,37 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { InputType, Field } from "@nestjs/graphql";
-import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
+import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
 import { ApiProperty } from "@nestjs/swagger";
 
 @InputType()
-class ChartOfAccountUpdateManyWithoutAccountsInput {
-  @Field(() => [ChartOfAccountWhereUniqueInput], {
+class AccountUpdateManyWithoutEntitiesInput {
+  @Field(() => [AccountWhereUniqueInput], {
     nullable: true,
   })
   @ApiProperty({
     required: false,
-    type: () => [ChartOfAccountWhereUniqueInput],
+    type: () => [AccountWhereUniqueInput],
   })
-  connect?: Array<ChartOfAccountWhereUniqueInput>;
+  connect?: Array<AccountWhereUniqueInput>;
 
-  @Field(() => [ChartOfAccountWhereUniqueInput], {
+  @Field(() => [AccountWhereUniqueInput], {
     nullable: true,
   })
   @ApiProperty({
     required: false,
-    type: () => [ChartOfAccountWhereUniqueInput],
+    type: () => [AccountWhereUniqueInput],
   })
-  disconnect?: Array<ChartOfAccountWhereUniqueInput>;
+  disconnect?: Array<AccountWhereUniqueInput>;
 
-  @Field(() => [ChartOfAccountWhereUniqueInput], {
+  @Field(() => [AccountWhereUniqueInput], {
     nullable: true,
   })
   @ApiProperty({
     required: false,
-    type: () => [ChartOfAccountWhereUniqueInput],
+    type: () => [AccountWhereUniqueInput],
   })
-  set?: Array<ChartOfAccountWhereUniqueInput>;
+  set?: Array<AccountWhereUniqueInput>;
 }
 
-export { ChartOfAccountUpdateManyWithoutAccountsInput as ChartOfAccountUpdateManyWithoutAccountsInput };
+export { AccountUpdateManyWithoutEntitiesInput as AccountUpdateManyWithoutEntitiesInput };

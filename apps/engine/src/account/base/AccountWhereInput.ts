@@ -15,7 +15,7 @@ import { IntNullableFilter } from "../../util/IntNullableFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested, IsEnum } from "class-validator";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { ChartOfAccountListRelationFilter } from "../../chartOfAccount/base/ChartOfAccountListRelationFilter";
+import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
 import { EnumAccountRole } from "./EnumAccountRole";
 import { TransactionListRelationFilter } from "../../transaction/base/TransactionListRelationFilter";
@@ -46,18 +46,6 @@ class AccountWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => ChartOfAccountListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => ChartOfAccountListRelationFilter)
-  @IsOptional()
-  @Field(() => ChartOfAccountListRelationFilter, {
-    nullable: true,
-  })
-  chartOfAccount?: ChartOfAccountListRelationFilter;
-
-  @ApiProperty({
-    required: false,
     type: StringNullableFilter,
   })
   @Type(() => StringNullableFilter)
@@ -66,6 +54,18 @@ class AccountWhereInput {
     nullable: true,
   })
   code?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => EntityWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => EntityWhereUniqueInput)
+  @IsOptional()
+  @Field(() => EntityWhereUniqueInput, {
+    nullable: true,
+  })
+  entity?: EntityWhereUniqueInput;
 
   @ApiProperty({
     required: false,

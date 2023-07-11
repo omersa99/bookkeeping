@@ -3,7 +3,6 @@ import { SortOrder } from "../../util/SortOrder";
 export type EntityOrderByInput = {
   accountingType?: SortOrder;
   address?: SortOrder;
-  coaID?: SortOrder;
   createdAt?: SortOrder;
   deductionId?: SortOrder;
   deductionRate?: SortOrder;
