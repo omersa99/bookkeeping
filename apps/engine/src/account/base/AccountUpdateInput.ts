@@ -20,7 +20,6 @@ import {
 } from "class-validator";
 import { ChartOfAccountUpdateManyWithoutAccountsInput } from "./ChartOfAccountUpdateManyWithoutAccountsInput";
 import { Type } from "class-transformer";
-import { InvoiceModelUpdateManyWithoutAccountsInput } from "./InvoiceModelUpdateManyWithoutAccountsInput";
 import { EnumAccountRole } from "./EnumAccountRole";
 import { TransactionUpdateManyWithoutAccountsInput } from "./TransactionUpdateManyWithoutAccountsInput";
 
@@ -70,18 +69,6 @@ class AccountUpdateInput {
     nullable: true,
   })
   code?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => InvoiceModelUpdateManyWithoutAccountsInput,
-  })
-  @ValidateNested()
-  @Type(() => InvoiceModelUpdateManyWithoutAccountsInput)
-  @IsOptional()
-  @Field(() => InvoiceModelUpdateManyWithoutAccountsInput, {
-    nullable: true,
-  })
-  invoiceModels?: InvoiceModelUpdateManyWithoutAccountsInput;
 
   @ApiProperty({
     required: false,

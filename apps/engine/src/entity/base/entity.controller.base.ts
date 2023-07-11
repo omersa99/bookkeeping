@@ -30,15 +30,15 @@ import { Entity } from "./Entity";
 import { CustomerFindManyArgs } from "../../customer/base/CustomerFindManyArgs";
 import { Customer } from "../../customer/base/Customer";
 import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
+import { InvoiceModelFindManyArgs } from "../../invoiceModel/base/InvoiceModelFindManyArgs";
+import { InvoiceModel } from "../../invoiceModel/base/InvoiceModel";
+import { InvoiceModelWhereUniqueInput } from "../../invoiceModel/base/InvoiceModelWhereUniqueInput";
 import { ItemFindManyArgs } from "../../item/base/ItemFindManyArgs";
 import { Item } from "../../item/base/Item";
 import { ItemWhereUniqueInput } from "../../item/base/ItemWhereUniqueInput";
 import { JournalFindManyArgs } from "../../journal/base/JournalFindManyArgs";
 import { Journal } from "../../journal/base/Journal";
 import { JournalWhereUniqueInput } from "../../journal/base/JournalWhereUniqueInput";
-import { LedgerFindManyArgs } from "../../ledger/base/LedgerFindManyArgs";
-import { Ledger } from "../../ledger/base/Ledger";
-import { LedgerWhereUniqueInput } from "../../ledger/base/LedgerWhereUniqueInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -427,6 +427,132 @@ export class EntityControllerBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/invoiceModels")
+  @ApiNestedQuery(InvoiceModelFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "InvoiceModel",
+    action: "read",
+    possession: "any",
+  })
+  async findManyInvoiceModels(
+    @common.Req() request: Request,
+    @common.Param() params: EntityWhereUniqueInput
+  ): Promise<InvoiceModel[]> {
+    const query = plainToClass(InvoiceModelFindManyArgs, request.query);
+    const results = await this.service.findInvoiceModels(params.id, {
+      ...query,
+      select: {
+        amountDue: true,
+        amountPaid: true,
+        createdAt: true,
+
+        customer: {
+          select: {
+            id: true,
+          },
+        },
+
+        entity: {
+          select: {
+            id: true,
+          },
+        },
+
+        id: true,
+        info: true,
+        invoiceNumber: true,
+        invoiceStatus: true,
+
+        item: {
+          select: {
+            id: true,
+          },
+        },
+
+        ledger: {
+          select: {
+            id: true,
+          },
+        },
+
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/invoiceModels")
+  @nestAccessControl.UseRoles({
+    resource: "Entity",
+    action: "update",
+    possession: "any",
+  })
+  async connectInvoiceModels(
+    @common.Param() params: EntityWhereUniqueInput,
+    @common.Body() body: InvoiceModelWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      invoiceModels: {
+        connect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/invoiceModels")
+  @nestAccessControl.UseRoles({
+    resource: "Entity",
+    action: "update",
+    possession: "any",
+  })
+  async updateInvoiceModels(
+    @common.Param() params: EntityWhereUniqueInput,
+    @common.Body() body: InvoiceModelWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      invoiceModels: {
+        set: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/invoiceModels")
+  @nestAccessControl.UseRoles({
+    resource: "Entity",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectInvoiceModels(
+    @common.Param() params: EntityWhereUniqueInput,
+    @common.Body() body: InvoiceModelWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      invoiceModels: {
+        disconnect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @common.Get("/:id/items")
   @ApiNestedQuery(ItemFindManyArgs)
   @nestAccessControl.UseRoles({
@@ -639,116 +765,6 @@ export class EntityControllerBase {
   ): Promise<void> {
     const data = {
       journals: {
-        disconnect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @common.Get("/:id/ledgers")
-  @ApiNestedQuery(LedgerFindManyArgs)
-  @nestAccessControl.UseRoles({
-    resource: "Ledger",
-    action: "read",
-    possession: "any",
-  })
-  async findManyLedgers(
-    @common.Req() request: Request,
-    @common.Param() params: EntityWhereUniqueInput
-  ): Promise<Ledger[]> {
-    const query = plainToClass(LedgerFindManyArgs, request.query);
-    const results = await this.service.findLedgers(params.id, {
-      ...query,
-      select: {
-        createdAt: true,
-
-        entity: {
-          select: {
-            id: true,
-          },
-        },
-
-        id: true,
-
-        invoiceModels: {
-          select: {
-            id: true,
-          },
-        },
-
-        name: true,
-        updatedAt: true,
-      },
-    });
-    if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
-    }
-    return results;
-  }
-
-  @common.Post("/:id/ledgers")
-  @nestAccessControl.UseRoles({
-    resource: "Entity",
-    action: "update",
-    possession: "any",
-  })
-  async connectLedgers(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: LedgerWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      ledgers: {
-        connect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Patch("/:id/ledgers")
-  @nestAccessControl.UseRoles({
-    resource: "Entity",
-    action: "update",
-    possession: "any",
-  })
-  async updateLedgers(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: LedgerWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      ledgers: {
-        set: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Delete("/:id/ledgers")
-  @nestAccessControl.UseRoles({
-    resource: "Entity",
-    action: "update",
-    possession: "any",
-  })
-  async disconnectLedgers(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: LedgerWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      ledgers: {
         disconnect: body,
       },
     };

@@ -14,7 +14,7 @@ import { InvoiceModelWhereUniqueInput } from "../../invoiceModel/base/InvoiceMod
 import { ApiProperty } from "@nestjs/swagger";
 
 @InputType()
-class InvoiceModelCreateNestedManyWithoutAccountsInput {
+class InvoiceModelUpdateManyWithoutEntitiesInput {
   @Field(() => [InvoiceModelWhereUniqueInput], {
     nullable: true,
   })
@@ -23,6 +23,24 @@ class InvoiceModelCreateNestedManyWithoutAccountsInput {
     type: () => [InvoiceModelWhereUniqueInput],
   })
   connect?: Array<InvoiceModelWhereUniqueInput>;
+
+  @Field(() => [InvoiceModelWhereUniqueInput], {
+    nullable: true,
+  })
+  @ApiProperty({
+    required: false,
+    type: () => [InvoiceModelWhereUniqueInput],
+  })
+  disconnect?: Array<InvoiceModelWhereUniqueInput>;
+
+  @Field(() => [InvoiceModelWhereUniqueInput], {
+    nullable: true,
+  })
+  @ApiProperty({
+    required: false,
+    type: () => [InvoiceModelWhereUniqueInput],
+  })
+  set?: Array<InvoiceModelWhereUniqueInput>;
 }
 
-export { InvoiceModelCreateNestedManyWithoutAccountsInput as InvoiceModelCreateNestedManyWithoutAccountsInput };
+export { InvoiceModelUpdateManyWithoutEntitiesInput as InvoiceModelUpdateManyWithoutEntitiesInput };

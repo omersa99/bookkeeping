@@ -12,7 +12,6 @@ import {
 } from "react-admin";
 
 import { ChartOfAccountTitle } from "../chartOfAccount/ChartOfAccountTitle";
-import { InvoiceModelTitle } from "../invoiceModel/InvoiceModelTitle";
 import { TransactionTitle } from "../transaction/TransactionTitle";
 
 export const AccountEdit = (props: EditProps): React.ReactElement => {
@@ -30,14 +29,6 @@ export const AccountEdit = (props: EditProps): React.ReactElement => {
           <SelectArrayInput optionText={ChartOfAccountTitle} />
         </ReferenceArrayInput>
         <TextInput label="code" source="code" />
-        <ReferenceArrayInput
-          source="invoiceModels"
-          reference="InvoiceModel"
-          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
-          format={(value: any) => value && value.map((v: any) => v.id)}
-        >
-          <SelectArrayInput optionText={InvoiceModelTitle} />
-        </ReferenceArrayInput>
         <TextInput label="name" source="name" />
         <SelectInput
           source="role"

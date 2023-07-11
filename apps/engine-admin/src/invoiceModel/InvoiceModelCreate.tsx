@@ -7,8 +7,8 @@ import {
   ReferenceInput,
   SelectInput,
 } from "react-admin";
-import { AccountTitle } from "../account/AccountTitle";
 import { CustomerTitle } from "../customer/CustomerTitle";
+import { EntityTitle } from "../entity/EntityTitle";
 import { ItemTitle } from "../item/ItemTitle";
 import { LedgerTitle } from "../ledger/LedgerTitle";
 
@@ -19,18 +19,14 @@ export const InvoiceModelCreate = (props: CreateProps): React.ReactElement => {
         <TextInput label="amount_due" source="amountDue" />
         <TextInput label="amount_paid" source="amountPaid" />
         <ReferenceInput
-          source="cashAccount.id"
-          reference="Account"
-          label="cash_account"
-        >
-          <SelectInput optionText={AccountTitle} />
-        </ReferenceInput>
-        <ReferenceInput
           source="customer.id"
           reference="Customer"
           label="customer"
         >
           <SelectInput optionText={CustomerTitle} />
+        </ReferenceInput>
+        <ReferenceInput source="entity.id" reference="Entity" label="entity">
+          <SelectInput optionText={EntityTitle} />
         </ReferenceInput>
         <TextInput label="info" source="info" />
         <TextInput label="invoice_number" source="invoiceNumber" />

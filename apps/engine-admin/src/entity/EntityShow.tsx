@@ -13,8 +13,10 @@ import {
 } from "react-admin";
 
 import { ENTITY_TITLE_FIELD } from "./EntityTitle";
-import { INVOICEMODEL_TITLE_FIELD } from "../invoiceModel/InvoiceModelTitle";
+import { CUSTOMER_TITLE_FIELD } from "../customer/CustomerTitle";
+import { ITEM_TITLE_FIELD } from "../item/ItemTitle";
 import { LEDGER_TITLE_FIELD } from "../ledger/LedgerTitle";
+import { INVOICEMODEL_TITLE_FIELD } from "../invoiceModel/InvoiceModelTitle";
 import { CHARTOFACCOUNT_TITLE_FIELD } from "../chartOfAccount/ChartOfAccountTitle";
 import { USER_TITLE_FIELD } from "../user/UserTitle";
 
@@ -60,6 +62,46 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
             <TextField label="ID" source="id" />
             <TextField label="name" source="name" />
             <TextField label="sales_tax_rate" source="salesTaxRate" />
+            <DateField source="updatedAt" label="Updated At" />
+          </Datagrid>
+        </ReferenceManyField>
+        <ReferenceManyField
+          reference="InvoiceModel"
+          target="entityId"
+          label="InvoiceModels"
+        >
+          <Datagrid rowClick="show">
+            <TextField label="amount_due" source="amountDue" />
+            <TextField label="amount_paid" source="amountPaid" />
+            <DateField source="createdAt" label="Created At" />
+            <ReferenceField
+              label="customer"
+              source="customer.id"
+              reference="Customer"
+            >
+              <TextField source={CUSTOMER_TITLE_FIELD} />
+            </ReferenceField>
+            <ReferenceField
+              label="entity"
+              source="entity.id"
+              reference="Entity"
+            >
+              <TextField source={ENTITY_TITLE_FIELD} />
+            </ReferenceField>
+            <TextField label="ID" source="id" />
+            <TextField label="info" source="info" />
+            <TextField label="invoice_number" source="invoiceNumber" />
+            <TextField label="invoice_status" source="invoiceStatus" />
+            <ReferenceField label="item" source="item.id" reference="Item">
+              <TextField source={ITEM_TITLE_FIELD} />
+            </ReferenceField>
+            <ReferenceField
+              label="ledger"
+              source="ledger.id"
+              reference="Ledger"
+            >
+              <TextField source={LEDGER_TITLE_FIELD} />
+            </ReferenceField>
             <DateField source="updatedAt" label="Updated At" />
           </Datagrid>
         </ReferenceManyField>
@@ -111,32 +153,6 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
             >
               <TextField source={LEDGER_TITLE_FIELD} />
             </ReferenceField>
-            <DateField source="updatedAt" label="Updated At" />
-          </Datagrid>
-        </ReferenceManyField>
-        <ReferenceManyField
-          reference="Ledger"
-          target="entityId"
-          label="ledgers"
-        >
-          <Datagrid rowClick="show">
-            <DateField source="createdAt" label="Created At" />
-            <ReferenceField
-              label="entity"
-              source="entity.id"
-              reference="Entity"
-            >
-              <TextField source={ENTITY_TITLE_FIELD} />
-            </ReferenceField>
-            <TextField label="ID" source="id" />
-            <ReferenceField
-              label="InvoiceModels"
-              source="invoicemodel.id"
-              reference="InvoiceModel"
-            >
-              <TextField source={INVOICEMODEL_TITLE_FIELD} />
-            </ReferenceField>
-            <TextField label="name" source="name" />
             <DateField source="updatedAt" label="Updated At" />
           </Datagrid>
         </ReferenceManyField>

@@ -268,16 +268,15 @@ export class CustomerControllerBase {
       select: {
         amountDue: true,
         amountPaid: true,
+        createdAt: true,
 
-        cashAccount: {
+        customer: {
           select: {
             id: true,
           },
         },
 
-        createdAt: true,
-
-        customer: {
+        entity: {
           select: {
             id: true,
           },

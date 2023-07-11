@@ -13,8 +13,8 @@ import { PrismaService } from "../../prisma/prisma.service";
 import {
   Prisma,
   InvoiceModel,
-  Account,
   Customer,
+  Entity,
   Item,
   Ledger,
 } from "@prisma/client";
@@ -54,20 +54,20 @@ export class InvoiceModelServiceBase {
     return this.prisma.invoiceModel.delete(args);
   }
 
-  async getCashAccount(parentId: string): Promise<Account | null> {
-    return this.prisma.invoiceModel
-      .findUnique({
-        where: { id: parentId },
-      })
-      .cashAccount();
-  }
-
   async getCustomer(parentId: string): Promise<Customer | null> {
     return this.prisma.invoiceModel
       .findUnique({
         where: { id: parentId },
       })
       .customer();
+  }
+
+  async getEntity(parentId: string): Promise<Entity | null> {
+    return this.prisma.invoiceModel
+      .findUnique({
+        where: { id: parentId },
+      })
+      .entity();
   }
 
   async getItem(parentId: string): Promise<Item | null> {

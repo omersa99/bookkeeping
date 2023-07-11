@@ -19,9 +19,9 @@ import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartO
 import { CustomerListRelationFilter } from "../../customer/base/CustomerListRelationFilter";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
+import { InvoiceModelListRelationFilter } from "../../invoiceModel/base/InvoiceModelListRelationFilter";
 import { ItemListRelationFilter } from "../../item/base/ItemListRelationFilter";
 import { JournalListRelationFilter } from "../../journal/base/JournalListRelationFilter";
-import { LedgerListRelationFilter } from "../../ledger/base/LedgerListRelationFilter";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
@@ -118,6 +118,18 @@ class EntityWhereInput {
 
   @ApiProperty({
     required: false,
+    type: () => InvoiceModelListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => InvoiceModelListRelationFilter)
+  @IsOptional()
+  @Field(() => InvoiceModelListRelationFilter, {
+    nullable: true,
+  })
+  invoiceModels?: InvoiceModelListRelationFilter;
+
+  @ApiProperty({
+    required: false,
     type: () => ItemListRelationFilter,
   })
   @ValidateNested()
@@ -139,18 +151,6 @@ class EntityWhereInput {
     nullable: true,
   })
   journals?: JournalListRelationFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => LedgerListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => LedgerListRelationFilter)
-  @IsOptional()
-  @Field(() => LedgerListRelationFilter, {
-    nullable: true,
-  })
-  ledgers?: LedgerListRelationFilter;
 
   @ApiProperty({
     required: false,

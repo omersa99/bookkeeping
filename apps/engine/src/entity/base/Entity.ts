@@ -23,9 +23,9 @@ import {
 import { ChartOfAccount } from "../../chartOfAccount/base/ChartOfAccount";
 import { Type } from "class-transformer";
 import { Customer } from "../../customer/base/Customer";
+import { InvoiceModel } from "../../invoiceModel/base/InvoiceModel";
 import { Item } from "../../item/base/Item";
 import { Journal } from "../../journal/base/Journal";
-import { Ledger } from "../../ledger/base/Ledger";
 import { User } from "../../user/base/User";
 
 @ObjectType()
@@ -121,6 +121,15 @@ class Entity {
 
   @ApiProperty({
     required: false,
+    type: () => [InvoiceModel],
+  })
+  @ValidateNested()
+  @Type(() => InvoiceModel)
+  @IsOptional()
+  invoiceModels?: Array<InvoiceModel>;
+
+  @ApiProperty({
+    required: false,
     type: () => [Item],
   })
   @ValidateNested()
@@ -136,15 +145,6 @@ class Entity {
   @Type(() => Journal)
   @IsOptional()
   journals?: Array<Journal>;
-
-  @ApiProperty({
-    required: false,
-    type: () => [Ledger],
-  })
-  @ValidateNested()
-  @Type(() => Ledger)
-  @IsOptional()
-  ledgers?: Array<Ledger>;
 
   @ApiProperty({
     required: false,

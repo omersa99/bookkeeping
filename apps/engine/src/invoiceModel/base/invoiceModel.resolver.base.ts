@@ -26,8 +26,8 @@ import { InvoiceModelCountArgs } from "./InvoiceModelCountArgs";
 import { InvoiceModelFindManyArgs } from "./InvoiceModelFindManyArgs";
 import { InvoiceModelFindUniqueArgs } from "./InvoiceModelFindUniqueArgs";
 import { InvoiceModel } from "./InvoiceModel";
-import { Account } from "../../account/base/Account";
 import { Customer } from "../../customer/base/Customer";
+import { Entity } from "../../entity/base/Entity";
 import { Item } from "../../item/base/Item";
 import { Ledger } from "../../ledger/base/Ledger";
 import { InvoiceModelService } from "../invoiceModel.service";
@@ -99,15 +99,15 @@ export class InvoiceModelResolverBase {
       data: {
         ...args.data,
 
-        cashAccount: args.data.cashAccount
-          ? {
-              connect: args.data.cashAccount,
-            }
-          : undefined,
-
         customer: args.data.customer
           ? {
               connect: args.data.customer,
+            }
+          : undefined,
+
+        entity: args.data.entity
+          ? {
+              connect: args.data.entity,
             }
           : undefined,
 
@@ -142,15 +142,15 @@ export class InvoiceModelResolverBase {
         data: {
           ...args.data,
 
-          cashAccount: args.data.cashAccount
-            ? {
-                connect: args.data.cashAccount,
-              }
-            : undefined,
-
           customer: args.data.customer
             ? {
                 connect: args.data.customer,
+              }
+            : undefined,
+
+          entity: args.data.entity
+            ? {
+                connect: args.data.entity,
               }
             : undefined,
 
@@ -199,27 +199,6 @@ export class InvoiceModelResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => Account, {
-    nullable: true,
-    name: "cashAccount",
-  })
-  @nestAccessControl.UseRoles({
-    resource: "Account",
-    action: "read",
-    possession: "any",
-  })
-  async resolveFieldCashAccount(
-    @graphql.Parent() parent: InvoiceModel
-  ): Promise<Account | null> {
-    const result = await this.service.getCashAccount(parent.id);
-
-    if (!result) {
-      return null;
-    }
-    return result;
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Customer, {
     nullable: true,
     name: "customer",
@@ -233,6 +212,27 @@ export class InvoiceModelResolverBase {
     @graphql.Parent() parent: InvoiceModel
   ): Promise<Customer | null> {
     const result = await this.service.getCustomer(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Entity, {
+    nullable: true,
+    name: "entity",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "Entity",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldEntity(
+    @graphql.Parent() parent: InvoiceModel
+  ): Promise<Entity | null> {
+    const result = await this.service.getEntity(parent.id);
 
     if (!result) {
       return null;

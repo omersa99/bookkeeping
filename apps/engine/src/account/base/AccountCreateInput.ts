@@ -20,7 +20,6 @@ import {
 } from "class-validator";
 import { ChartOfAccountCreateNestedManyWithoutAccountsInput } from "./ChartOfAccountCreateNestedManyWithoutAccountsInput";
 import { Type } from "class-transformer";
-import { InvoiceModelCreateNestedManyWithoutAccountsInput } from "./InvoiceModelCreateNestedManyWithoutAccountsInput";
 import { EnumAccountRole } from "./EnumAccountRole";
 import { TransactionCreateNestedManyWithoutAccountsInput } from "./TransactionCreateNestedManyWithoutAccountsInput";
 
@@ -70,18 +69,6 @@ class AccountCreateInput {
     nullable: true,
   })
   code?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => InvoiceModelCreateNestedManyWithoutAccountsInput,
-  })
-  @ValidateNested()
-  @Type(() => InvoiceModelCreateNestedManyWithoutAccountsInput)
-  @IsOptional()
-  @Field(() => InvoiceModelCreateNestedManyWithoutAccountsInput, {
-    nullable: true,
-  })
-  invoiceModels?: InvoiceModelCreateNestedManyWithoutAccountsInput;
 
   @ApiProperty({
     required: false,
