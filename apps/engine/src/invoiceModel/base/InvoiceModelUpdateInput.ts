@@ -12,9 +12,9 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsString, IsOptional, ValidateNested, IsEnum } from "class-validator";
-import { AccountWhereUniqueInput } from "../../account/base/AccountWhereUniqueInput";
-import { Type } from "class-transformer";
 import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
+import { Type } from "class-transformer";
+import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
 import { EnumInvoiceModelInvoiceStatus } from "./EnumInvoiceModelInvoiceStatus";
 import { ItemWhereUniqueInput } from "../../item/base/ItemWhereUniqueInput";
 import { LedgerWhereUniqueInput } from "../../ledger/base/LedgerWhereUniqueInput";
@@ -45,18 +45,6 @@ class InvoiceModelUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: () => AccountWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => AccountWhereUniqueInput)
-  @IsOptional()
-  @Field(() => AccountWhereUniqueInput, {
-    nullable: true,
-  })
-  cashAccount?: AccountWhereUniqueInput | null;
-
-  @ApiProperty({
-    required: false,
     type: () => CustomerWhereUniqueInput,
   })
   @ValidateNested()
@@ -66,6 +54,18 @@ class InvoiceModelUpdateInput {
     nullable: true,
   })
   customer?: CustomerWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => EntityWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => EntityWhereUniqueInput)
+  @IsOptional()
+  @Field(() => EntityWhereUniqueInput, {
+    nullable: true,
+  })
+  entity?: EntityWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,

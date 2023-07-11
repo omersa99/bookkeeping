@@ -53,15 +53,15 @@ export class InvoiceModelControllerBase {
       data: {
         ...data,
 
-        cashAccount: data.cashAccount
-          ? {
-              connect: data.cashAccount,
-            }
-          : undefined,
-
         customer: data.customer
           ? {
               connect: data.customer,
+            }
+          : undefined,
+
+        entity: data.entity
+          ? {
+              connect: data.entity,
             }
           : undefined,
 
@@ -80,16 +80,15 @@ export class InvoiceModelControllerBase {
       select: {
         amountDue: true,
         amountPaid: true,
+        createdAt: true,
 
-        cashAccount: {
+        customer: {
           select: {
             id: true,
           },
         },
 
-        createdAt: true,
-
-        customer: {
+        entity: {
           select: {
             id: true,
           },
@@ -136,16 +135,15 @@ export class InvoiceModelControllerBase {
       select: {
         amountDue: true,
         amountPaid: true,
+        createdAt: true,
 
-        cashAccount: {
+        customer: {
           select: {
             id: true,
           },
         },
 
-        createdAt: true,
-
-        customer: {
+        entity: {
           select: {
             id: true,
           },
@@ -193,16 +191,15 @@ export class InvoiceModelControllerBase {
       select: {
         amountDue: true,
         amountPaid: true,
+        createdAt: true,
 
-        cashAccount: {
+        customer: {
           select: {
             id: true,
           },
         },
 
-        createdAt: true,
-
-        customer: {
+        entity: {
           select: {
             id: true,
           },
@@ -258,15 +255,15 @@ export class InvoiceModelControllerBase {
         data: {
           ...data,
 
-          cashAccount: data.cashAccount
-            ? {
-                connect: data.cashAccount,
-              }
-            : undefined,
-
           customer: data.customer
             ? {
                 connect: data.customer,
+              }
+            : undefined,
+
+          entity: data.entity
+            ? {
+                connect: data.entity,
               }
             : undefined,
 
@@ -285,16 +282,15 @@ export class InvoiceModelControllerBase {
         select: {
           amountDue: true,
           amountPaid: true,
+          createdAt: true,
 
-          cashAccount: {
+          customer: {
             select: {
               id: true,
             },
           },
 
-          createdAt: true,
-
-          customer: {
+          entity: {
             select: {
               id: true,
             },
@@ -350,16 +346,15 @@ export class InvoiceModelControllerBase {
         select: {
           amountDue: true,
           amountPaid: true,
+          createdAt: true,
 
-          cashAccount: {
+          customer: {
             select: {
               id: true,
             },
           },
 
-          createdAt: true,
-
-          customer: {
+          entity: {
             select: {
               id: true,
             },

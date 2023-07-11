@@ -21,7 +21,6 @@ import {
 } from "class-validator";
 import { ChartOfAccount } from "../../chartOfAccount/base/ChartOfAccount";
 import { Type } from "class-transformer";
-import { InvoiceModel } from "../../invoiceModel/base/InvoiceModel";
 import { EnumAccountRole } from "./EnumAccountRole";
 import { Transaction } from "../../transaction/base/Transaction";
 
@@ -84,15 +83,6 @@ class Account {
   @IsString()
   @Field(() => String)
   id!: string;
-
-  @ApiProperty({
-    required: false,
-    type: () => [InvoiceModel],
-  })
-  @ValidateNested()
-  @Type(() => InvoiceModel)
-  @IsOptional()
-  invoiceModels?: Array<InvoiceModel>;
 
   @ApiProperty({
     required: false,

@@ -5,8 +5,8 @@ import {
   SimpleShowLayout,
   ShowProps,
   DateField,
-  ReferenceField,
   TextField,
+  ReferenceField,
   ReferenceManyField,
   Datagrid,
 } from "react-admin";
@@ -20,9 +20,6 @@ export const LedgerShow = (props: ShowProps): React.ReactElement => {
     <Show {...props}>
       <SimpleShowLayout>
         <DateField source="createdAt" label="Created At" />
-        <ReferenceField label="entity" source="entity.id" reference="Entity">
-          <TextField source={ENTITY_TITLE_FIELD} />
-        </ReferenceField>
         <TextField label="ID" source="id" />
         <ReferenceField
           label="InvoiceModels"

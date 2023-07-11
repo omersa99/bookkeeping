@@ -17,7 +17,6 @@ import { IsOptional, ValidateNested, IsEnum } from "class-validator";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { ChartOfAccountListRelationFilter } from "../../chartOfAccount/base/ChartOfAccountListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
-import { InvoiceModelListRelationFilter } from "../../invoiceModel/base/InvoiceModelListRelationFilter";
 import { EnumAccountRole } from "./EnumAccountRole";
 import { TransactionListRelationFilter } from "../../transaction/base/TransactionListRelationFilter";
 
@@ -78,18 +77,6 @@ class AccountWhereInput {
     nullable: true,
   })
   id?: StringFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => InvoiceModelListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => InvoiceModelListRelationFilter)
-  @IsOptional()
-  @Field(() => InvoiceModelListRelationFilter, {
-    nullable: true,
-  })
-  invoiceModels?: InvoiceModelListRelationFilter;
 
   @ApiProperty({
     required: false,

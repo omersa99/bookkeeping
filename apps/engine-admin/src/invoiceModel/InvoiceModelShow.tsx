@@ -4,11 +4,11 @@ import {
   SimpleShowLayout,
   ShowProps,
   TextField,
-  ReferenceField,
   DateField,
+  ReferenceField,
 } from "react-admin";
-import { ACCOUNT_TITLE_FIELD } from "../account/AccountTitle";
 import { CUSTOMER_TITLE_FIELD } from "../customer/CustomerTitle";
+import { ENTITY_TITLE_FIELD } from "../entity/EntityTitle";
 import { ITEM_TITLE_FIELD } from "../item/ItemTitle";
 import { LEDGER_TITLE_FIELD } from "../ledger/LedgerTitle";
 
@@ -18,13 +18,6 @@ export const InvoiceModelShow = (props: ShowProps): React.ReactElement => {
       <SimpleShowLayout>
         <TextField label="amount_due" source="amountDue" />
         <TextField label="amount_paid" source="amountPaid" />
-        <ReferenceField
-          label="cash_account"
-          source="account.id"
-          reference="Account"
-        >
-          <TextField source={ACCOUNT_TITLE_FIELD} />
-        </ReferenceField>
         <DateField source="createdAt" label="Created At" />
         <ReferenceField
           label="customer"
@@ -32,6 +25,9 @@ export const InvoiceModelShow = (props: ShowProps): React.ReactElement => {
           reference="Customer"
         >
           <TextField source={CUSTOMER_TITLE_FIELD} />
+        </ReferenceField>
+        <ReferenceField label="entity" source="entity.id" reference="Entity">
+          <TextField source={ENTITY_TITLE_FIELD} />
         </ReferenceField>
         <TextField label="ID" source="id" />
         <TextField label="info" source="info" />

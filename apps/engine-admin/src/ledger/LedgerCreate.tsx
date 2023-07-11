@@ -11,7 +11,6 @@ import {
   TextInput,
 } from "react-admin";
 
-import { EntityTitle } from "../entity/EntityTitle";
 import { InvoiceModelTitle } from "../invoiceModel/InvoiceModelTitle";
 import { JournalTitle } from "../journal/JournalTitle";
 
@@ -19,9 +18,6 @@ export const LedgerCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
-        <ReferenceInput source="entity.id" reference="Entity" label="entity">
-          <SelectInput optionText={EntityTitle} />
-        </ReferenceInput>
         <ReferenceInput
           source="invoiceModels.id"
           reference="InvoiceModel"

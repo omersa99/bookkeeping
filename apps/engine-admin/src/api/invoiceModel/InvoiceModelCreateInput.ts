@@ -1,13 +1,13 @@
-import { AccountWhereUniqueInput } from "../account/AccountWhereUniqueInput";
 import { CustomerWhereUniqueInput } from "../customer/CustomerWhereUniqueInput";
+import { EntityWhereUniqueInput } from "../entity/EntityWhereUniqueInput";
 import { ItemWhereUniqueInput } from "../item/ItemWhereUniqueInput";
 import { LedgerWhereUniqueInput } from "../ledger/LedgerWhereUniqueInput";
 
 export type InvoiceModelCreateInput = {
   amountDue?: string | null;
   amountPaid?: string | null;
-  cashAccount?: AccountWhereUniqueInput | null;
   customer?: CustomerWhereUniqueInput | null;
+  entity?: EntityWhereUniqueInput | null;
   info?: string | null;
   invoiceNumber?: string | null;
   invoiceStatus?: "Draft" | "Paid" | "Canceled" | null;

@@ -14,13 +14,13 @@ import { ApiProperty } from "@nestjs/swagger";
 import {
   IsString,
   IsOptional,
-  ValidateNested,
   IsDate,
+  ValidateNested,
   IsEnum,
 } from "class-validator";
-import { Account } from "../../account/base/Account";
 import { Type } from "class-transformer";
 import { Customer } from "../../customer/base/Customer";
+import { Entity } from "../../entity/base/Entity";
 import { EnumInvoiceModelInvoiceStatus } from "./EnumInvoiceModelInvoiceStatus";
 import { Item } from "../../item/base/Item";
 import { Ledger } from "../../ledger/base/Ledger";
@@ -50,15 +50,6 @@ class InvoiceModel {
   amountPaid!: string | null;
 
   @ApiProperty({
-    required: false,
-    type: () => Account,
-  })
-  @ValidateNested()
-  @Type(() => Account)
-  @IsOptional()
-  cashAccount?: Account | null;
-
-  @ApiProperty({
     required: true,
   })
   @IsDate()
@@ -74,6 +65,15 @@ class InvoiceModel {
   @Type(() => Customer)
   @IsOptional()
   customer?: Customer | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => Entity,
+  })
+  @ValidateNested()
+  @Type(() => Entity)
+  @IsOptional()
+  entity?: Entity | null;
 
   @ApiProperty({
     required: true,

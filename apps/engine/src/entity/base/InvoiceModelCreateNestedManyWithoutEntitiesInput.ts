@@ -10,19 +10,19 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { InputType, Field } from "@nestjs/graphql";
-import { LedgerWhereUniqueInput } from "../../ledger/base/LedgerWhereUniqueInput";
+import { InvoiceModelWhereUniqueInput } from "../../invoiceModel/base/InvoiceModelWhereUniqueInput";
 import { ApiProperty } from "@nestjs/swagger";
 
 @InputType()
-class LedgerCreateNestedManyWithoutEntitiesInput {
-  @Field(() => [LedgerWhereUniqueInput], {
+class InvoiceModelCreateNestedManyWithoutEntitiesInput {
+  @Field(() => [InvoiceModelWhereUniqueInput], {
     nullable: true,
   })
   @ApiProperty({
     required: false,
-    type: () => [LedgerWhereUniqueInput],
+    type: () => [InvoiceModelWhereUniqueInput],
   })
-  connect?: Array<LedgerWhereUniqueInput>;
+  connect?: Array<InvoiceModelWhereUniqueInput>;
 }
 
-export { LedgerCreateNestedManyWithoutEntitiesInput as LedgerCreateNestedManyWithoutEntitiesInput };
+export { InvoiceModelCreateNestedManyWithoutEntitiesInput as InvoiceModelCreateNestedManyWithoutEntitiesInput };

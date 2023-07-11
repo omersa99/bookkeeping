@@ -1,5 +1,5 @@
 import { InvoiceModelWhereUniqueInput } from "../invoiceModel/InvoiceModelWhereUniqueInput";
 
-export type InvoiceModelCreateNestedManyWithoutAccountsInput = {
+export type InvoiceModelCreateNestedManyWithoutEntitiesInput = {
   connect?: Array<InvoiceModelWhereUniqueInput>;
 };

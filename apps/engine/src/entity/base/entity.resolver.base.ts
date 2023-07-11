@@ -28,12 +28,12 @@ import { EntityFindUniqueArgs } from "./EntityFindUniqueArgs";
 import { Entity } from "./Entity";
 import { CustomerFindManyArgs } from "../../customer/base/CustomerFindManyArgs";
 import { Customer } from "../../customer/base/Customer";
+import { InvoiceModelFindManyArgs } from "../../invoiceModel/base/InvoiceModelFindManyArgs";
+import { InvoiceModel } from "../../invoiceModel/base/InvoiceModel";
 import { ItemFindManyArgs } from "../../item/base/ItemFindManyArgs";
 import { Item } from "../../item/base/Item";
 import { JournalFindManyArgs } from "../../journal/base/JournalFindManyArgs";
 import { Journal } from "../../journal/base/Journal";
-import { LedgerFindManyArgs } from "../../ledger/base/LedgerFindManyArgs";
-import { Ledger } from "../../ledger/base/Ledger";
 import { ChartOfAccount } from "../../chartOfAccount/base/ChartOfAccount";
 import { User } from "../../user/base/User";
 import { EntityService } from "../entity.service";
@@ -197,6 +197,26 @@ export class EntityResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [InvoiceModel], { name: "invoiceModels" })
+  @nestAccessControl.UseRoles({
+    resource: "InvoiceModel",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldInvoiceModels(
+    @graphql.Parent() parent: Entity,
+    @graphql.Args() args: InvoiceModelFindManyArgs
+  ): Promise<InvoiceModel[]> {
+    const results = await this.service.findInvoiceModels(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => [Item], { name: "items" })
   @nestAccessControl.UseRoles({
     resource: "Item",
@@ -228,26 +248,6 @@ export class EntityResolverBase {
     @graphql.Args() args: JournalFindManyArgs
   ): Promise<Journal[]> {
     const results = await this.service.findJournals(parent.id, args);
-
-    if (!results) {
-      return [];
-    }
-
-    return results;
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [Ledger], { name: "ledgers" })
-  @nestAccessControl.UseRoles({
-    resource: "Ledger",
-    action: "read",
-    possession: "any",
-  })
-  async resolveFieldLedgers(
-    @graphql.Parent() parent: Entity,
-    @graphql.Args() args: LedgerFindManyArgs
-  ): Promise<Ledger[]> {
-    const results = await this.service.findLedgers(parent.id, args);
 
     if (!results) {
       return [];

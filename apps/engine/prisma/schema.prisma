@@ -45,8 +45,6 @@ model Journal {
 
 model Ledger {
   createdAt     DateTime      @default(now())
-  entity        Entity?       @relation(fields: [entityId], references: [id])
-  entityId      String?
   id            String        @id @default(cuid())
   invoiceModels InvoiceModel?
   journals      Journal[]
@@ -61,7 +59,6 @@ model Account {
   code           String?
   createdAt      DateTime         @default(now())
   id             String           @id @default(cuid())
-  invoiceModels  InvoiceModel[]
   name           String?
   role           EnumAccountRole?
   transactions   Transaction[]
@@ -79,9 +76,9 @@ model Entity {
   deductionRate  String?
   exemption      Boolean?
   id             String                    @id @default(cuid())
+  invoiceModels  InvoiceModel[]
   items          Item[]
   journals       Journal[]
-  ledgers        Ledger[]
   name           String?
   taxId          String?
   updatedAt      DateTime                  @updatedAt
@@ -114,11 +111,11 @@ model Item {
 model InvoiceModel {
   amountDue     String?
   amountPaid    String?
-  cashAccount   Account?                       @relation(fields: [cashAccountId], references: [id])
-  cashAccountId String?
   createdAt     DateTime                       @default(now())
   customer      Customer?                      @relation(fields: [customerId], references: [id])
   customerId    String?
+  entity        Entity?                        @relation(fields: [entityId], references: [id])
+  entityId      String?
   id            String                         @id @default(cuid())
   info          String?
   invoiceNumber String?

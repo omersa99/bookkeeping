@@ -1,6 +1,6 @@
 import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { AccountWhereUniqueInput } from "../account/AccountWhereUniqueInput";
 import { CustomerWhereUniqueInput } from "../customer/CustomerWhereUniqueInput";
+import { EntityWhereUniqueInput } from "../entity/EntityWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
 import { ItemWhereUniqueInput } from "../item/ItemWhereUniqueInput";
 import { LedgerWhereUniqueInput } from "../ledger/LedgerWhereUniqueInput";
@@ -8,8 +8,8 @@ import { LedgerWhereUniqueInput } from "../ledger/LedgerWhereUniqueInput";
 export type InvoiceModelWhereInput = {
   amountDue?: StringNullableFilter;
   amountPaid?: StringNullableFilter;
-  cashAccount?: AccountWhereUniqueInput;
   customer?: CustomerWhereUniqueInput;
+  entity?: EntityWhereUniqueInput;
   id?: StringFilter;
   info?: StringNullableFilter;
   invoiceNumber?: StringNullableFilter;
