@@ -9,7 +9,6 @@ export type EntityOrderByInput = {
   deductionRate?: SortOrder;
   exemption?: SortOrder;
   id?: SortOrder;
-  itemsId?: SortOrder;
   name?: SortOrder;
   taxId?: SortOrder;
   updatedAt?: SortOrder;

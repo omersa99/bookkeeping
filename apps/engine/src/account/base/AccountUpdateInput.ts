@@ -11,10 +11,17 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsInt, IsOptional, IsString, ValidateNested } from "class-validator";
+import {
+  IsInt,
+  IsOptional,
+  IsString,
+  ValidateNested,
+  IsEnum,
+} from "class-validator";
 import { ChartOfAccountUpdateManyWithoutAccountsInput } from "./ChartOfAccountUpdateManyWithoutAccountsInput";
 import { Type } from "class-transformer";
 import { InvoiceModelUpdateManyWithoutAccountsInput } from "./InvoiceModelUpdateManyWithoutAccountsInput";
+import { EnumAccountRole } from "./EnumAccountRole";
 import { TransactionUpdateManyWithoutAccountsInput } from "./TransactionUpdateManyWithoutAccountsInput";
 
 @InputType()
@@ -89,14 +96,14 @@ class AccountUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: String,
+    enum: EnumAccountRole,
   })
-  @IsString()
+  @IsEnum(EnumAccountRole)
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => EnumAccountRole, {
     nullable: true,
   })
-  role?: string | null;
+  role?: "Asset" | "Liability" | "Income" | "Cogs" | "Expenses" | null;
 
   @ApiProperty({
     required: false,

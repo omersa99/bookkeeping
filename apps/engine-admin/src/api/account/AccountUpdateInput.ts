@@ -9,6 +9,6 @@ export type AccountUpdateInput = {
   code?: string | null;
   invoiceModels?: InvoiceModelUpdateManyWithoutAccountsInput;
   name?: string | null;
-  role?: string | null;
+  role?: "Asset" | "Liability" | "Income" | "Cogs" | "Expenses" | null;
   transactions?: TransactionUpdateManyWithoutAccountsInput;
 };

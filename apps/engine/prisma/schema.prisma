@@ -63,7 +63,7 @@ model Account {
   id             String           @id @default(cuid())
   invoiceModels  InvoiceModel[]
   name           String?
-  role           String?
+  role           EnumAccountRole?
   transactions   Transaction[]
   updatedAt      DateTime         @updatedAt
 }
@@ -79,7 +79,7 @@ model Entity {
   deductionRate  String?
   exemption      Boolean?
   id             String                    @id @default(cuid())
-  items          Item?
+  items          Item[]
   journals       Journal[]
   ledgers        Ledger[]
   name           String?
@@ -100,7 +100,7 @@ model Item {
   createdAt        DateTime          @default(now())
   description      String?
   entity           Entity?           @relation(fields: [entityId], references: [id])
-  entityId         String?           @unique
+  entityId         String?
   id               String            @id @default(cuid())
   invoiceModels    InvoiceModel?
   itemTransactions ItemTransaction[]
@@ -157,6 +157,14 @@ model ItemTransaction {
 enum EnumTransactionTransactionType {
   Debit
   Credit
+}
+
+enum EnumAccountRole {
+  Asset
+  Liability
+  Income
+  Cogs
+  Expenses
 }
 
 enum EnumEntityAccountingType {

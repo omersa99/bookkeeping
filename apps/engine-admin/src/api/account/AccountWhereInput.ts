@@ -13,6 +13,6 @@ export type AccountWhereInput = {
   id?: StringFilter;
   invoiceModels?: InvoiceModelListRelationFilter;
   name?: StringNullableFilter;
-  role?: StringNullableFilter;
+  role?: "Asset" | "Liability" | "Income" | "Cogs" | "Expenses";
   transactions?: TransactionListRelationFilter;
 };

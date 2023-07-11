@@ -22,7 +22,7 @@ import {
 import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
 import { Type } from "class-transformer";
 import { CustomerUpdateManyWithoutEntitiesInput } from "./CustomerUpdateManyWithoutEntitiesInput";
-import { ItemWhereUniqueInput } from "../../item/base/ItemWhereUniqueInput";
+import { ItemUpdateManyWithoutEntitiesInput } from "./ItemUpdateManyWithoutEntitiesInput";
 import { JournalUpdateManyWithoutEntitiesInput } from "./JournalUpdateManyWithoutEntitiesInput";
 import { LedgerUpdateManyWithoutEntitiesInput } from "./LedgerUpdateManyWithoutEntitiesInput";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
@@ -110,15 +110,15 @@ class EntityUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: () => ItemWhereUniqueInput,
+    type: () => ItemUpdateManyWithoutEntitiesInput,
   })
   @ValidateNested()
-  @Type(() => ItemWhereUniqueInput)
+  @Type(() => ItemUpdateManyWithoutEntitiesInput)
   @IsOptional()
-  @Field(() => ItemWhereUniqueInput, {
+  @Field(() => ItemUpdateManyWithoutEntitiesInput, {
     nullable: true,
   })
-  items?: ItemWhereUniqueInput | null;
+  items?: ItemUpdateManyWithoutEntitiesInput;
 
   @ApiProperty({
     required: false,

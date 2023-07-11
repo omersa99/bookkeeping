@@ -49,9 +49,14 @@ export const EntityEdit = (props: EditProps): React.ReactElement => {
         <TextInput label="deduction Id" source="deductionId" />
         <TextInput label="deductionRate" source="deductionRate" />
         <BooleanInput label="exemption" source="exemption" />
-        <ReferenceInput source="items.id" reference="Item" label="items">
-          <SelectInput optionText={ItemTitle} />
-        </ReferenceInput>
+        <ReferenceArrayInput
+          source="items"
+          reference="Item"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={ItemTitle} />
+        </ReferenceArrayInput>
         <ReferenceArrayInput
           source="journals"
           reference="Journal"

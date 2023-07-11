@@ -19,7 +19,7 @@ import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartO
 import { CustomerListRelationFilter } from "../../customer/base/CustomerListRelationFilter";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
-import { ItemWhereUniqueInput } from "../../item/base/ItemWhereUniqueInput";
+import { ItemListRelationFilter } from "../../item/base/ItemListRelationFilter";
 import { JournalListRelationFilter } from "../../journal/base/JournalListRelationFilter";
 import { LedgerListRelationFilter } from "../../ledger/base/LedgerListRelationFilter";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
@@ -118,15 +118,15 @@ class EntityWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => ItemWhereUniqueInput,
+    type: () => ItemListRelationFilter,
   })
   @ValidateNested()
-  @Type(() => ItemWhereUniqueInput)
+  @Type(() => ItemListRelationFilter)
   @IsOptional()
-  @Field(() => ItemWhereUniqueInput, {
+  @Field(() => ItemListRelationFilter, {
     nullable: true,
   })
-  items?: ItemWhereUniqueInput;
+  items?: ItemListRelationFilter;
 
   @ApiProperty({
     required: false,

@@ -8,6 +8,7 @@ import {
   TextInput,
   ReferenceArrayInput,
   SelectArrayInput,
+  SelectInput,
 } from "react-admin";
 
 import { ChartOfAccountTitle } from "../chartOfAccount/ChartOfAccountTitle";
@@ -38,7 +39,20 @@ export const AccountEdit = (props: EditProps): React.ReactElement => {
           <SelectArrayInput optionText={InvoiceModelTitle} />
         </ReferenceArrayInput>
         <TextInput label="name" source="name" />
-        <TextInput label="role" source="role" />
+        <SelectInput
+          source="role"
+          label="role"
+          choices={[
+            { label: "ASSET", value: "Asset" },
+            { label: "LIABILITY", value: "Liability" },
+            { label: "INCOME", value: "Income" },
+            { label: "COGS", value: "Cogs" },
+            { label: "Expenses", value: "Expenses" },
+          ]}
+          optionText="label"
+          allowEmpty
+          optionValue="value"
+        />
         <ReferenceArrayInput
           source="transactions"
           reference="Transaction"

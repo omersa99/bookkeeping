@@ -9,6 +9,6 @@ export type AccountCreateInput = {
   code?: string | null;
   invoiceModels?: InvoiceModelCreateNestedManyWithoutAccountsInput;
   name?: string | null;
-  role?: string | null;
+  role?: "Asset" | "Liability" | "Income" | "Cogs" | "Expenses" | null;
   transactions?: TransactionCreateNestedManyWithoutAccountsInput;
 };

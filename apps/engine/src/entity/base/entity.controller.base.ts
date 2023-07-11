@@ -30,6 +30,9 @@ import { Entity } from "./Entity";
 import { CustomerFindManyArgs } from "../../customer/base/CustomerFindManyArgs";
 import { Customer } from "../../customer/base/Customer";
 import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
+import { ItemFindManyArgs } from "../../item/base/ItemFindManyArgs";
+import { Item } from "../../item/base/Item";
+import { ItemWhereUniqueInput } from "../../item/base/ItemWhereUniqueInput";
 import { JournalFindManyArgs } from "../../journal/base/JournalFindManyArgs";
 import { Journal } from "../../journal/base/Journal";
 import { JournalWhereUniqueInput } from "../../journal/base/JournalWhereUniqueInput";
@@ -66,12 +69,6 @@ export class EntityControllerBase {
             }
           : undefined,
 
-        items: data.items
-          ? {
-              connect: data.items,
-            }
-          : undefined,
-
         user: data.user
           ? {
               connect: data.user,
@@ -93,13 +90,6 @@ export class EntityControllerBase {
         deductionRate: true,
         exemption: true,
         id: true,
-
-        items: {
-          select: {
-            id: true,
-          },
-        },
-
         name: true,
         taxId: true,
         updatedAt: true,
@@ -144,13 +134,6 @@ export class EntityControllerBase {
         deductionRate: true,
         exemption: true,
         id: true,
-
-        items: {
-          select: {
-            id: true,
-          },
-        },
-
         name: true,
         taxId: true,
         updatedAt: true,
@@ -196,13 +179,6 @@ export class EntityControllerBase {
         deductionRate: true,
         exemption: true,
         id: true,
-
-        items: {
-          select: {
-            id: true,
-          },
-        },
-
         name: true,
         taxId: true,
         updatedAt: true,
@@ -250,12 +226,6 @@ export class EntityControllerBase {
               }
             : undefined,
 
-          items: data.items
-            ? {
-                connect: data.items,
-              }
-            : undefined,
-
           user: data.user
             ? {
                 connect: data.user,
@@ -277,13 +247,6 @@ export class EntityControllerBase {
           deductionRate: true,
           exemption: true,
           id: true,
-
-          items: {
-            select: {
-              id: true,
-            },
-          },
-
           name: true,
           taxId: true,
           updatedAt: true,
@@ -337,13 +300,6 @@ export class EntityControllerBase {
           deductionRate: true,
           exemption: true,
           id: true,
-
-          items: {
-            select: {
-              id: true,
-            },
-          },
-
           name: true,
           taxId: true,
           updatedAt: true,
@@ -460,6 +416,120 @@ export class EntityControllerBase {
   ): Promise<void> {
     const data = {
       customers: {
+        disconnect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/items")
+  @ApiNestedQuery(ItemFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Item",
+    action: "read",
+    possession: "any",
+  })
+  async findManyItems(
+    @common.Req() request: Request,
+    @common.Param() params: EntityWhereUniqueInput
+  ): Promise<Item[]> {
+    const query = plainToClass(ItemFindManyArgs, request.query);
+    const results = await this.service.findItems(params.id, {
+      ...query,
+      select: {
+        createdAt: true,
+        description: true,
+
+        entity: {
+          select: {
+            id: true,
+          },
+        },
+
+        id: true,
+
+        invoiceModels: {
+          select: {
+            id: true,
+          },
+        },
+
+        name: true,
+        price: true,
+        pricePerUnit: true,
+        quantity: true,
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/items")
+  @nestAccessControl.UseRoles({
+    resource: "Entity",
+    action: "update",
+    possession: "any",
+  })
+  async connectItems(
+    @common.Param() params: EntityWhereUniqueInput,
+    @common.Body() body: ItemWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      items: {
+        connect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/items")
+  @nestAccessControl.UseRoles({
+    resource: "Entity",
+    action: "update",
+    possession: "any",
+  })
+  async updateItems(
+    @common.Param() params: EntityWhereUniqueInput,
+    @common.Body() body: ItemWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      items: {
+        set: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/items")
+  @nestAccessControl.UseRoles({
+    resource: "Entity",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectItems(
+    @common.Param() params: EntityWhereUniqueInput,
+    @common.Body() body: ItemWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      items: {
         disconnect: body,
       },
     };

@@ -13,11 +13,12 @@ import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { IntNullableFilter } from "../../util/IntNullableFilter";
 import { Type } from "class-transformer";
-import { IsOptional, ValidateNested } from "class-validator";
+import { IsOptional, ValidateNested, IsEnum } from "class-validator";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { ChartOfAccountListRelationFilter } from "../../chartOfAccount/base/ChartOfAccountListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { InvoiceModelListRelationFilter } from "../../invoiceModel/base/InvoiceModelListRelationFilter";
+import { EnumAccountRole } from "./EnumAccountRole";
 import { TransactionListRelationFilter } from "../../transaction/base/TransactionListRelationFilter";
 
 @InputType()
@@ -103,14 +104,14 @@ class AccountWhereInput {
 
   @ApiProperty({
     required: false,
-    type: StringNullableFilter,
+    enum: EnumAccountRole,
   })
-  @Type(() => StringNullableFilter)
+  @IsEnum(EnumAccountRole)
   @IsOptional()
-  @Field(() => StringNullableFilter, {
+  @Field(() => EnumAccountRole, {
     nullable: true,
   })
-  role?: StringNullableFilter;
+  role?: "Asset" | "Liability" | "Income" | "Cogs" | "Expenses";
 
   @ApiProperty({
     required: false,
