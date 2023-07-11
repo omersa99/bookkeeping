@@ -1,4 +1,4 @@
-import { ChartOfAccountWhereUniqueInput } from "../chartOfAccount/ChartOfAccountWhereUniqueInput";
+import { AccountCreateNestedManyWithoutEntitiesInput } from "./AccountCreateNestedManyWithoutEntitiesInput";
 import { CustomerCreateNestedManyWithoutEntitiesInput } from "./CustomerCreateNestedManyWithoutEntitiesInput";
 import { InvoiceModelCreateNestedManyWithoutEntitiesInput } from "./InvoiceModelCreateNestedManyWithoutEntitiesInput";
 import { ItemCreateNestedManyWithoutEntitiesInput } from "./ItemCreateNestedManyWithoutEntitiesInput";
@@ -7,8 +7,8 @@ import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type EntityCreateInput = {
   accountingType?: "Cash" | "Cumulative" | null;
+  accounts?: AccountCreateNestedManyWithoutEntitiesInput;
   address?: string | null;
-  coa?: ChartOfAccountWhereUniqueInput | null;
   customers?: CustomerCreateNestedManyWithoutEntitiesInput;
   deductionId?: string | null;
   deductionRate?: string | null;

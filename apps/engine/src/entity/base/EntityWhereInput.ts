@@ -13,9 +13,9 @@ import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { EnumEntityAccountingType } from "./EnumEntityAccountingType";
 import { IsEnum, IsOptional, ValidateNested } from "class-validator";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { AccountListRelationFilter } from "../../account/base/AccountListRelationFilter";
 import { Type } from "class-transformer";
-import { ChartOfAccountWhereUniqueInput } from "../../chartOfAccount/base/ChartOfAccountWhereUniqueInput";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { CustomerListRelationFilter } from "../../customer/base/CustomerListRelationFilter";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
@@ -39,6 +39,18 @@ class EntityWhereInput {
 
   @ApiProperty({
     required: false,
+    type: () => AccountListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => AccountListRelationFilter)
+  @IsOptional()
+  @Field(() => AccountListRelationFilter, {
+    nullable: true,
+  })
+  accounts?: AccountListRelationFilter;
+
+  @ApiProperty({
+    required: false,
     type: StringNullableFilter,
   })
   @Type(() => StringNullableFilter)
@@ -47,18 +59,6 @@ class EntityWhereInput {
     nullable: true,
   })
   address?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => ChartOfAccountWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => ChartOfAccountWhereUniqueInput)
-  @IsOptional()
-  @Field(() => ChartOfAccountWhereUniqueInput, {
-    nullable: true,
-  })
-  coa?: ChartOfAccountWhereUniqueInput;
 
   @ApiProperty({
     required: false,

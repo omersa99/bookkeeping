@@ -5,14 +5,14 @@ import {
   SimpleForm,
   CreateProps,
   SelectInput,
-  TextInput,
-  ReferenceInput,
   ReferenceArrayInput,
   SelectArrayInput,
+  TextInput,
   BooleanInput,
+  ReferenceInput,
 } from "react-admin";
 
-import { ChartOfAccountTitle } from "../chartOfAccount/ChartOfAccountTitle";
+import { AccountTitle } from "../account/AccountTitle";
 import { CustomerTitle } from "../customer/CustomerTitle";
 import { InvoiceModelTitle } from "../invoiceModel/InvoiceModelTitle";
 import { ItemTitle } from "../item/ItemTitle";
@@ -34,10 +34,15 @@ export const EntityCreate = (props: CreateProps): React.ReactElement => {
           allowEmpty
           optionValue="value"
         />
+        <ReferenceArrayInput
+          source="accounts"
+          reference="Account"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={AccountTitle} />
+        </ReferenceArrayInput>
         <TextInput label="address" source="address" />
-        <ReferenceInput source="coa.id" reference="ChartOfAccount" label="coa">
-          <SelectInput optionText={ChartOfAccountTitle} />
-        </ReferenceInput>
         <ReferenceArrayInput
           source="customers"
           reference="Customer"

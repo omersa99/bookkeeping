@@ -29,10 +29,6 @@ import { EntityList } from "./entity/EntityList";
 import { EntityCreate } from "./entity/EntityCreate";
 import { EntityEdit } from "./entity/EntityEdit";
 import { EntityShow } from "./entity/EntityShow";
-import { ChartOfAccountList } from "./chartOfAccount/ChartOfAccountList";
-import { ChartOfAccountCreate } from "./chartOfAccount/ChartOfAccountCreate";
-import { ChartOfAccountEdit } from "./chartOfAccount/ChartOfAccountEdit";
-import { ChartOfAccountShow } from "./chartOfAccount/ChartOfAccountShow";
 import { ItemList } from "./item/ItemList";
 import { ItemCreate } from "./item/ItemCreate";
 import { ItemEdit } from "./item/ItemEdit";
@@ -116,13 +112,6 @@ const App = (): React.ReactElement => {
           edit={EntityEdit}
           create={EntityCreate}
           show={EntityShow}
-        />
-        <Resource
-          name="ChartOfAccount"
-          list={ChartOfAccountList}
-          edit={ChartOfAccountEdit}
-          create={ChartOfAccountCreate}
-          show={ChartOfAccountShow}
         />
         <Resource
           name="Item"

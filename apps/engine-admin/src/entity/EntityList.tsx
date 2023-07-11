@@ -5,13 +5,12 @@ import {
   Datagrid,
   ListProps,
   TextField,
-  ReferenceField,
   DateField,
   BooleanField,
+  ReferenceField,
 } from "react-admin";
 
 import Pagination from "../Components/Pagination";
-import { CHARTOFACCOUNT_TITLE_FIELD } from "../chartOfAccount/ChartOfAccountTitle";
 import { USER_TITLE_FIELD } from "../user/UserTitle";
 
 export const EntityList = (props: ListProps): React.ReactElement => {
@@ -26,13 +25,6 @@ export const EntityList = (props: ListProps): React.ReactElement => {
       <Datagrid rowClick="show">
         <TextField label="accounting Type" source="accountingType" />
         <TextField label="address" source="address" />
-        <ReferenceField
-          label="coa"
-          source="chartofaccount.id"
-          reference="ChartOfAccount"
-        >
-          <TextField source={CHARTOFACCOUNT_TITLE_FIELD} />
-        </ReferenceField>
         <DateField source="createdAt" label="Created At" />
         <TextField label="deduction Id" source="deductionId" />
         <TextField label="deductionRate" source="deductionRate" />

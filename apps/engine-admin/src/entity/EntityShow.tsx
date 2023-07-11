@@ -5,9 +5,9 @@ import {
   SimpleShowLayout,
   ShowProps,
   TextField,
-  ReferenceField,
   DateField,
   BooleanField,
+  ReferenceField,
   ReferenceManyField,
   Datagrid,
 } from "react-admin";
@@ -17,7 +17,6 @@ import { CUSTOMER_TITLE_FIELD } from "../customer/CustomerTitle";
 import { ITEM_TITLE_FIELD } from "../item/ItemTitle";
 import { LEDGER_TITLE_FIELD } from "../ledger/LedgerTitle";
 import { INVOICEMODEL_TITLE_FIELD } from "../invoiceModel/InvoiceModelTitle";
-import { CHARTOFACCOUNT_TITLE_FIELD } from "../chartOfAccount/ChartOfAccountTitle";
 import { USER_TITLE_FIELD } from "../user/UserTitle";
 
 export const EntityShow = (props: ShowProps): React.ReactElement => {
@@ -26,13 +25,6 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
       <SimpleShowLayout>
         <TextField label="accounting Type" source="accountingType" />
         <TextField label="address" source="address" />
-        <ReferenceField
-          label="coa"
-          source="chartofaccount.id"
-          reference="ChartOfAccount"
-        >
-          <TextField source={CHARTOFACCOUNT_TITLE_FIELD} />
-        </ReferenceField>
         <DateField source="createdAt" label="Created At" />
         <TextField label="deduction Id" source="deductionId" />
         <TextField label="deductionRate" source="deductionRate" />
@@ -44,6 +36,29 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
         <ReferenceField label="user" source="user.id" reference="User">
           <TextField source={USER_TITLE_FIELD} />
         </ReferenceField>
+        <ReferenceManyField
+          reference="Account"
+          target="entityId"
+          label="accounts"
+        >
+          <Datagrid rowClick="show">
+            <TextField label="balance" source="balance" />
+            <TextField label="balanceType" source="balanceType" />
+            <TextField label="code" source="code" />
+            <DateField source="createdAt" label="Created At" />
+            <ReferenceField
+              label="entity"
+              source="entity.id"
+              reference="Entity"
+            >
+              <TextField source={ENTITY_TITLE_FIELD} />
+            </ReferenceField>
+            <TextField label="ID" source="id" />
+            <TextField label="name" source="name" />
+            <TextField label="role" source="role" />
+            <DateField source="updatedAt" label="Updated At" />
+          </Datagrid>
+        </ReferenceManyField>
         <ReferenceManyField
           reference="Customer"
           target="entityId"

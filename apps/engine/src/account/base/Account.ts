@@ -15,12 +15,12 @@ import {
   IsInt,
   IsOptional,
   IsString,
-  ValidateNested,
   IsDate,
+  ValidateNested,
   IsEnum,
 } from "class-validator";
-import { ChartOfAccount } from "../../chartOfAccount/base/ChartOfAccount";
 import { Type } from "class-transformer";
+import { Entity } from "../../entity/base/Entity";
 import { EnumAccountRole } from "./EnumAccountRole";
 import { Transaction } from "../../transaction/base/Transaction";
 
@@ -50,15 +50,6 @@ class Account {
 
   @ApiProperty({
     required: false,
-    type: () => [ChartOfAccount],
-  })
-  @ValidateNested()
-  @Type(() => ChartOfAccount)
-  @IsOptional()
-  chartOfAccount?: Array<ChartOfAccount>;
-
-  @ApiProperty({
-    required: false,
     type: String,
   })
   @IsString()
@@ -75,6 +66,15 @@ class Account {
   @Type(() => Date)
   @Field(() => Date)
   createdAt!: Date;
+
+  @ApiProperty({
+    required: false,
+    type: () => Entity,
+  })
+  @ValidateNested()
+  @Type(() => Entity)
+  @IsOptional()
+  entity?: Entity | null;
 
   @ApiProperty({
     required: true,

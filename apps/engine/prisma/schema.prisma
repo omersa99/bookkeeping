@@ -53,23 +53,23 @@ model Ledger {
 }
 
 model Account {
-  balance        Int?
-  balanceType    String?
-  chartOfAccount ChartOfAccount[]
-  code           String?
-  createdAt      DateTime         @default(now())
-  id             String           @id @default(cuid())
-  name           String?
-  role           EnumAccountRole?
-  transactions   Transaction[]
-  updatedAt      DateTime         @updatedAt
+  balance      Int?
+  balanceType  String?
+  code         String?
+  createdAt    DateTime         @default(now())
+  entity       Entity?          @relation(fields: [entityId], references: [id])
+  entityId     String?
+  id           String           @id @default(cuid())
+  name         String?
+  role         EnumAccountRole?
+  transactions Transaction[]
+  updatedAt    DateTime         @updatedAt
 }
 
 model Entity {
   accountingType EnumEntityAccountingType?
+  accounts       Account[]
   address        String?
-  coa            ChartOfAccount?           @relation(fields: [coaID], references: [id])
-  coaID          String?                   @unique
   createdAt      DateTime                  @default(now())
   customers      Customer[]
   deductionId    String?
@@ -83,14 +83,6 @@ model Entity {
   taxId          String?
   updatedAt      DateTime                  @updatedAt
   user           User?
-}
-
-model ChartOfAccount {
-  accounts  Account[]
-  createdAt DateTime  @default(now())
-  entitie   Entity?
-  id        String    @id @default(cuid())
-  updatedAt DateTime  @updatedAt
 }
 
 model Item {
