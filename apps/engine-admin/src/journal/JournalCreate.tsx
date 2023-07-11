@@ -10,7 +10,6 @@ import {
   SelectArrayInput,
 } from "react-admin";
 
-import { EntityTitle } from "../entity/EntityTitle";
 import { LedgerTitle } from "../ledger/LedgerTitle";
 import { TransactionTitle } from "../transaction/TransactionTitle";
 
@@ -18,9 +17,6 @@ export const JournalCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
-        <ReferenceInput source="entity.id" reference="Entity" label="entity">
-          <SelectInput optionText={EntityTitle} />
-        </ReferenceInput>
         <ReferenceInput source="ledger.id" reference="Ledger" label="ledger">
           <SelectInput optionText={LedgerTitle} />
         </ReferenceInput>

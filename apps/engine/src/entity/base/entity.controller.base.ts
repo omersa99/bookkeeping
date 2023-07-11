@@ -39,9 +39,9 @@ import { InvoiceModelWhereUniqueInput } from "../../invoiceModel/base/InvoiceMod
 import { ItemFindManyArgs } from "../../item/base/ItemFindManyArgs";
 import { Item } from "../../item/base/Item";
 import { ItemWhereUniqueInput } from "../../item/base/ItemWhereUniqueInput";
-import { JournalFindManyArgs } from "../../journal/base/JournalFindManyArgs";
-import { Journal } from "../../journal/base/Journal";
-import { JournalWhereUniqueInput } from "../../journal/base/JournalWhereUniqueInput";
+import { LedgerFindManyArgs } from "../../ledger/base/LedgerFindManyArgs";
+import { Ledger } from "../../ledger/base/Ledger";
+import { LedgerWhereUniqueInput } from "../../ledger/base/LedgerWhereUniqueInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -730,19 +730,19 @@ export class EntityControllerBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @common.Get("/:id/journals")
-  @ApiNestedQuery(JournalFindManyArgs)
+  @common.Get("/:id/ledgers")
+  @ApiNestedQuery(LedgerFindManyArgs)
   @nestAccessControl.UseRoles({
-    resource: "Journal",
+    resource: "Ledger",
     action: "read",
     possession: "any",
   })
-  async findManyJournals(
+  async findManyLedgers(
     @common.Req() request: Request,
     @common.Param() params: EntityWhereUniqueInput
-  ): Promise<Journal[]> {
-    const query = plainToClass(JournalFindManyArgs, request.query);
-    const results = await this.service.findJournals(params.id, {
+  ): Promise<Ledger[]> {
+    const query = plainToClass(LedgerFindManyArgs, request.query);
+    const results = await this.service.findLedgers(params.id, {
       ...query,
       select: {
         createdAt: true,
@@ -755,12 +755,13 @@ export class EntityControllerBase {
 
         id: true,
 
-        ledger: {
+        invoiceModels: {
           select: {
             id: true,
           },
         },
 
+        name: true,
         updatedAt: true,
       },
     });
@@ -772,18 +773,18 @@ export class EntityControllerBase {
     return results;
   }
 
-  @common.Post("/:id/journals")
+  @common.Post("/:id/ledgers")
   @nestAccessControl.UseRoles({
     resource: "Entity",
     action: "update",
     possession: "any",
   })
-  async connectJournals(
+  async connectLedgers(
     @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: JournalWhereUniqueInput[]
+    @common.Body() body: LedgerWhereUniqueInput[]
   ): Promise<void> {
     const data = {
-      journals: {
+      ledgers: {
         connect: body,
       },
     };
@@ -794,18 +795,18 @@ export class EntityControllerBase {
     });
   }
 
-  @common.Patch("/:id/journals")
+  @common.Patch("/:id/ledgers")
   @nestAccessControl.UseRoles({
     resource: "Entity",
     action: "update",
     possession: "any",
   })
-  async updateJournals(
+  async updateLedgers(
     @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: JournalWhereUniqueInput[]
+    @common.Body() body: LedgerWhereUniqueInput[]
   ): Promise<void> {
     const data = {
-      journals: {
+      ledgers: {
         set: body,
       },
     };
@@ -816,18 +817,18 @@ export class EntityControllerBase {
     });
   }
 
-  @common.Delete("/:id/journals")
+  @common.Delete("/:id/ledgers")
   @nestAccessControl.UseRoles({
     resource: "Entity",
     action: "update",
     possession: "any",
   })
-  async disconnectJournals(
+  async disconnectLedgers(
     @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: JournalWhereUniqueInput[]
+    @common.Body() body: LedgerWhereUniqueInput[]
   ): Promise<void> {
     const data = {
-      journals: {
+      ledgers: {
         disconnect: body,
       },
     };

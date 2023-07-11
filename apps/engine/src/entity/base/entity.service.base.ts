@@ -17,7 +17,7 @@ import {
   Customer,
   InvoiceModel,
   Item,
-  Journal,
+  Ledger,
   User,
 } from "@prisma/client";
 
@@ -100,15 +100,15 @@ export class EntityServiceBase {
       .items(args);
   }
 
-  async findJournals(
+  async findLedgers(
     parentId: string,
-    args: Prisma.JournalFindManyArgs
-  ): Promise<Journal[]> {
+    args: Prisma.LedgerFindManyArgs
+  ): Promise<Ledger[]> {
     return this.prisma.entity
       .findUniqueOrThrow({
         where: { id: parentId },
       })
-      .journals(args);
+      .ledgers(args);
   }
 
   async getUser(parentId: string): Promise<User | null> {

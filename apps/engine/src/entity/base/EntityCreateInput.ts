@@ -24,7 +24,7 @@ import { Type } from "class-transformer";
 import { CustomerCreateNestedManyWithoutEntitiesInput } from "./CustomerCreateNestedManyWithoutEntitiesInput";
 import { InvoiceModelCreateNestedManyWithoutEntitiesInput } from "./InvoiceModelCreateNestedManyWithoutEntitiesInput";
 import { ItemCreateNestedManyWithoutEntitiesInput } from "./ItemCreateNestedManyWithoutEntitiesInput";
-import { JournalCreateNestedManyWithoutEntitiesInput } from "./JournalCreateNestedManyWithoutEntitiesInput";
+import { LedgerCreateNestedManyWithoutEntitiesInput } from "./LedgerCreateNestedManyWithoutEntitiesInput";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
@@ -134,15 +134,15 @@ class EntityCreateInput {
 
   @ApiProperty({
     required: false,
-    type: () => JournalCreateNestedManyWithoutEntitiesInput,
+    type: () => LedgerCreateNestedManyWithoutEntitiesInput,
   })
   @ValidateNested()
-  @Type(() => JournalCreateNestedManyWithoutEntitiesInput)
+  @Type(() => LedgerCreateNestedManyWithoutEntitiesInput)
   @IsOptional()
-  @Field(() => JournalCreateNestedManyWithoutEntitiesInput, {
+  @Field(() => LedgerCreateNestedManyWithoutEntitiesInput, {
     nullable: true,
   })
-  journals?: JournalCreateNestedManyWithoutEntitiesInput;
+  ledgers?: LedgerCreateNestedManyWithoutEntitiesInput;
 
   @ApiProperty({
     required: false,

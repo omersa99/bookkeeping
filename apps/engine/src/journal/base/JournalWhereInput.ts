@@ -11,27 +11,14 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
-import { ValidateNested, IsOptional } from "class-validator";
-import { Type } from "class-transformer";
 import { StringFilter } from "../../util/StringFilter";
+import { Type } from "class-transformer";
+import { IsOptional, ValidateNested } from "class-validator";
 import { LedgerWhereUniqueInput } from "../../ledger/base/LedgerWhereUniqueInput";
 import { TransactionListRelationFilter } from "../../transaction/base/TransactionListRelationFilter";
 
 @InputType()
 class JournalWhereInput {
-  @ApiProperty({
-    required: false,
-    type: () => EntityWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => EntityWhereUniqueInput)
-  @IsOptional()
-  @Field(() => EntityWhereUniqueInput, {
-    nullable: true,
-  })
-  entity?: EntityWhereUniqueInput;
-
   @ApiProperty({
     required: false,
     type: StringFilter,

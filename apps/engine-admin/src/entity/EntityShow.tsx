@@ -147,9 +147,9 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
           </Datagrid>
         </ReferenceManyField>
         <ReferenceManyField
-          reference="Journal"
+          reference="Ledger"
           target="entityId"
-          label="journals"
+          label="ledgers"
         >
           <Datagrid rowClick="show">
             <DateField source="createdAt" label="Created At" />
@@ -162,12 +162,13 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
             </ReferenceField>
             <TextField label="ID" source="id" />
             <ReferenceField
-              label="ledger"
-              source="ledger.id"
-              reference="Ledger"
+              label="InvoiceModels"
+              source="invoicemodel.id"
+              reference="InvoiceModel"
             >
-              <TextField source={LEDGER_TITLE_FIELD} />
+              <TextField source={INVOICEMODEL_TITLE_FIELD} />
             </ReferenceField>
+            <TextField label="name" source="name" />
             <DateField source="updatedAt" label="Updated At" />
           </Datagrid>
         </ReferenceManyField>

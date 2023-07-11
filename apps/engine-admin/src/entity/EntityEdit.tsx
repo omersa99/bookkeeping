@@ -16,7 +16,7 @@ import { AccountTitle } from "../account/AccountTitle";
 import { CustomerTitle } from "../customer/CustomerTitle";
 import { InvoiceModelTitle } from "../invoiceModel/InvoiceModelTitle";
 import { ItemTitle } from "../item/ItemTitle";
-import { JournalTitle } from "../journal/JournalTitle";
+import { LedgerTitle } from "../ledger/LedgerTitle";
 import { UserTitle } from "../user/UserTitle";
 
 export const EntityEdit = (props: EditProps): React.ReactElement => {
@@ -71,12 +71,12 @@ export const EntityEdit = (props: EditProps): React.ReactElement => {
           <SelectArrayInput optionText={ItemTitle} />
         </ReferenceArrayInput>
         <ReferenceArrayInput
-          source="journals"
-          reference="Journal"
+          source="ledgers"
+          reference="Ledger"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
         >
-          <SelectArrayInput optionText={JournalTitle} />
+          <SelectArrayInput optionText={LedgerTitle} />
         </ReferenceArrayInput>
         <TextInput label="name" source="name" />
         <TextInput label="taxId" source="taxId" />

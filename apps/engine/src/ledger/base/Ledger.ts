@@ -11,8 +11,9 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsString, ValidateNested, IsOptional } from "class-validator";
+import { IsDate, ValidateNested, IsOptional, IsString } from "class-validator";
 import { Type } from "class-transformer";
+import { Entity } from "../../entity/base/Entity";
 import { InvoiceModel } from "../../invoiceModel/base/InvoiceModel";
 import { Journal } from "../../journal/base/Journal";
 
@@ -25,6 +26,15 @@ class Ledger {
   @Type(() => Date)
   @Field(() => Date)
   createdAt!: Date;
+
+  @ApiProperty({
+    required: false,
+    type: () => Entity,
+  })
+  @ValidateNested()
+  @Type(() => Entity)
+  @IsOptional()
+  entity?: Entity | null;
 
   @ApiProperty({
     required: true,

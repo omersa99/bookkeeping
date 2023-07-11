@@ -10,7 +10,7 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
-import { Prisma, Journal, Transaction, Entity, Ledger } from "@prisma/client";
+import { Prisma, Journal, Transaction, Ledger } from "@prisma/client";
 
 export class JournalServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -56,14 +56,6 @@ export class JournalServiceBase {
         where: { id: parentId },
       })
       .transactions(args);
-  }
-
-  async getEntity(parentId: string): Promise<Entity | null> {
-    return this.prisma.journal
-      .findUnique({
-        where: { id: parentId },
-      })
-      .entity();
   }
 
   async getLedger(parentId: string): Promise<Ledger | null> {

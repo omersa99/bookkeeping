@@ -2,7 +2,7 @@ import { Account } from "../account/Account";
 import { Customer } from "../customer/Customer";
 import { InvoiceModel } from "../invoiceModel/InvoiceModel";
 import { Item } from "../item/Item";
-import { Journal } from "../journal/Journal";
+import { Ledger } from "../ledger/Ledger";
 import { User } from "../user/User";
 
 export type Entity = {
@@ -17,7 +17,7 @@ export type Entity = {
   id: string;
   invoiceModels?: Array<InvoiceModel>;
   items?: Array<Item>;
-  journals?: Array<Journal>;
+  ledgers?: Array<Ledger>;
   name: string | null;
   taxId: string | null;
   updatedAt: Date;
