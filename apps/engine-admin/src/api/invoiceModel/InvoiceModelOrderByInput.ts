@@ -11,6 +11,8 @@ export type InvoiceModelOrderByInput = {
   invoiceNumber?: SortOrder;
   invoiceStatus?: SortOrder;
   itemId?: SortOrder;
+  itemUnits?: SortOrder;
   ledgerId?: SortOrder;
+  pricePerUnit?: SortOrder;
   updatedAt?: SortOrder;
 };

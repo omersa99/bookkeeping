@@ -105,12 +105,15 @@ export class InvoiceModelControllerBase {
           },
         },
 
+        itemUnits: true,
+
         ledger: {
           select: {
             id: true,
           },
         },
 
+        pricePerUnit: true,
         updatedAt: true,
       },
     });
@@ -160,12 +163,15 @@ export class InvoiceModelControllerBase {
           },
         },
 
+        itemUnits: true,
+
         ledger: {
           select: {
             id: true,
           },
         },
 
+        pricePerUnit: true,
         updatedAt: true,
       },
     });
@@ -216,12 +222,15 @@ export class InvoiceModelControllerBase {
           },
         },
 
+        itemUnits: true,
+
         ledger: {
           select: {
             id: true,
           },
         },
 
+        pricePerUnit: true,
         updatedAt: true,
       },
     });
@@ -307,12 +316,15 @@ export class InvoiceModelControllerBase {
             },
           },
 
+          itemUnits: true,
+
           ledger: {
             select: {
               id: true,
             },
           },
 
+          pricePerUnit: true,
           updatedAt: true,
         },
       });
@@ -371,12 +383,15 @@ export class InvoiceModelControllerBase {
             },
           },
 
+          itemUnits: true,
+
           ledger: {
             select: {
               id: true,
             },
           },
 
+          pricePerUnit: true,
           updatedAt: true,
         },
       });

@@ -11,7 +11,14 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional, ValidateNested, IsEnum } from "class-validator";
+import {
+  IsString,
+  IsOptional,
+  ValidateNested,
+  IsEnum,
+  IsInt,
+  IsNumber,
+} from "class-validator";
 import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
 import { Type } from "class-transformer";
 import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
@@ -114,6 +121,17 @@ class InvoiceModelCreateInput {
 
   @ApiProperty({
     required: false,
+    type: Number,
+  })
+  @IsInt()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  itemUnits?: number | null;
+
+  @ApiProperty({
+    required: false,
     type: () => LedgerWhereUniqueInput,
   })
   @ValidateNested()
@@ -123,6 +141,17 @@ class InvoiceModelCreateInput {
     nullable: true,
   })
   ledger?: LedgerWhereUniqueInput | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsNumber()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  pricePerUnit?: number | null;
 }
 
 export { InvoiceModelCreateInput as InvoiceModelCreateInput };

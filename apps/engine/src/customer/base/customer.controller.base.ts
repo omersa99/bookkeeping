@@ -293,12 +293,15 @@ export class CustomerControllerBase {
           },
         },
 
+        itemUnits: true,
+
         ledger: {
           select: {
             id: true,
           },
         },
 
+        pricePerUnit: true,
         updatedAt: true,
       },
     });
