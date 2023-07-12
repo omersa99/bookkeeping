@@ -114,8 +114,10 @@ model InvoiceModel {
   invoiceStatus EnumInvoiceModelInvoiceStatus?
   item          Item?                          @relation(fields: [itemId], references: [id])
   itemId        String?                        @unique
+  itemUnits     Int?
   ledger        Ledger?                        @relation(fields: [ledgerId], references: [id])
   ledgerId      String?                        @unique
+  pricePerUnit  Float?
   updatedAt     DateTime                       @updatedAt
 }
 

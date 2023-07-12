@@ -12,5 +12,7 @@ export type InvoiceModelUpdateInput = {
   invoiceNumber?: string | null;
   invoiceStatus?: "Draft" | "Paid" | "Canceled" | null;
   item?: ItemWhereUniqueInput | null;
+  itemUnits?: number | null;
   ledger?: LedgerWhereUniqueInput | null;
+  pricePerUnit?: number | null;
 };

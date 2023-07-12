@@ -17,6 +17,8 @@ import {
   IsDate,
   ValidateNested,
   IsEnum,
+  IsInt,
+  IsNumber,
 } from "class-validator";
 import { Type } from "class-transformer";
 import { Customer } from "../../customer/base/Customer";
@@ -127,12 +129,34 @@ class InvoiceModel {
 
   @ApiProperty({
     required: false,
+    type: Number,
+  })
+  @IsInt()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  itemUnits!: number | null;
+
+  @ApiProperty({
+    required: false,
     type: () => Ledger,
   })
   @ValidateNested()
   @Type(() => Ledger)
   @IsOptional()
   ledger?: Ledger | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsNumber()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  pricePerUnit!: number | null;
 
   @ApiProperty({
     required: true,

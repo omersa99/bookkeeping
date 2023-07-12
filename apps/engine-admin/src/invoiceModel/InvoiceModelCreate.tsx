@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import {
   Create,
   SimpleForm,
@@ -6,7 +7,9 @@ import {
   TextInput,
   ReferenceInput,
   SelectInput,
+  NumberInput,
 } from "react-admin";
+
 import { CustomerTitle } from "../customer/CustomerTitle";
 import { EntityTitle } from "../entity/EntityTitle";
 import { ItemTitle } from "../item/ItemTitle";
@@ -45,9 +48,11 @@ export const InvoiceModelCreate = (props: CreateProps): React.ReactElement => {
         <ReferenceInput source="item.id" reference="Item" label="item">
           <SelectInput optionText={ItemTitle} />
         </ReferenceInput>
+        <NumberInput step={1} label="item units" source="itemUnits" />
         <ReferenceInput source="ledger.id" reference="Ledger" label="ledger">
           <SelectInput optionText={LedgerTitle} />
         </ReferenceInput>
+        <NumberInput label="price per unit" source="pricePerUnit" />
       </SimpleForm>
     </Create>
   );
