@@ -11,30 +11,30 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested, IsEnum } from "class-validator";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
 import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
 import { EnumInvoiceModelInvoiceStatus } from "./EnumInvoiceModelInvoiceStatus";
 import { ItemWhereUniqueInput } from "../../item/base/ItemWhereUniqueInput";
 import { LedgerWhereUniqueInput } from "../../ledger/base/LedgerWhereUniqueInput";
-import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { IntNullableFilter } from "../../util/IntNullableFilter";
 
 @InputType()
 class InvoiceModelWhereInput {
   @ApiProperty({
     required: false,
-    type: StringNullableFilter,
+    type: FloatNullableFilter,
   })
-  @Type(() => StringNullableFilter)
+  @Type(() => FloatNullableFilter)
   @IsOptional()
-  @Field(() => StringNullableFilter, {
+  @Field(() => FloatNullableFilter, {
     nullable: true,
   })
-  amountDue?: StringNullableFilter;
+  amountDue?: FloatNullableFilter;
 
   @ApiProperty({
     required: false,

@@ -19,7 +19,7 @@ import { InvoiceModelService } from "../invoiceModel.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
-  amountDue: "exampleAmountDue",
+  amountDue: 42.42,
   amountPaid: "exampleAmountPaid",
   createdAt: new Date(),
   id: "exampleId",
@@ -30,7 +30,7 @@ const CREATE_INPUT = {
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
-  amountDue: "exampleAmountDue",
+  amountDue: 42.42,
   amountPaid: "exampleAmountPaid",
   createdAt: new Date(),
   id: "exampleId",
@@ -42,7 +42,7 @@ const CREATE_RESULT = {
 };
 const FIND_MANY_RESULT = [
   {
-    amountDue: "exampleAmountDue",
+    amountDue: 42.42,
     amountPaid: "exampleAmountPaid",
     createdAt: new Date(),
     id: "exampleId",
@@ -54,7 +54,7 @@ const FIND_MANY_RESULT = [
   },
 ];
 const FIND_ONE_RESULT = {
-  amountDue: "exampleAmountDue",
+  amountDue: 42.42,
   amountPaid: "exampleAmountPaid",
   createdAt: new Date(),
   id: "exampleId",

@@ -4,10 +4,10 @@ import {
   Edit,
   SimpleForm,
   EditProps,
+  NumberInput,
   TextInput,
   ReferenceInput,
   SelectInput,
-  NumberInput,
 } from "react-admin";
 
 import { CustomerTitle } from "../customer/CustomerTitle";
@@ -19,7 +19,7 @@ export const InvoiceModelEdit = (props: EditProps): React.ReactElement => {
   return (
     <Edit {...props}>
       <SimpleForm>
-        <TextInput label="amount_due" source="amountDue" />
+        <NumberInput label="amount_due" source="amountDue" />
         <TextInput label="amount_paid" source="amountPaid" />
         <ReferenceInput
           source="customer.id"
