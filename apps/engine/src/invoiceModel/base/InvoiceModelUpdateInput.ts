@@ -16,8 +16,8 @@ import {
   IsOptional,
   ValidateNested,
   IsEnum,
-  IsInt,
   IsNumber,
+  IsInt,
 } from "class-validator";
 import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
 import { Type } from "class-transformer";
@@ -121,17 +121,6 @@ class InvoiceModelUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: Number,
-  })
-  @IsInt()
-  @IsOptional()
-  @Field(() => Number, {
-    nullable: true,
-  })
-  itemUnits?: number | null;
-
-  @ApiProperty({
-    required: false,
     type: () => LedgerWhereUniqueInput,
   })
   @ValidateNested()
@@ -152,6 +141,17 @@ class InvoiceModelUpdateInput {
     nullable: true,
   })
   pricePerUnit?: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsInt()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  quantity?: number | null;
 }
 
 export { InvoiceModelUpdateInput as InvoiceModelUpdateInput };

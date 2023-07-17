@@ -293,8 +293,6 @@ export class CustomerControllerBase {
           },
         },
 
-        itemUnits: true,
-
         ledger: {
           select: {
             id: true,
@@ -302,6 +300,7 @@ export class CustomerControllerBase {
         },
 
         pricePerUnit: true,
+        quantity: true,
         updatedAt: true,
       },
     });

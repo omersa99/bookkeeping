@@ -95,7 +95,6 @@ model Item {
   itemTransactions ItemTransaction[]
   name             String?
   price            Float?
-  pricePerUnit     Float?
   quantity         Int?
   updatedAt        DateTime          @updatedAt
 }
@@ -114,10 +113,10 @@ model InvoiceModel {
   invoiceStatus EnumInvoiceModelInvoiceStatus?
   item          Item?                          @relation(fields: [itemId], references: [id])
   itemId        String?                        @unique
-  itemUnits     Int?
   ledger        Ledger?                        @relation(fields: [ledgerId], references: [id])
   ledgerId      String?                        @unique
   pricePerUnit  Float?
+  quantity      Int?
   updatedAt     DateTime                       @updatedAt
 }
 
@@ -139,7 +138,7 @@ model ItemTransaction {
   item            Item?                               @relation(fields: [itemId], references: [id])
   itemId          String?
   quantity        Int?
-  totalCost       String?
+  totalCost       Float?
   transactionType EnumItemTransactionTransactionType?
   unitPrice       Float?
   updatedAt       DateTime                            @updatedAt
@@ -173,4 +172,5 @@ enum EnumItemTransactionTransactionType {
   Purchase
   Return
   Adjustment
+  Sold
 }

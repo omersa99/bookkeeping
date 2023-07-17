@@ -9,6 +9,5 @@ export type ItemUpdateInput = {
   itemTransactions?: ItemTransactionUpdateManyWithoutItemsInput;
   name?: string | null;
   price?: number | null;
-  pricePerUnit?: number | null;
   quantity?: number | null;
 };

@@ -48,11 +48,11 @@ export const InvoiceModelCreate = (props: CreateProps): React.ReactElement => {
         <ReferenceInput source="item.id" reference="Item" label="item">
           <SelectInput optionText={ItemTitle} />
         </ReferenceInput>
-        <NumberInput step={1} label="item units" source="itemUnits" />
         <ReferenceInput source="ledger.id" reference="Ledger" label="ledger">
           <SelectInput optionText={LedgerTitle} />
         </ReferenceInput>
         <NumberInput label="price per unit" source="pricePerUnit" />
+        <NumberInput step={1} label="quantity" source="quantity" />
       </SimpleForm>
     </Create>
   );

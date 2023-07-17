@@ -105,8 +105,6 @@ export class InvoiceModelControllerBase {
           },
         },
 
-        itemUnits: true,
-
         ledger: {
           select: {
             id: true,
@@ -114,6 +112,7 @@ export class InvoiceModelControllerBase {
         },
 
         pricePerUnit: true,
+        quantity: true,
         updatedAt: true,
       },
     });
@@ -163,8 +162,6 @@ export class InvoiceModelControllerBase {
           },
         },
 
-        itemUnits: true,
-
         ledger: {
           select: {
             id: true,
@@ -172,6 +169,7 @@ export class InvoiceModelControllerBase {
         },
 
         pricePerUnit: true,
+        quantity: true,
         updatedAt: true,
       },
     });
@@ -222,8 +220,6 @@ export class InvoiceModelControllerBase {
           },
         },
 
-        itemUnits: true,
-
         ledger: {
           select: {
             id: true,
@@ -231,6 +227,7 @@ export class InvoiceModelControllerBase {
         },
 
         pricePerUnit: true,
+        quantity: true,
         updatedAt: true,
       },
     });
@@ -316,8 +313,6 @@ export class InvoiceModelControllerBase {
             },
           },
 
-          itemUnits: true,
-
           ledger: {
             select: {
               id: true,
@@ -325,6 +320,7 @@ export class InvoiceModelControllerBase {
           },
 
           pricePerUnit: true,
+          quantity: true,
           updatedAt: true,
         },
       });
@@ -383,8 +379,6 @@ export class InvoiceModelControllerBase {
             },
           },
 
-          itemUnits: true,
-
           ledger: {
             select: {
               id: true,
@@ -392,6 +386,7 @@ export class InvoiceModelControllerBase {
           },
 
           pricePerUnit: true,
+          quantity: true,
           updatedAt: true,
         },
       });

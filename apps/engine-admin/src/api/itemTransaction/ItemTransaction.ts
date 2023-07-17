@@ -5,8 +5,8 @@ export type ItemTransaction = {
   id: string;
   item?: Item | null;
   quantity: number | null;
-  totalCost: string | null;
-  transactionType?: "Purchase" | "Return" | "Adjustment" | null;
+  totalCost: number | null;
+  transactionType?: "Purchase" | "Return" | "Adjustment" | "Sold" | null;
   unitPrice: number | null;
   updatedAt: Date;
 };

@@ -105,17 +105,6 @@ class ItemWhereInput {
 
   @ApiProperty({
     required: false,
-    type: FloatNullableFilter,
-  })
-  @Type(() => FloatNullableFilter)
-  @IsOptional()
-  @Field(() => FloatNullableFilter, {
-    nullable: true,
-  })
-  pricePerUnit?: FloatNullableFilter;
-
-  @ApiProperty({
-    required: false,
     type: IntNullableFilter,
   })
   @Type(() => IntNullableFilter)

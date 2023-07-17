@@ -36,11 +36,11 @@ export const InvoiceModelShow = (props: ShowProps): React.ReactElement => {
         <ReferenceField label="item" source="item.id" reference="Item">
           <TextField source={ITEM_TITLE_FIELD} />
         </ReferenceField>
-        <TextField label="item units" source="itemUnits" />
         <ReferenceField label="ledger" source="ledger.id" reference="Ledger">
           <TextField source={LEDGER_TITLE_FIELD} />
         </ReferenceField>
         <TextField label="price per unit" source="pricePerUnit" />
+        <TextField label="quantity" source="quantity" />
         <DateField source="updatedAt" label="Updated At" />
       </SimpleShowLayout>
     </Show>

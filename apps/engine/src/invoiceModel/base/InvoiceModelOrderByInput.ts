@@ -138,17 +138,6 @@ class InvoiceModelOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  itemUnits?: SortOrder;
-
-  @ApiProperty({
-    required: false,
-    enum: ["asc", "desc"],
-  })
-  @IsOptional()
-  @IsEnum(SortOrder)
-  @Field(() => SortOrder, {
-    nullable: true,
-  })
   ledgerId?: SortOrder;
 
   @ApiProperty({
@@ -161,6 +150,17 @@ class InvoiceModelOrderByInput {
     nullable: true,
   })
   pricePerUnit?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @IsOptional()
+  @IsEnum(SortOrder)
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  quantity?: SortOrder;
 
   @ApiProperty({
     required: false,

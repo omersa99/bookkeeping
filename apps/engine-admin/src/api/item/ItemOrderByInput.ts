@@ -8,7 +8,6 @@ export type ItemOrderByInput = {
   invoiceModelsId?: SortOrder;
   name?: SortOrder;
   price?: SortOrder;
-  pricePerUnit?: SortOrder;
   quantity?: SortOrder;
   updatedAt?: SortOrder;
 };

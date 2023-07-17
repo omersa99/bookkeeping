@@ -11,7 +11,6 @@ export type Item = {
   itemTransactions?: Array<ItemTransaction>;
   name: string | null;
   price: number | null;
-  pricePerUnit: number | null;
   quantity: number | null;
   updatedAt: Date;
 };
