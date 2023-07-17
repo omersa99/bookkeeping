@@ -106,17 +106,6 @@ class Item {
     required: false,
     type: Number,
   })
-  @IsNumber()
-  @IsOptional()
-  @Field(() => Number, {
-    nullable: true,
-  })
-  pricePerUnit!: number | null;
-
-  @ApiProperty({
-    required: false,
-    type: Number,
-  })
   @IsInt()
   @IsOptional()
   @Field(() => Number, {

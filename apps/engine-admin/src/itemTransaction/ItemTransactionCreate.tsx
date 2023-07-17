@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import {
   Create,
   SimpleForm,
@@ -7,9 +6,7 @@ import {
   ReferenceInput,
   SelectInput,
   NumberInput,
-  TextInput,
 } from "react-admin";
-
 import { ItemTitle } from "../item/ItemTitle";
 
 export const ItemTransactionCreate = (
@@ -22,7 +19,7 @@ export const ItemTransactionCreate = (
           <SelectInput optionText={ItemTitle} />
         </ReferenceInput>
         <NumberInput step={1} label="quantity" source="quantity" />
-        <TextInput label="total cost" source="totalCost" />
+        <NumberInput label="total cost" source="totalCost" />
         <SelectInput
           source="transactionType"
           label="transaction type"
@@ -30,6 +27,7 @@ export const ItemTransactionCreate = (
             { label: "Purchase", value: "Purchase" },
             { label: "Return", value: "Return" },
             { label: "Adjustment", value: "Adjustment" },
+            { label: "Sold", value: "Sold" },
           ]}
           optionText="label"
           allowEmpty

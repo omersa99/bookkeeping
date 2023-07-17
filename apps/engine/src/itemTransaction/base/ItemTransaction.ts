@@ -17,8 +17,8 @@ import {
   ValidateNested,
   IsOptional,
   IsInt,
-  IsEnum,
   IsNumber,
+  IsEnum,
 } from "class-validator";
 import { Type } from "class-transformer";
 import { Item } from "../../item/base/Item";
@@ -64,14 +64,14 @@ class ItemTransaction {
 
   @ApiProperty({
     required: false,
-    type: String,
+    type: Number,
   })
-  @IsString()
+  @IsNumber()
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => Number, {
     nullable: true,
   })
-  totalCost!: string | null;
+  totalCost!: number | null;
 
   @ApiProperty({
     required: false,
@@ -82,7 +82,7 @@ class ItemTransaction {
   @Field(() => EnumItemTransactionTransactionType, {
     nullable: true,
   })
-  transactionType?: "Purchase" | "Return" | "Adjustment" | null;
+  transactionType?: "Purchase" | "Return" | "Adjustment" | "Sold" | null;
 
   @ApiProperty({
     required: false,

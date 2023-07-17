@@ -14,8 +14,8 @@ export type InvoiceModel = {
   invoiceNumber: string | null;
   invoiceStatus?: "Draft" | "Paid" | "Canceled" | null;
   item?: Item | null;
-  itemUnits: number | null;
   ledger?: Ledger | null;
   pricePerUnit: number | null;
+  quantity: number | null;
   updatedAt: Date;
 };

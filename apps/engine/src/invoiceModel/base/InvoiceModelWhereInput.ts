@@ -19,9 +19,9 @@ import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput
 import { StringFilter } from "../../util/StringFilter";
 import { EnumInvoiceModelInvoiceStatus } from "./EnumInvoiceModelInvoiceStatus";
 import { ItemWhereUniqueInput } from "../../item/base/ItemWhereUniqueInput";
-import { IntNullableFilter } from "../../util/IntNullableFilter";
 import { LedgerWhereUniqueInput } from "../../ledger/base/LedgerWhereUniqueInput";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
+import { IntNullableFilter } from "../../util/IntNullableFilter";
 
 @InputType()
 class InvoiceModelWhereInput {
@@ -129,17 +129,6 @@ class InvoiceModelWhereInput {
 
   @ApiProperty({
     required: false,
-    type: IntNullableFilter,
-  })
-  @Type(() => IntNullableFilter)
-  @IsOptional()
-  @Field(() => IntNullableFilter, {
-    nullable: true,
-  })
-  itemUnits?: IntNullableFilter;
-
-  @ApiProperty({
-    required: false,
     type: () => LedgerWhereUniqueInput,
   })
   @ValidateNested()
@@ -160,6 +149,17 @@ class InvoiceModelWhereInput {
     nullable: true,
   })
   pricePerUnit?: FloatNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: IntNullableFilter,
+  })
+  @Type(() => IntNullableFilter)
+  @IsOptional()
+  @Field(() => IntNullableFilter, {
+    nullable: true,
+  })
+  quantity?: IntNullableFilter;
 }
 
 export { InvoiceModelWhereInput as InvoiceModelWhereInput };

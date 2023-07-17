@@ -14,6 +14,5 @@ export type ItemWhereInput = {
   itemTransactions?: ItemTransactionListRelationFilter;
   name?: StringNullableFilter;
   price?: FloatNullableFilter;
-  pricePerUnit?: FloatNullableFilter;
   quantity?: IntNullableFilter;
 };

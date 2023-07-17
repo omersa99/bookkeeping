@@ -41,7 +41,6 @@ export const ItemCreate = (props: CreateProps): React.ReactElement => {
         </ReferenceArrayInput>
         <TextInput label="name" source="name" />
         <NumberInput label="price" source="price" />
-        <NumberInput label="price per unit" source="pricePerUnit" />
         <NumberInput step={1} label="quantity" source="quantity" />
       </SimpleForm>
     </Create>

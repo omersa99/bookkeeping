@@ -532,8 +532,6 @@ export class EntityControllerBase {
           },
         },
 
-        itemUnits: true,
-
         ledger: {
           select: {
             id: true,
@@ -541,6 +539,7 @@ export class EntityControllerBase {
         },
 
         pricePerUnit: true,
+        quantity: true,
         updatedAt: true,
       },
     });
@@ -653,7 +652,6 @@ export class EntityControllerBase {
 
         name: true,
         price: true,
-        pricePerUnit: true,
         quantity: true,
         updatedAt: true,
       },

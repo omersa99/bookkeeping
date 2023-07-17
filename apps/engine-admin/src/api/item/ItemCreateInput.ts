@@ -9,6 +9,5 @@ export type ItemCreateInput = {
   itemTransactions?: ItemTransactionCreateNestedManyWithoutItemsInput;
   name?: string | null;
   price?: number | null;
-  pricePerUnit?: number | null;
   quantity?: number | null;
 };

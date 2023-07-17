@@ -34,7 +34,6 @@ export const ItemShow = (props: ShowProps): React.ReactElement => {
         </ReferenceField>
         <TextField label="name" source="name" />
         <TextField label="price" source="price" />
-        <TextField label="price per unit" source="pricePerUnit" />
         <TextField label="quantity" source="quantity" />
         <DateField source="updatedAt" label="Updated At" />
         <ReferenceManyField

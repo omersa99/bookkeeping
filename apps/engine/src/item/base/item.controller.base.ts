@@ -86,7 +86,6 @@ export class ItemControllerBase {
 
         name: true,
         price: true,
-        pricePerUnit: true,
         quantity: true,
         updatedAt: true,
       },
@@ -129,7 +128,6 @@ export class ItemControllerBase {
 
         name: true,
         price: true,
-        pricePerUnit: true,
         quantity: true,
         updatedAt: true,
       },
@@ -173,7 +171,6 @@ export class ItemControllerBase {
 
         name: true,
         price: true,
-        pricePerUnit: true,
         quantity: true,
         updatedAt: true,
       },
@@ -240,7 +237,6 @@ export class ItemControllerBase {
 
           name: true,
           price: true,
-          pricePerUnit: true,
           quantity: true,
           updatedAt: true,
         },
@@ -292,7 +288,6 @@ export class ItemControllerBase {
 
           name: true,
           price: true,
-          pricePerUnit: true,
           quantity: true,
           updatedAt: true,
         },

@@ -24,7 +24,6 @@ const CREATE_INPUT = {
   id: "exampleId",
   name: "exampleName",
   price: 42.42,
-  pricePerUnit: 42.42,
   quantity: 42,
   updatedAt: new Date(),
 };
@@ -34,7 +33,6 @@ const CREATE_RESULT = {
   id: "exampleId",
   name: "exampleName",
   price: 42.42,
-  pricePerUnit: 42.42,
   quantity: 42,
   updatedAt: new Date(),
 };
@@ -45,7 +43,6 @@ const FIND_MANY_RESULT = [
     id: "exampleId",
     name: "exampleName",
     price: 42.42,
-    pricePerUnit: 42.42,
     quantity: 42,
     updatedAt: new Date(),
   },
@@ -56,7 +53,6 @@ const FIND_ONE_RESULT = {
   id: "exampleId",
   name: "exampleName",
   price: 42.42,
-  pricePerUnit: 42.42,
   quantity: 42,
   updatedAt: new Date(),
 };

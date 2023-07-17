@@ -16,9 +16,8 @@ import { Type } from "class-transformer";
 import { IsOptional, ValidateNested, IsEnum } from "class-validator";
 import { ItemWhereUniqueInput } from "../../item/base/ItemWhereUniqueInput";
 import { IntNullableFilter } from "../../util/IntNullableFilter";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { EnumItemTransactionTransactionType } from "./EnumItemTransactionTransactionType";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
+import { EnumItemTransactionTransactionType } from "./EnumItemTransactionTransactionType";
 
 @InputType()
 class ItemTransactionWhereInput {
@@ -58,14 +57,14 @@ class ItemTransactionWhereInput {
 
   @ApiProperty({
     required: false,
-    type: StringNullableFilter,
+    type: FloatNullableFilter,
   })
-  @Type(() => StringNullableFilter)
+  @Type(() => FloatNullableFilter)
   @IsOptional()
-  @Field(() => StringNullableFilter, {
+  @Field(() => FloatNullableFilter, {
     nullable: true,
   })
-  totalCost?: StringNullableFilter;
+  totalCost?: FloatNullableFilter;
 
   @ApiProperty({
     required: false,
@@ -76,7 +75,7 @@ class ItemTransactionWhereInput {
   @Field(() => EnumItemTransactionTransactionType, {
     nullable: true,
   })
-  transactionType?: "Purchase" | "Return" | "Adjustment";
+  transactionType?: "Purchase" | "Return" | "Adjustment" | "Sold";
 
   @ApiProperty({
     required: false,
