@@ -4,7 +4,7 @@ import { ItemWhereUniqueInput } from "../item/ItemWhereUniqueInput";
 import { LedgerWhereUniqueInput } from "../ledger/LedgerWhereUniqueInput";
 
 export type InvoiceModelCreateInput = {
-  amountDue?: string | null;
+  amountDue?: number | null;
   amountPaid?: string | null;
   customer?: CustomerWhereUniqueInput | null;
   entity?: EntityWhereUniqueInput | null;

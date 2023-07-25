@@ -4,10 +4,10 @@ import {
   Create,
   SimpleForm,
   CreateProps,
+  NumberInput,
   TextInput,
   ReferenceInput,
   SelectInput,
-  NumberInput,
 } from "react-admin";
 
 import { CustomerTitle } from "../customer/CustomerTitle";
@@ -19,7 +19,7 @@ export const InvoiceModelCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
-        <TextInput label="amount_due" source="amountDue" />
+        <NumberInput label="amount_due" source="amountDue" />
         <TextInput label="amount_paid" source="amountPaid" />
         <ReferenceInput
           source="customer.id"

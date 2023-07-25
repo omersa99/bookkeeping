@@ -4,7 +4,7 @@ import { Item } from "../item/Item";
 import { Ledger } from "../ledger/Ledger";
 
 export type InvoiceModel = {
-  amountDue: string | null;
+  amountDue: number | null;
   amountPaid: string | null;
   createdAt: Date;
   customer?: Customer | null;
