@@ -14,7 +14,6 @@ import {
 
 import { ENTITY_TITLE_FIELD } from "./EntityTitle";
 import { CUSTOMER_TITLE_FIELD } from "../customer/CustomerTitle";
-import { ITEM_TITLE_FIELD } from "../item/ItemTitle";
 import { LEDGER_TITLE_FIELD } from "../ledger/LedgerTitle";
 import { INVOICEMODEL_TITLE_FIELD } from "../invoiceModel/InvoiceModelTitle";
 import { USER_TITLE_FIELD } from "../user/UserTitle";
@@ -107,9 +106,6 @@ export const EntityShow = (props: ShowProps): React.ReactElement => {
             <TextField label="info" source="info" />
             <TextField label="invoice_number" source="invoiceNumber" />
             <TextField label="invoice_status" source="invoiceStatus" />
-            <ReferenceField label="item" source="item.id" reference="Item">
-              <TextField source={ITEM_TITLE_FIELD} />
-            </ReferenceField>
             <ReferenceField
               label="ledger"
               source="ledger.id"
