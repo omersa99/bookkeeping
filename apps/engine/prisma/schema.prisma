@@ -91,7 +91,8 @@ model Item {
   entity           Entity?           @relation(fields: [entityId], references: [id])
   entityId         String?
   id               String            @id @default(cuid())
-  invoiceModels    InvoiceModel?
+  invoiceModels    InvoiceModel?     @relation(fields: [invoiceModelsId], references: [id])
+  invoiceModelsId  String?
   itemTransactions ItemTransaction[]
   name             String?
   price            Float?
@@ -111,8 +112,7 @@ model InvoiceModel {
   info          String?
   invoiceNumber String?
   invoiceStatus EnumInvoiceModelInvoiceStatus?
-  item          Item?                          @relation(fields: [itemId], references: [id])
-  itemId        String?                        @unique
+  item          Item[]
   ledger        Ledger?                        @relation(fields: [ledgerId], references: [id])
   ledgerId      String?                        @unique
   pricePerUnit  Float?

@@ -1,6 +1,6 @@
 import { CustomerWhereUniqueInput } from "../customer/CustomerWhereUniqueInput";
 import { EntityWhereUniqueInput } from "../entity/EntityWhereUniqueInput";
-import { ItemWhereUniqueInput } from "../item/ItemWhereUniqueInput";
+import { ItemCreateNestedManyWithoutInvoiceModelsInput } from "./ItemCreateNestedManyWithoutInvoiceModelsInput";
 import { LedgerWhereUniqueInput } from "../ledger/LedgerWhereUniqueInput";
 
 export type InvoiceModelCreateInput = {
@@ -11,7 +11,7 @@ export type InvoiceModelCreateInput = {
   info?: string | null;
   invoiceNumber?: string | null;
   invoiceStatus?: "Draft" | "Paid" | "Canceled" | null;
-  item?: ItemWhereUniqueInput | null;
+  item?: ItemCreateNestedManyWithoutInvoiceModelsInput;
   ledger?: LedgerWhereUniqueInput | null;
   pricePerUnit?: number | null;
   quantity?: number | null;

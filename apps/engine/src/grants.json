@@ -6,7 +6,19 @@
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "User",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "User",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "regular",
     "resource": "User",
     "action": "create:any",
     "attributes": "*"
@@ -18,7 +30,19 @@
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "User",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "User",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "regular",
     "resource": "User",
     "action": "delete:any",
     "attributes": "*"
@@ -30,7 +54,19 @@
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "User",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "Transaction",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "regular",
     "resource": "Transaction",
     "action": "read:own",
     "attributes": "*"
@@ -42,13 +78,31 @@
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "Transaction",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Transaction",
     "action": "update:any",
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "Transaction",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "Transaction",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "regular",
     "resource": "Transaction",
     "action": "delete:any",
     "attributes": "*"
@@ -60,7 +114,19 @@
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "Transaction",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "Journal",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "regular",
     "resource": "Journal",
     "action": "read:own",
     "attributes": "*"
@@ -72,13 +138,31 @@
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "Journal",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Journal",
     "action": "update:any",
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "Journal",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "Journal",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "regular",
     "resource": "Journal",
     "action": "delete:any",
     "attributes": "*"
@@ -90,7 +174,19 @@
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "Journal",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "Ledger",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "regular",
     "resource": "Ledger",
     "action": "read:own",
     "attributes": "*"
@@ -102,13 +198,31 @@
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "Ledger",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Ledger",
     "action": "update:any",
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "Ledger",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "Ledger",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "regular",
     "resource": "Ledger",
     "action": "delete:any",
     "attributes": "*"
@@ -120,7 +234,19 @@
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "Ledger",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "Account",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "regular",
     "resource": "Account",
     "action": "read:own",
     "attributes": "*"
@@ -132,13 +258,31 @@
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "Account",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Account",
     "action": "update:any",
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "Account",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "Account",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "regular",
     "resource": "Account",
     "action": "delete:any",
     "attributes": "*"
@@ -150,7 +294,19 @@
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "Account",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "Entity",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "regular",
     "resource": "Entity",
     "action": "read:own",
     "attributes": "*"
@@ -162,7 +318,19 @@
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "Entity",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "Entity",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "regular",
     "resource": "Entity",
     "action": "update:any",
     "attributes": "*"
@@ -174,7 +342,19 @@
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "Entity",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "Entity",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "regular",
     "resource": "Entity",
     "action": "read:any",
     "attributes": "*"
@@ -186,7 +366,19 @@
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "Item",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "Item",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "regular",
     "resource": "Item",
     "action": "create:any",
     "attributes": "*"
@@ -198,13 +390,31 @@
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "Item",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Item",
     "action": "delete:any",
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "Item",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "Item",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "regular",
     "resource": "Item",
     "action": "read:any",
     "attributes": "*"
@@ -216,7 +426,19 @@
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "InvoiceModel",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "InvoiceModel",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "regular",
     "resource": "InvoiceModel",
     "action": "create:any",
     "attributes": "*"
@@ -228,13 +450,31 @@
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "InvoiceModel",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "InvoiceModel",
     "action": "delete:any",
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "InvoiceModel",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "InvoiceModel",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "regular",
     "resource": "InvoiceModel",
     "action": "read:any",
     "attributes": "*"
@@ -246,7 +486,19 @@
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "Customer",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "Customer",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "regular",
     "resource": "Customer",
     "action": "create:any",
     "attributes": "*"
@@ -258,13 +510,31 @@
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "Customer",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Customer",
     "action": "delete:any",
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "Customer",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "Customer",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "regular",
     "resource": "Customer",
     "action": "read:any",
     "attributes": "*"
@@ -276,7 +546,19 @@
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "ItemTransaction",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "ItemTransaction",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "regular",
     "resource": "ItemTransaction",
     "action": "create:any",
     "attributes": "*"
@@ -288,13 +570,31 @@
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "ItemTransaction",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "ItemTransaction",
     "action": "delete:any",
     "attributes": "*"
   },
   {
+    "role": "regular",
+    "resource": "ItemTransaction",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "ItemTransaction",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "regular",
     "resource": "ItemTransaction",
     "action": "read:any",
     "attributes": "*"

@@ -27,6 +27,9 @@ import { InvoiceModelWhereUniqueInput } from "./InvoiceModelWhereUniqueInput";
 import { InvoiceModelFindManyArgs } from "./InvoiceModelFindManyArgs";
 import { InvoiceModelUpdateInput } from "./InvoiceModelUpdateInput";
 import { InvoiceModel } from "./InvoiceModel";
+import { ItemFindManyArgs } from "../../item/base/ItemFindManyArgs";
+import { Item } from "../../item/base/Item";
+import { ItemWhereUniqueInput } from "../../item/base/ItemWhereUniqueInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -65,12 +68,6 @@ export class InvoiceModelControllerBase {
             }
           : undefined,
 
-        item: data.item
-          ? {
-              connect: data.item,
-            }
-          : undefined,
-
         ledger: data.ledger
           ? {
               connect: data.ledger,
@@ -98,12 +95,6 @@ export class InvoiceModelControllerBase {
         info: true,
         invoiceNumber: true,
         invoiceStatus: true,
-
-        item: {
-          select: {
-            id: true,
-          },
-        },
 
         ledger: {
           select: {
@@ -156,12 +147,6 @@ export class InvoiceModelControllerBase {
         invoiceNumber: true,
         invoiceStatus: true,
 
-        item: {
-          select: {
-            id: true,
-          },
-        },
-
         ledger: {
           select: {
             id: true,
@@ -213,12 +198,6 @@ export class InvoiceModelControllerBase {
         info: true,
         invoiceNumber: true,
         invoiceStatus: true,
-
-        item: {
-          select: {
-            id: true,
-          },
-        },
 
         ledger: {
           select: {
@@ -273,12 +252,6 @@ export class InvoiceModelControllerBase {
               }
             : undefined,
 
-          item: data.item
-            ? {
-                connect: data.item,
-              }
-            : undefined,
-
           ledger: data.ledger
             ? {
                 connect: data.ledger,
@@ -306,12 +279,6 @@ export class InvoiceModelControllerBase {
           info: true,
           invoiceNumber: true,
           invoiceStatus: true,
-
-          item: {
-            select: {
-              id: true,
-            },
-          },
 
           ledger: {
             select: {
@@ -373,12 +340,6 @@ export class InvoiceModelControllerBase {
           invoiceNumber: true,
           invoiceStatus: true,
 
-          item: {
-            select: {
-              id: true,
-            },
-          },
-
           ledger: {
             select: {
               id: true,
@@ -398,5 +359,118 @@ export class InvoiceModelControllerBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/item")
+  @ApiNestedQuery(ItemFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Item",
+    action: "read",
+    possession: "any",
+  })
+  async findManyItem(
+    @common.Req() request: Request,
+    @common.Param() params: InvoiceModelWhereUniqueInput
+  ): Promise<Item[]> {
+    const query = plainToClass(ItemFindManyArgs, request.query);
+    const results = await this.service.findItem(params.id, {
+      ...query,
+      select: {
+        createdAt: true,
+        description: true,
+
+        entity: {
+          select: {
+            id: true,
+          },
+        },
+
+        id: true,
+
+        invoiceModels: {
+          select: {
+            id: true,
+          },
+        },
+
+        name: true,
+        price: true,
+        quantity: true,
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/item")
+  @nestAccessControl.UseRoles({
+    resource: "InvoiceModel",
+    action: "update",
+    possession: "any",
+  })
+  async connectItem(
+    @common.Param() params: InvoiceModelWhereUniqueInput,
+    @common.Body() body: ItemWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      item: {
+        connect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/item")
+  @nestAccessControl.UseRoles({
+    resource: "InvoiceModel",
+    action: "update",
+    possession: "any",
+  })
+  async updateItem(
+    @common.Param() params: InvoiceModelWhereUniqueInput,
+    @common.Body() body: ItemWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      item: {
+        set: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/item")
+  @nestAccessControl.UseRoles({
+    resource: "InvoiceModel",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectItem(
+    @common.Param() params: InvoiceModelWhereUniqueInput,
+    @common.Body() body: ItemWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      item: {
+        disconnect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
   }
 }

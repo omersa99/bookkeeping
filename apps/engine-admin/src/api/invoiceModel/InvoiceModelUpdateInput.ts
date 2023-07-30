@@ -1,6 +1,6 @@
 import { CustomerWhereUniqueInput } from "../customer/CustomerWhereUniqueInput";
 import { EntityWhereUniqueInput } from "../entity/EntityWhereUniqueInput";
-import { ItemWhereUniqueInput } from "../item/ItemWhereUniqueInput";
+import { ItemUpdateManyWithoutInvoiceModelsInput } from "./ItemUpdateManyWithoutInvoiceModelsInput";
 import { LedgerWhereUniqueInput } from "../ledger/LedgerWhereUniqueInput";
 
 export type InvoiceModelUpdateInput = {
@@ -11,7 +11,7 @@ export type InvoiceModelUpdateInput = {
   info?: string | null;
   invoiceNumber?: string | null;
   invoiceStatus?: "Draft" | "Paid" | "Canceled" | null;
-  item?: ItemWhereUniqueInput | null;
+  item?: ItemUpdateManyWithoutInvoiceModelsInput;
   ledger?: LedgerWhereUniqueInput | null;
   pricePerUnit?: number | null;
   quantity?: number | null;
