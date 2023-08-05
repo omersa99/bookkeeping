@@ -19,7 +19,7 @@ import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqu
 import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
 import { EnumInvoiceModelInvoiceStatus } from "./EnumInvoiceModelInvoiceStatus";
-import { ItemWhereUniqueInput } from "../../item/base/ItemWhereUniqueInput";
+import { ItemListRelationFilter } from "../../item/base/ItemListRelationFilter";
 import { LedgerWhereUniqueInput } from "../../ledger/base/LedgerWhereUniqueInput";
 import { IntNullableFilter } from "../../util/IntNullableFilter";
 
@@ -117,15 +117,15 @@ class InvoiceModelWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => ItemWhereUniqueInput,
+    type: () => ItemListRelationFilter,
   })
   @ValidateNested()
-  @Type(() => ItemWhereUniqueInput)
+  @Type(() => ItemListRelationFilter)
   @IsOptional()
-  @Field(() => ItemWhereUniqueInput, {
+  @Field(() => ItemListRelationFilter, {
     nullable: true,
   })
-  item?: ItemWhereUniqueInput;
+  item?: ItemListRelationFilter;
 
   @ApiProperty({
     required: false,

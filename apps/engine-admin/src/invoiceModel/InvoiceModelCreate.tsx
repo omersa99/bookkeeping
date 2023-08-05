@@ -8,6 +8,8 @@ import {
   TextInput,
   ReferenceInput,
   SelectInput,
+  ReferenceArrayInput,
+  SelectArrayInput,
 } from "react-admin";
 
 import { CustomerTitle } from "../customer/CustomerTitle";
@@ -45,9 +47,14 @@ export const InvoiceModelCreate = (props: CreateProps): React.ReactElement => {
           allowEmpty
           optionValue="value"
         />
-        <ReferenceInput source="item.id" reference="Item" label="item">
-          <SelectInput optionText={ItemTitle} />
-        </ReferenceInput>
+        <ReferenceArrayInput
+          source="item"
+          reference="Item"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={ItemTitle} />
+        </ReferenceArrayInput>
         <ReferenceInput source="ledger.id" reference="Ledger" label="ledger">
           <SelectInput optionText={LedgerTitle} />
         </ReferenceInput>

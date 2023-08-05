@@ -26,9 +26,10 @@ import { InvoiceModelCountArgs } from "./InvoiceModelCountArgs";
 import { InvoiceModelFindManyArgs } from "./InvoiceModelFindManyArgs";
 import { InvoiceModelFindUniqueArgs } from "./InvoiceModelFindUniqueArgs";
 import { InvoiceModel } from "./InvoiceModel";
+import { ItemFindManyArgs } from "../../item/base/ItemFindManyArgs";
+import { Item } from "../../item/base/Item";
 import { Customer } from "../../customer/base/Customer";
 import { Entity } from "../../entity/base/Entity";
-import { Item } from "../../item/base/Item";
 import { Ledger } from "../../ledger/base/Ledger";
 import { InvoiceModelService } from "../invoiceModel.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
@@ -111,12 +112,6 @@ export class InvoiceModelResolverBase {
             }
           : undefined,
 
-        item: args.data.item
-          ? {
-              connect: args.data.item,
-            }
-          : undefined,
-
         ledger: args.data.ledger
           ? {
               connect: args.data.ledger,
@@ -151,12 +146,6 @@ export class InvoiceModelResolverBase {
           entity: args.data.entity
             ? {
                 connect: args.data.entity,
-              }
-            : undefined,
-
-          item: args.data.item
-            ? {
-                connect: args.data.item,
               }
             : undefined,
 
@@ -199,6 +188,26 @@ export class InvoiceModelResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [Item], { name: "item" })
+  @nestAccessControl.UseRoles({
+    resource: "Item",
+    action: "read",
+    possession: "any",
+  })
+  async resolveFieldItem(
+    @graphql.Parent() parent: InvoiceModel,
+    @graphql.Args() args: ItemFindManyArgs
+  ): Promise<Item[]> {
+    const results = await this.service.findItem(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Customer, {
     nullable: true,
     name: "customer",
@@ -233,27 +242,6 @@ export class InvoiceModelResolverBase {
     @graphql.Parent() parent: InvoiceModel
   ): Promise<Entity | null> {
     const result = await this.service.getEntity(parent.id);
-
-    if (!result) {
-      return null;
-    }
-    return result;
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => Item, {
-    nullable: true,
-    name: "item",
-  })
-  @nestAccessControl.UseRoles({
-    resource: "Item",
-    action: "read",
-    possession: "any",
-  })
-  async resolveFieldItem(
-    @graphql.Parent() parent: InvoiceModel
-  ): Promise<Item | null> {
-    const result = await this.service.getItem(parent.id);
 
     if (!result) {
       return null;

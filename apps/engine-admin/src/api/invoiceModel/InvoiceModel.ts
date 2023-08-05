@@ -13,7 +13,7 @@ export type InvoiceModel = {
   info: string | null;
   invoiceNumber: string | null;
   invoiceStatus?: "Draft" | "Paid" | "Canceled" | null;
-  item?: Item | null;
+  item?: Array<Item>;
   ledger?: Ledger | null;
   pricePerUnit: number | null;
   quantity: number | null;

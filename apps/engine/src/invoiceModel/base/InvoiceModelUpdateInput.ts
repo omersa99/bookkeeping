@@ -23,7 +23,7 @@ import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqu
 import { Type } from "class-transformer";
 import { EntityWhereUniqueInput } from "../../entity/base/EntityWhereUniqueInput";
 import { EnumInvoiceModelInvoiceStatus } from "./EnumInvoiceModelInvoiceStatus";
-import { ItemWhereUniqueInput } from "../../item/base/ItemWhereUniqueInput";
+import { ItemUpdateManyWithoutInvoiceModelsInput } from "./ItemUpdateManyWithoutInvoiceModelsInput";
 import { LedgerWhereUniqueInput } from "../../ledger/base/LedgerWhereUniqueInput";
 
 @InputType()
@@ -109,15 +109,15 @@ class InvoiceModelUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: () => ItemWhereUniqueInput,
+    type: () => ItemUpdateManyWithoutInvoiceModelsInput,
   })
   @ValidateNested()
-  @Type(() => ItemWhereUniqueInput)
+  @Type(() => ItemUpdateManyWithoutInvoiceModelsInput)
   @IsOptional()
-  @Field(() => ItemWhereUniqueInput, {
+  @Field(() => ItemUpdateManyWithoutInvoiceModelsInput, {
     nullable: true,
   })
-  item?: ItemWhereUniqueInput | null;
+  item?: ItemUpdateManyWithoutInvoiceModelsInput;
 
   @ApiProperty({
     required: false,
