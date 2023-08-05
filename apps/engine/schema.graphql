@@ -1,0 +1,911 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Account {
+  balance: Float
+  balanceType: String
+  code: String
+  createdAt: DateTime!
+  entity: Entity
+  id: String!
+  name: String
+  role: EnumAccountRole
+  transactions(orderBy: [TransactionOrderByInput!], skip: Float, take: Float, where: TransactionWhereInput): [Transaction!]!
+  updatedAt: DateTime!
+}
+
+input AccountCreateInput {
+  balance: Float
+  balanceType: String
+  code: String
+  entity: EntityWhereUniqueInput
+  name: String
+  role: EnumAccountRole
+  transactions: TransactionCreateNestedManyWithoutAccountsInput
+}
+
+input AccountCreateNestedManyWithoutEntitiesInput {
+  connect: [AccountWhereUniqueInput!]
+}
+
+input AccountListRelationFilter {
+  every: AccountWhereInput
+  none: AccountWhereInput
+  some: AccountWhereInput
+}
+
+input AccountOrderByInput {
+  balance: SortOrder
+  balanceType: SortOrder
+  code: SortOrder
+  createdAt: SortOrder
+  entityId: SortOrder
+  id: SortOrder
+  name: SortOrder
+  role: SortOrder
+  updatedAt: SortOrder
+}
+
+input AccountUpdateInput {
+  balance: Float
+  balanceType: String
+  code: String
+  entity: EntityWhereUniqueInput
+  name: String
+  role: EnumAccountRole
+  transactions: TransactionUpdateManyWithoutAccountsInput
+}
+
+input AccountUpdateManyWithoutEntitiesInput {
+  connect: [AccountWhereUniqueInput!]
+  disconnect: [AccountWhereUniqueInput!]
+  set: [AccountWhereUniqueInput!]
+}
+
+input AccountWhereInput {
+  balance: IntNullableFilter
+  balanceType: StringNullableFilter
+  code: StringNullableFilter
+  entity: EntityWhereUniqueInput
+  id: StringFilter
+  name: StringNullableFilter
+  role: EnumAccountRole
+  transactions: TransactionListRelationFilter
+}
+
+input AccountWhereUniqueInput {
+  id: String!
+}
+
+input BooleanNullableFilter {
+  equals: Boolean
+  not: Boolean
+}
+
+input Credentials {
+  password: String!
+  username: String!
+}
+
+type Customer {
+  active: Boolean
+  createdAt: DateTime!
+  entity: Entity
+  id: String!
+  invoiceModels(orderBy: [InvoiceModelOrderByInput!], skip: Float, take: Float, where: InvoiceModelWhereInput): [InvoiceModel!]!
+  name: String
+  salesTaxRate: Float
+  updatedAt: DateTime!
+}
+
+input CustomerCreateInput {
+  active: Boolean
+  entity: EntityWhereUniqueInput
+  invoiceModels: InvoiceModelCreateNestedManyWithoutCustomersInput
+  name: String
+  salesTaxRate: Float
+}
+
+input CustomerCreateNestedManyWithoutEntitiesInput {
+  connect: [CustomerWhereUniqueInput!]
+}
+
+input CustomerListRelationFilter {
+  every: CustomerWhereInput
+  none: CustomerWhereInput
+  some: CustomerWhereInput
+}
+
+input CustomerOrderByInput {
+  active: SortOrder
+  createdAt: SortOrder
+  entityId: SortOrder
+  id: SortOrder
+  name: SortOrder
+  salesTaxRate: SortOrder
+  updatedAt: SortOrder
+}
+
+input CustomerUpdateInput {
+  active: Boolean
+  entity: EntityWhereUniqueInput
+  invoiceModels: InvoiceModelUpdateManyWithoutCustomersInput
+  name: String
+  salesTaxRate: Float
+}
+
+input CustomerUpdateManyWithoutEntitiesInput {
+  connect: [CustomerWhereUniqueInput!]
+  disconnect: [CustomerWhereUniqueInput!]
+  set: [CustomerWhereUniqueInput!]
+}
+
+input CustomerWhereInput {
+  active: BooleanNullableFilter
+  entity: EntityWhereUniqueInput
+  id: StringFilter
+  invoiceModels: InvoiceModelListRelationFilter
+  name: StringNullableFilter
+  salesTaxRate: FloatNullableFilter
+}
+
+input CustomerWhereUniqueInput {
+  id: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Entity {
+  accountingType: EnumEntityAccountingType
+  accounts(orderBy: [AccountOrderByInput!], skip: Float, take: Float, where: AccountWhereInput): [Account!]!
+  address: String
+  createdAt: DateTime!
+  customers(orderBy: [CustomerOrderByInput!], skip: Float, take: Float, where: CustomerWhereInput): [Customer!]!
+  deductionId: String
+  deductionRate: String
+  exemption: Boolean
+  id: String!
+  invoiceModels(orderBy: [InvoiceModelOrderByInput!], skip: Float, take: Float, where: InvoiceModelWhereInput): [InvoiceModel!]!
+  items(orderBy: [ItemOrderByInput!], skip: Float, take: Float, where: ItemWhereInput): [Item!]!
+  ledgers(orderBy: [LedgerOrderByInput!], skip: Float, take: Float, where: LedgerWhereInput): [Ledger!]!
+  name: String
+  taxId: String
+  updatedAt: DateTime!
+  user: User
+}
+
+input EntityCreateInput {
+  accountingType: EnumEntityAccountingType
+  accounts: AccountCreateNestedManyWithoutEntitiesInput
+  address: String
+  customers: CustomerCreateNestedManyWithoutEntitiesInput
+  deductionId: String
+  deductionRate: String
+  exemption: Boolean
+  invoiceModels: InvoiceModelCreateNestedManyWithoutEntitiesInput
+  items: ItemCreateNestedManyWithoutEntitiesInput
+  ledgers: LedgerCreateNestedManyWithoutEntitiesInput
+  name: String
+  taxId: String
+  user: UserWhereUniqueInput
+}
+
+input EntityOrderByInput {
+  accountingType: SortOrder
+  address: SortOrder
+  createdAt: SortOrder
+  deductionId: SortOrder
+  deductionRate: SortOrder
+  exemption: SortOrder
+  id: SortOrder
+  name: SortOrder
+  taxId: SortOrder
+  updatedAt: SortOrder
+  userId: SortOrder
+}
+
+input EntityUpdateInput {
+  accountingType: EnumEntityAccountingType
+  accounts: AccountUpdateManyWithoutEntitiesInput
+  address: String
+  customers: CustomerUpdateManyWithoutEntitiesInput
+  deductionId: String
+  deductionRate: String
+  exemption: Boolean
+  invoiceModels: InvoiceModelUpdateManyWithoutEntitiesInput
+  items: ItemUpdateManyWithoutEntitiesInput
+  ledgers: LedgerUpdateManyWithoutEntitiesInput
+  name: String
+  taxId: String
+  user: UserWhereUniqueInput
+}
+
+input EntityWhereInput {
+  accountingType: EnumEntityAccountingType
+  accounts: AccountListRelationFilter
+  address: StringNullableFilter
+  customers: CustomerListRelationFilter
+  deductionId: StringNullableFilter
+  deductionRate: StringNullableFilter
+  exemption: BooleanNullableFilter
+  id: StringFilter
+  invoiceModels: InvoiceModelListRelationFilter
+  items: ItemListRelationFilter
+  ledgers: LedgerListRelationFilter
+  name: StringNullableFilter
+  taxId: StringNullableFilter
+  user: UserWhereUniqueInput
+}
+
+input EntityWhereUniqueInput {
+  id: String!
+}
+
+enum EnumAccountRole {
+  Asset
+  Cogs
+  Expenses
+  Income
+  Liability
+}
+
+enum EnumEntityAccountingType {
+  Cash
+  Cumulative
+}
+
+enum EnumInvoiceModelInvoiceStatus {
+  Canceled
+  Draft
+  Paid
+}
+
+enum EnumItemTransactionTransactionType {
+  Adjustment
+  Purchase
+  Return
+  Sold
+}
+
+enum EnumTransactionTransactionType {
+  Credit
+  Debit
+}
+
+input FloatNullableFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: Float
+  notIn: [Float!]
+}
+
+input IntNullableFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: Int
+  notIn: [Int!]
+}
+
+type InvoiceModel {
+  amountDue: Float
+  amountPaid: String
+  createdAt: DateTime!
+  customer: Customer
+  entity: Entity
+  id: String!
+  info: String
+  invoiceNumber: String
+  invoiceStatus: EnumInvoiceModelInvoiceStatus
+  item: Item
+  ledger: Ledger
+  pricePerUnit: Float
+  quantity: Float
+  updatedAt: DateTime!
+}
+
+input InvoiceModelCreateInput {
+  amountDue: Float
+  amountPaid: String
+  customer: CustomerWhereUniqueInput
+  entity: EntityWhereUniqueInput
+  info: String
+  invoiceNumber: String
+  invoiceStatus: EnumInvoiceModelInvoiceStatus
+  item: ItemWhereUniqueInput
+  ledger: LedgerWhereUniqueInput
+  pricePerUnit: Float
+  quantity: Float
+}
+
+input InvoiceModelCreateNestedManyWithoutCustomersInput {
+  connect: [InvoiceModelWhereUniqueInput!]
+}
+
+input InvoiceModelCreateNestedManyWithoutEntitiesInput {
+  connect: [InvoiceModelWhereUniqueInput!]
+}
+
+input InvoiceModelListRelationFilter {
+  every: InvoiceModelWhereInput
+  none: InvoiceModelWhereInput
+  some: InvoiceModelWhereInput
+}
+
+input InvoiceModelOrderByInput {
+  amountDue: SortOrder
+  amountPaid: SortOrder
+  createdAt: SortOrder
+  customerId: SortOrder
+  entityId: SortOrder
+  id: SortOrder
+  info: SortOrder
+  invoiceNumber: SortOrder
+  invoiceStatus: SortOrder
+  itemId: SortOrder
+  ledgerId: SortOrder
+  pricePerUnit: SortOrder
+  quantity: SortOrder
+  updatedAt: SortOrder
+}
+
+input InvoiceModelUpdateInput {
+  amountDue: Float
+  amountPaid: String
+  customer: CustomerWhereUniqueInput
+  entity: EntityWhereUniqueInput
+  info: String
+  invoiceNumber: String
+  invoiceStatus: EnumInvoiceModelInvoiceStatus
+  item: ItemWhereUniqueInput
+  ledger: LedgerWhereUniqueInput
+  pricePerUnit: Float
+  quantity: Float
+}
+
+input InvoiceModelUpdateManyWithoutCustomersInput {
+  connect: [InvoiceModelWhereUniqueInput!]
+  disconnect: [InvoiceModelWhereUniqueInput!]
+  set: [InvoiceModelWhereUniqueInput!]
+}
+
+input InvoiceModelUpdateManyWithoutEntitiesInput {
+  connect: [InvoiceModelWhereUniqueInput!]
+  disconnect: [InvoiceModelWhereUniqueInput!]
+  set: [InvoiceModelWhereUniqueInput!]
+}
+
+input InvoiceModelWhereInput {
+  amountDue: FloatNullableFilter
+  amountPaid: StringNullableFilter
+  customer: CustomerWhereUniqueInput
+  entity: EntityWhereUniqueInput
+  id: StringFilter
+  info: StringNullableFilter
+  invoiceNumber: StringNullableFilter
+  invoiceStatus: EnumInvoiceModelInvoiceStatus
+  item: ItemWhereUniqueInput
+  ledger: LedgerWhereUniqueInput
+  pricePerUnit: FloatNullableFilter
+  quantity: IntNullableFilter
+}
+
+input InvoiceModelWhereUniqueInput {
+  id: String!
+}
+
+type Item {
+  createdAt: DateTime!
+  description: String
+  entity: Entity
+  id: String!
+  invoiceModels: InvoiceModel
+  itemTransactions(orderBy: [ItemTransactionOrderByInput!], skip: Float, take: Float, where: ItemTransactionWhereInput): [ItemTransaction!]!
+  name: String
+  price: Float
+  quantity: Float
+  updatedAt: DateTime!
+}
+
+input ItemCreateInput {
+  description: String
+  entity: EntityWhereUniqueInput
+  invoiceModels: InvoiceModelWhereUniqueInput
+  itemTransactions: ItemTransactionCreateNestedManyWithoutItemsInput
+  name: String
+  price: Float
+  quantity: Float
+}
+
+input ItemCreateNestedManyWithoutEntitiesInput {
+  connect: [ItemWhereUniqueInput!]
+}
+
+input ItemListRelationFilter {
+  every: ItemWhereInput
+  none: ItemWhereInput
+  some: ItemWhereInput
+}
+
+input ItemOrderByInput {
+  createdAt: SortOrder
+  description: SortOrder
+  entityId: SortOrder
+  id: SortOrder
+  invoiceModelsId: SortOrder
+  name: SortOrder
+  price: SortOrder
+  quantity: SortOrder
+  updatedAt: SortOrder
+}
+
+type ItemTransaction {
+  createdAt: DateTime!
+  id: String!
+  item: Item
+  quantity: Float
+  totalCost: Float
+  transactionType: EnumItemTransactionTransactionType
+  unitPrice: Float
+  updatedAt: DateTime!
+}
+
+input ItemTransactionCreateInput {
+  item: ItemWhereUniqueInput
+  quantity: Float
+  totalCost: Float
+  transactionType: EnumItemTransactionTransactionType
+  unitPrice: Float
+}
+
+input ItemTransactionCreateNestedManyWithoutItemsInput {
+  connect: [ItemTransactionWhereUniqueInput!]
+}
+
+input ItemTransactionListRelationFilter {
+  every: ItemTransactionWhereInput
+  none: ItemTransactionWhereInput
+  some: ItemTransactionWhereInput
+}
+
+input ItemTransactionOrderByInput {
+  createdAt: SortOrder
+  id: SortOrder
+  itemId: SortOrder
+  quantity: SortOrder
+  totalCost: SortOrder
+  transactionType: SortOrder
+  unitPrice: SortOrder
+  updatedAt: SortOrder
+}
+
+input ItemTransactionUpdateInput {
+  item: ItemWhereUniqueInput
+  quantity: Float
+  totalCost: Float
+  transactionType: EnumItemTransactionTransactionType
+  unitPrice: Float
+}
+
+input ItemTransactionUpdateManyWithoutItemsInput {
+  connect: [ItemTransactionWhereUniqueInput!]
+  disconnect: [ItemTransactionWhereUniqueInput!]
+  set: [ItemTransactionWhereUniqueInput!]
+}
+
+input ItemTransactionWhereInput {
+  id: StringFilter
+  item: ItemWhereUniqueInput
+  quantity: IntNullableFilter
+  totalCost: FloatNullableFilter
+  transactionType: EnumItemTransactionTransactionType
+  unitPrice: FloatNullableFilter
+}
+
+input ItemTransactionWhereUniqueInput {
+  id: String!
+}
+
+input ItemUpdateInput {
+  description: String
+  entity: EntityWhereUniqueInput
+  invoiceModels: InvoiceModelWhereUniqueInput
+  itemTransactions: ItemTransactionUpdateManyWithoutItemsInput
+  name: String
+  price: Float
+  quantity: Float
+}
+
+input ItemUpdateManyWithoutEntitiesInput {
+  connect: [ItemWhereUniqueInput!]
+  disconnect: [ItemWhereUniqueInput!]
+  set: [ItemWhereUniqueInput!]
+}
+
+input ItemWhereInput {
+  description: StringNullableFilter
+  entity: EntityWhereUniqueInput
+  id: StringFilter
+  invoiceModels: InvoiceModelWhereUniqueInput
+  itemTransactions: ItemTransactionListRelationFilter
+  name: StringNullableFilter
+  price: FloatNullableFilter
+  quantity: IntNullableFilter
+}
+
+input ItemWhereUniqueInput {
+  id: String!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
+type Journal {
+  createdAt: DateTime!
+  id: String!
+  ledger: Ledger
+  transactions(orderBy: [TransactionOrderByInput!], skip: Float, take: Float, where: TransactionWhereInput): [Transaction!]!
+  updatedAt: DateTime!
+}
+
+input JournalCreateInput {
+  ledger: LedgerWhereUniqueInput
+  transactions: TransactionCreateNestedManyWithoutJournalsInput
+}
+
+input JournalCreateNestedManyWithoutLedgersInput {
+  connect: [JournalWhereUniqueInput!]
+}
+
+input JournalListRelationFilter {
+  every: JournalWhereInput
+  none: JournalWhereInput
+  some: JournalWhereInput
+}
+
+input JournalOrderByInput {
+  createdAt: SortOrder
+  id: SortOrder
+  ledgerId: SortOrder
+  updatedAt: SortOrder
+}
+
+input JournalUpdateInput {
+  ledger: LedgerWhereUniqueInput
+  transactions: TransactionUpdateManyWithoutJournalsInput
+}
+
+input JournalUpdateManyWithoutLedgersInput {
+  connect: [JournalWhereUniqueInput!]
+  disconnect: [JournalWhereUniqueInput!]
+  set: [JournalWhereUniqueInput!]
+}
+
+input JournalWhereInput {
+  id: StringFilter
+  ledger: LedgerWhereUniqueInput
+  transactions: TransactionListRelationFilter
+}
+
+input JournalWhereUniqueInput {
+  id: String!
+}
+
+type Ledger {
+  createdAt: DateTime!
+  entity: Entity
+  id: String!
+  invoiceModels: InvoiceModel
+  journals(orderBy: [JournalOrderByInput!], skip: Float, take: Float, where: JournalWhereInput): [Journal!]!
+  name: String
+  updatedAt: DateTime!
+}
+
+input LedgerCreateInput {
+  entity: EntityWhereUniqueInput
+  invoiceModels: InvoiceModelWhereUniqueInput
+  journals: JournalCreateNestedManyWithoutLedgersInput
+  name: String
+}
+
+input LedgerCreateNestedManyWithoutEntitiesInput {
+  connect: [LedgerWhereUniqueInput!]
+}
+
+input LedgerListRelationFilter {
+  every: LedgerWhereInput
+  none: LedgerWhereInput
+  some: LedgerWhereInput
+}
+
+input LedgerOrderByInput {
+  createdAt: SortOrder
+  entityId: SortOrder
+  id: SortOrder
+  invoiceModelsId: SortOrder
+  name: SortOrder
+  updatedAt: SortOrder
+}
+
+input LedgerUpdateInput {
+  entity: EntityWhereUniqueInput
+  invoiceModels: InvoiceModelWhereUniqueInput
+  journals: JournalUpdateManyWithoutLedgersInput
+  name: String
+}
+
+input LedgerUpdateManyWithoutEntitiesInput {
+  connect: [LedgerWhereUniqueInput!]
+  disconnect: [LedgerWhereUniqueInput!]
+  set: [LedgerWhereUniqueInput!]
+}
+
+input LedgerWhereInput {
+  entity: EntityWhereUniqueInput
+  id: StringFilter
+  invoiceModels: InvoiceModelWhereUniqueInput
+  journals: JournalListRelationFilter
+  name: StringNullableFilter
+}
+
+input LedgerWhereUniqueInput {
+  id: String!
+}
+
+type MetaQueryPayload {
+  count: Float!
+}
+
+type Mutation {
+  createAccount(data: AccountCreateInput!): Account!
+  createCustomer(data: CustomerCreateInput!): Customer!
+  createEntity(data: EntityCreateInput!): Entity!
+  createInvoiceModel(data: InvoiceModelCreateInput!): InvoiceModel!
+  createItem(data: ItemCreateInput!): Item!
+  createItemTransaction(data: ItemTransactionCreateInput!): ItemTransaction!
+  createJournal(data: JournalCreateInput!): Journal!
+  createLedger(data: LedgerCreateInput!): Ledger!
+  createTransaction(data: TransactionCreateInput!): Transaction!
+  createUser(data: UserCreateInput!): User!
+  deleteAccount(where: AccountWhereUniqueInput!): Account!
+  deleteCustomer(where: CustomerWhereUniqueInput!): Customer!
+  deleteEntity(where: EntityWhereUniqueInput!): Entity!
+  deleteInvoiceModel(where: InvoiceModelWhereUniqueInput!): InvoiceModel!
+  deleteItem(where: ItemWhereUniqueInput!): Item!
+  deleteItemTransaction(where: ItemTransactionWhereUniqueInput!): ItemTransaction!
+  deleteJournal(where: JournalWhereUniqueInput!): Journal!
+  deleteLedger(where: LedgerWhereUniqueInput!): Ledger!
+  deleteTransaction(where: TransactionWhereUniqueInput!): Transaction!
+  deleteUser(where: UserWhereUniqueInput!): User!
+  login(credentials: Credentials!): UserInfo!
+  updateAccount(data: AccountUpdateInput!, where: AccountWhereUniqueInput!): Account!
+  updateCustomer(data: CustomerUpdateInput!, where: CustomerWhereUniqueInput!): Customer!
+  updateEntity(data: EntityUpdateInput!, where: EntityWhereUniqueInput!): Entity!
+  updateInvoiceModel(data: InvoiceModelUpdateInput!, where: InvoiceModelWhereUniqueInput!): InvoiceModel!
+  updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item!
+  updateItemTransaction(data: ItemTransactionUpdateInput!, where: ItemTransactionWhereUniqueInput!): ItemTransaction!
+  updateJournal(data: JournalUpdateInput!, where: JournalWhereUniqueInput!): Journal!
+  updateLedger(data: LedgerUpdateInput!, where: LedgerWhereUniqueInput!): Ledger!
+  updateTransaction(data: TransactionUpdateInput!, where: TransactionWhereUniqueInput!): Transaction!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
+}
+
+type Query {
+  _accountsMeta(where: AccountWhereInput): MetaQueryPayload!
+  _customersMeta(where: CustomerWhereInput): MetaQueryPayload!
+  _entitiesMeta(where: EntityWhereInput): MetaQueryPayload!
+  _invoiceModelsMeta(where: InvoiceModelWhereInput): MetaQueryPayload!
+  _itemTransactionsMeta(where: ItemTransactionWhereInput): MetaQueryPayload!
+  _itemsMeta(where: ItemWhereInput): MetaQueryPayload!
+  _journalsMeta(where: JournalWhereInput): MetaQueryPayload!
+  _ledgersMeta(where: LedgerWhereInput): MetaQueryPayload!
+  _transactionsMeta(where: TransactionWhereInput): MetaQueryPayload!
+  _usersMeta(where: UserWhereInput): MetaQueryPayload!
+  account(where: AccountWhereUniqueInput!): Account
+  accounts(orderBy: [AccountOrderByInput!], skip: Float, take: Float, where: AccountWhereInput): [Account!]!
+  customer(where: CustomerWhereUniqueInput!): Customer
+  customers(orderBy: [CustomerOrderByInput!], skip: Float, take: Float, where: CustomerWhereInput): [Customer!]!
+  entities(orderBy: [EntityOrderByInput!], skip: Float, take: Float, where: EntityWhereInput): [Entity!]!
+  entity(where: EntityWhereUniqueInput!): Entity
+  invoiceModel(where: InvoiceModelWhereUniqueInput!): InvoiceModel
+  invoiceModels(orderBy: [InvoiceModelOrderByInput!], skip: Float, take: Float, where: InvoiceModelWhereInput): [InvoiceModel!]!
+  item(where: ItemWhereUniqueInput!): Item
+  itemTransaction(where: ItemTransactionWhereUniqueInput!): ItemTransaction
+  itemTransactions(orderBy: [ItemTransactionOrderByInput!], skip: Float, take: Float, where: ItemTransactionWhereInput): [ItemTransaction!]!
+  items(orderBy: [ItemOrderByInput!], skip: Float, take: Float, where: ItemWhereInput): [Item!]!
+  journal(where: JournalWhereUniqueInput!): Journal
+  journals(orderBy: [JournalOrderByInput!], skip: Float, take: Float, where: JournalWhereInput): [Journal!]!
+  ledger(where: LedgerWhereUniqueInput!): Ledger
+  ledgers(orderBy: [LedgerOrderByInput!], skip: Float, take: Float, where: LedgerWhereInput): [Ledger!]!
+  me: User!
+  transaction(where: TransactionWhereUniqueInput!): Transaction
+  transactions(orderBy: [TransactionOrderByInput!], skip: Float, take: Float, where: TransactionWhereInput): [Transaction!]!
+  user(where: UserWhereUniqueInput!): User
+  userInfo: UserInfo!
+  users(orderBy: [UserOrderByInput!], skip: Float, take: Float, where: UserWhereInput): [User!]!
+}
+
+enum QueryMode {
+  Default
+  Insensitive
+}
+
+enum SortOrder {
+  Asc
+  Desc
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: String
+  notIn: [String!]
+  startsWith: String
+}
+
+input StringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: String
+  notIn: [String!]
+  startsWith: String
+}
+
+type Transaction {
+  account: Account
+  amount: Float
+  createdAt: DateTime!
+  id: String!
+  journal: Journal
+  transactionType: EnumTransactionTransactionType
+  updatedAt: DateTime!
+}
+
+input TransactionCreateInput {
+  account: AccountWhereUniqueInput
+  amount: Float
+  journal: JournalWhereUniqueInput
+  transactionType: EnumTransactionTransactionType
+}
+
+input TransactionCreateNestedManyWithoutAccountsInput {
+  connect: [TransactionWhereUniqueInput!]
+}
+
+input TransactionCreateNestedManyWithoutJournalsInput {
+  connect: [TransactionWhereUniqueInput!]
+}
+
+input TransactionListRelationFilter {
+  every: TransactionWhereInput
+  none: TransactionWhereInput
+  some: TransactionWhereInput
+}
+
+input TransactionOrderByInput {
+  accountId: SortOrder
+  amount: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  journalId: SortOrder
+  transactionType: SortOrder
+  updatedAt: SortOrder
+}
+
+input TransactionUpdateInput {
+  account: AccountWhereUniqueInput
+  amount: Float
+  journal: JournalWhereUniqueInput
+  transactionType: EnumTransactionTransactionType
+}
+
+input TransactionUpdateManyWithoutAccountsInput {
+  connect: [TransactionWhereUniqueInput!]
+  disconnect: [TransactionWhereUniqueInput!]
+  set: [TransactionWhereUniqueInput!]
+}
+
+input TransactionUpdateManyWithoutJournalsInput {
+  connect: [TransactionWhereUniqueInput!]
+  disconnect: [TransactionWhereUniqueInput!]
+  set: [TransactionWhereUniqueInput!]
+}
+
+input TransactionWhereInput {
+  account: AccountWhereUniqueInput
+  amount: FloatNullableFilter
+  id: StringFilter
+  journal: JournalWhereUniqueInput
+  transactionType: EnumTransactionTransactionType
+}
+
+input TransactionWhereUniqueInput {
+  id: String!
+}
+
+type User {
+  createdAt: DateTime!
+  entities: Entity
+  firstName: String
+  id: String!
+  lastName: String
+  roles: JSON!
+  updatedAt: DateTime!
+  username: String!
+}
+
+input UserCreateInput {
+  entities: EntityWhereUniqueInput
+  firstName: String
+  lastName: String
+  password: String!
+  roles: JSON!
+  username: String!
+}
+
+type UserInfo {
+  accessToken: String
+  id: String!
+  roles: [String!]!
+  username: String!
+}
+
+input UserOrderByInput {
+  createdAt: SortOrder
+  entitiesId: SortOrder
+  firstName: SortOrder
+  id: SortOrder
+  lastName: SortOrder
+  password: SortOrder
+  roles: SortOrder
+  updatedAt: SortOrder
+  username: SortOrder
+}
+
+input UserUpdateInput {
+  entities: EntityWhereUniqueInput
+  firstName: String
+  lastName: String
+  password: String
+  roles: JSON
+  username: String
+}
+
+input UserWhereInput {
+  entities: EntityWhereUniqueInput
+  firstName: StringNullableFilter
+  id: StringFilter
+  lastName: StringNullableFilter
+  username: StringFilter
+}
+
+input UserWhereUniqueInput {
+  id: String!
+}

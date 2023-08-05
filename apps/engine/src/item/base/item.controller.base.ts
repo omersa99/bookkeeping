@@ -34,10 +34,7 @@ import { ItemTransactionWhereUniqueInput } from "../../itemTransaction/base/Item
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class ItemControllerBase {
-  constructor(
-    protected readonly service: ItemService,
-    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
-  ) {}
+  constructor(protected readonly service: ItemService, protected readonly rolesBuilder: nestAccessControl.RolesBuilder) {}
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Item })
@@ -146,9 +143,7 @@ export class ItemControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async findOne(
-    @common.Param() params: ItemWhereUniqueInput
-  ): Promise<Item | null> {
+  async findOne(@common.Param() params: ItemWhereUniqueInput): Promise<Item | null> {
     const result = await this.service.findOne({
       where: params,
       select: {
@@ -176,9 +171,7 @@ export class ItemControllerBase {
       },
     });
     if (result === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
+      throw new errors.NotFoundException(`No resource was found for ${JSON.stringify(params)}`);
     }
     return result;
   }
@@ -195,10 +188,7 @@ export class ItemControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async update(
-    @common.Param() params: ItemWhereUniqueInput,
-    @common.Body() data: ItemUpdateInput
-  ): Promise<Item | null> {
+  async update(@common.Param() params: ItemWhereUniqueInput, @common.Body() data: ItemUpdateInput): Promise<Item | null> {
     try {
       return await this.service.update({
         where: params,
@@ -243,9 +233,7 @@ export class ItemControllerBase {
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
-        throw new errors.NotFoundException(
-          `No resource was found for ${JSON.stringify(params)}`
-        );
+        throw new errors.NotFoundException(`No resource was found for ${JSON.stringify(params)}`);
       }
       throw error;
     }
@@ -262,9 +250,7 @@ export class ItemControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async delete(
-    @common.Param() params: ItemWhereUniqueInput
-  ): Promise<Item | null> {
+  async delete(@common.Param() params: ItemWhereUniqueInput): Promise<Item | null> {
     try {
       return await this.service.delete({
         where: params,
@@ -294,9 +280,7 @@ export class ItemControllerBase {
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
-        throw new errors.NotFoundException(
-          `No resource was found for ${JSON.stringify(params)}`
-        );
+        throw new errors.NotFoundException(`No resource was found for ${JSON.stringify(params)}`);
       }
       throw error;
     }
@@ -310,10 +294,7 @@ export class ItemControllerBase {
     action: "read",
     possession: "any",
   })
-  async findManyItemTransactions(
-    @common.Req() request: Request,
-    @common.Param() params: ItemWhereUniqueInput
-  ): Promise<ItemTransaction[]> {
+  async findManyItemTransactions(@common.Req() request: Request, @common.Param() params: ItemWhereUniqueInput): Promise<ItemTransaction[]> {
     const query = plainToClass(ItemTransactionFindManyArgs, request.query);
     const results = await this.service.findItemTransactions(params.id, {
       ...query,
@@ -335,9 +316,7 @@ export class ItemControllerBase {
       },
     });
     if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
+      throw new errors.NotFoundException(`No resource was found for ${JSON.stringify(params)}`);
     }
     return results;
   }
@@ -348,10 +327,7 @@ export class ItemControllerBase {
     action: "update",
     possession: "any",
   })
-  async connectItemTransactions(
-    @common.Param() params: ItemWhereUniqueInput,
-    @common.Body() body: ItemTransactionWhereUniqueInput[]
-  ): Promise<void> {
+  async connectItemTransactions(@common.Param() params: ItemWhereUniqueInput, @common.Body() body: ItemTransactionWhereUniqueInput[]): Promise<void> {
     const data = {
       itemTransactions: {
         connect: body,
@@ -370,10 +346,7 @@ export class ItemControllerBase {
     action: "update",
     possession: "any",
   })
-  async updateItemTransactions(
-    @common.Param() params: ItemWhereUniqueInput,
-    @common.Body() body: ItemTransactionWhereUniqueInput[]
-  ): Promise<void> {
+  async updateItemTransactions(@common.Param() params: ItemWhereUniqueInput, @common.Body() body: ItemTransactionWhereUniqueInput[]): Promise<void> {
     const data = {
       itemTransactions: {
         set: body,
@@ -392,10 +365,7 @@ export class ItemControllerBase {
     action: "update",
     possession: "any",
   })
-  async disconnectItemTransactions(
-    @common.Param() params: ItemWhereUniqueInput,
-    @common.Body() body: ItemTransactionWhereUniqueInput[]
-  ): Promise<void> {
+  async disconnectItemTransactions(@common.Param() params: ItemWhereUniqueInput, @common.Body() body: ItemTransactionWhereUniqueInput[]): Promise<void> {
     const data = {
       itemTransactions: {
         disconnect: body,

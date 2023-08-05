@@ -46,10 +46,7 @@ import { LedgerWhereUniqueInput } from "../../ledger/base/LedgerWhereUniqueInput
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class EntityControllerBase {
-  constructor(
-    protected readonly service: EntityService,
-    protected readonly rolesBuilder: nestAccessControl.RolesBuilder
-  ) {}
+  constructor(protected readonly service: EntityService, protected readonly rolesBuilder: nestAccessControl.RolesBuilder) {}
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Entity })
@@ -142,9 +139,7 @@ export class EntityControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async findOne(
-    @common.Param() params: EntityWhereUniqueInput
-  ): Promise<Entity | null> {
+  async findOne(@common.Param() params: EntityWhereUniqueInput): Promise<Entity | null> {
     const result = await this.service.findOne({
       where: params,
       select: {
@@ -167,9 +162,7 @@ export class EntityControllerBase {
       },
     });
     if (result === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
+      throw new errors.NotFoundException(`No resource was found for ${JSON.stringify(params)}`);
     }
     return result;
   }
@@ -186,10 +179,7 @@ export class EntityControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async update(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() data: EntityUpdateInput
-  ): Promise<Entity | null> {
+  async update(@common.Param() params: EntityWhereUniqueInput, @common.Body() data: EntityUpdateInput): Promise<Entity | null> {
     try {
       return await this.service.update({
         where: params,
@@ -223,9 +213,7 @@ export class EntityControllerBase {
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
-        throw new errors.NotFoundException(
-          `No resource was found for ${JSON.stringify(params)}`
-        );
+        throw new errors.NotFoundException(`No resource was found for ${JSON.stringify(params)}`);
       }
       throw error;
     }
@@ -242,9 +230,7 @@ export class EntityControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async delete(
-    @common.Param() params: EntityWhereUniqueInput
-  ): Promise<Entity | null> {
+  async delete(@common.Param() params: EntityWhereUniqueInput): Promise<Entity | null> {
     try {
       return await this.service.delete({
         where: params,
@@ -269,9 +255,7 @@ export class EntityControllerBase {
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
-        throw new errors.NotFoundException(
-          `No resource was found for ${JSON.stringify(params)}`
-        );
+        throw new errors.NotFoundException(`No resource was found for ${JSON.stringify(params)}`);
       }
       throw error;
     }
@@ -285,10 +269,7 @@ export class EntityControllerBase {
     action: "read",
     possession: "any",
   })
-  async findManyAccounts(
-    @common.Req() request: Request,
-    @common.Param() params: EntityWhereUniqueInput
-  ): Promise<Account[]> {
+  async findManyAccounts(@common.Req() request: Request, @common.Param() params: EntityWhereUniqueInput): Promise<Account[]> {
     const query = plainToClass(AccountFindManyArgs, request.query);
     const results = await this.service.findAccounts(params.id, {
       ...query,
@@ -311,9 +292,7 @@ export class EntityControllerBase {
       },
     });
     if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
+      throw new errors.NotFoundException(`No resource was found for ${JSON.stringify(params)}`);
     }
     return results;
   }
@@ -324,10 +303,7 @@ export class EntityControllerBase {
     action: "update",
     possession: "any",
   })
-  async connectAccounts(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: AccountWhereUniqueInput[]
-  ): Promise<void> {
+  async connectAccounts(@common.Param() params: EntityWhereUniqueInput, @common.Body() body: AccountWhereUniqueInput[]): Promise<void> {
     const data = {
       accounts: {
         connect: body,
@@ -346,10 +322,7 @@ export class EntityControllerBase {
     action: "update",
     possession: "any",
   })
-  async updateAccounts(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: AccountWhereUniqueInput[]
-  ): Promise<void> {
+  async updateAccounts(@common.Param() params: EntityWhereUniqueInput, @common.Body() body: AccountWhereUniqueInput[]): Promise<void> {
     const data = {
       accounts: {
         set: body,
@@ -368,10 +341,7 @@ export class EntityControllerBase {
     action: "update",
     possession: "any",
   })
-  async disconnectAccounts(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: AccountWhereUniqueInput[]
-  ): Promise<void> {
+  async disconnectAccounts(@common.Param() params: EntityWhereUniqueInput, @common.Body() body: AccountWhereUniqueInput[]): Promise<void> {
     const data = {
       accounts: {
         disconnect: body,
@@ -392,10 +362,7 @@ export class EntityControllerBase {
     action: "read",
     possession: "any",
   })
-  async findManyCustomers(
-    @common.Req() request: Request,
-    @common.Param() params: EntityWhereUniqueInput
-  ): Promise<Customer[]> {
+  async findManyCustomers(@common.Req() request: Request, @common.Param() params: EntityWhereUniqueInput): Promise<Customer[]> {
     const query = plainToClass(CustomerFindManyArgs, request.query);
     const results = await this.service.findCustomers(params.id, {
       ...query,
@@ -416,9 +383,7 @@ export class EntityControllerBase {
       },
     });
     if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
+      throw new errors.NotFoundException(`No resource was found for ${JSON.stringify(params)}`);
     }
     return results;
   }
@@ -429,10 +394,7 @@ export class EntityControllerBase {
     action: "update",
     possession: "any",
   })
-  async connectCustomers(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: CustomerWhereUniqueInput[]
-  ): Promise<void> {
+  async connectCustomers(@common.Param() params: EntityWhereUniqueInput, @common.Body() body: CustomerWhereUniqueInput[]): Promise<void> {
     const data = {
       customers: {
         connect: body,
@@ -451,10 +413,7 @@ export class EntityControllerBase {
     action: "update",
     possession: "any",
   })
-  async updateCustomers(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: CustomerWhereUniqueInput[]
-  ): Promise<void> {
+  async updateCustomers(@common.Param() params: EntityWhereUniqueInput, @common.Body() body: CustomerWhereUniqueInput[]): Promise<void> {
     const data = {
       customers: {
         set: body,
@@ -473,10 +432,7 @@ export class EntityControllerBase {
     action: "update",
     possession: "any",
   })
-  async disconnectCustomers(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: CustomerWhereUniqueInput[]
-  ): Promise<void> {
+  async disconnectCustomers(@common.Param() params: EntityWhereUniqueInput, @common.Body() body: CustomerWhereUniqueInput[]): Promise<void> {
     const data = {
       customers: {
         disconnect: body,
@@ -497,10 +453,7 @@ export class EntityControllerBase {
     action: "read",
     possession: "any",
   })
-  async findManyInvoiceModels(
-    @common.Req() request: Request,
-    @common.Param() params: EntityWhereUniqueInput
-  ): Promise<InvoiceModel[]> {
+  async findManyInvoiceModels(@common.Req() request: Request, @common.Param() params: EntityWhereUniqueInput): Promise<InvoiceModel[]> {
     const query = plainToClass(InvoiceModelFindManyArgs, request.query);
     const results = await this.service.findInvoiceModels(params.id, {
       ...query,
@@ -544,9 +497,7 @@ export class EntityControllerBase {
       },
     });
     if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
+      throw new errors.NotFoundException(`No resource was found for ${JSON.stringify(params)}`);
     }
     return results;
   }
@@ -557,10 +508,7 @@ export class EntityControllerBase {
     action: "update",
     possession: "any",
   })
-  async connectInvoiceModels(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: InvoiceModelWhereUniqueInput[]
-  ): Promise<void> {
+  async connectInvoiceModels(@common.Param() params: EntityWhereUniqueInput, @common.Body() body: InvoiceModelWhereUniqueInput[]): Promise<void> {
     const data = {
       invoiceModels: {
         connect: body,
@@ -579,10 +527,7 @@ export class EntityControllerBase {
     action: "update",
     possession: "any",
   })
-  async updateInvoiceModels(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: InvoiceModelWhereUniqueInput[]
-  ): Promise<void> {
+  async updateInvoiceModels(@common.Param() params: EntityWhereUniqueInput, @common.Body() body: InvoiceModelWhereUniqueInput[]): Promise<void> {
     const data = {
       invoiceModels: {
         set: body,
@@ -601,10 +546,7 @@ export class EntityControllerBase {
     action: "update",
     possession: "any",
   })
-  async disconnectInvoiceModels(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: InvoiceModelWhereUniqueInput[]
-  ): Promise<void> {
+  async disconnectInvoiceModels(@common.Param() params: EntityWhereUniqueInput, @common.Body() body: InvoiceModelWhereUniqueInput[]): Promise<void> {
     const data = {
       invoiceModels: {
         disconnect: body,
@@ -625,10 +567,7 @@ export class EntityControllerBase {
     action: "read",
     possession: "any",
   })
-  async findManyItems(
-    @common.Req() request: Request,
-    @common.Param() params: EntityWhereUniqueInput
-  ): Promise<Item[]> {
+  async findManyItems(@common.Req() request: Request, @common.Param() params: EntityWhereUniqueInput): Promise<Item[]> {
     const query = plainToClass(ItemFindManyArgs, request.query);
     const results = await this.service.findItems(params.id, {
       ...query,
@@ -657,9 +596,7 @@ export class EntityControllerBase {
       },
     });
     if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
+      throw new errors.NotFoundException(`No resource was found for ${JSON.stringify(params)}`);
     }
     return results;
   }
@@ -670,10 +607,7 @@ export class EntityControllerBase {
     action: "update",
     possession: "any",
   })
-  async connectItems(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: ItemWhereUniqueInput[]
-  ): Promise<void> {
+  async connectItems(@common.Param() params: EntityWhereUniqueInput, @common.Body() body: ItemWhereUniqueInput[]): Promise<void> {
     const data = {
       items: {
         connect: body,
@@ -692,10 +626,7 @@ export class EntityControllerBase {
     action: "update",
     possession: "any",
   })
-  async updateItems(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: ItemWhereUniqueInput[]
-  ): Promise<void> {
+  async updateItems(@common.Param() params: EntityWhereUniqueInput, @common.Body() body: ItemWhereUniqueInput[]): Promise<void> {
     const data = {
       items: {
         set: body,
@@ -714,10 +645,7 @@ export class EntityControllerBase {
     action: "update",
     possession: "any",
   })
-  async disconnectItems(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: ItemWhereUniqueInput[]
-  ): Promise<void> {
+  async disconnectItems(@common.Param() params: EntityWhereUniqueInput, @common.Body() body: ItemWhereUniqueInput[]): Promise<void> {
     const data = {
       items: {
         disconnect: body,
@@ -738,10 +666,7 @@ export class EntityControllerBase {
     action: "read",
     possession: "any",
   })
-  async findManyLedgers(
-    @common.Req() request: Request,
-    @common.Param() params: EntityWhereUniqueInput
-  ): Promise<Ledger[]> {
+  async findManyLedgers(@common.Req() request: Request, @common.Param() params: EntityWhereUniqueInput): Promise<Ledger[]> {
     const query = plainToClass(LedgerFindManyArgs, request.query);
     const results = await this.service.findLedgers(params.id, {
       ...query,
@@ -767,9 +692,7 @@ export class EntityControllerBase {
       },
     });
     if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
+      throw new errors.NotFoundException(`No resource was found for ${JSON.stringify(params)}`);
     }
     return results;
   }
@@ -780,10 +703,7 @@ export class EntityControllerBase {
     action: "update",
     possession: "any",
   })
-  async connectLedgers(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: LedgerWhereUniqueInput[]
-  ): Promise<void> {
+  async connectLedgers(@common.Param() params: EntityWhereUniqueInput, @common.Body() body: LedgerWhereUniqueInput[]): Promise<void> {
     const data = {
       ledgers: {
         connect: body,
@@ -802,10 +722,7 @@ export class EntityControllerBase {
     action: "update",
     possession: "any",
   })
-  async updateLedgers(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: LedgerWhereUniqueInput[]
-  ): Promise<void> {
+  async updateLedgers(@common.Param() params: EntityWhereUniqueInput, @common.Body() body: LedgerWhereUniqueInput[]): Promise<void> {
     const data = {
       ledgers: {
         set: body,
@@ -824,10 +741,7 @@ export class EntityControllerBase {
     action: "update",
     possession: "any",
   })
-  async disconnectLedgers(
-    @common.Param() params: EntityWhereUniqueInput,
-    @common.Body() body: LedgerWhereUniqueInput[]
-  ): Promise<void> {
+  async disconnectLedgers(@common.Param() params: EntityWhereUniqueInput, @common.Body() body: LedgerWhereUniqueInput[]): Promise<void> {
     const data = {
       ledgers: {
         disconnect: body,
